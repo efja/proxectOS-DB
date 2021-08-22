@@ -8,6 +8,10 @@ Este repositorio forma parte de [ProxectOS][repoProxecto] e ten como obxectivo i
 
 Pódese ver a estratexia de [versionado] neste [enlace][versionado].
 
+### CHANGELOG
+
+Podes consultar a lista de cambios de versión no [changelog]
+
 ### Sobre o autor
 
 **Contacto:** a18franciscogc@iessanclemente.net
@@ -79,6 +83,8 @@ Lista de autores:
 
    <!-- Enlaces internos -->
    [versionado]: <doc/versionado.md>
+
+   [changelog]: <CHANGELOG.md>
 
    <!-- Enlaces proxecto -->
 
