@@ -8,14 +8,24 @@
   },
   "scripts": {
     "build": "tsc",
-    "dev": "ts-node-dev --respawn --watch ./locales --transpile-only ./src/index.ts",
     "start": "tsc && node build/index.js",
+    "dev": "ts-node-dev --respawn --watch ./locales --transpile-only ./src/index.ts",
+    "predev": "npm run mongo-stop; npm run mongo-start",
+    "postdev": "npm run mongo-stop",
+    "mongo-start": "docker run --name proxectos-db -d -p 27017:27017 -v proxectos-db:/data/db mongo:4.0",
+    "mongo-stop": "docker rm -f proxectos-db",
+    "mongo-enter": "docker exec -ti proxectos-db mongo",
     "test": "jest --coverage",
-    "test:simple": "jest"
+    "test:simple": "jest",
+    "pretest": "npm run test:mongo-stop; npm run test:mongo-start",
+    "posttest": "npm run test:mongo-start",
+    "test:mongo-start": "docker run --name proxectos-test-mongo -d -p 27018:27017 -v proxectos-test_db:/data/db mongo:4.0",
+    "test:mongo-stop": "docker rm -f proxectos-test-mongo"
   },
   "author": "Fco. Javier González Campos",
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "@typegoose/typegoose": "^8.3.0",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
@@ -27,6 +37,7 @@
     "i18next-fs-backend": "^1.1.1",
     "i18next-http-middleware": "^3.1.4",
     "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.9",
     "tsc": "^2.0.3"
   },
   "devDependencies": {

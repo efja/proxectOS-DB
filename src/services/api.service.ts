@@ -8,6 +8,7 @@ import express, { Application } from 'express';
 import i18next from "i18next";
 import i18nextBack from "i18next-fs-backend";
 import i18nextMidd from "i18next-http-middleware";
+import { dbConnection } from '../config/config_db';
 
 import { routes } from '../routes';
 
@@ -35,12 +36,20 @@ export class App {
         this.middlewares();
         this.languages();
         this.routes();
-        this.start();
     }
 
     // ************************************************************************************************
     // ** MÉTODOS
     // ************************************************************************************************
+    public dbConnection() {
+        dbConnection().then((result) => {
+            console.log(result.green);
+        }).catch((error) => {
+            console.log(error);
+        });
+
+        return this;
+    }
     /**
      * Toma o número de versión a partir da versión definida no ficheiro json
      */

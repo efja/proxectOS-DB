@@ -1,7 +1,7 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { UserContact } from "./user-contact";
+import { UserContact } from "./user-contact.model";
 import { UserSchedule } from './user-schedule.model';
 import { Role } from './role.model';
 
