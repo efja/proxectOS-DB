@@ -1,0 +1,17 @@
+{
+    "WELCOME": "Welcome to {{app}}, version: {{version}}",
+    "COMMON": {
+        "CREATED_DATE": "Creation date"
+    },
+    "PROJECT": {
+        "SERVICE": {
+            "SUCCESS": {
+                "GET_ALL": "All projects fetched successfully",
+                "GET_SINGLE": "Project fetched successfully",
+                "CREATE": "Project created successfully",
+                "UPDATE": "Project updated successfully",
+                "DELETE": "Project deleted successfully"
+            }
+        }
+    }
+}
