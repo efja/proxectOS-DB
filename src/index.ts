@@ -6,4 +6,4 @@ import { App } from "./services/api.service";
 
 // ## INICIO DO PROGRAMA
 
-const app = new App().dbConnection().start();
+const app = new App().start();

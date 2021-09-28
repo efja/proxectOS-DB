@@ -41,15 +41,20 @@ export class App {
     // ************************************************************************************************
     // ** MÉTODOS
     // ************************************************************************************************
-    public dbConnection() {
+    /**
+     * Inicia a conexión coa Base de Datos
+     */
+    public async dbConnection() {
         dbConnection().then((result) => {
             console.log(result.green);
         }).catch((error) => {
+            console.log(error.toString().bgRed);
             console.log(error);
         });
 
         return this;
     }
+
     /**
      * Toma o número de versión a partir da versión definida no ficheiro json
      */
@@ -100,6 +105,7 @@ export class App {
      * Arranca a aplicación
      */
     public start(): void {
+        this.dbConnection();
         this.app.listen(this.port, () => {
             console.log(colors.bgBlue(`Aplicación levantada en: ${this.host}:${this.port}/api/${this.apiVersion}/`));
         });
