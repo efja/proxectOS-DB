@@ -29,7 +29,7 @@ Despois de algo máis de 15 anos de experiencia na administrción e mantemento d
 
 ### Licenza
 
-Este software licenciase baixo as condicións descritas no ficheiro [LICENSE.md] que se incormpora na raíz desde repoisitorio. Dito ficheiro describe unha licenza [GNU-AGPL] da [FSF] (Free Software Foundation).
+Este software licenciase baixo as condicións descritas no ficheiro [LICENSE.md] que se incormpora na raíz desde repoisitorio. Dito ficheiro describe unha licenza [GNU-GPLv3] da [FSF] (Free Software Foundation).
 
 ### Limitación de responsabilidades
 
@@ -56,7 +56,7 @@ Lista de autores:
 | ENLACE                                        | DESTINO
 |:-                                             |:-
 | [FSF]                                         | Free Software Foundation
-| [GNU-AGPL]                                    | Licenza GNU-AGPL
+| [GNU-GPLv3]                                    | Licenza GNU-GPLv3
 | [Repositorio Proxecto][repoProxecto]          | Repositorio deste proxecto
 | [Repositorio Proxecto API][repoProxecto-API]  | Repositorio da API deste proxecto
 | [Repositorio Proxecto BD][repoProxecto-DB]    | Repositorio da API de xestión da BD deste proxecto
@@ -77,7 +77,7 @@ Lista de autores:
 
    [FSF]: <https://www.fsf.org/es>
 
-   [GNU-AGPL]: <https://www.gnu.org/licenses/agpl-3.0.html>
+   [GNU-GPLv3]: <https://www.gnu.org/licenses/gpl-3.0.html>
 
    [nginx]: <https://www.nginx.com/>
 
@@ -90,10 +90,10 @@ Lista de autores:
 
    [logo]: <doc/img/logos/ProxectOS_logo1_400x85.png>
 
-   [repoProxecto]: <https://github.com/efja/proxectoDAW>
+   [repoProxecto]: <https://gitlab.iessanclemente.net/dawm/a18franciscogc>
 
-   [repoProxecto-API]: <https://github.com/efja/proxectoDAW-API>
+   [repoProxecto-API]: <https://gitlab.iessanclemente.net/a18franciscogc/proxectos-api>
 
-   [repoProxecto-DB]: <https://github.com/efja/proxectoDAW-DB>
+   [repoProxecto-DB]: <https://gitlab.iessanclemente.net/a18franciscogc/proxectos-db>
 
-   [repoProxecto-UI]: <https://github.com/efja/proxectoDAW-UI>
+   [repoProxecto-UI]: <https://gitlab.iessanclemente.net/a18franciscogc/proxectos-ui>
