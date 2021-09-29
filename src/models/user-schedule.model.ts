@@ -1,24 +1,37 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
+import { Collection, Entity, Property, ManyToOne, ManyToMany, OneToMany } from '@mikro-orm/core';
+import { BaseEntity } from "./base-entity.model";
+import { User } from './user.model';
 
 // ####################################################################################################
 // ## CLASE UserSchedule
 // ####################################################################################################
-export class UserSchedule {
+@Entity()
+export class UserSchedule extends BaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    public id               : string;
-
+    @Property()
     public worksWeekends   : string;
+    @Property()
     public weeklyHours     : string;
+    @Property()
     public holidays        : Date[];
+
+    // ************************************************************************************************
+    // ** Propiedades de navegación
+    // ************************************************************************************************
+    // User
+    @OneToMany(() => User, u => u.userSchedule)
+    users   : Collection<User>= new Collection<User>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
     constructor(obj?: Partial<UserSchedule>) {
+        super();
         Object.assign(this, obj);
     }
 

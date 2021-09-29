@@ -1,25 +1,40 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
+import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
+import { BaseEntity } from "./base-entity.model";
+import { Role } from './role.model';
+
 
 // ####################################################################################################
 // ## CLASE Permissions
 // ####################################################################################################
-export class Permissions {
+@Entity()
+export class Permissions extends BaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    public id               : string;
-
+    @Property()
     public delete : boolean;
+    @Property()
     public read   : boolean;
+    @Property()
     public update : boolean;
+    @Property()
     public write  : boolean;
+
+    // ************************************************************************************************
+    // ** Propiedades de navegación
+    // ************************************************************************************************
+    // permissions
+    @ManyToMany(() => Role, c => c.permissions)
+    permissionsRoles    : Collection<Role>= new Collection<Role>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
     constructor(obj?: Partial<Permissions>) {
+        super();
         Object.assign(this, obj);
     }
 

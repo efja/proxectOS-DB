@@ -1,5 +1,5 @@
-process.env.APP_NAME        = "ProxectOS API PERSISTENCIA";
-process.env.APP_DESCRIPTION = "ProxectOS API PERSISTENCIA";
+process.env.APP_NAME        = "ProxectOS";
+process.env.APP_DESCRIPTION = "ProxectOS_API_PERSISTENCIA";
 
 process.env.APP_HOST = "http://localhost";
 process.env.APP_PORT = "3001";

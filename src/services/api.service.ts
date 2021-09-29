@@ -8,9 +8,10 @@ import express, { Application } from 'express';
 import i18next from "i18next";
 import i18nextBack from "i18next-fs-backend";
 import i18nextMidd from "i18next-http-middleware";
-import { dbConnection } from '../config/config_db';
 
 import { routes } from '../routes';
+
+import { DBConnection } from '../config/config_db';
 
 // ####################################################################################################
 // ## CLASE APP
@@ -23,6 +24,7 @@ export class App {
     private host        : string | number;
     private port        : string | number;
     private apiVersion  : string | number;
+    private db          : DBConnection = new DBConnection();
 
     // ************************************************************************************************
     // ** CONSTRUTOR
@@ -44,13 +46,8 @@ export class App {
     /**
      * Inicia a conexión coa Base de Datos
      */
-    public async dbConnection() {
-        dbConnection().then((result) => {
-            console.log(result.green);
-        }).catch((error) => {
-            console.log(error.toString().bgRed);
-            console.log(error);
-        });
+    public dbConnection() {
+        this.db.start();
 
         return this;
     }
@@ -105,7 +102,6 @@ export class App {
      * Arranca a aplicación
      */
     public start(): void {
-        this.dbConnection();
         this.app.listen(this.port, () => {
             console.log(colors.bgBlue(`Aplicación levantada en: ${this.host}:${this.port}/api/${this.apiVersion}/`));
         });
