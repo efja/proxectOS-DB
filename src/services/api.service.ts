@@ -11,7 +11,24 @@ import i18nextMidd from "i18next-http-middleware";
 
 import { routes } from '../routes';
 
-import { DBConnection } from '../config/config_db';
+import { DBConnection } from '../config/config-db';
+
+// ####################################################################################################
+// ## CONSTANTES DO ENTORNO
+// ####################################################################################################
+const {
+    APP_HOST,
+    APP_PORT,
+    API_PREFIX,
+
+    DBMS,
+    DB_HOST,
+    DB_PORT,
+    DB_NAME,
+
+    DB_LOGIN,
+    DB_PASS,
+} = process.env;
 
 // ####################################################################################################
 // ## CLASE APP
@@ -21,18 +38,22 @@ export class App {
     // ** ATRIBUTOS
     // ************************************************************************************************
     private app         : Application;
-    private host        : string | number;
-    private port        : string | number;
     private apiVersion  : string | number;
-    private db          : DBConnection = new DBConnection();
+    private db          : DBConnection = new DBConnection(
+        DBMS,
+        DB_HOST,
+        DB_PORT,
+        DB_NAME,
+
+        DB_LOGIN,
+        DB_PASS,
+    );
 
     // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
     constructor() {
         this.app        = express();
-        this.host       = process.env.APP_HOST;
-        this.port       = process.env.APP_PORT;
         this.apiVersion = this.getAPIVersion();
 
         this.middlewares();
@@ -53,11 +74,20 @@ export class App {
     }
 
     /**
+     * Finaliza a conexión coa Base de Datos
+     */
+    public dbConnectionStop() {
+        this.db.stop();
+
+        return this;
+    }
+
+    /**
      * Toma o número de versión a partir da versión definida no ficheiro json
      */
     public getAPIVersion():string {
         let apiFullVersion = process.env.npm_package_version.split(".");
-        let apiPrefix = process.env.API_PREFIX;
+        let apiPrefix = API_PREFIX;
 
         let result = `${apiPrefix}${apiFullVersion[0]}`;
 
@@ -102,9 +132,17 @@ export class App {
      * Arranca a aplicación
      */
     public start(): void {
-        this.app.listen(this.port, () => {
-            console.log(colors.bgBlue(`Aplicación levantada en: ${this.host}:${this.port}/api/${this.apiVersion}/`));
+        this.app.listen(APP_PORT, () => {
+            console.log(colors.bgBlue(`Aplicación levantada en: ${APP_HOST}:${APP_PORT}/api/${this.apiVersion}/`));
         });
+    }
+
+    /**
+     * Para a aplicación
+     */
+    public stop(): void {
+        this.dbConnectionStop();
+        this.app.close();
     }
 
     /**
@@ -114,5 +152,14 @@ export class App {
      */
     public getApp(): Application {
         return this.app;
+    }
+
+    /**
+     * Devolve a instancia desta clase
+     *
+     * @returns unha instancia desta clase
+     */
+    public getDb(): DBConnection {
+        return this.db;
     }
 }

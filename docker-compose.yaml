@@ -8,12 +8,11 @@ services:
     ports:
       - 27017:27017
     environment:
-      - MONGODB_USERNAME=admin
-      - MONGODB_PASSWORD=abc123.
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=abc123.
       - MONGODB_DATABASE=ProxectOS
     volumes:
       - proxectos-db:/data/db
 volumes:
   proxectos-db:
     external: false
-
