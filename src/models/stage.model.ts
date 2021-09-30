@@ -22,6 +22,8 @@ export class Stage extends BaseEntity {
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
+    public startDate        : Date;
+    @Property()
     public finishDate       : Date;
     @Property()
     public targetStartDate  : Date;
@@ -42,28 +44,13 @@ export class Stage extends BaseEntity {
 
     @ManyToOne()
     public createdBy        : User;
-    @ManyToMany()
+    @ManyToMany(() => User)
     public assignedUsers    : Collection<User> = new Collection<User>(this);
-    @ManyToMany()
+    @ManyToMany(() => User)
     public validatingUsers  : Collection<User> = new Collection<User>(this);
 
-    @ManyToMany()
+    @ManyToMany(() => CommentApp)
     public comments         : Collection<CommentApp> = new Collection<CommentApp>(this);
-
-    // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // currentStage
-    @OneToMany(() => PerformanceApp, p => p.currentStage)
-    currentStagesPerformances   : Collection<PerformanceApp>= new Collection<PerformanceApp>(this);
-    @OneToMany(() => Project, p => p.currentStage)
-    currentStagesProjects       : Collection<Project>= new Collection<Project>(this);
-    @OneToMany(() => Requirement, r => r.currentStage)
-    currentStagesRequirements   : Collection<Requirement>= new Collection<Requirement>(this);
-
-    // stage
-    @OneToMany(() => StateHistory, s => s.stage)
-    stagesStateHistories : Collection<StateHistory>= new Collection<StateHistory>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

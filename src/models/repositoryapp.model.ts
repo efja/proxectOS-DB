@@ -3,6 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mikro-orm/core';
 import { BaseEntity } from "./base-entity.model";
+import { CommentApp } from './commentapp.model';
 import { Project } from './project.model';
 import { Requirement } from './requirement.model';
 
@@ -31,17 +32,11 @@ export class RepositoryApp extends BaseEntity {
     // Relacións
     @ManyToOne()
     public createdBy        : User;
-    @ManyToMany()
+    @ManyToMany(() => Role)
     public targetRoles      : Collection<Role> = new Collection<Role>(this);
 
-    // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // Repositories
-    @ManyToMany(() => Project, p => p.repositories)
-    repositoriesProjects  : Collection<Project>= new Collection<Project>(this);
-    @ManyToMany(() => Requirement, r => r.repositories)
-    repositoriesRequirements  : Collection<Requirement>= new Collection<Requirement>(this);
+    @ManyToMany(() => CommentApp)
+    public comments         : Collection<CommentApp> = new Collection<CommentApp>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

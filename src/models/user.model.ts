@@ -41,54 +41,16 @@ export class User extends BaseEntity {
     @Property()
     public password         : string;
 
+    @Property()
+    public vacantions       : Date[];
+
     // Relacións
     @ManyToOne()
     public userSchedule     : UserSchedule;
-    @ManyToMany()
+    @ManyToMany(() => UserContact)
     public contacts         : Collection<UserContact> = new Collection<UserContact>(this);
-    @ManyToMany()
+    @ManyToMany(() => Role)
     public roles            : Collection<Role> = new Collection<Role>(this);
-
-    // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // createdBy
-    @OneToMany(() => CommentApp, c => c.createdBy)
-    createdByComments                : Collection<CommentApp>= new Collection<CommentApp>(this);
-    @OneToMany(() => PerformanceApp, p => p.createdBy)
-    createdByPerformances            : Collection<PerformanceApp>= new Collection<PerformanceApp>(this);
-    @OneToMany(() => Project, p => p.createdBy)
-    createdByProjects                : Collection<Project>= new Collection<Project>(this);
-    @OneToMany(() => RepositoryApp, r => r.createdBy)
-    createdByRepositories            : Collection<RepositoryApp>= new Collection<RepositoryApp>(this);
-    @OneToMany(() => Requirement, r => r.createdBy)
-    createdByRequirements            : Collection<Requirement>= new Collection<Requirement>(this);
-    @OneToMany(() => ResourcesEstimation, r => r.createdBy)
-    createdByResourcesEstimations    : Collection<ResourcesEstimation>= new Collection<ResourcesEstimation>(this);
-    @OneToMany(() => Stage, s => s.createdBy)
-    createdByStages                  : Collection<Stage>= new Collection<Stage>(this);
-    @OneToMany(() => StateHistory, s => s.createdBy)
-    createdByStateHistories          : Collection<StateHistory>= new Collection<StateHistory>(this);
-
-    // assignedUsers
-    @ManyToMany(() => PerformanceApp, p => p.assignedUsers)
-    assignedUsersPerformances   : Collection<PerformanceApp> = new Collection<PerformanceApp>(this);
-    @ManyToMany(() => Project, p => p.assignedUsers)
-    assignedUsersProjects       : Collection<Project> = new Collection<Project>(this);
-    @ManyToMany(() => Requirement, r => r.assignedUsers)
-    assignedUsersRequirements   : Collection<Requirement> = new Collection<Requirement>(this);
-    @ManyToMany(() => Stage, s => s.assignedUsers)
-    assignedUsersStages         : Collection<Stage> = new Collection<Stage>(this);
-
-    // validatingUsers
-    @ManyToMany(() => PerformanceApp, p => p.validatingUsers)
-    validatingUsersPerformances : Collection<PerformanceApp> = new Collection<PerformanceApp>(this);
-    @ManyToMany(() => Project, p => p.validatingUsers)
-    validatingUsersProjects     : Collection<Project> = new Collection<Project>(this);
-    @ManyToMany(() => Requirement, r => r.validatingUsers)
-    validatingUsersRequirements : Collection<Requirement> = new Collection<Requirement>(this);
-    @ManyToMany(() => Stage, s => s.validatingUsers)
-    validatingUsersStages       : Collection<Stage> = new Collection<Stage>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

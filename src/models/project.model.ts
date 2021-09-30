@@ -42,32 +42,25 @@ export class Project extends BaseEntity {
     @ManyToOne()
     public currentState     : State;
 
-    @ManyToMany()
+    @ManyToMany(() => Role)
     public assignedRoles    : Collection<Role> = new Collection<Role>(this);
 
     @ManyToOne()
     public createdBy        : User;
-    @ManyToMany()
+    @ManyToMany(() => User)
     public assignedUsers    : Collection<User> = new Collection<User>(this);
-    @ManyToMany()
+    @ManyToMany(() => User)
     public validatingUsers  : Collection<User> = new Collection<User>(this);
 
 
-    @ManyToMany()
+    @ManyToMany(() => Requirement)
     public requirements     : Collection<Requirement> = new Collection<Requirement>(this);
 
-    @ManyToMany()
+    @ManyToMany(() => RepositoryApp)
     public repositories     : Collection<RepositoryApp> = new Collection<RepositoryApp>(this);
 
-    @ManyToMany()
+    @ManyToMany(() => CommentApp)
     public comments         : Collection<CommentApp> = new Collection<CommentApp>(this);
-
-    // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // project
-    @OneToMany(() => StateHistory, s => s.project)
-    projectsStateHistories  : Collection<StateHistory>= new Collection<StateHistory>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

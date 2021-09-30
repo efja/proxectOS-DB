@@ -44,29 +44,8 @@ export class Role extends BaseEntity {
     public TargetRole   : TargetRole[];
 
     // Relacións
-    @ManyToMany()
+    @ManyToMany(() => Permissions)
     public permissions  : Collection<Permissions> = new Collection<Permissions>(this);
-
-    // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // assignedRoles
-    @ManyToMany(() => PerformanceApp, p => p.assignedRoles)
-    assignedRolesPerformances   : Collection<PerformanceApp>= new Collection<PerformanceApp>(this);
-    @ManyToMany(() => Project, p => p.assignedRoles)
-    assignedRolesProjects       : Collection<Project>= new Collection<Project>(this);
-    @ManyToMany(() => Requirement, r => r.assignedRoles)
-    assignedRolesRequirements   : Collection<Requirement>= new Collection<Requirement>(this);
-    @ManyToMany(() => Stage, s => s.assignedRoles)
-    assignedRolesStages         : Collection<Stage>= new Collection<Stage>(this);
-
-    // targetRoles
-    @ManyToMany(() => CommentApp, c => c.targetRoles)
-    targetRolesComments : Collection<CommentApp> = new Collection<CommentApp>(this);
-    @ManyToMany(() => RepositoryApp, r => r.targetRoles)
-    targetRolesRepositories : Collection<RepositoryApp> = new Collection<RepositoryApp>(this);
-    @ManyToMany(() => StateHistory, s => s.targetRoles)
-    targetRolesStateHistories : Collection<StateHistory> = new Collection<StateHistory>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

@@ -20,15 +20,6 @@ export class Priority extends BaseEntity {
     public description  : string;
 
     // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // priority
-    @OneToMany(() => PerformanceApp, p => p.priority)
-    prioritiesPerformances  : Collection<PerformanceApp>= new Collection<PerformanceApp>(this);
-    @OneToMany(() => Requirement, r => r.priority)
-    prioritiesRequirements  : Collection<Requirement>= new Collection<Requirement>(this);
-
-    // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
     constructor(obj?: Partial<Priority>) {

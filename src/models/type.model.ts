@@ -20,15 +20,6 @@ export class Type extends BaseEntity {
     public description  : string;
 
     // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // type
-    @OneToMany(() => PerformanceApp, p => p.type)
-    typesPerformances   : Collection<PerformanceApp>= new Collection<PerformanceApp>(this);
-    @OneToMany(() => Requirement, r => r.type)
-    typesRequirements   : Collection<Requirement>= new Collection<Requirement>(this);
-
-    // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
     constructor(obj?: Partial<Type>) {

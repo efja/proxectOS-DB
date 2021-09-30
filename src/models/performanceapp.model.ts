@@ -48,6 +48,9 @@ export class PerformanceApp extends BaseEntity {
     public totalResourcesConsumed   : number;
 
     // Relacións
+    @ManyToMany(() => PerformanceApp)
+    public performances             : Collection<PerformanceApp> = new Collection<PerformanceApp>(this);
+
     @ManyToOne()
     public currentStage             : Stage;
     @ManyToOne()
@@ -57,37 +60,28 @@ export class PerformanceApp extends BaseEntity {
     @ManyToOne()
     public type                     : Type;
 
-    @ManyToMany()
+    @ManyToMany(() => Role)
     public assignedRoles            : Collection<Role> = new Collection<Role>(this);
 
     @ManyToOne()
     public createdBy                : User;
-    @ManyToMany()
+    @ManyToMany(() => User)
     public assignedUsers            : Collection<User> = new Collection<User>(this);
-    @ManyToMany()
+    @ManyToMany(() => User)
     public validatingUsers          : Collection<User> = new Collection<User>(this);
 
-    @ManyToOne()
-    public estimatedHours           : ResourcesEstimation;
-    @ManyToOne()
-    public hoursConsumed            : ResourcesEstimation;
+    @ManyToMany(() => ResourcesEstimation)
+    public estimatedHours           : Collection<ResourcesEstimation> = new Collection<ResourcesEstimation>(this);
+    @ManyToMany(() => ResourcesEstimation)
+    public hoursConsumed            : Collection<ResourcesEstimation> = new Collection<ResourcesEstimation>(this);
 
-    @ManyToOne()
-    public estimatedResources       : ResourcesEstimation;
-    @ManyToOne()
-    public resourcesConsumed        : ResourcesEstimation;
+    @ManyToMany(() => ResourcesEstimation)
+    public estimatedResources       : Collection<ResourcesEstimation> = new Collection<ResourcesEstimation>(this);
+    @ManyToMany(() => ResourcesEstimation)
+    public resourcesConsumed        : Collection<ResourcesEstimation> = new Collection<ResourcesEstimation>(this);
 
-    @ManyToMany()
+    @ManyToMany(() => CommentApp)
     public comments                 : Collection<CommentApp> = new Collection<CommentApp>(this);
-
-    // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // performances
-    @ManyToMany(() => Requirement, p => p.performances)
-    performancesRequirements    : Collection<Requirement>= new Collection<Requirement>(this);
-    @OneToMany(() => StateHistory, s => s.performance)
-    performancesStateHistories    : Collection<StateHistory>= new Collection<StateHistory>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

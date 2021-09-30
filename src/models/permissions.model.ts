@@ -24,13 +24,6 @@ export class Permissions extends BaseEntity {
     public write  : boolean;
 
     // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // permissions
-    @ManyToMany(() => Role, c => c.permissions)
-    permissionsRoles    : Collection<Role>= new Collection<Role>(this);
-
-    // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
     constructor(obj?: Partial<Permissions>) {
