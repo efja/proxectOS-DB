@@ -1,0 +1,11 @@
+[
+    {
+        "id"            : "",
+        "createdAt"     : "",
+        "updatedAt"     : "",
+
+        "worksWeekends" : "false",
+        "weeklyHours"   : 40,
+        "holidays"      : []
+    }
+]

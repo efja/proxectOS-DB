@@ -1,0 +1,12 @@
+[
+    {
+        "id"        : "",
+        "createdAt" : "",
+        "updatedAt" : "",
+
+        "delete"    : "true",
+        "read"      : "true",
+        "update"    : "true",
+        "write"     : "true"
+    }
+]

@@ -1,0 +1,40 @@
+[
+    {
+        "id"                        : "",
+        "createdAt"                 : "",
+        "updatedAt"                 : "",
+
+        "startDate"                 : "",
+        "finishDate"                : "",
+        "targetStartDate"           : "",
+        "targetFinishDate"          : "",
+
+        "name"                      : "",
+        "description"               : "",
+
+        "totalEstimatedHours"       : 0,
+        "totalHoursConsumed"        : 0,
+        "totalEstimatedResources"   : 0,
+        "totalResourcesConsumed"    : 0,
+
+        "currentStage"              : {},
+        "currentState"              : {},
+        "priority"                  : {},
+        "type"                      : {},
+
+        "assignedRoles"             : [],
+        "createdBy"                 : {},
+        "assignedUsers"             : [],
+        "validatingUsers"           : [],
+
+        "estimatedHours"            : [],
+        "hoursConsumed"             : [],
+
+        "estimatedResources"        : [],
+        "resourcesConsumed"         : [],
+
+        "performances"              : [],
+        "repositories"              : [],
+        "comments"                  : []
+    }
+]

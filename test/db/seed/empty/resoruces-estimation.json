@@ -1,0 +1,15 @@
+[
+    {
+        "id"            : "",
+        "createdAt"     : "",
+        "updatedAt"     : "",
+
+        "name"          : "",
+        "description"   : "",
+        "scale"         : "HOURS",
+        "amount"        : 0,
+        "cost"          : 0,
+        "createdBy"     : {},
+        "comments"      : []
+    }
+]

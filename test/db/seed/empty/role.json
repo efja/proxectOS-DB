@@ -1,0 +1,13 @@
+[
+    {
+        "id"            : "",
+        "createdAt"     : "",
+        "updatedAt"     : "",
+
+        "name"          : "",
+        "description"   : "",
+        "scope"         : "",
+        "targetRole"    : "",
+        "permissions"   : []
+    }
+]
