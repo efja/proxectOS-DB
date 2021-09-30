@@ -1,21 +1,14 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToMany, OneToMany, Enum, Unique } from '@mikro-orm/core';
+import { Collection, Entity, Property, ManyToMany, Enum, Unique } from '@mikro-orm/core';
 import { BaseEntity } from "./base-entity.model";
-import { CommentApp } from './commentapp.model';
-import { PerformanceApp } from './performanceapp.model';
 import { Permissions } from "./permissions.model";
-import { Project } from './project.model';
-import { RepositoryApp } from './repositoryapp.model';
-import { Requirement } from './requirement.model';
-import { Stage } from './stage.model';
-import { StateHistory } from './state-history.model';
 
 // ####################################################################################################
 // ## ENUMS
 // ####################################################################################################
-export enum TargetRole {
+export enum Scope {
     PERFORMANCE,
     PROJECT,
     REQUIREMENT,
@@ -38,10 +31,8 @@ export class Role extends BaseEntity {
     @Property()
     public description  : string;
     @Property()
-    public scope        : string;
-
-    @Enum({ items: () => TargetRole, array: true, nullable: false })
-    public TargetRole   : TargetRole[];
+    @Enum({ items: () => Scope, array: true, nullable: false })
+    public scope   : Scope[];
 
     // Relacións
     @ManyToMany(() => Permissions)
