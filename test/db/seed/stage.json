@@ -1,20 +1,97 @@
 [
     {
-        "id"            : "",
-        "createdAt"     : "",
-        "updatedAt"     : "",
+        "_id"               : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13",
+        "id"                : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13",
+        "createdAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+        "updatedAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
 
-        "startDate"    : "",
-        "finishDate"          : "",
-        "targetStartDate"   : "",
-        "targetFinishDate"         : "",
-        "name"    : "",
-        "description"    : "",
-        "currentState"    : {},
-        "assignedRoles"   : [],
-        "createdBy"    :  {},
-        "assignedUsers"   : [],
+        "startDate"         : "Thu Sep 30 2021 11:49:50 GMT+0200 (GMT+02:00)",
+        "finishDate"        : null,
+        "targetStartDate"   : "Thu Sep 30 2021 08:00:00 GMT+0200 (GMT+02:00)",
+        "targetFinishDate"  : "Sun Jan 18 2022 1500:00 GMT+0200 (GMT+02:00)",
+
+        "name"              : "quidem",
+        "description"       : "Commodi ut adipisci ut eos. Iusto nesciunt voluptatem rerum exercitationem dolorum odit laboriosam.",
+        "currentState"      : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
+        "assignedRoles"     : [
+            "b192e904-c8a3-4300-a27e-04f00b06d3af",
+            "5ac29634-1b89-4fd4-b69b-3ef6206f2573",
+            "05e34569-1c11-46ad-bfb8-ece7124f3a87",
+            "311a6b6b-4ea1-4210-8c38-d0e478271fbc"
+        ],
+        "createdBy"         : {},
+        "assignedUsers"     : [],
         "validatingUsers"   : [],
-        "comments"   : []
+        "comments"          : []
+    },
+    {
+        "_id"               : "fd6a2f6d-36c5-4b28-9352-bc5cfae75ae8",
+        "id"                : "fd6a2f6d-36c5-4b28-9352-bc5cfae75ae8",
+        "createdAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+        "updatedAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+
+        "startDate"         : "Tue Mar 02 2021 14:43:17 GMT+0100 (GMT+01:00)",
+        "finishDate"        : "Mon Jun 21 2021 22:07:03 GMT+0100 (GMT+01:00)",
+        "targetStartDate"   : "Tue Mar 01 2021 08:00:00 GMT+0100 (GMT+01:00)",
+        "targetFinishDate"  : "Mon Jun 25 2021 15:00:00 GMT+0100 (GMT+01:00)",
+
+        "name"              : "ratione",
+        "description"       : "Quia veniam omnis est non dicta sunt cum.",
+        "currentState"      : "ac25f7f5-9ff8-4df6-ab90-3bf9677a148e",
+        "assignedRoles"     : [
+            "b192e904-c8a3-4300-a27e-04f00b06d3af"
+        ],
+        "createdBy"         : {},
+        "assignedUsers"     : [],
+        "validatingUsers"   : [],
+        "comments"          : []
+    },
+    {
+        "_id"               : "118e2ace-6e87-4d7c-9907-2d2942ff6653",
+        "id"                : "118e2ace-6e87-4d7c-9907-2d2942ff6653",
+        "createdAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+        "updatedAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+
+        "startDate"         : "Wed Feb 24 2021 15:09:42 GMT+0100 (GMT+01:00)",
+        "finishDate"        : "Fri May 07 2021 23:04:20 GMT+0200 (GMT+02:00)",
+        "targetStartDate"   : "Tue Feb 24 2021 08:00:00 GMT+0100 (GMT+01:00)",
+        "targetFinishDate"  : "Mon May 01 2021 15:00:00 GMT+0100 (GMT+01:00)",
+
+        "name"              : "eos maxime possimus",
+        "description"       : "Enim quis quae dignissimos.",
+        "currentState"      : "7dfd5f13-ffea-4f1f-8cb8-42099d35a333",
+        "assignedRoles"     : [
+            "b192e904-c8a3-4300-a27e-04f00b06d3af",
+            "5ac29634-1b89-4fd4-b69b-3ef6206f2573",
+            "311a6b6b-4ea1-4210-8c38-d0e478271fbc"
+        ],
+        "createdBy"         : {},
+        "assignedUsers"     : [],
+        "validatingUsers"   : [],
+        "comments"          : []
+    },
+    {
+        "_id"               : "a529a85b-07d1-445d-9677-fdb48769a872",
+        "id"                : "a529a85b-07d1-445d-9677-fdb48769a872",
+        "createdAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+        "updatedAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+
+        "startDate"         : "Sun Jul 01 2021 08:12:20 GMT+0200 (GMT+02:00)",
+        "finishDate"        : "Sat Jul 31 2021 11:35:41 GMT+0200 (GMT+02:00)",
+        "targetStartDate"   : "Tue Jun 15 2021 08:00:00 GMT+0100 (GMT+01:00)",
+        "targetFinishDate"  : "Mon Jun 26 2021 15:00:00 GMT+0100 (GMT+01:00)",
+
+        "name"              : "quisquam molestiae nihil",
+        "description"       : "Officia vero et et adipisci atque facilis.",
+        "currentState"      : "7dfd5f13-ffea-4f1f-8cb8-42099d35a333",
+        "assignedRoles"     : [
+            "b192e904-c8a3-4300-a27e-04f00b06d3af",
+            "05e34569-1c11-46ad-bfb8-ece7124f3a87",
+            "311a6b6b-4ea1-4210-8c38-d0e478271fbc"
+        ],
+        "createdBy"         : {},
+        "assignedUsers"     : [],
+        "validatingUsers"   : [],
+        "comments"          : []
     }
 ]
