@@ -1,10 +1,10 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany, OneToMany, Enum } from '@mikro-orm/core';
+import { Collection, Entity, Property, ManyToOne, ManyToMany, Enum } from '@mikro-orm/core';
+
 import { BaseEntity } from "./base-entity.model";
-import { PerformanceApp } from './performanceapp.model';
-import { Requirement } from './requirement.model';
+import { CommentApp } from './commentapp.model';
 import { User } from './user.model';
 
 // ####################################################################################################
@@ -14,6 +14,8 @@ export enum ResourcesEstimationScale {
     HOURS,
     DAYS,
     WEEKS,
+    EURO,
+    DOLLAR,
 }
 
 // ####################################################################################################
@@ -40,32 +42,8 @@ export class ResourcesEstimation extends BaseEntity {
     @ManyToOne()
     public createdBy    : User;
 
-    // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // estimatedHours
-    @OneToMany(() => PerformanceApp, p => p.estimatedHours)
-    estimatedHoursPerformances  : Collection<PerformanceApp>= new Collection<PerformanceApp>(this);
-    @OneToMany(() => Requirement, r => r.estimatedHours)
-    estimatedHoursRequirements  : Collection<Requirement>= new Collection<Requirement>(this);
-
-    // hoursConsumed
-    @OneToMany(() => PerformanceApp, p => p.hoursConsumed)
-    hoursConsumedPerformances  : Collection<PerformanceApp>= new Collection<PerformanceApp>(this);
-    @OneToMany(() => Requirement, r => r.hoursConsumed)
-    hoursConsumedRequirements  : Collection<Requirement>= new Collection<Requirement>(this);
-
-    // estimatedResources
-    @OneToMany(() => PerformanceApp, p => p.estimatedResources)
-    estimatedResourcesPerformances  : Collection<PerformanceApp>= new Collection<PerformanceApp>(this);
-    @OneToMany(() => Requirement, r => r.estimatedResources)
-    estimatedResourcesRequirements  : Collection<Requirement>= new Collection<Requirement>(this);
-
-    // resourcesConsumed
-    @OneToMany(() => PerformanceApp, p => p.resourcesConsumed)
-    resourcesConsumedPerformances  : Collection<PerformanceApp>= new Collection<PerformanceApp>(this);
-    @OneToMany(() => Requirement, r => r.resourcesConsumed)
-    resourcesConsumedRequirements  : Collection<Requirement>= new Collection<Requirement>(this);
+    @ManyToMany(() => CommentApp)
+    public comments     : Collection<CommentApp> = new Collection<CommentApp>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

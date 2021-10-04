@@ -1,10 +1,9 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
-import { BaseEntity } from "./base-entity.model";
-import { Role } from './role.model';
+import { Entity, Property } from '@mikro-orm/core';
 
+import { BaseEntity } from "./base-entity.model";
 
 // ####################################################################################################
 // ## CLASE Permissions
@@ -22,13 +21,6 @@ export class Permissions extends BaseEntity {
     public update : boolean;
     @Property()
     public write  : boolean;
-
-    // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // permissions
-    @ManyToMany(() => Role, c => c.permissions)
-    permissionsRoles    : Collection<Role>= new Collection<Role>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

@@ -1,21 +1,19 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany, OneToMany } from '@mikro-orm/core';
-import { BaseEntity } from "./base-entity.model";
+import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
+import { AssignedRolesToUser } from './assigned-roles-user.model';
+import { BaseEntity } from "./base-entity.model";
+import { CommentApp } from './commentapp.model';
 import { PerformanceApp } from './performanceapp.model';
 import { Priority } from "./priority.model";
 import { RepositoryApp } from "./repositoryapp.model";
 import { ResourcesEstimation } from "./resoruces-estimation.model";
-import { Role } from "./role.model";
 import { Stage } from "./stage.model";
 import { State } from "./state.model";
 import { Type } from "./type.model";
 import { User } from "./user.model";
-import { CommentApp } from './commentapp.model';
-import { Project } from './project.model';
-import { StateHistory } from './state-history.model';
 
 // ####################################################################################################
 // ## CLASE Requirement
@@ -59,43 +57,32 @@ export class Requirement extends BaseEntity {
     @ManyToOne()
     public type                     : Type;
 
-    @ManyToMany()
-    public assignedRoles            : Collection<Role> = new Collection<Role>(this);
+    @ManyToMany(() => AssignedRolesToUser)
+    public assignedUsers    : Collection<AssignedRolesToUser> = new Collection<AssignedRolesToUser>(this);
 
     @ManyToOne()
     public createdBy                : User;
-    @ManyToMany()
-    public assignedUsers            : Collection<User> = new Collection<User>(this);
-    @ManyToMany()
+    @ManyToMany(() => User)
     public validatingUsers          : Collection<User> = new Collection<User>(this);
 
-    @ManyToOne()
-    public estimatedHours           : ResourcesEstimation;
-    @ManyToOne()
-    public hoursConsumed            : ResourcesEstimation;
+    @ManyToMany(() => ResourcesEstimation)
+    public estimatedHours           : Collection<ResourcesEstimation> = new Collection<ResourcesEstimation>(this);
+    @ManyToMany(() => ResourcesEstimation)
+    public hoursConsumed            : Collection<ResourcesEstimation> = new Collection<ResourcesEstimation>(this);
 
-    @ManyToOne()
-    public estimatedResources       : ResourcesEstimation;
-    @ManyToOne()
-    public resourcesConsumed        : ResourcesEstimation;
+    @ManyToMany(() => ResourcesEstimation)
+    public estimatedResources       : Collection<ResourcesEstimation> = new Collection<ResourcesEstimation>(this);
+    @ManyToMany(() => ResourcesEstimation)
+    public resourcesConsumed        : Collection<ResourcesEstimation> = new Collection<ResourcesEstimation>(this);
 
-    @ManyToMany()
+    @ManyToMany(() => PerformanceApp)
     public performances             : Collection<PerformanceApp> = new Collection<PerformanceApp>(this);
 
-    @ManyToMany()
+    @ManyToMany(() => RepositoryApp)
     public repositories             : Collection<RepositoryApp> = new Collection<RepositoryApp>(this);
 
-    @ManyToMany()
+    @ManyToMany(() => CommentApp)
     public comments                 : Collection<CommentApp> = new Collection<CommentApp>(this);
-
-    // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // requirements
-    @ManyToMany(() => Project, p => p.requirements)
-    requirementsProjects    : Collection<Project>= new Collection<Project>(this);
-    @OneToMany(() => StateHistory, s => s.requirement)
-    requirementsStateHistories  : Collection<StateHistory>= new Collection<StateHistory>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

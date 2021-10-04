@@ -1,9 +1,9 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany, OneToMany } from '@mikro-orm/core';
+import { Entity, Property } from '@mikro-orm/core';
+
 import { BaseEntity } from "./base-entity.model";
-import { User } from './user.model';
 
 // ####################################################################################################
 // ## CLASE UserSchedule
@@ -14,18 +14,11 @@ export class UserSchedule extends BaseEntity {
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public worksWeekends   : string;
+    public worksWeekends   : boolean;
     @Property()
-    public weeklyHours     : string;
+    public weeklyHours     : number;
     @Property()
     public holidays        : Date[];
-
-    // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // User
-    @OneToMany(() => User, u => u.userSchedule)
-    users   : Collection<User>= new Collection<User>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

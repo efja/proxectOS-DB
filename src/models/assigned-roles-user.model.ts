@@ -1,35 +1,32 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Entity, Property, Unique, ManyToOne } from '@mikro-orm/core';
-
+import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 import { BaseEntity } from "./base-entity.model";
-import { Permissions } from "./permissions.model";
+import { Role } from './role.model';
+import { User } from './user.model';
+
 
 // ####################################################################################################
-// ## CLASE Role
+// ## CLASE AssignedPermissions
 // ####################################################################################################
 @Entity()
-export class Role extends BaseEntity {
+export class AssignedRolesToUser extends BaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    @Property()
-    @Unique()
-    public name             : string;
-    @Property()
-    public description      : string;
-    @Property()
-    public isSystemAdmin    : boolean[];
-
     // Relacións
     @ManyToOne()
-    public permissions      : Permissions;
+    public createdBy        : User;
+    @ManyToOne()
+    public assignedUser     : User;
+    @ManyToMany(() => Role)
+    public assignedRoles    : Collection<Role> = new Collection<Role>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
-    constructor(obj?: Partial<Role>) {
+    constructor(obj?: Partial<AssignedRolesToUser>) {
         super();
         Object.assign(this, obj);
     }

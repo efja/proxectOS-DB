@@ -1,9 +1,9 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
+import { Entity, Property } from '@mikro-orm/core';
+
 import { BaseEntity } from "./base-entity.model";
-import { User } from './user.model';
 
 // ####################################################################################################
 // ## CLASE UserContact
@@ -17,13 +17,6 @@ export class UserContact extends BaseEntity {
     public type    : string;
     @Property()
     public contact : string;
-
-    // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // User
-    @ManyToMany(() => User, u => u.contacts)
-    users   : Collection<User>= new Collection<User>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

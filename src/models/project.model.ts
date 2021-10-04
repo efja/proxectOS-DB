@@ -1,17 +1,16 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany, OneToMany, Unique } from '@mikro-orm/core';
-import { BaseEntity } from "./base-entity.model";
+import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mikro-orm/core';
 
+import { AssignedRolesToUser } from './assigned-roles-user.model';
+import { BaseEntity } from "./base-entity.model";
 import { RepositoryApp } from './repositoryapp.model';
 import { Requirement } from './requirement.model';
-import { Role } from './role.model';
 import { Stage } from './stage.model';
 import { State } from './state.model';
 import { User } from './user.model';
 import { CommentApp } from './commentapp.model';
-import { StateHistory } from './state-history.model';
 
 // ####################################################################################################
 // ## CLASE Project
@@ -42,32 +41,23 @@ export class Project extends BaseEntity {
     @ManyToOne()
     public currentState     : State;
 
-    @ManyToMany()
-    public assignedRoles    : Collection<Role> = new Collection<Role>(this);
+    @ManyToMany(() => AssignedRolesToUser)
+    public assignedUsers    : Collection<AssignedRolesToUser> = new Collection<AssignedRolesToUser>(this);
 
     @ManyToOne()
     public createdBy        : User;
-    @ManyToMany()
-    public assignedUsers    : Collection<User> = new Collection<User>(this);
-    @ManyToMany()
+    @ManyToMany(() => User)
     public validatingUsers  : Collection<User> = new Collection<User>(this);
 
 
-    @ManyToMany()
+    @ManyToMany(() => Requirement)
     public requirements     : Collection<Requirement> = new Collection<Requirement>(this);
 
-    @ManyToMany()
+    @ManyToMany(() => RepositoryApp)
     public repositories     : Collection<RepositoryApp> = new Collection<RepositoryApp>(this);
 
-    @ManyToMany()
+    @ManyToMany(() => CommentApp)
     public comments         : Collection<CommentApp> = new Collection<CommentApp>(this);
-
-    // ************************************************************************************************
-    // ** Propiedades de navegación
-    // ************************************************************************************************
-    // project
-    @OneToMany(() => StateHistory, s => s.project)
-    projectsStateHistories  : Collection<StateHistory>= new Collection<StateHistory>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

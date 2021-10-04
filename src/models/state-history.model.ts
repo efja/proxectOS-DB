@@ -2,8 +2,8 @@
 // ## IMPORTACIÓNS
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
-import { BaseEntity } from "./base-entity.model";
 
+import { BaseEntity } from "./base-entity.model";
 import { PerformanceApp } from './performanceapp.model';
 import { Project } from './project.model';
 import { Requirement } from './requirement.model';
@@ -29,7 +29,7 @@ export class StateHistory extends BaseEntity {
     @ManyToOne()
     public newState     : State;
 
-    @ManyToMany()
+    @ManyToMany(() => Role)
     public targetRoles  : Collection<Role> = new Collection<Role>(this);
 
     @ManyToOne()
