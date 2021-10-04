@@ -6,6 +6,7 @@ import HttpStatus from 'http-status-codes';
 import { ProjectService } from '../services/project.service';
 
 import { req, res, next } from 'express';
+import { ResponseData } from '../interfaces/response-data.interface';
 
 // ####################################################################################################
 // ## CLASE ProjectController
@@ -32,17 +33,23 @@ export class ProjectController {
    * @param next
    */
   public getAllProjects = async (
-    req: req,
-    res: res,
-    next: next
+    req   : req,
+    res   : res,
+    next  : next
   ): Promise<any> => {
     try {
-      const data = {};
-      res.status(HttpStatus.OK).json({
-        code: HttpStatus.OK,
-        data: data,
-        message: req.t('PROJECT.SERVICE.SUCCESS.GET_ALL')
-      });
+      const data = [];
+
+      let responseData : ResponseData = {
+        code    : HttpStatus.OK,
+        data    : data,
+        total   : data.length,
+        from    : 0,
+        limit   : 0,
+        message : req.t('PROJECT.SERVICE.SUCCESS.GET_ALL'),
+      };
+
+      res.status(HttpStatus.OK).json(responseData);
     } catch (error) {
       next(error);
     }
@@ -56,17 +63,20 @@ export class ProjectController {
    * @param next
    */
   public getProject = async (
-    req: req,
-    res: res,
-    next: next
+    req   : req,
+    res   : res,
+    next  : next
   ): Promise<any> => {
     try {
       const data = {};
-      res.status(HttpStatus.OK).json({
-        code: HttpStatus.OK,
-        data: data,
-        message: req.t('PROJECT.SERVICE.SUCCESS.GET_ALL')
-      });
+
+      let responseData : ResponseData = {
+        code    : HttpStatus.OK,
+        data    : data,
+        message : req.t('PROJECT.SERVICE.SUCCESS.GET_SINGLE')
+      };
+
+      res.status(HttpStatus.OK).json(responseData);
     } catch (error) {
       next(error);
     }
@@ -83,17 +93,20 @@ export class ProjectController {
    * @param next
    */
   public newProject = async (
-    req: req,
-    res: res,
-    next: next
+    req   : req,
+    res   : res,
+    next  : next
   ): Promise<any> => {
     try {
       const data = {};
-      res.status(HttpStatus.CREATED).json({
-        code: HttpStatus.CREATED,
-        data: data,
-        message: req.t('PROJECT.SERVICE.SUCCESS.GET_SINGLE')
-      });
+
+      let responseData : ResponseData = {
+        code    : HttpStatus.CREATED,
+        data    : data,
+        message : req.t('PROJECT.SERVICE.SUCCESS.CREATE')
+      };
+
+      res.status(HttpStatus.OK).json(responseData);
     } catch (error) {
       next(error);
     }
@@ -110,17 +123,20 @@ export class ProjectController {
    * @param next
    */
   public updateProject = async (
-    req: req,
-    res: res,
-    next: next
+    req   : req,
+    res   : res,
+    next  : next
   ): Promise<any> => {
     try {
       const data = {};
-      res.status(HttpStatus.ACCEPTED).json({
-        code: HttpStatus.ACCEPTED,
-        data: data,
-        message: req.t('PROJECT.SERVICE.SUCCESS.UPDATE')
-      });
+
+      let responseData : ResponseData = {
+        code    : HttpStatus.ACCEPTED,
+        data    : data,
+        message : req.t('PROJECT.SERVICE.SUCCESS.UPDATE')
+      };
+
+      res.status(HttpStatus.OK).json(responseData);
     } catch (error) {
       next(error);
     }
@@ -137,16 +153,20 @@ export class ProjectController {
    * @param next
    */
   public deleteProject = async (
-    req: req,
-    res: res,
-    next: next
+    req   : req,
+    res   : res,
+    next  : next
   ): Promise<any> => {
     try {
-      res.status(HttpStatus.OK).json({
-        code: HttpStatus.OK,
-        data: {},
-        message: req.t('PROJECT.SERVICE.SUCCESS.DELETE')
-      });
+      const data = {};
+
+      let responseData : ResponseData = {
+        code    : HttpStatus.OK,
+        data    : data,
+        message : req.t('PROJECT.SERVICE.SUCCESS.DELETE')
+      };
+
+      res.status(HttpStatus.OK).json(responseData);
     } catch (error) {
       next(error);
     }

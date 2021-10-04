@@ -11,7 +11,7 @@ process.env.DBMS = "mongodb";
 
 process.env.DB_NAME = "ProxectOS-test";
 process.env.DB_HOST = "localhost";
-process.env.DB_PORT = "27017";
+process.env.DB_PORT = "27018";
 
 process.env.DB_LOGIN = "admin";
 process.env.DB_PASS  = "abc123.";
