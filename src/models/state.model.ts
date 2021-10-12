@@ -1,12 +1,9 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany, OneToMany } from '@mikro-orm/core';
+import { Entity, Property } from '@mikro-orm/core';
+
 import { BaseEntity } from "./base-entity.model";
-import { PerformanceApp } from './performanceapp.model';
-import { Project } from './project.model';
-import { Requirement } from './requirement.model';
-import { StateHistory } from './state-history.model';
 
 // ####################################################################################################
 // ## CLASE State

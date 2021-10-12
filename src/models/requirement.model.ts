@@ -1,21 +1,19 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany, OneToMany } from '@mikro-orm/core';
-import { BaseEntity } from "./base-entity.model";
+import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
+import { AssignedRolesToUser } from './assigned-roles-user.model';
+import { BaseEntity } from "./base-entity.model";
+import { CommentApp } from './commentapp.model';
 import { PerformanceApp } from './performanceapp.model';
 import { Priority } from "./priority.model";
 import { RepositoryApp } from "./repositoryapp.model";
 import { ResourcesEstimation } from "./resoruces-estimation.model";
-import { Role } from "./role.model";
 import { Stage } from "./stage.model";
 import { State } from "./state.model";
 import { Type } from "./type.model";
 import { User } from "./user.model";
-import { CommentApp } from './commentapp.model';
-import { Project } from './project.model';
-import { StateHistory } from './state-history.model';
 
 // ####################################################################################################
 // ## CLASE Requirement
@@ -59,13 +57,11 @@ export class Requirement extends BaseEntity {
     @ManyToOne()
     public type                     : Type;
 
-    @ManyToMany(() => Role)
-    public assignedRoles            : Collection<Role> = new Collection<Role>(this);
+    @ManyToMany(() => AssignedRolesToUser)
+    public assignedUsers    : Collection<AssignedRolesToUser> = new Collection<AssignedRolesToUser>(this);
 
     @ManyToOne()
     public createdBy                : User;
-    @ManyToMany(() => User)
-    public assignedUsers            : Collection<User> = new Collection<User>(this);
     @ManyToMany(() => User)
     public validatingUsers          : Collection<User> = new Collection<User>(this);
 

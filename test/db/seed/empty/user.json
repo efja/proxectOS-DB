@@ -8,12 +8,18 @@
         "name"              : "",
         "firstSurname"      : "",
         "secondSurname"     : "",
-        "salary"            : 0,
-        "flexibleSchedule"  : "true",
+
         "login"             : "",
         "password"          : "",
+
+        "salary"            : 0,
+        "flexibleSchedule"  : true,
+        "vacantions"        : [],
+
         "userSchedule"      : {},
+
         "contacts"          : [],
-        "roles"             : []
+
+        "defaultRoles"      : []
     }
 ]

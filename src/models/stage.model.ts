@@ -1,17 +1,13 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany, OneToMany } from '@mikro-orm/core';
-import { BaseEntity } from "./base-entity.model";
+import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
+import { BaseEntity } from "./base-entity.model";
+import { CommentApp } from './commentapp.model';
 import { Role } from "./role.model";
 import { State } from "./state.model";
 import { User } from "./user.model";
-import { CommentApp } from './commentapp.model';
-import { PerformanceApp } from './performanceapp.model';
-import { Project } from './project.model';
-import { Requirement } from './requirement.model';
-import { StateHistory } from './state-history.model';
 
 // ####################################################################################################
 // ## CLASE Stage

@@ -1,11 +1,10 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany, OneToMany, Enum } from '@mikro-orm/core';
+import { Collection, Entity, Property, ManyToOne, ManyToMany, Enum } from '@mikro-orm/core';
+
 import { BaseEntity } from "./base-entity.model";
 import { CommentApp } from './commentapp.model';
-import { PerformanceApp } from './performanceapp.model';
-import { Requirement } from './requirement.model';
 import { User } from './user.model';
 
 // ####################################################################################################

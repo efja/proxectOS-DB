@@ -2,12 +2,10 @@
 // ## IMPORTACIÓNS
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mikro-orm/core';
+
+import { AssignedRolesToUser } from './assigned-roles-user.model';
 import { BaseEntity } from "./base-entity.model";
 import { CommentApp } from './commentapp.model';
-import { Project } from './project.model';
-import { Requirement } from './requirement.model';
-
-import { Role } from "./role.model";
 import { User } from "./user.model";
 
 // ####################################################################################################
@@ -32,8 +30,9 @@ export class RepositoryApp extends BaseEntity {
     // Relacións
     @ManyToOne()
     public createdBy        : User;
-    @ManyToMany(() => Role)
-    public targetRoles      : Collection<Role> = new Collection<Role>(this);
+
+    @ManyToMany(() => AssignedRolesToUser)
+    public assignedUsers    : Collection<AssignedRolesToUser> = new Collection<AssignedRolesToUser>(this);
 
     @ManyToMany(() => CommentApp)
     public comments         : Collection<CommentApp> = new Collection<CommentApp>(this);

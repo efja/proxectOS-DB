@@ -16,9 +16,9 @@
         "currentStage"      : {},
         "currentState"      : {},
 
-        "assignedRoles"     : [],
-        "createdBy"         : {},
         "assignedUsers"     : [],
+
+        "createdBy"         : {},
         "validatingUsers"   : [],
 
         "requirements"      : [],

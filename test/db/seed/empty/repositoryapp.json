@@ -11,6 +11,9 @@
         "uri"               : "",
         "createdBy"         : {},
         "targetRoles"       : [],
+
+        "assignedUsers"     : [],
+
         "comments"          : []
     }
 ]

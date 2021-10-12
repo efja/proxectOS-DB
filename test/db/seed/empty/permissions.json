@@ -5,9 +5,9 @@
         "createdAt" : "",
         "updatedAt" : "",
 
-        "delete"    : "true",
-        "read"      : "true",
-        "update"    : "true",
-        "write"     : "true"
+        "delete"    : true,
+        "read"      : true,
+        "update"    : true,
+        "write"     : true
     }
 ]
