@@ -1,0 +1,68 @@
+[
+    {
+        "_id"           : "b192e904-c8a3-4300-a27e-04f00b06d3af",
+        "id"            : "b192e904-c8a3-4300-a27e-04f00b06d3af",
+        "createdAt"     : "Thu Sep 30 2021 10:17:55 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 21:07:05 GMT+0200 (GMT+02:00)",
+
+        "name"          : "developer",
+        "description"   : "Ipsum laboriosam aut",
+        "scope"         : "PERFORMANCE",
+        "permissions"   : []
+    },
+    {
+        "_id"           : "5ac29634-1b89-4fd4-b69b-3ef6206f2573",
+        "id"            : "5ac29634-1b89-4fd4-b69b-3ef6206f2573",
+        "createdAt"     : "Wed Sep 29 2021 22:33:09 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 18:41:03 GMT+0200 (GMT+02:00)",
+
+        "name"          : "owner",
+        "description"   : "quidem est quo",
+        "scope"         : "PROJECT",
+        "permissions"   : []
+    },
+    {
+        "_id"           : "05e34569-1c11-46ad-bfb8-ece7124f3a87",
+        "id"            : "05e34569-1c11-46ad-bfb8-ece7124f3a87",
+        "createdAt"     : "Thu Sep 30 2021 11:08:34 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 12:58:18 GMT+0200 (GMT+02:00)",
+
+        "name"          : "manager",
+        "description"   : "consequatur tempore id",
+        "scope"         : "REQUIREMENT",
+        "permissions"   : []
+    },
+    {
+        "_id"           : "311a6b6b-4ea1-4210-8c38-d0e478271fbc",
+        "id"            : "311a6b6b-4ea1-4210-8c38-d0e478271fbc",
+        "createdAt"     : "Thu Sep 30 2021 09:47:55 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 12:32:42 GMT+0200 (GMT+02:00)",
+
+        "name"          : "validator",
+        "description"   : "est perspiciatis voluptas",
+        "scope"         : "STAGE",
+        "permissions"   : []
+    },
+    {
+        "_id"           : "996c22fe-584c-4441-9de9-d882ebaeb02d",
+        "id"            : "996c22fe-584c-4441-9de9-d882ebaeb02d",
+        "createdAt"     : "Thu Sep 30 2021 02:43:33 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:55:16 GMT+0200 (GMT+02:00)",
+
+        "name"          : "validator2",
+        "description"   : "ut aut exaut aut sed",
+        "scope"         : "STATE",
+        "permissions"   : []
+    },
+    {
+        "_id"           : "bdda6aa9-3a53-40aa-bf03-4b3eaee31941",
+        "id"            : "bdda6aa9-3a53-40aa-bf03-4b3eaee31941",
+        "createdAt"     : "Thu Sep 30 2021 00:26:07 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 20:49:09 GMT+0200 (GMT+02:00)",
+
+        "name"          : "admin",
+        "description"   : "dolorum assumenda maxime",
+        "scope"         : "SYSTEM",
+        "permissions"   : []
+    }
+]

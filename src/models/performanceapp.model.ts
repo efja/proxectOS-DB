@@ -59,7 +59,7 @@ export class PerformanceApp extends BaseEntity {
     public type                     : Type;
 
     @ManyToMany(() => AssignedRolesToUser)
-    public assignedUsers    : Collection<AssignedRolesToUser> = new Collection<AssignedRolesToUser>(this);
+    public assignedUsers            : Collection<AssignedRolesToUser> = new Collection<AssignedRolesToUser>(this);
 
     @ManyToOne()
     public createdBy                : User;

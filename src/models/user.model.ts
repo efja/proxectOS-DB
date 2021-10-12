@@ -22,10 +22,6 @@ export class User extends BaseEntity {
     public firstSurname     : string;
     @Property()
     public secondSurname    : string;
-    @Property()
-    public salary           : number;
-    @Property()
-    public flexibleSchedule : boolean;
 
     @Property()
     @Unique()
@@ -33,6 +29,10 @@ export class User extends BaseEntity {
     @Property()
     public password         : string;
 
+    @Property()
+    public salary           : number;
+    @Property()
+    public flexibleSchedule : boolean;
     @Property()
     public vacantions       : Date[];
 

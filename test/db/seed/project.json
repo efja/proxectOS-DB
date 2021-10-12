@@ -1,0 +1,28 @@
+[
+    {
+        "_id"               : "",
+        "id"                : "",
+        "createdAt"         : "",
+        "updatedAt"         : "",
+
+        "startDate"         : "",
+        "finishDate"        : "",
+        "targetStartDate"   : "",
+        "targetFinishDate"  : "",
+
+        "name"              : "",
+        "description"       : "",
+
+        "currentStage"      : {},
+        "currentState"      : {},
+
+        "assignedRoles"     : [],
+        "createdBy"         : {},
+        "assignedUsers"     : [],
+        "validatingUsers"   : [],
+
+        "requirements"      : [],
+        "repositories"      : [],
+        "comments"          : []
+    }
+]

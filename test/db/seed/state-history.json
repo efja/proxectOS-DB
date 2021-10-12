@@ -1,0 +1,17 @@
+[
+    {
+        "_id"           : "",
+        "id"            : "",
+        "createdAt"     : "",
+        "updatedAt"     : "",
+
+        "log"           : "",
+        "oldState"      : {},
+        "newState"      : {},
+        "targetRoles"   : [],
+        "project"       : {},
+        "performance"   : {},
+        "requirement"   : {},
+        "stage"         : {}
+    }
+]

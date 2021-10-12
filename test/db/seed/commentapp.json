@@ -1,0 +1,14 @@
+[
+    {
+        "_id"               : "",
+        "id"                : "",
+        "createdAt"         : "",
+        "updatedAt"         : "",
+
+        "expirationDate"    : null,
+        "title"             : "",
+        "message"           : "",
+        "createdBy"         : "",
+        "targetRoles"       : []
+    }
+]

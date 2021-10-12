@@ -1,0 +1,22 @@
+[
+    {
+        "_id"               : "",
+        "id"                : "",
+        "createdAt"         : "",
+        "updatedAt"         : "",
+
+        "startDate"         : "",
+        "finishDate"        : "",
+        "targetStartDate"   : "",
+        "targetFinishDate"  : "",
+
+        "name"              : "",
+        "description"       : "",
+        "currentState"      : {},
+        "assignedRoles"     : [],
+        "createdBy"         : {},
+        "assignedUsers"     : [],
+        "validatingUsers"   : [],
+        "comments"          : []
+    }
+]

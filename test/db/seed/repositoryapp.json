@@ -1,0 +1,16 @@
+[
+    {
+        "_id"               : "",
+        "id"                : "",
+        "createdAt"         : "",
+        "updatedAt"         : "",
+
+        "expirationDate"    : "",
+        "name"              : "",
+        "description"       : "",
+        "uri"               : "",
+        "createdBy"         : {},
+        "targetRoles"       : [],
+        "comments"          : []
+    }
+]
