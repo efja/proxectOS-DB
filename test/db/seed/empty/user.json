@@ -12,6 +12,8 @@
         "login"             : "",
         "password"          : "",
 
+        "isCustomer"        : false,
+
         "salary"            : 0,
         "flexibleSchedule"  : true,
         "vacantions"        : [],

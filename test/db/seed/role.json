@@ -2,8 +2,8 @@
     {
         "_id"           : "bdda6aa9-3a53-40aa-bf03-4b3eaee31941",
         "id"            : "bdda6aa9-3a53-40aa-bf03-4b3eaee31941",
-        "createdAt"     : "Thu Sep 30 2021 00:26:07 GMT+0200 (GMT+02:00)",
-        "updatedAt"     : "Thu Sep 30 2021 20:49:09 GMT+0200 (GMT+02:00)",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
         "name"          : "Administrador Sistema",
         "description"   : "",
@@ -14,8 +14,8 @@
     {
         "_id"           : "d34cc365-7ed9-4150-89ac-26970cac0bf7",
         "id"            : "d34cc365-7ed9-4150-89ac-26970cac0bf7",
-        "createdAt"     : "Thu Sep 30 2021 00:26:07 GMT+0200 (GMT+02:00)",
-        "updatedAt"     : "Thu Sep 30 2021 20:49:09 GMT+0200 (GMT+02:00)",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
         "name"          : "Administrador",
         "description"   : "",
@@ -26,8 +26,8 @@
     {
         "_id"           : "5ac29634-1b89-4fd4-b69b-3ef6206f2573",
         "id"            : "5ac29634-1b89-4fd4-b69b-3ef6206f2573",
-        "createdAt"     : "Wed Sep 29 2021 22:33:09 GMT+0200 (GMT+02:00)",
-        "updatedAt"     : "Thu Sep 30 2021 18:41:03 GMT+0200 (GMT+02:00)",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
         "name"          : "Cliente",
         "description"   : "",
@@ -38,8 +38,8 @@
     {
         "_id"           : "214f0e60-47bb-4762-90b1-662ab935c333",
         "id"            : "214f0e60-47bb-4762-90b1-662ab935c333",
-        "createdAt"     : "Wed Sep 29 2021 22:33:09 GMT+0200 (GMT+02:00)",
-        "updatedAt"     : "Thu Sep 30 2021 18:41:03 GMT+0200 (GMT+02:00)",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
         "name"          : "Comercial",
         "description"   : "",
@@ -50,8 +50,8 @@
     {
         "_id"           : "b192e904-c8a3-4300-a27e-04f00b06d3af",
         "id"            : "b192e904-c8a3-4300-a27e-04f00b06d3af",
-        "createdAt"     : "Thu Sep 30 2021 10:17:55 GMT+0200 (GMT+02:00)",
-        "updatedAt"     : "Thu Sep 30 2021 21:07:05 GMT+0200 (GMT+02:00)",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
         "name"          : "Desenvolvedor",
         "description"   : "",
@@ -62,8 +62,8 @@
     {
         "_id"           : "05e34569-1c11-46ad-bfb8-ece7124f3a87",
         "id"            : "05e34569-1c11-46ad-bfb8-ece7124f3a87",
-        "createdAt"     : "Thu Sep 30 2021 11:08:34 GMT+0200 (GMT+02:00)",
-        "updatedAt"     : "Thu Sep 30 2021 12:58:18 GMT+0200 (GMT+02:00)",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
         "name"          : "Responsable",
         "description"   : "",
@@ -74,8 +74,8 @@
     {
         "_id"           : "311a6b6b-4ea1-4210-8c38-d0e478271fbc",
         "id"            : "311a6b6b-4ea1-4210-8c38-d0e478271fbc",
-        "createdAt"     : "Thu Sep 30 2021 09:47:55 GMT+0200 (GMT+02:00)",
-        "updatedAt"     : "Thu Sep 30 2021 12:32:42 GMT+0200 (GMT+02:00)",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
         "name"          : "Validador",
         "description"   : "",

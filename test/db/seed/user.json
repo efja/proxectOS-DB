@@ -1,18 +1,21 @@
 [
     {
-        "_id"               : "",
-        "createdAt"         : "",
-        "updatedAt"         : "",
+        "_id"               : "1f2462e4-3c1b-411f-9393-216b078bada4",
+        "id"                : "1f2462e4-3c1b-411f-9393-216b078bada4",
+        "createdAt"         : "2021-01-25T07:05:37.000+01:00",
+        "updatedAt"         : "2021-01-25T07:05:37.000+01:00",
 
-        "name"              : "",
-        "firstSurname"      : "",
-        "secondSurname"     : "",
+        "name"              : "Marta",
+        "firstSurname"      : "Calderón",
+        "secondSurname"     : "Ramírez",
 
-        "login"             : "",
-        "password"          : "",
+        "login"             : "martacr",
+        "password"          : "abc123.",
+
+        "isCustomer"        : true,
 
         "salary"            : 0,
-        "flexibleSchedule"  : true,
+        "flexibleSchedule"  : false,
         "vacantions"        : [],
 
         "userSchedule"      : null,
@@ -27,20 +30,28 @@
         ]
     },
     {
-        "_id"               : "",
-        "createdAt"         : "",
-        "updatedAt"         : "",
+        "_id"               : "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+        "id"                : "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+        "createdAt"         : "2021-01-25T07:05:37.000+01:00",
+        "updatedAt"         : "2021-01-25T07:05:37.000+01:00",
 
-        "name"              : "",
-        "firstSurname"      : "",
-        "secondSurname"     : "",
+        "name"              : "Gerardo",
+        "firstSurname"      : "Tovar",
+        "secondSurname"     : "Lozano",
 
-        "login"             : "",
-        "password"          : "",
+        "login"             : "gerardotl",
+        "password"          : "abc123.",
 
-        "salary"            : 0,
+        "isCustomer"        : false,
+
+        "salary"            : 38564,
         "flexibleSchedule"  : true,
-        "vacantions"        : [],
+        "vacantions"        : [
+            "2021-08-12T00:00:00.000+02:00",
+            "2021-08-134T00:00:00.000+02:00",
+            "2021-08-16T00:00:00.000+02:00",
+            "2021-08-17T00:00:00.000+02:00"
+        ],
 
         "userSchedule"      : "b6c69c00-0a67-46c8-a4f0-0fbe561f66fb",
 
@@ -54,18 +65,21 @@
         ]
     },
     {
-        "_id"               : "",
-        "createdAt"         : "",
-        "updatedAt"         : "",
+        "_id"               : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
+        "id"                : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
+        "createdAt"         : "2021-01-25T07:05:37.000+01:00",
+        "updatedAt"         : "2021-01-25T07:05:37.000+01:00",
 
-        "name"              : "",
-        "firstSurname"      : "",
-        "secondSurname"     : "",
+        "name"              : "Ester",
+        "firstSurname"      : "Henríquez",
+        "secondSurname"     : "Lucero",
 
-        "login"             : "",
-        "password"          : "",
+        "login"             : "esterhl",
+        "password"          : "abc123.",
 
-        "salary"            : 0,
+        "isCustomer"        : false,
+
+        "salary"            : 17752,
         "flexibleSchedule"  : false,
         "vacantions"        : [],
 
@@ -82,18 +96,21 @@
         ]
     },
     {
-        "_id"               : "",
-        "createdAt"         : "",
-        "updatedAt"         : "",
+        "_id"               : "4ec9b87f-577c-4c50-a55b-4d74cce5b207",
+        "id"                : "4ec9b87f-577c-4c50-a55b-4d74cce5b207",
+        "createdAt"         : "2021-01-25T07:05:37.000+01:00",
+        "updatedAt"         : "2021-01-25T07:05:37.000+01:00",
 
-        "name"              : "",
-        "firstSurname"      : "",
-        "secondSurname"     : "",
+        "name"              : "Mariana",
+        "firstSurname"      : "Armijo",
+        "secondSurname"     : "Esparza",
 
-        "login"             : "",
-        "password"          : "",
+        "login"             : "marianaae",
+        "password"          : "abc123.",
 
-        "salary"            : 0,
+        "isCustomer"        : false,
+
+        "salary"            : 23596,
         "flexibleSchedule"  : true,
         "vacantions"        : [],
 

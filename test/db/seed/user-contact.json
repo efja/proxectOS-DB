@@ -2,8 +2,8 @@
     {
         "_id"       : "e655a85c-7b85-49dc-9580-9da170f35afa",
         "id"        : "e655a85c-7b85-49dc-9580-9da170f35afa",
-        "createdAt" : "Tue Oct 12 2021 03:55:55 GMT+0200 (GMT+02:00)",
-        "updatedAt" : "Tue Oct 12 2021 03:55:55 GMT+0200 (GMT+02:00)",
+        "createdAt" : "2021-10-12T03:55:55.000+02:00",
+        "updatedAt" : "2021-10-12T03:55:55.000+02:00",
 
         "type"      : "email",
         "contact"   : "Dulce.Renner20@hotmail.com"
@@ -11,8 +11,8 @@
     {
         "_id"       : "a0a70f31-2e89-42d1-a028-ffb9e3308730",
         "id"        : "a0a70f31-2e89-42d1-a028-ffb9e3308730",
-        "createdAt" : "Tue Oct 12 2021 03:55:55 GMT+0200 (GMT+02:00)",
-        "updatedAt" : "Tue Oct 12 2021 03:55:55 GMT+0200 (GMT+02:00)",
+        "createdAt" : "2021-10-12T03:55:55.000+02:00",
+        "updatedAt" : "2021-10-12T03:55:55.000+02:00",
 
         "type"      : "email",
         "contact"   : "Marianna.Hegmann@gmail.com"
@@ -20,8 +20,8 @@
     {
         "_id"       : "9701cb1f-4ce0-4a4b-b81f-56e69e18ca68",
         "id"        : "9701cb1f-4ce0-4a4b-b81f-56e69e18ca68",
-        "createdAt" : "Tue Oct 12 2021 03:55:55 GMT+0200 (GMT+02:00)",
-        "updatedAt" : "Tue Oct 12 2021 03:55:55 GMT+0200 (GMT+02:00)",
+        "createdAt" : "2021-10-12T03:55:55.000+02:00",
+        "updatedAt" : "2021-10-12T03:55:55.000+02:00",
 
         "type"      : "email",
         "contact"   : "Myriam.Dickinson91@gmail.com"
@@ -29,8 +29,8 @@
     {
         "_id"       : "5c9a12e8-ccd2-4d9a-9672-12528f6289b2",
         "id"        : "5c9a12e8-ccd2-4d9a-9672-12528f6289b2",
-        "createdAt" : "Tue Oct 12 2021 03:55:55 GMT+0200 (GMT+02:00)",
-        "updatedAt" : "Tue Oct 12 2021 03:55:55 GMT+0200 (GMT+02:00)",
+        "createdAt" : "2021-10-12T03:55:55.000+02:00",
+        "updatedAt" : "2021-10-12T03:55:55.000+02:00",
 
         "type"      : "email",
         "contact"   : "Hilma_Ryan68@hotmail.com"
@@ -38,8 +38,8 @@
     {
         "_id"       : "4b2262bc-73a7-4016-9590-89d63e741499",
         "id"        : "4b2262bc-73a7-4016-9590-89d63e741499",
-        "createdAt" : "Tue Oct 12 2021 03:55:55 GMT+0200 (GMT+02:00)",
-        "updatedAt" : "Tue Oct 12 2021 03:55:55 GMT+0200 (GMT+02:00)",
+        "createdAt" : "2021-10-12T03:55:55.000+02:00",
+        "updatedAt" : "2021-10-12T03:55:55.000+02:00",
 
         "type"      : "teléfono",
         "contact"   : "039.993.9024 x13427"
@@ -47,8 +47,8 @@
     {
         "_id"       : "573aaf4b-0aa7-45b9-984d-62595b892c37",
         "id"        : "573aaf4b-0aa7-45b9-984d-62595b892c37",
-        "createdAt" : "Tue Oct 12 2021 03:55:55 GMT+0200 (GMT+02:00)",
-        "updatedAt" : "Tue Oct 12 2021 03:55:55 GMT+0200 (GMT+02:00)",
+        "createdAt" : "2021-10-12T03:55:55.000+02:00",
+        "updatedAt" : "2021-10-12T03:55:55.000+02:00",
 
         "type"      : "teléfono",
         "contact"   : "726-963-5772"

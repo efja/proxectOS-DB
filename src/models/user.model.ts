@@ -30,6 +30,9 @@ export class User extends BaseEntity {
     public password         : string;
 
     @Property()
+    public isCustomer       : boolean;
+
+    @Property()
     public salary           : number;
     @Property()
     public flexibleSchedule : boolean;
