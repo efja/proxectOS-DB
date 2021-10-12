@@ -5,6 +5,8 @@
         "createdAt"     : "",
         "updatedAt"     : "",
 
+        "description"   : "",
+
         "worksWeekends" : false,
         "weeklyHours"   : 40,
         "holidays"      : []

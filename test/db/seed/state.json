@@ -1,21 +1,66 @@
 [
     {
+        "_id"           : "ac25f7f5-9ff8-4df6-ab90-3bf9677a148e",
+        "id"            : "ac25f7f5-9ff8-4df6-ab90-3bf9677a148e",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Corrixida",
+        "description"   : "Rematada e probada satisfactoriamente."
+    },
+    {
+        "_id"           : "462fa821-348e-4982-846d-09e975c95c2c",
+        "id"            : "462fa821-348e-4982-846d-09e975c95c2c",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Descartada",
+        "description"   : "Solución desestimada"
+    },
+    {
+        "_id"           : "7dfd5f13-ffea-4f1f-8cb8-42099d35a333",
+        "id"            : "7dfd5f13-ffea-4f1f-8cb8-42099d35a333",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Despregada - Preprodución",
+        "description"   : "Levada a un entrono de probas."
+    },
+    {
+        "_id"           : "7dfd5f13-ffea-4f1f-8cb8-42099d35a333",
+        "id"            : "7dfd5f13-ffea-4f1f-8cb8-42099d35a333",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Despregada - Produción",
+        "description"   : "Levada no entrono final."
+    },
+    {
+        "_id"           : "7dfd5f13-ffea-4f1f-8cb8-42099d35a333",
+        "id"            : "7dfd5f13-ffea-4f1f-8cb8-42099d35a333",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Despregamento - Preprodución",
+        "description"   : "Montandose no entrono de probas."
+    },
+    {
+        "_id"           : "7dfd5f13-ffea-4f1f-8cb8-42099d35a333",
+        "id"            : "7dfd5f13-ffea-4f1f-8cb8-42099d35a333",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Despregamento - Produción",
+        "description"   : "Montandose no entrono final."
+    },
+    {
         "_id"           : "7515ca8b-887b-473a-a9dc-013000cfc79a",
         "id"            : "7515ca8b-887b-473a-a9dc-013000cfc79a",
         "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
         "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
 
-        "name"          : "Detectado",
-        "description"   : "nulla occaecati officiis"
-    },
-    {
-        "_id"           : "0cbfaf2e-6ff0-4886-b746-a97b767373af",
-        "id"            : "0cbfaf2e-6ff0-4886-b746-a97b767373af",
-        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
-        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
-
-        "name"          : "Notificado",
-        "description"   : "et sunt qui"
+        "name"          : "Detectada",
+        "description"   : "Pendente de comezar"
     },
     {
         "_id"           : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
@@ -24,7 +69,52 @@
         "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
 
         "name"          : "En curso",
-        "description"   : "quia laudantium ullam"
+        "description"   : "Solución en curso"
+    },
+    {
+        "_id"           : "0cbfaf2e-6ff0-4886-b746-a97b767373af",
+        "id"            : "0cbfaf2e-6ff0-4886-b746-a97b767373af",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Notificada",
+        "description"   : ""
+    },
+    {
+        "_id"           : "0cbfaf2e-6ff0-4886-b746-a97b767373af",
+        "id"            : "0cbfaf2e-6ff0-4886-b746-a97b767373af",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Pausada",
+        "description"   : "Traballo en espera."
+    },
+    {
+        "_id"           : "0cbfaf2e-6ff0-4886-b746-a97b767373af",
+        "id"            : "0cbfaf2e-6ff0-4886-b746-a97b767373af",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Pausada por 3ros",
+        "description"   : "Traballo en espera por algunha dependencia externa pendente de resolver."
+    },
+    {
+        "_id"           : "1f0c2752-c863-4b6c-8b1d-c65b801bc385",
+        "id"            : "1f0c2752-c863-4b6c-8b1d-c65b801bc385",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Pendente de 3ros",
+        "description"   : "Pendente de comezar por algunha dependencia externa insatisfeita."
+    },
+    {
+        "_id"           : "e0a03900-b86c-4cb6-a719-38a1738154d5",
+        "id"            : "e0a03900-b86c-4cb6-a719-38a1738154d5",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Pendente de validación",
+        "description"   : "Corrixida e pendende de que un responsable dea o visto bo."
     },
     {
         "_id"           : "1f0c2752-c863-4b6c-8b1d-c65b801bc385",
@@ -33,25 +123,7 @@
         "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
 
         "name"          : "Probándose",
-        "description"   : "ipsum odit in"
-    },
-    {
-        "_id"           : "ac25f7f5-9ff8-4df6-ab90-3bf9677a148e",
-        "id"            : "ac25f7f5-9ff8-4df6-ab90-3bf9677a148e",
-        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
-        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
-
-        "name"          : "Corrixido",
-        "description"   : "voluptatem consectetur ea"
-    },
-    {
-        "_id"           : "462fa821-348e-4982-846d-09e975c95c2c",
-        "id"            : "462fa821-348e-4982-846d-09e975c95c2c",
-        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
-        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
-
-        "name"          : "Descartado",
-        "description"   : "veritatis assumenda quis"
+        "description"   : "Probando solución."
     },
     {
         "_id"           : "e0a03900-b86c-4cb6-a719-38a1738154d5",
@@ -59,16 +131,43 @@
         "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
         "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
 
-        "name"          : "Rematado",
-        "description"   : "voluptas ad rem"
+        "name"          : "Rematada",
+        "description"   : "Rematada e pendende de probar."
     },
     {
-        "_id"           : "7dfd5f13-ffea-4f1f-8cb8-42099d35a333",
-        "id"            : "7dfd5f13-ffea-4f1f-8cb8-42099d35a333",
+        "_id"           : "e0a03900-b86c-4cb6-a719-38a1738154d5",
+        "id"            : "e0a03900-b86c-4cb6-a719-38a1738154d5",
         "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
         "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
 
-        "name"          : "Despregado",
-        "description"   : "dolores iste eum"
+        "name"          : "Rexeitada",
+        "description"   : ""
+    },
+    {
+        "_id"           : "e0a03900-b86c-4cb6-a719-38a1738154d5",
+        "id"            : "e0a03900-b86c-4cb6-a719-38a1738154d5",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Validación Rexeitada",
+        "description"   : "Corrixida e rexeitada por algún validador."
+    },
+    {
+        "_id"           : "e0a03900-b86c-4cb6-a719-38a1738154d5",
+        "id"            : "e0a03900-b86c-4cb6-a719-38a1738154d5",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Validada",
+        "description"   : "Corrixida e confirmada por algún validador."
+    },
+    {
+        "_id"           : "e0a03900-b86c-4cb6-a719-38a1738154d5",
+        "id"            : "e0a03900-b86c-4cb6-a719-38a1738154d5",
+        "createdAt"     : "Wed Sep 29 2021 22:51:54 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Thu Sep 30 2021 03:11:21 GMT+0200 (GMT+02:00)",
+
+        "name"          : "Validándose",
+        "description"   : "Rematada e en proceso de que un validador lle dea o visto bo."
     }
 ]

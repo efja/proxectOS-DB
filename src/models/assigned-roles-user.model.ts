@@ -18,6 +18,7 @@ export class AssignedRolesToUser extends BaseEntity {
     // Relacións
     @ManyToOne()
     public createdBy        : User;
+
     @ManyToOne()
     public assignedUser     : User;
     @ManyToMany(() => Role)

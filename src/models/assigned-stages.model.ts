@@ -1,46 +1,54 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Entity, Enum, Property } from '@mikro-orm/core';
+import { Collection, Entity, ManyToOne, ManyToMany, Property } from '@mikro-orm/core';
 
+import { AssignedRolesToUser } from './assigned-roles-user.model';
 import { BaseEntity } from "./base-entity.model";
+import { CommentApp } from './commentapp.model';
+import { User } from './user.model';
+import { State } from "./state.model";
+import { Stage } from './stage.model';
 
 // ####################################################################################################
-// ## ENUMS
-// ####################################################################################################
-export enum Scopes {
-    PERFORMANCE,
-    PROJECT,
-    REQUIREMENT,
-    STAGE,
-    STATE,
-    SYSTEM,
-}
-
-// ####################################################################################################
-// ## CLASE Permissions
+// ## CLASE AssignedPermissions
 // ####################################################################################################
 @Entity()
-export class Permissions extends BaseEntity {
+export class AssignedStages extends BaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public delete   : boolean;
+    public startDate        : Date;
     @Property()
-    public read     : boolean;
+    public finishDate       : Date;
     @Property()
-    public update   : boolean;
+    public targetStartDate  : Date;
     @Property()
-    public write    : boolean;
+    public targetFinishDate : Date;
 
-    @Enum({ items: () => Scopes, array: true, nullable: false })
-    public scopes   : Scopes[];
+    // Relacións
+    @ManyToOne()
+    public createdBy        : User;
+
+    @ManyToOne()
+    public stage            : Stage;
+
+    @ManyToOne()
+    public currentState     : State;
+
+    @ManyToMany(() => AssignedRolesToUser)
+    public assignedUsers    : Collection<AssignedRolesToUser> = new Collection<AssignedRolesToUser>(this);
+    @ManyToMany(() => User)
+    public validatingUsers  : Collection<User> = new Collection<User>(this);
+
+    @ManyToMany(() => CommentApp)
+    public comments         : Collection<CommentApp> = new Collection<CommentApp>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
-    constructor(obj?: Partial<Permissions>) {
+    constructor(obj?: Partial<AssignedStages>) {
         super();
         Object.assign(this, obj);
     }

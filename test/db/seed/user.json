@@ -1,19 +1,112 @@
 [
     {
         "_id"               : "",
-        "id"                : "",
         "createdAt"         : "",
         "updatedAt"         : "",
 
         "name"              : "",
         "firstSurname"      : "",
         "secondSurname"     : "",
-        "salary"            : 0,
-        "flexibleSchedule"  : "true",
+
         "login"             : "",
         "password"          : "",
-        "userSchedule"      : {},
-        "contacts"          : [],
-        "roles"             : []
+
+        "salary"            : 0,
+        "flexibleSchedule"  : true,
+        "vacantions"        : [],
+
+        "userSchedule"      : null,
+
+        "contacts"          : [
+            "e655a85c-7b85-49dc-9580-9da170f35afa"
+        ],
+
+        "defaultRoles"      : [
+            "5ac29634-1b89-4fd4-b69b-3ef6206f2573",
+            "311a6b6b-4ea1-4210-8c38-d0e478271fbc"
+        ]
+    },
+    {
+        "_id"               : "",
+        "createdAt"         : "",
+        "updatedAt"         : "",
+
+        "name"              : "",
+        "firstSurname"      : "",
+        "secondSurname"     : "",
+
+        "login"             : "",
+        "password"          : "",
+
+        "salary"            : 0,
+        "flexibleSchedule"  : true,
+        "vacantions"        : [],
+
+        "userSchedule"      : "b6c69c00-0a67-46c8-a4f0-0fbe561f66fb",
+
+        "contacts"          : [
+            "a0a70f31-2e89-42d1-a028-ffb9e3308730"
+        ],
+
+        "defaultRoles"      : [
+            "b192e904-c8a3-4300-a27e-04f00b06d3af",
+            "311a6b6b-4ea1-4210-8c38-d0e478271fbc"
+        ]
+    },
+    {
+        "_id"               : "",
+        "createdAt"         : "",
+        "updatedAt"         : "",
+
+        "name"              : "",
+        "firstSurname"      : "",
+        "secondSurname"     : "",
+
+        "login"             : "",
+        "password"          : "",
+
+        "salary"            : 0,
+        "flexibleSchedule"  : false,
+        "vacantions"        : [],
+
+        "userSchedule"      : "359fb20b-692a-4516-8f45-06619d6c04c1",
+
+        "contacts"          : [
+            "9701cb1f-4ce0-4a4b-b81f-56e69e18ca68",
+            "573aaf4b-0aa7-45b9-984d-62595b892c37"
+        ],
+
+        "defaultRoles"      : [
+            "bdda6aa9-3a53-40aa-bf03-4b3eaee31941",
+            "05e34569-1c11-46ad-bfb8-ece7124f3a87"
+        ]
+    },
+    {
+        "_id"               : "",
+        "createdAt"         : "",
+        "updatedAt"         : "",
+
+        "name"              : "",
+        "firstSurname"      : "",
+        "secondSurname"     : "",
+
+        "login"             : "",
+        "password"          : "",
+
+        "salary"            : 0,
+        "flexibleSchedule"  : true,
+        "vacantions"        : [],
+
+        "userSchedule"      : "359fb20b-692a-4516-8f45-06619d6c04c1",
+
+        "contacts"          : [
+            "5c9a12e8-ccd2-4d9a-9672-12528f6289b2",
+            "4b2262bc-73a7-4016-9590-89d63e741499"
+        ],
+
+        "defaultRoles"      : [
+            "b192e904-c8a3-4300-a27e-04f00b06d3af",
+            "05e34569-1c11-46ad-bfb8-ece7124f3a87"
+        ]
     }
 ]

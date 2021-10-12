@@ -10,19 +10,15 @@
         "targetStartDate"   : "",
         "targetFinishDate"  : "",
 
-        "name"              : "",
-        "description"       : "",
+        "createdBy"         : {},
 
-        "currentStage"      : {},
+        "stage"             : {},
+
         "currentState"      : {},
 
         "assignedUsers"     : [],
-
-        "createdBy"         : {},
         "validatingUsers"   : [],
 
-        "requirements"      : [],
-        "repositories"      : [],
         "comments"          : []
     }
 ]

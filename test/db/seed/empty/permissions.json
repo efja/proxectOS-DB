@@ -8,6 +8,8 @@
         "delete"    : true,
         "read"      : true,
         "update"    : true,
-        "write"     : true
+        "write"     : true,
+
+        "scopes"    : ""
     }
 ]

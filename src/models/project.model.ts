@@ -7,7 +7,7 @@ import { AssignedRolesToUser } from './assigned-roles-user.model';
 import { BaseEntity } from "./base-entity.model";
 import { RepositoryApp } from './repositoryapp.model';
 import { Requirement } from './requirement.model';
-import { Stage } from './stage.model';
+import { AssignedStages } from './assigned-stages.model';
 import { State } from './state.model';
 import { User } from './user.model';
 import { CommentApp } from './commentapp.model';
@@ -36,10 +36,8 @@ export class Project extends BaseEntity {
     public description      : string;
 
     // Relacións
-    @ManyToOne()
-    public currentStage     : Stage;
-    @ManyToOne()
-    public currentState     : State;
+    @ManyToMany(() => AssignedStages)
+    public stages           : Collection<AssignedStages> = new Collection<AssignedStages>(this);
 
     @ManyToMany(() => AssignedRolesToUser)
     public assignedUsers    : Collection<AssignedRolesToUser> = new Collection<AssignedRolesToUser>(this);

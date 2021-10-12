@@ -14,11 +14,13 @@ export class UserSchedule extends BaseEntity {
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public worksWeekends   : boolean;
+    public description      : string;
     @Property()
-    public weeklyHours     : number;
+    public worksWeekends    : boolean;
     @Property()
-    public holidays        : Date[];
+    public weeklyHours      : number;
+    @Property()
+    public holidays         : Date[];
 
     // ************************************************************************************************
     // ** CONSTRUTOR

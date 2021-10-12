@@ -1,0 +1,86 @@
+[
+    {
+        "_id"               : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13",
+        "id"                : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13",
+        "createdAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+        "updatedAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+
+        "startDate"         : "Thu Sep 30 2021 11:49:50 GMT+0200 (GMT+02:00)",
+        "finishDate"        : null,
+        "targetStartDate"   : "Thu Sep 30 2021 08:00:00 GMT+0200 (GMT+02:00)",
+        "targetFinishDate"  : "Sun Jan 18 2022 1500:00 GMT+0200 (GMT+02:00)",
+
+        "createdBy"         : "",
+
+        "stage"             : "ced452ae-3d05-4422-a5c3-10929b97a9de",
+
+        "currentState"      : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
+
+        "assignedUsers"     : [],
+        "validatingUsers"   : [],
+        "comments"          : []
+    },
+    {
+        "_id"               : "fd6a2f6d-36c5-4b28-9352-bc5cfae75ae8",
+        "id"                : "fd6a2f6d-36c5-4b28-9352-bc5cfae75ae8",
+        "createdAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+        "updatedAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+
+        "startDate"         : "Tue Mar 02 2021 14:43:17 GMT+0100 (GMT+01:00)",
+        "finishDate"        : "Mon Jun 21 2021 22:07:03 GMT+0100 (GMT+01:00)",
+        "targetStartDate"   : "Tue Mar 01 2021 08:00:00 GMT+0100 (GMT+01:00)",
+        "targetFinishDate"  : "Mon Jun 25 2021 15:00:00 GMT+0100 (GMT+01:00)",
+
+        "createdBy"         : "",
+
+        "stage"             : "73e3c668-933b-4916-9273-248422c91204",
+
+        "currentState"      : "7515ca8b-887b-473a-a9dc-013000cfc79a",
+
+        "assignedUsers"     : [],
+        "validatingUsers"   : [],
+        "comments"          : []
+    },
+    {
+        "_id"               : "118e2ace-6e87-4d7c-9907-2d2942ff6653",
+        "id"                : "118e2ace-6e87-4d7c-9907-2d2942ff6653",
+        "createdAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+        "updatedAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+
+        "startDate"         : "Wed Feb 24 2021 15:09:42 GMT+0100 (GMT+01:00)",
+        "finishDate"        : "Fri May 07 2021 23:04:20 GMT+0200 (GMT+02:00)",
+        "targetStartDate"   : "Tue Feb 24 2021 08:00:00 GMT+0100 (GMT+01:00)",
+        "targetFinishDate"  : "Mon May 01 2021 15:00:00 GMT+0100 (GMT+01:00)",
+
+        "createdBy"         : "",
+
+        "stage"             : "a8b6d996-cc3c-45d4-912a-7a14521e4b13",
+
+        "currentState"      : "e0a03900-b86c-4cb6-a719-38a1738154d5",
+
+        "assignedUsers"     : [],
+        "validatingUsers"   : [],
+        "comments"          : []
+    },
+    {
+        "_id"               : "a529a85b-07d1-445d-9677-fdb48769a872",
+        "id"                : "a529a85b-07d1-445d-9677-fdb48769a872",
+        "createdAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+        "updatedAt"         : "Thu Sep 30 2020 01:59:29 GMT+0200 (GMT+02:00)",
+
+        "startDate"         : "Sun Jul 01 2021 08:12:20 GMT+0200 (GMT+02:00)",
+        "finishDate"        : "Sat Jul 31 2021 11:35:41 GMT+0200 (GMT+02:00)",
+        "targetStartDate"   : "Tue Jun 15 2021 08:00:00 GMT+0100 (GMT+01:00)",
+        "targetFinishDate"  : "Mon Jun 26 2021 15:00:00 GMT+0100 (GMT+01:00)",
+
+        "createdBy"         : "",
+
+        "stage"             : "74e400ce-bf2e-45e4-8208-30c45c930bb4",
+
+        "currentState"      : "1f0c2752-c863-4b6c-8b1d-c65b801bc385",
+
+        "assignedUsers"     : [],
+        "validatingUsers"   : [],
+        "comments"          : []
+    }
+]

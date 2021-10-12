@@ -1,12 +1,35 @@
 [
     {
-        "_id"           : "",
-        "id"            : "",
-        "createdAt"     : "",
-        "updatedAt"     : "",
+        "_id"           : "b6c69c00-0a67-46c8-a4f0-0fbe561f66fb",
+        "id"            : "b6c69c00-0a67-46c8-a4f0-0fbe561f66fb",
+        "createdAt"     : "Tue Oct 12 2021 13:05:05 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Tue Oct 12 2021 13:05:05 GMT+0200 (GMT+02:00)",
 
-        "worksWeekends" : "false",
+        "description"   : "Calendario xeral 1",
+
+        "worksWeekends" : false,
         "weeklyHours"   : 40,
-        "holidays"      : []
+        "holidays"      : [
+            "Tue Jan 01 2021 00:00:00 GMT+0200 (GMT+02:00)",
+            "Tue Oct 12 2021 00:00:00 GMT+0200 (GMT+02:00)",
+            "Tue Dec 25 2021 00:00:00 GMT+0200 (GMT+02:00)"
+        ]
+    },
+    {
+        "_id"           : "359fb20b-692a-4516-8f45-06619d6c04c1",
+        "id"            : "359fb20b-692a-4516-8f45-06619d6c04c1",
+        "createdAt"     : "Tue Oct 12 2021 02:30:08 GMT+0200 (GMT+02:00)",
+        "updatedAt"     : "Tue Oct 12 2021 02:30:08 GMT+0200 (GMT+02:00)",
+
+        "description"   : "Calendario xeral 2",
+
+        "worksWeekends" : true,
+        "weeklyHours"   : 36,
+        "holidays"      : [
+            "Tue Jan 01 2021 00:00:00 GMT+0200 (GMT+02:00)",
+            "Tue Jul 25 2021 00:00:00 GMT+0200 (GMT+02:00)",
+            "Tue Oct 12 2021 00:00:00 GMT+0200 (GMT+02:00)",
+            "Tue Dec 25 2021 00:00:00 GMT+0200 (GMT+02:00)"
+        ]
     }
 ]

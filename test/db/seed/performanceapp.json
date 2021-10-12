@@ -24,9 +24,9 @@
         "priority"                  : {},
         "type"                      : {},
 
-        "assignedRoles"             : [],
-        "createdBy"                 : {},
         "assignedUsers"             : [],
+
+        "createdBy"                 : {},
         "validatingUsers"           : [],
 
         "estimatedHours"            : [],

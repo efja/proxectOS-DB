@@ -4,6 +4,7 @@
 import { Collection, Entity, Property, ManyToOne, ManyToMany, OneToMany } from '@mikro-orm/core';
 
 import { AssignedRolesToUser } from './assigned-roles-user.model';
+import { AssignedStages } from './assigned-stages.model';
 import { BaseEntity } from "./base-entity.model";
 import { CommentApp } from './commentapp.model';
 import { Priority } from './priority.model';
@@ -49,10 +50,9 @@ export class PerformanceApp extends BaseEntity {
     @ManyToMany(() => PerformanceApp)
     public performances             : Collection<PerformanceApp> = new Collection<PerformanceApp>(this);
 
-    @ManyToOne()
-    public currentStage             : Stage;
-    @ManyToOne()
-    public currentState             : State;
+    @ManyToMany(() => AssignedStages)
+    public stages                   : Collection<AssignedStages> = new Collection<AssignedStages>(this);
+
     @ManyToOne()
     public priority                 : Priority;
     @ManyToOne()
