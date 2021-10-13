@@ -5,6 +5,7 @@ import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mi
 
 import { BaseEntity } from "./base-entity.model";
 import { UserContact } from "./user-contact.model";
+import { UserGroup } from './user-group.model';
 import { UserSchedule } from './user-schedule.model';
 import { Role } from './role.model';
 
@@ -17,36 +18,36 @@ export class User extends BaseEntity {
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public name             : string;
+    public name                 : string;
     @Property()
-    public firstSurname     : string;
+    public firstSurname         : string;
     @Property()
-    public secondSurname    : string;
+    public secondSurname        : string;
 
     @Property()
     @Unique()
-    public login            : string;
+    public login                : string;
     @Property()
-    public password         : string;
+    public password             : string;
 
     @Property()
-    public isCustomer       : boolean;
+    public isCustomer           : boolean;
 
     @Property()
-    public salary           : number;
+    public salary               : number;
     @Property()
-    public flexibleSchedule : boolean;
+    public flexibleSchedule     : boolean;
     @Property()
-    public vacantions       : Date[];
+    public vacantions           : Date[];
 
     // Relacións
     @ManyToOne()
-    public userSchedule     : UserSchedule;
+    public userSchedule         : UserSchedule;
     @ManyToMany(() => UserContact)
-    public contacts         : Collection<UserContact> = new Collection<UserContact>(this);
+    public contacts             : Collection<UserContact> = new Collection<UserContact>(this);
 
-    @ManyToMany(() => Role)
-    public defaultRoles     : Collection<Role> = new Collection<Role>(this);
+    @ManyToMany(() => UserGroup)
+    public defaultUserGroups    : Collection<UserGroup> = new Collection<UserGroup>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

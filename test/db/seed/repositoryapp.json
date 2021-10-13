@@ -10,7 +10,7 @@
         "description"       : "",
         "uri"               : "",
         "createdBy"         : {},
-        "targetRoles"       : [],
+        "targetUserGroups"  : [],
 
         "assignedUsers"     : [],
 

@@ -7,11 +7,7 @@
 
         "name"          : "",
         "description"   : "",
-        "isSystemAdmin" : false,
 
-        "create"        : false,
-        "delete"        : false,
-        "read"          : false,
-        "update"        : false
+        "defaultRoles"      : []
     }
 ]

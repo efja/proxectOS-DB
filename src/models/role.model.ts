@@ -1,10 +1,9 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Entity, Property, Unique, ManyToOne } from '@mikro-orm/core';
+import { Entity, Property, Unique } from '@mikro-orm/core';
 
 import { BaseEntity } from "./base-entity.model";
-import { Permissions } from "./permissions.model";
 
 // ####################################################################################################
 // ## CLASE Role
@@ -20,11 +19,18 @@ export class Role extends BaseEntity {
     @Property()
     public description      : string;
     @Property()
-    public isSystemAdmin    : boolean[];
+    public isSystemAdmin    : boolean;
+
+    @Property()
+    public create           : boolean;
+    @Property()
+    public delete           : boolean;
+    @Property()
+    public read             : boolean;
+    @Property()
+    public update           : boolean;
 
     // Relacións
-    @ManyToOne()
-    public permissions      : Permissions;
 
     // ************************************************************************************************
     // ** CONSTRUTOR

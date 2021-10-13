@@ -6,10 +6,13 @@
         "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
         "name"          : "Administrador Sistema",
-        "description"   : "",
+        "description"   : "Control total do sistema.",
         "isSystemAdmin" : true,
 
-        "permissions"   : []
+        "create"        : true,
+        "delete"        : true,
+        "read"          : true,
+        "update"        : true
     },
     {
         "_id"           : "d34cc365-7ed9-4150-89ac-26970cac0bf7",
@@ -18,10 +21,13 @@
         "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
         "name"          : "Administrador",
-        "description"   : "",
+        "description"   : "Control total.",
         "isSystemAdmin" : false,
 
-        "permissions"   : []
+        "create"        : true,
+        "delete"        : true,
+        "read"          : true,
+        "update"        : true
     },
     {
         "_id"           : "5ac29634-1b89-4fd4-b69b-3ef6206f2573",
@@ -29,11 +35,14 @@
         "createdAt"     : "2021-09-29T22:51:54.000+02:00",
         "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
-        "name"          : "Cliente",
-        "description"   : "",
+        "name"          : "Só lectura",
+        "description"   : "Só pode ver a información do elemento.",
         "isSystemAdmin" : false,
 
-        "permissions"   : []
+        "create"        : false,
+        "delete"        : false,
+        "read"          : true,
+        "update"        : false
     },
     {
         "_id"           : "214f0e60-47bb-4762-90b1-662ab935c333",
@@ -41,11 +50,14 @@
         "createdAt"     : "2021-09-29T22:51:54.000+02:00",
         "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
-        "name"          : "Comercial",
-        "description"   : "",
+        "name"          : "Actualización",
+        "description"   : "Pode ver e actualizar a información do elemento.",
         "isSystemAdmin" : false,
 
-        "permissions"   : []
+        "create"        : false,
+        "delete"        : false,
+        "read"          : true,
+        "update"        : true
     },
     {
         "_id"           : "b192e904-c8a3-4300-a27e-04f00b06d3af",
@@ -53,11 +65,14 @@
         "createdAt"     : "2021-09-29T22:51:54.000+02:00",
         "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
-        "name"          : "Desenvolvedor",
-        "description"   : "",
+        "name"          : "Creación",
+        "description"   : "Pode crear un novo elemento,",
         "isSystemAdmin" : false,
 
-        "permissions"   : []
+        "create"        : true,
+        "delete"        : false,
+        "read"          : false,
+        "update"        : false
     },
     {
         "_id"           : "05e34569-1c11-46ad-bfb8-ece7124f3a87",
@@ -65,11 +80,14 @@
         "createdAt"     : "2021-09-29T22:51:54.000+02:00",
         "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
-        "name"          : "Responsable",
-        "description"   : "",
+        "name"          : "Eliminación",
+        "description"   : "Pode ver a información do elemento e borralo.",
         "isSystemAdmin" : false,
 
-        "permissions"   : []
+        "create"        : false,
+        "delete"        : true,
+        "read"          : true,
+        "update"        : false
     },
     {
         "_id"           : "311a6b6b-4ea1-4210-8c38-d0e478271fbc",
@@ -77,10 +95,13 @@
         "createdAt"     : "2021-09-29T22:51:54.000+02:00",
         "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
-        "name"          : "Validador",
+        "name"          : "Sen permisos",
         "description"   : "",
         "isSystemAdmin" : false,
 
-        "permissions"   : []
+        "create"        : false,
+        "delete"        : false,
+        "read"          : false,
+        "update"        : false
     }
 ]

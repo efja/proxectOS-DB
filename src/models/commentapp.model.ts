@@ -4,8 +4,8 @@
 import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
 import { BaseEntity } from "./base-entity.model";
-import { Role } from './role.model';
 import { User } from './user.model';
+import { UserGroup } from './user-group.model';
 
 // ####################################################################################################
 // ## CLASE CommentApp
@@ -26,8 +26,8 @@ export class CommentApp extends BaseEntity {
     // Relacións
     @ManyToOne()
     public createdBy        : User;
-    @ManyToMany(() => Role)
-    public targetRoles      : Collection<Role> = new Collection<Role>(this);
+    @ManyToMany(() => UserGroup)
+    public targetUserGroups : Collection<UserGroup> = new Collection<UserGroup>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

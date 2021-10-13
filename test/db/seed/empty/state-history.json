@@ -1,17 +1,17 @@
 [
     {
-        "_id"           : "",
-        "id"            : "",
-        "createdAt"     : "",
-        "updatedAt"     : "",
+        "_id"               : "",
+        "id"                : "",
+        "createdAt"         : "",
+        "updatedAt"         : "",
 
-        "log"           : "",
-        "oldState"      : {},
-        "newState"      : {},
-        "targetRoles"   : [],
-        "project"       : {},
-        "performance"   : {},
-        "requirement"   : {},
-        "stage"         : {}
+        "log"               : "",
+        "oldState"          : {},
+        "newState"          : {},
+        "targetUserGroups"  : [],
+        "project"           : {},
+        "performance"       : {},
+        "requirement"       : {},
+        "stage"             : {}
     }
 ]

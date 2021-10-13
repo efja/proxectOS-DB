@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
-import { AssignedRolesToUser } from './assigned-roles-user.model';
+import { AssignedUser } from './assigned-user.model';
 import { AssignedStages } from './assigned-stages.model';
 import { BaseEntity } from "./base-entity.model";
 import { CommentApp } from './commentapp.model';
@@ -57,8 +57,8 @@ export class Requirement extends BaseEntity {
     @ManyToOne()
     public type                     : Type;
 
-    @ManyToMany(() => AssignedRolesToUser)
-    public assignedUsers    : Collection<AssignedRolesToUser> = new Collection<AssignedRolesToUser>(this);
+    @ManyToMany(() => AssignedUser)
+    public assignedUsers    : Collection<AssignedUser> = new Collection<AssignedUser>(this);
 
     @ManyToOne()
     public createdBy                : User;

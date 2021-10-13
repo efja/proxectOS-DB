@@ -24,9 +24,8 @@
             "e655a85c-7b85-49dc-9580-9da170f35afa"
         ],
 
-        "defaultRoles"      : [
-            "5ac29634-1b89-4fd4-b69b-3ef6206f2573",
-            "311a6b6b-4ea1-4210-8c38-d0e478271fbc"
+        "defaultUserGroups" : [
+            "e1701e18-ce0e-4a0b-aacf-6cc4095ff934"
         ]
     },
     {
@@ -59,9 +58,8 @@
             "a0a70f31-2e89-42d1-a028-ffb9e3308730"
         ],
 
-        "defaultRoles"      : [
-            "b192e904-c8a3-4300-a27e-04f00b06d3af",
-            "311a6b6b-4ea1-4210-8c38-d0e478271fbc"
+        "defaultUserGroups" : [
+            "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd"
         ]
     },
     {
@@ -90,9 +88,9 @@
             "573aaf4b-0aa7-45b9-984d-62595b892c37"
         ],
 
-        "defaultRoles"      : [
-            "bdda6aa9-3a53-40aa-bf03-4b3eaee31941",
-            "05e34569-1c11-46ad-bfb8-ece7124f3a87"
+        "defaultUserGroups" : [
+            "6361e86d-7894-4d22-92f6-29f67cd0d303",
+            "c5433574-2529-4799-8597-6cbc063b0712"
         ]
     },
     {
@@ -121,9 +119,9 @@
             "4b2262bc-73a7-4016-9590-89d63e741499"
         ],
 
-        "defaultRoles"      : [
-            "b192e904-c8a3-4300-a27e-04f00b06d3af",
-            "05e34569-1c11-46ad-bfb8-ece7124f3a87"
+        "defaultUserGroups" : [
+            "6361e86d-7894-4d22-92f6-29f67cd0d303",
+            "8e0a3153-fef7-4bca-acb3-b9f2f8457ebf"
         ]
     }
 ]

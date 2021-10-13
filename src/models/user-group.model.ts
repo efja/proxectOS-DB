@@ -1,46 +1,38 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Entity, Enum, Property } from '@mikro-orm/core';
+import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mikro-orm/core';
 
 import { BaseEntity } from "./base-entity.model";
+import { UserContact } from "./user-contact.model";
+import { User } from './user.model';
+import { Role } from './role.model';
 
 // ####################################################################################################
-// ## ENUMS
-// ####################################################################################################
-export enum Scopes {
-    PERFORMANCE,
-    PROJECT,
-    REQUIREMENT,
-    STAGE,
-    STATE,
-    SYSTEM,
-}
-
-// ####################################################################################################
-// ## CLASE Permissions
+// ## CLASE User
 // ####################################################################################################
 @Entity()
-export class Permissions extends BaseEntity {
+export class UserGroup extends BaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public delete   : boolean;
+    @Unique()
+    public name         : string;
     @Property()
-    public read     : boolean;
-    @Property()
-    public update   : boolean;
-    @Property()
-    public write    : boolean;
+    public description  : string;
 
-    @Enum({ items: () => Scopes, array: true, nullable: false })
-    public scopes   : Scopes[];
+    // Relacións
+    @ManyToMany(() => Role)
+    public defaultRoles     : Collection<Role> = new Collection<Role>(this);
+
+    // @ManyToMany(() => User)
+    // public users        : Collection<User> = new Collection<User>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
-    constructor(obj?: Partial<Permissions>) {
+    constructor(obj?: Partial<UserGroup>) {
         super();
         Object.assign(this, obj);
     }

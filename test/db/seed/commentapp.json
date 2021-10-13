@@ -9,6 +9,6 @@
         "title"             : "",
         "message"           : "",
         "createdBy"         : "",
-        "targetRoles"       : []
+        "targetUserGroups"  : []
     }
 ]

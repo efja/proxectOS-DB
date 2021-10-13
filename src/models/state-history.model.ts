@@ -30,7 +30,7 @@ export class StateHistory extends BaseEntity {
     public newState     : State;
 
     @ManyToMany(() => Role)
-    public targetRoles  : Collection<Role> = new Collection<Role>(this);
+    public targetUserGroups  : Collection<Role> = new Collection<Role>(this);
 
     @ManyToOne()
     public createdBy    : User;

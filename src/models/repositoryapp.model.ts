@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mikro-orm/core';
 
-import { AssignedRolesToUser } from './assigned-roles-user.model';
+import { AssignedUser } from './assigned-user.model';
 import { BaseEntity } from "./base-entity.model";
 import { CommentApp } from './commentapp.model';
 import { User } from "./user.model";
@@ -31,8 +31,8 @@ export class RepositoryApp extends BaseEntity {
     @ManyToOne()
     public createdBy        : User;
 
-    @ManyToMany(() => AssignedRolesToUser)
-    public assignedUsers    : Collection<AssignedRolesToUser> = new Collection<AssignedRolesToUser>(this);
+    @ManyToMany(() => AssignedUser)
+    public assignedUsers    : Collection<AssignedUser> = new Collection<AssignedUser>(this);
 
     @ManyToMany(() => CommentApp)
     public comments         : Collection<CommentApp> = new Collection<CommentApp>(this);

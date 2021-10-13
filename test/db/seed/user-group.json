@@ -1,0 +1,96 @@
+[
+    {
+        "_id"           : "86cb711c-6b5c-4400-a523-2aabda676736",
+        "id"            : "86cb711c-6b5c-4400-a523-2aabda676736",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Administradores de sistema",
+        "description"   : "",
+
+        "defaultRoles"  : [
+            "bdda6aa9-3a53-40aa-bf03-4b3eaee31941"
+        ]
+    },
+    {
+        "_id"           : "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
+        "id"            : "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Administradores",
+        "description"   : "",
+
+        "defaultRoles"  : [
+            "d34cc365-7ed9-4150-89ac-26970cac0bf7"
+        ]
+    },
+    {
+        "_id"           : "e1701e18-ce0e-4a0b-aacf-6cc4095ff934",
+        "id"            : "e1701e18-ce0e-4a0b-aacf-6cc4095ff934",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Clientes",
+        "description"   : "",
+
+        "defaultRoles"  : [
+            "311a6b6b-4ea1-4210-8c38-d0e478271fbc"
+        ]
+    },
+    {
+        "_id"           : "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+        "id"            : "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Comerciais",
+        "description"   : "",
+
+        "defaultRoles"  : [
+            "214f0e60-47bb-4762-90b1-662ab935c333",
+            "b192e904-c8a3-4300-a27e-04f00b06d3af"
+        ]
+    },
+    {
+        "_id"           : "6361e86d-7894-4d22-92f6-29f67cd0d303",
+        "id"            : "6361e86d-7894-4d22-92f6-29f67cd0d303",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Programadores",
+        "description"   : "",
+
+        "defaultRoles"  : [
+            "214f0e60-47bb-4762-90b1-662ab935c333",
+            "b192e904-c8a3-4300-a27e-04f00b06d3af"
+        ]
+    },
+    {
+        "_id"           : "c5433574-2529-4799-8597-6cbc063b0712",
+        "id"            : "c5433574-2529-4799-8597-6cbc063b0712",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Responsables",
+        "description"   : "",
+
+        "defaultRoles"  : [
+            "d34cc365-7ed9-4150-89ac-26970cac0bf7"
+        ]
+    },
+    {
+        "_id"           : "8e0a3153-fef7-4bca-acb3-b9f2f8457ebf",
+        "id"            : "8e0a3153-fef7-4bca-acb3-b9f2f8457ebf",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Validadores",
+        "description"   : "",
+
+        "defaultRoles"  : [
+            "214f0e60-47bb-4762-90b1-662ab935c333",
+            "b192e904-c8a3-4300-a27e-04f00b06d3af"
+        ]
+    }
+]
