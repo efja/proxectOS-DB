@@ -13,8 +13,7 @@
         "name"              : "",
         "description"       : "",
 
-        "currentStage"      : {},
-        "currentState"      : {},
+        "assignedStages"    : [],
 
         "assignedUsers"     : [],
 

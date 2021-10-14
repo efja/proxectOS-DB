@@ -1,0 +1,13 @@
+[
+    {
+        "_id"                   : "",
+        "id"                    : "",
+        "createdAt"             : "",
+        "updatedAt"             : "",
+        "createdBy"             : "",
+
+        "assignedUser"          : "",
+        "assignedRoles"         : [],
+        "assignedUserGroups"    : []
+    }
+]

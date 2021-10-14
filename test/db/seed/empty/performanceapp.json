@@ -19,8 +19,7 @@
         "totalResourcesConsumed"    : 0,
 
         "performances"              : [],
-        "currentStage"              : {},
-        "currentState"              : {},
+        "assignedStages"            : [],
         "priority"                  : {},
         "type"                      : {},
 

@@ -96,7 +96,7 @@
         "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
 
         "name"          : "Sen permisos",
-        "description"   : "",
+        "description"   : "Destinado ó grupo Todos para evitar asignar permisos accidentalmente.",
         "isSystemAdmin" : false,
 
         "create"        : false,

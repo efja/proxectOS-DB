@@ -14,7 +14,7 @@ import { Stage } from './stage.model';
 // ## CLASE AssignedPermissions
 // ####################################################################################################
 @Entity()
-export class AssignedStages extends BaseEntity {
+export class AssignedStage extends BaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -48,7 +48,7 @@ export class AssignedStages extends BaseEntity {
     // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
-    constructor(obj?: Partial<AssignedStages>) {
+    constructor(obj?: Partial<AssignedStage>) {
         super();
         Object.assign(this, obj);
     }

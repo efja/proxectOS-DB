@@ -9,13 +9,15 @@
         "oldState"          : null,
         "newState"          : "7515ca8b-887b-473a-a9dc-013000cfc79a",
         "targetUserGroups"  : [
-            "",
-            ""
+            "86cb711c-6b5c-4400-a523-2aabda676736",
+            "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
+            "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+            "c5433574-2529-4799-8597-6cbc063b0712"
         ],
         "project"           : null,
         "performance"       : null,
         "requirement"       : null,
-        "stage"             : "ced452ae-3d05-4422-a5c3-10929b97a9de"
+        "assignedStage"     : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
     },
     {
         "_id"               : "20404d68-10f7-4306-b000-48ceadad8151",
@@ -27,13 +29,16 @@
         "oldState"          : "7515ca8b-887b-473a-a9dc-013000cfc79a",
         "newState"          : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
         "targetUserGroups"  : [
-            "",
-            ""
+            "86cb711c-6b5c-4400-a523-2aabda676736",
+            "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
+            "e1701e18-ce0e-4a0b-aacf-6cc4095ff934",
+            "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+            "c5433574-2529-4799-8597-6cbc063b0712"
         ],
         "project"           : null,
         "performance"       : null,
         "requirement"       : null,
-        "stage"             : "ced452ae-3d05-4422-a5c3-10929b97a9de"
+        "assignedStage"     : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
     },
     {
         "_id"               : "5d056959-40f2-4855-bae7-e1df010ba2e9",
@@ -45,13 +50,15 @@
         "oldState"          : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
         "newState"          : "50c6a119-adba-4908-a384-8fa556250cbe",
         "targetUserGroups"  : [
-            "",
-            ""
+            "86cb711c-6b5c-4400-a523-2aabda676736",
+            "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
+            "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+            "c5433574-2529-4799-8597-6cbc063b0712"
         ],
         "project"           : null,
         "performance"       : null,
         "requirement"       : null,
-        "stage"             : "ced452ae-3d05-4422-a5c3-10929b97a9de"
+        "assignedStage"     : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
     },
     {
         "_id"               : "dd3c0c41-4161-4fa2-8728-d9b4d91efd7b",
@@ -63,12 +70,14 @@
         "oldState"          : "50c6a119-adba-4908-a384-8fa556250cbe",
         "newState"          : "e34003f8-4dd1-47ce-ab2c-4bc41ee4dda3",
         "targetUserGroups"  : [
-            "",
-            ""
+            "86cb711c-6b5c-4400-a523-2aabda676736",
+            "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
+            "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+            "c5433574-2529-4799-8597-6cbc063b0712"
         ],
         "project"           : null,
         "performance"       : null,
         "requirement"       : null,
-        "stage"             : "ced452ae-3d05-4422-a5c3-10929b97a9de"
+        "assignedStage"     : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
     }
 ]

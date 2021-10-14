@@ -80,6 +80,19 @@
         ]
     },
     {
+        "_id"           : "034ca48b-7e6a-409f-ba5b-2400e48cf44a",
+        "id"            : "034ca48b-7e6a-409f-ba5b-2400e48cf44a",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Todos",
+        "description"   : "",
+
+        "defaultRoles"  : [
+            "311a6b6b-4ea1-4210-8c38-d0e478271fbc"
+        ]
+    },
+    {
         "_id"           : "8e0a3153-fef7-4bca-acb3-b9f2f8457ebf",
         "id"            : "8e0a3153-fef7-4bca-acb3-b9f2f8457ebf",
         "createdAt"     : "2021-09-30T12:00:45.000+02:00",

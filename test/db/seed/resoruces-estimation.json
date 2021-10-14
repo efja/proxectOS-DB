@@ -1,16 +1,80 @@
 [
     {
         "_id"           : "",
-        "id"            : "",
-        "createdAt"     : "",
-        "updatedAt"     : "",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
 
         "name"          : "",
         "description"   : "",
         "scale"         : "HOURS",
         "amount"        : 0,
         "cost"          : 0,
-        "createdBy"     : {},
+        "createdBy"     : "",
+        "comments"      : []
+    },
+    {
+        "_id"           : "",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "",
+        "description"   : "",
+        "scale"         : "HOURS",
+        "amount"        : 0,
+        "cost"          : 0,
+        "createdBy"     : "",
+        "comments"      : []
+    },
+    {
+        "_id"           : "",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "",
+        "description"   : "",
+        "scale"         : "HOURS",
+        "amount"        : 0,
+        "cost"          : 0,
+        "createdBy"     : "",
+        "comments"      : []
+    },
+    {
+        "_id"           : "",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "",
+        "description"   : "",
+        "scale"         : "HOURS",
+        "amount"        : 0,
+        "cost"          : 0,
+        "createdBy"     : "",
+        "comments"      : []
+    },
+    {
+        "_id"           : "",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "",
+        "description"   : "",
+        "scale"         : "HOURS",
+        "amount"        : 0,
+        "cost"          : 0,
+        "createdBy"     : "",
+        "comments"      : []
+    },
+    {
+        "_id"           : "",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "",
+        "description"   : "",
+        "scale"         : "HOURS",
+        "amount"        : 0,
+        "cost"          : 0,
+        "createdBy"     : "",
         "comments"      : []
     }
 ]

@@ -3,11 +3,11 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mikro-orm/core';
 
+import { AssignedStage } from './assigned-stage.model';
 import { AssignedUser } from './assigned-user.model';
 import { BaseEntity } from "./base-entity.model";
 import { RepositoryApp } from './repositoryapp.model';
 import { Requirement } from './requirement.model';
-import { AssignedStages } from './assigned-stages.model';
 import { User } from './user.model';
 import { CommentApp } from './commentapp.model';
 
@@ -35,8 +35,8 @@ export class Project extends BaseEntity {
     public description      : string;
 
     // Relacións
-    @ManyToMany(() => AssignedStages)
-    public stages           : Collection<AssignedStages> = new Collection<AssignedStages>(this);
+    @ManyToMany(() => AssignedStage)
+    public assignedStages   : Collection<AssignedStage> = new Collection<AssignedStage>(this);
 
     @ManyToMany(() => AssignedUser)
     public assignedUsers    : Collection<AssignedUser> = new Collection<AssignedUser>(this);

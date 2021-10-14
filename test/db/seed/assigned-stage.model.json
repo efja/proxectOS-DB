@@ -16,8 +16,14 @@
 
         "currentState"      : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
 
-        "assignedUsers"     : [],
-        "validatingUsers"   : [],
+        "assignedUsers"     : [
+            "1f2462e4-3c1b-411f-9393-216b078bada4",
+            "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+            "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a"
+        ],
+        "validatingUsers"   : [
+            "1f2462e4-3c1b-411f-9393-216b078bada4"
+        ],
         "comments"          : []
     },
     {
@@ -33,12 +39,18 @@
 
         "createdBy"         : "",
 
-        "stage"             : "73e3c668-933b-4916-9273-248422c91204",
+        "stage"             : "fd6a2f6d-36c5-4b28-9352-bc5cfae75ae8",
 
         "currentState"      : "7515ca8b-887b-473a-a9dc-013000cfc79a",
 
-        "assignedUsers"     : [],
-        "validatingUsers"   : [],
+        "assignedUsers"     : [
+            "1f2462e4-3c1b-411f-9393-216b078bada4",
+            "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+            "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a"
+        ],
+        "validatingUsers"   : [
+            "1f2462e4-3c1b-411f-9393-216b078bada4"
+        ],
         "comments"          : []
     },
     {
@@ -58,8 +70,15 @@
 
         "currentState"      : "e0a03900-b86c-4cb6-a719-38a1738154d5",
 
-        "assignedUsers"     : [],
-        "validatingUsers"   : [],
+        "assignedUsers"     : [
+            "1f2462e4-3c1b-411f-9393-216b078bada4",
+            "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+            "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a"
+        ],
+        "validatingUsers"   : [
+            "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+            "1f2462e4-3c1b-411f-9393-216b078bada4"
+        ],
         "comments"          : []
     },
     {
@@ -75,12 +94,18 @@
 
         "createdBy"         : "",
 
-        "stage"             : "74e400ce-bf2e-45e4-8208-30c45c930bb4",
+        "stage"             : "a529a85b-07d1-445d-9677-fdb48769a872",
 
         "currentState"      : "1f0c2752-c863-4b6c-8b1d-c65b801bc385",
 
-        "assignedUsers"     : [],
-        "validatingUsers"   : [],
+        "assignedUsers"     : [
+            "1f2462e4-3c1b-411f-9393-216b078bada4",
+            "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a"
+        ],
+        "validatingUsers"   : [
+            "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+            "1f2462e4-3c1b-411f-9393-216b078bada4"
+        ],
         "comments"          : []
     }
 ]

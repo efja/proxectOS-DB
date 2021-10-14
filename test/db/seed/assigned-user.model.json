@@ -1,0 +1,58 @@
+[
+    {
+        "_id"                   : "e6e8d0fd-5d3e-4f9d-afcf-fd3c243826de",
+        "id"                    : "e6e8d0fd-5d3e-4f9d-afcf-fd3c243826de",
+        "createdAt"             : "2020-12-23T20:22:47.000+01:00",
+        "updatedAt"             : "2020-12-23T20:22:47.000+01:00",
+        "createdBy"             : "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+
+        "assignedUser"          : "4ec9b87f-577c-4c50-a55b-4d74cce5b207",
+        "assignedRoles"         : [],
+        "assignedUserGroups"    : [
+            "8e0a3153-fef7-4bca-acb3-b9f2f8457ebf",
+            "6361e86d-7894-4d22-92f6-29f67cd0d303"
+        ]
+    },
+    {
+        "_id"                   : "3821bf78-f1a3-46e7-bf53-09157d72a294",
+        "id"                    : "3821bf78-f1a3-46e7-bf53-09157d72a294",
+        "createdAt"             : "2020-12-23T20:22:47.000+01:00",
+        "updatedAt"             : "2020-12-23T20:22:47.000+01:00",
+        "createdBy"             : "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+
+        "assignedUser"          : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
+        "assignedRoles"         : [],
+        "assignedUserGroups"    : [
+            "c5433574-2529-4799-8597-6cbc063b0712",
+            "6361e86d-7894-4d22-92f6-29f67cd0d303"
+        ]
+    },
+    {
+        "_id"                   : "e13d6980-bce7-485b-828a-cb7946d25d53",
+        "id"                    : "e13d6980-bce7-485b-828a-cb7946d25d53",
+        "createdAt"             : "2020-12-23T20:22:47.000+01:00",
+        "updatedAt"             : "2020-12-23T20:22:47.000+01:00",
+        "createdBy"             : "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+
+        "assignedUser"          : "1f2462e4-3c1b-411f-9393-216b078bada4",
+        "assignedRoles"         : [],
+        "assignedUserGroups"    : [
+            "e1701e18-ce0e-4a0b-aacf-6cc4095ff934"
+        ]
+    },
+    {
+        "_id"                   : "5242af8d-078d-4fc9-b1b7-511bd5441a16",
+        "id"                    : "5242af8d-078d-4fc9-b1b7-511bd5441a16",
+        "createdAt"             : "2020-12-23T20:22:47.000+01:00",
+        "updatedAt"             : "2020-12-23T20:22:47.000+01:00",
+        "createdBy"             : "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+
+        "assignedUser"          : "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+        "assignedRoles"         : [
+            "d34cc365-7ed9-4150-89ac-26970cac0bf7"
+        ],
+        "assignedUserGroups"    : [
+            "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd"
+        ]
+    }
+]

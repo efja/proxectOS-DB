@@ -4,15 +4,13 @@
 import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
 import { AssignedUser } from './assigned-user.model';
-import { AssignedStages } from './assigned-stages.model';
+import { AssignedStage } from './assigned-stage.model';
 import { BaseEntity } from "./base-entity.model";
 import { CommentApp } from './commentapp.model';
 import { PerformanceApp } from './performanceapp.model';
 import { Priority } from "./priority.model";
 import { RepositoryApp } from "./repositoryapp.model";
 import { ResourcesEstimation } from "./resoruces-estimation.model";
-import { Stage } from "./stage.model";
-import { State } from "./state.model";
 import { Type } from "./type.model";
 import { User } from "./user.model";
 
@@ -49,8 +47,8 @@ export class Requirement extends BaseEntity {
     public totalResourcesConsumed   : number;
 
     // Relacións
-    @ManyToMany(() => AssignedStages)
-    public stages                   : Collection<AssignedStages> = new Collection<AssignedStages>(this);
+    @ManyToMany(() => AssignedStage)
+    public assignedStages           : Collection<AssignedStage> = new Collection<AssignedStage>(this);
 
     @ManyToOne()
     public priority                 : Priority;

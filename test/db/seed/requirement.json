@@ -1,9 +1,8 @@
 [
     {
         "_id"                       : "",
-        "id"                        : "",
-        "createdAt"                 : "",
-        "updatedAt"                 : "",
+        "createdAt"                 : "2021-02-08T00:02:46.000+01:00",
+        "updatedAt"                 : "2021-02-08T00:02:46.000+01:00",
 
         "startDate"                 : "",
         "finishDate"                : "",
@@ -18,14 +17,87 @@
         "totalEstimatedResources"   : 0,
         "totalResourcesConsumed"    : 0,
 
-        "currentStage"              : {},
-        "currentState"              : {},
-        "priority"                  : {},
-        "type"                      : {},
+        "assignedStages"            : [],
+        "priority"                  : "",
+        "type"                      : "",
 
         "assignedUsers"             : [],
 
-        "createdBy"                 : {},
+        "createdBy"                 : "",
+        "validatingUsers"           : [],
+
+        "estimatedHours"            : [],
+        "hoursConsumed"             : [],
+
+        "estimatedResources"        : [],
+        "resourcesConsumed"         : [],
+
+        "performances"              : [],
+        "repositories"              : [],
+        "comments"                  : []
+    },
+    {
+        "_id"                       : "",
+        "createdAt"                 : "2021-02-08T00:02:46.000+01:00",
+        "updatedAt"                 : "2021-02-08T00:02:46.000+01:00",
+
+        "startDate"                 : "",
+        "finishDate"                : "",
+        "targetStartDate"           : "",
+        "targetFinishDate"          : "",
+
+        "name"                      : "",
+        "description"               : "",
+
+        "totalEstimatedHours"       : 0,
+        "totalHoursConsumed"        : 0,
+        "totalEstimatedResources"   : 0,
+        "totalResourcesConsumed"    : 0,
+
+        "assignedStages"            : [],
+        "priority"                  : "",
+        "type"                      : "",
+
+        "assignedUsers"             : [],
+
+        "createdBy"                 : "",
+        "validatingUsers"           : [],
+
+        "estimatedHours"            : [],
+        "hoursConsumed"             : [],
+
+        "estimatedResources"        : [],
+        "resourcesConsumed"         : [],
+
+        "performances"              : [],
+        "repositories"              : [],
+        "comments"                  : []
+    },
+    {
+        "_id"                       : "",
+        "createdAt"                 : "2021-02-08T00:02:46.000+01:00",
+        "updatedAt"                 : "2021-02-08T00:02:46.000+01:00",
+
+        "startDate"                 : "",
+        "finishDate"                : "",
+        "targetStartDate"           : "",
+        "targetFinishDate"          : "",
+
+        "name"                      : "",
+        "description"               : "",
+
+        "totalEstimatedHours"       : 0,
+        "totalHoursConsumed"        : 0,
+        "totalEstimatedResources"   : 0,
+        "totalResourcesConsumed"    : 0,
+
+        "assignedStages"            : [],
+        "priority"                  : "",
+        "type"                      : "",
+
+        "assignedUsers"             : [],
+
+        "createdBy"                 : "",
         "validatingUsers"           : [],
 
         "estimatedHours"            : [],

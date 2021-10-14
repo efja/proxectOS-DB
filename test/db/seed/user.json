@@ -25,6 +25,7 @@
         ],
 
         "defaultUserGroups" : [
+            "034ca48b-7e6a-409f-ba5b-2400e48cf44a",
             "e1701e18-ce0e-4a0b-aacf-6cc4095ff934"
         ]
     },
@@ -59,6 +60,7 @@
         ],
 
         "defaultUserGroups" : [
+            "034ca48b-7e6a-409f-ba5b-2400e48cf44a",
             "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd"
         ]
     },
@@ -89,6 +91,7 @@
         ],
 
         "defaultUserGroups" : [
+            "034ca48b-7e6a-409f-ba5b-2400e48cf44a",
             "6361e86d-7894-4d22-92f6-29f67cd0d303",
             "c5433574-2529-4799-8597-6cbc063b0712"
         ]
@@ -120,6 +123,7 @@
         ],
 
         "defaultUserGroups" : [
+            "034ca48b-7e6a-409f-ba5b-2400e48cf44a",
             "6361e86d-7894-4d22-92f6-29f67cd0d303",
             "8e0a3153-fef7-4bca-acb3-b9f2f8457ebf"
         ]
