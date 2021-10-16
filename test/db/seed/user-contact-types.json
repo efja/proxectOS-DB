@@ -1,31 +1,31 @@
 [
     {
-        "_id"           : "4efb8862-f051-47ec-ad7e-38a598d2c355",
-        "id"            : "4efb8862-f051-47ec-ad7e-38a598d2c355",
+        "_id"           : "616b4f8625f2bb77b2003c33",
+        "id"            : "616b4f8625f2bb77b2003c33",
         "createdAt"     : "2021-03-04T23:29:00.000+01:00",
         "updatedAt"     : "2021-03-04T23:29:00.000+01:00",
 
         "description"   : "Teléfono"
     },
     {
-        "_id"           : "4ca68d78-1346-4385-9427-59a90b9a017b",
-        "id"            : "4ca68d78-1346-4385-9427-59a90b9a017b",
+        "_id"           : "aa6b4f8625f2bb77b2005a33",
+        "id"            : "aa6b4f8625f2bb77b2005a33",
         "createdAt"     : "2021-02-27T21:44:17.000+01:00",
         "updatedAt"     : "2021-02-27T21:44:17.000+01:00",
 
         "description"   : "Móbil"
     },
     {
-        "_id"           : "d514004d-9d7a-426b-9eed-972f592992fb",
-        "id"            : "d514004d-9d7a-426b-9eed-972f592992fb",
+        "_id"           : "616b4f73d6feb6e084e83c73",
+        "id"            : "616b4f73d6feb6e084e83c73",
         "createdAt"     : "2020-11-17T15:38:17.000+01:00",
         "updatedAt"     : "2020-11-17T15:38:17.000+01:00",
 
         "description"   : "Correo electrónico"
     },
     {
-        "_id"           : "101dbc2f-eee3-4fb0-bc27-eeb1ee043983",
-        "id"            : "101dbc2f-eee3-4fb0-bc27-eeb1ee043983",
+        "_id"           : "616b4fc42ed9fcae37e43114",
+        "id"            : "616b4fc42ed9fcae37e43114",
         "createdAt"     : "2021-06-26T07:41:58.000+02:00",
         "updatedAt"     : "2021-06-26T07:41:58.000+02:00",
 

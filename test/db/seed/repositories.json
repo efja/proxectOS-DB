@@ -1,7 +1,7 @@
 [
     {
-        "_id"                   : "2a4e19ad-121d-41b8-bc4c-50eba74ef5bc",
-        "id"                    : "2a4e19ad-121d-41b8-bc4c-50eba74ef5bc",
+        "_id"                   : "616b55642c479482e52a2f81",
+        "id"                    : "616b55642c479482e52a2f81",
         "createdAt"             : "2020-10-16T11:02:43.000+02:00",
         "updatedAt"             : "2020-10-16T11:02:43.000+02:00",
 
@@ -9,25 +9,25 @@
         "name"                  : "Proxecto fin de ciclo DAW (ProxectOS)",
         "description"           : "",
         "uri"                   : "https://gitlab.iessanclemente.net/dawm/a18franciscogc.git",
-        "createdBy"             : "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+        "createdBy"             : "616b4b58eb372265b9c3101d",
         "visibleToUserGroups"   : [
-            "c5433574-2529-4799-8597-6cbc063b0712",
-            "6361e86d-7894-4d22-92f6-29f67cd0d303",
-            "ea2240be-1ff1-48b4-94fe-e45d266fb1a4"
+            "616b4ef96fb29ff203f48491",
+            "616b4ee74fb0c1c58625e9c9",
+            "616b50508003db4c84fbe94a"
         ],
 
         "assignedUsers"         : [
-            "e6e8d0fd-5d3e-4f9d-afcf-fd3c243826de",
-            "3821bf78-f1a3-46e7-bf53-09157d72a294"
+            "616b523c3cafa4214f535025 ",
+            "616b524d366c2aa993b56590"
         ],
 
         "comments"              : [
-            "8fd9492a-f5ea-45ad-9a35-08fa878d4ce2"
+            "616b4fedc0c559d10b709c9b"
         ]
     },
     {
-        "_id"                   : "c36786a9-1c47-46ad-bce0-303d8b0a5449",
-        "id"                    : "c36786a9-1c47-46ad-bce0-303d8b0a5449",
+        "_id"                   : "616b5564462b9b0f7138f718",
+        "id"                    : "616b5564462b9b0f7138f718",
         "createdAt"             : "2020-10-16T11:02:43.000+02:00",
         "updatedAt"             : "2020-10-16T11:02:43.000+02:00",
 
@@ -35,23 +35,23 @@
         "name"                  : "Proxecto fin de ciclo DAW (ProxectOS-API)",
         "description"           : "",
         "uri"                   : "https://gitlab.iessanclemente.net/a18franciscogc/proxectos-api.git",
-        "createdBy"             : "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+        "createdBy"             : "616b4b58eb372265b9c3101d",
         "visibleToUserGroups"  : [
-            "c5433574-2529-4799-8597-6cbc063b0712",
-            "6361e86d-7894-4d22-92f6-29f67cd0d303",
-            "ea2240be-1ff1-48b4-94fe-e45d266fb1a4"
+            "616b4ef96fb29ff203f48491",
+            "616b4ee74fb0c1c58625e9c9",
+            "616b50508003db4c84fbe94a"
         ],
 
         "assignedUsers"         : [
-            "e6e8d0fd-5d3e-4f9d-afcf-fd3c243826de",
-            "3821bf78-f1a3-46e7-bf53-09157d72a294"
+            "616b523c3cafa4214f535025 ",
+            "616b524d366c2aa993b56590"
         ],
 
         "comments"              : []
     },
     {
-        "_id"                   : "f9c213cf-2070-49f3-96f4-12514c215e86",
-        "id"                    : "f9c213cf-2070-49f3-96f4-12514c215e86",
+        "_id"                   : "616b55646a86e73af521b0ed",
+        "id"                    : "616b55646a86e73af521b0ed",
         "createdAt"             : "2020-10-16T11:02:43.000+02:00",
         "updatedAt"             : "2020-10-16T11:02:43.000+02:00",
 
@@ -59,23 +59,23 @@
         "name"                  : "Proxecto fin de ciclo DAW (ProxectOS-DB)",
         "description"           : "",
         "uri"                   : "https://gitlab.iessanclemente.net/a18franciscogc/proxectos-db.git",
-        "createdBy"             : "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+        "createdBy"             : "616b4b58eb372265b9c3101d",
         "visibleToUserGroups"   : [
-            "c5433574-2529-4799-8597-6cbc063b0712",
-            "6361e86d-7894-4d22-92f6-29f67cd0d303",
-            "ea2240be-1ff1-48b4-94fe-e45d266fb1a4"
+            "616b4ef96fb29ff203f48491",
+            "616b4ee74fb0c1c58625e9c9",
+            "616b50508003db4c84fbe94a"
         ],
 
         "assignedUsers"         : [
-            "e6e8d0fd-5d3e-4f9d-afcf-fd3c243826de",
-            "3821bf78-f1a3-46e7-bf53-09157d72a294"
+            "616b523c3cafa4214f535025 ",
+            "616b524d366c2aa993b56590"
         ],
 
         "comments"              : []
     },
     {
-        "_id"                   : "abf98572-56eb-4513-8c2f-c5b384241626",
-        "id"                    : "abf98572-56eb-4513-8c2f-c5b384241626",
+        "_id"                   : "616b5564edcaf7c282ccd7b2",
+        "id"                    : "616b5564edcaf7c282ccd7b2",
         "createdAt"             : "2020-10-16T11:02:43.000+02:00",
         "updatedAt"             : "2020-10-16T11:02:43.000+02:00",
 
@@ -83,16 +83,16 @@
         "name"                  : "Proxecto fin de ciclo DAW (ProxectOS-UI)",
         "description"           : "",
         "uri"                   : "https://gitlab.iessanclemente.net/a18franciscogc/proxectos-ui.git",
-        "createdBy"             : "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
+        "createdBy"             : "616b4b58eb372265b9c3101d",
         "visibleToUserGroups"   : [
-            "c5433574-2529-4799-8597-6cbc063b0712",
-            "6361e86d-7894-4d22-92f6-29f67cd0d303",
-            "ea2240be-1ff1-48b4-94fe-e45d266fb1a4"
+            "616b4ef96fb29ff203f48491",
+            "616b4ee74fb0c1c58625e9c9",
+            "616b50508003db4c84fbe94a"
         ],
 
         "assignedUsers"         : [
-            "e6e8d0fd-5d3e-4f9d-afcf-fd3c243826de",
-            "3821bf78-f1a3-46e7-bf53-09157d72a294"
+            "616b523c3cafa4214f535025 ",
+            "616b524d366c2aa993b56590"
         ],
 
         "comments"              : []

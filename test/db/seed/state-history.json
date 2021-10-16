@@ -1,89 +1,89 @@
 [
     {
-        "_id"                   : "38044c9a-5930-4de4-8cd0-14b93e7245ba",
-        "id"                    : "38044c9a-5930-4de4-8cd0-14b93e7245ba",
+        "_id"                   : "616b5155e60062e408935707",
+        "id"                    : "616b5155e60062e408935707",
         "createdAt"             : "2021-04-11T05:43:46.000+02:00",
         "updatedAt"             : "2021-04-11T05:43:46.000+02:00",
 
         "log"                   : "Creación da tarefa",
 
         "oldState"              : null,
-        "newState"              : "7515ca8b-887b-473a-a9dc-013000cfc79a",
+        "newState"              : "616b516b289b9cacbd37547c",
 
-        "createdBy"             : "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+        "createdBy"             : "616b4dd523f371ed0309e105",
 
         "visibleToUserGroups"   : [
-            "86cb711c-6b5c-4400-a523-2aabda676736",
-            "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
-            "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
-            "c5433574-2529-4799-8597-6cbc063b0712"
+            "616b5015d32984b61f6ad57e",
+            "616b50508003db4c84fbe94a",
+            "616b4bb2d34ebe7bd6e155e2",
+            "616b4ef96fb29ff203f48491"
         ],
 
-        "assignedStage"         : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
+        "assignedStage"         : "616b5190265cafd5a3176e1f"
     },
     {
-        "_id"                   : "20404d68-10f7-4306-b000-48ceadad8151",
-        "id"                    : "20404d68-10f7-4306-b000-48ceadad8151",
+        "_id"                   : "616b51a5eff59b6da399f850",
+        "id"                    : "616b51a5eff59b6da399f850",
         "createdAt"             : "2021-05-02T05:43:46.000+02:00",
         "updatedAt"             : "2021-05-02T05:43:46.000+02:00",
 
         "log"                   : "Traballando a topito",
 
-        "oldState"              : "7515ca8b-887b-473a-a9dc-013000cfc79a",
-        "newState"              : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
+        "oldState"              : "616b516b289b9cacbd37547c",
+        "newState"              : "734b51a5eff59b6da399f850",
 
         "visibleToUserGroups"   : [
-            "86cb711c-6b5c-4400-a523-2aabda676736",
-            "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
-            "e1701e18-ce0e-4a0b-aacf-6cc4095ff934",
-            "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
-            "c5433574-2529-4799-8597-6cbc063b0712"
+            "616b5015d32984b61f6ad57e",
+            "616b50508003db4c84fbe94a",
+            "616b4e54c4efa9d9ccc5d11c",
+            "616b4bb2d34ebe7bd6e155e2",
+            "616b4ef96fb29ff203f48491"
         ],
 
-        "assignedStage"         : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
+        "assignedStage"         : "616b5190265cafd5a3176e1f"
     },
     {
-        "_id"                   : "5d056959-40f2-4855-bae7-e1df010ba2e9",
-        "id"                    : "5d056959-40f2-4855-bae7-e1df010ba2e9",
+        "_id"                   : "616b51df00edfe209655a44e",
+        "id"                    : "616b51df00edfe209655a44e",
         "createdAt"             : "2021-05-18T05:43:46.000+02:00",
         "updatedAt"             : "2021-05-18T05:43:46.000+02:00",
 
         "log"                   : "Hai que parar a tomar un café",
 
-        "oldState"              : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
-        "newState"              : "50c6a119-adba-4908-a384-8fa556250cbe",
+        "oldState"              : "734b51a5eff59b6da399f850",
+        "newState"              : "616b51f99f0cb221e580e2d6",
 
-        "createdBy"             : "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+        "createdBy"             : "616b4dd523f371ed0309e105",
 
         "visibleToUserGroups"   : [
-            "86cb711c-6b5c-4400-a523-2aabda676736",
-            "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
-            "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
-            "c5433574-2529-4799-8597-6cbc063b0712"
+            "616b5015d32984b61f6ad57e",
+            "616b50508003db4c84fbe94a",
+            "616b4bb2d34ebe7bd6e155e2",
+            "616b4ef96fb29ff203f48491"
         ],
 
-        "assignedStage"         : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
+        "assignedStage"         : "616b5190265cafd5a3176e1f"
     },
     {
-        "_id"                   : "dd3c0c41-4161-4fa2-8728-d9b4d91efd7b",
-        "id"                    : "dd3c0c41-4161-4fa2-8728-d9b4d91efd7b",
+        "_id"                   : "616b5223c6b5226ce892d1e5",
+        "id"                    : "616b5223c6b5226ce892d1e5",
         "createdAt"             : "2021-05-28T05:43:46.000+02:00",
         "updatedAt"             : "2021-05-28T05:43:46.000+02:00",
 
         "log"                   : "Hai que parar antes de tomalo café que se escapan os clientes!!!",
 
-        "oldState"              : "50c6a119-adba-4908-a384-8fa556250cbe",
-        "newState"              : "e34003f8-4dd1-47ce-ab2c-4bc41ee4dda3",
+        "oldState"              : "616b51f99f0cb221e580e2d6",
+        "newState"              : "616b520a74fe6e519606f0e3",
 
-        "createdBy"             : "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+        "createdBy"             : "616b4dd523f371ed0309e105",
 
         "visibleToUserGroups"  : [
-            "86cb711c-6b5c-4400-a523-2aabda676736",
-            "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
-            "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
-            "c5433574-2529-4799-8597-6cbc063b0712"
+            "616b5015d32984b61f6ad57e",
+            "616b50508003db4c84fbe94a",
+            "616b4bb2d34ebe7bd6e155e2",
+            "616b4ef96fb29ff203f48491"
         ],
 
-        "assignedStage"         : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
+        "assignedStage"         : "616b5190265cafd5a3176e1f"
     }
 ]
