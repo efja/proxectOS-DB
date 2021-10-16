@@ -1,14 +1,15 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany, OneToMany } from '@mikro-orm/core';
+import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
+import { BaseEntity } from "./base-entity.model";
+
+import { AssignedResource } from './assigned-resoruce.model';
 import { AssignedUser } from './assigned-user.model';
 import { AssignedStage } from './assigned-stage.model';
-import { BaseEntity } from "./base-entity.model";
 import { CommentApp } from './commentapp.model';
 import { Priority } from './priority.model';
-import { Resource } from './resoruces.model';
 import { Type } from './type.model';
 import { User } from './user.model';
 import { UserGroup } from './user-group.model';
@@ -56,10 +57,10 @@ export class PerformanceApp extends BaseEntity {
     @ManyToMany(() => UserGroup)
     public visibleToUserGroups      : Collection<UserGroup> = new Collection<UserGroup>(this);
 
-    @ManyToMany(() => Resource)
-    public estimatedResources       : Collection<Resource> = new Collection<Resource>(this);
-    @ManyToMany(() => Resource)
-    public resourcesConsumed        : Collection<Resource> = new Collection<Resource>(this);
+    @ManyToMany(() => AssignedResource)
+    public estimatedResources       : Collection<AssignedResource> = new Collection<AssignedResource>(this);
+    @ManyToMany(() => AssignedResource)
+    public resourcesConsumed        : Collection<AssignedResource> = new Collection<AssignedResource>(this);
 
     @ManyToMany(() => CommentApp)
     public comments                 : Collection<CommentApp> = new Collection<CommentApp>(this);

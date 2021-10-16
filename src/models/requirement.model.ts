@@ -3,14 +3,13 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
-import { AssignedUser } from './assigned-user.model';
-import { AssignedStage } from './assigned-stage.model';
 import { BaseEntity } from "./base-entity.model";
+
+import { AssignedUser } from './assigned-user.model';
 import { CommentApp } from './commentapp.model';
 import { PerformanceApp } from './performanceapp.model';
 import { Priority } from "./priority.model";
 import { RepositoryApp } from "./repositoryapp.model";
-import { Resource } from "./resoruces.model";
 import { Type } from "./type.model";
 import { User } from "./user.model";
 

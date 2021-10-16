@@ -3,12 +3,12 @@
 // ####################################################################################################
 import { Collection, Entity, ManyToOne, ManyToMany, Property } from '@mikro-orm/core';
 
-import { AssignedUser } from './assigned-user.model';
 import { BaseEntity } from "./base-entity.model";
+
 import { CommentApp } from './commentapp.model';
 import { User } from './user.model';
-import { State } from "./state.model";
 import { Stage } from './stage.model';
+import { State } from "./state.model";
 
 // ####################################################################################################
 // ## CLASE AssignedPermissions

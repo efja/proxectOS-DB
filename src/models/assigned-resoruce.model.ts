@@ -1,19 +1,20 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany, Enum } from '@mikro-orm/core';
+import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
 import { BaseEntity } from "./base-entity.model";
+
 import { CommentApp } from './commentapp.model';
 import { User } from './user.model';
 import { Resource } from './resoruces.model';
 
 
 // ####################################################################################################
-// ## CLASE AssignedResources
+// ## CLASE AssignedResource
 // ####################################################################################################
 @Entity()
-export class AssignedResources extends BaseEntity {
+export class AssignedResource extends BaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -38,7 +39,7 @@ export class AssignedResources extends BaseEntity {
     // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
-    constructor(obj?: Partial<AssignedResources>) {
+    constructor(obj?: Partial<AssignedResource>) {
         super();
         Object.assign(this, obj);
     }

@@ -4,6 +4,7 @@
 import { Collection, Entity, Property, ManyToOne, ManyToMany, Enum } from '@mikro-orm/core';
 
 import { BaseEntity } from "./base-entity.model";
+
 import { CommentApp } from './commentapp.model';
 import { User } from './user.model';
 

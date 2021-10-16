@@ -3,9 +3,9 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
-import { AssignedStage } from './assigned-stage.model';
 import { BaseEntity } from "./base-entity.model";
 
+import { AssignedStage } from './assigned-stage.model';
 import { Role } from './role.model';
 import { State } from './state.model';
 import { User } from './user.model';

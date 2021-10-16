@@ -3,11 +3,12 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mikro-orm/core';
 
-import { AssignedUser } from './assigned-user.model';
 import { BaseEntity } from "./base-entity.model";
+
+import { AssignedUser } from './assigned-user.model';
 import { CommentApp } from './commentapp.model';
-import { UserGroup } from './user-group.model';
 import { User } from "./user.model";
+import { UserGroup } from './user-group.model';
 
 // ####################################################################################################
 // ## CLASE RepositoryApp
