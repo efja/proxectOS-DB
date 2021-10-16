@@ -1,11 +1,10 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mikro-orm/core';
+import { Collection, Entity, Property, ManyToMany, Unique } from '@mikro-orm/core';
 
 import { BaseEntity } from "./base-entity.model";
-import { UserContact } from "./user-contact.model";
-import { User } from './user.model';
+
 import { Role } from './role.model';
 
 // ####################################################################################################

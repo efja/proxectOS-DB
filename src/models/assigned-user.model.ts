@@ -2,11 +2,12 @@
 // ## IMPORTACIÓNS
 // ####################################################################################################
 import { Collection, Entity, ManyToOne, ManyToMany } from '@mikro-orm/core';
-import { BaseEntity } from "./base-entity.model";
-import { Role } from './role.model';
-import { UserGroup } from './user-group.model';
-import { User } from './user.model';
 
+import { BaseEntity } from "./base-entity.model";
+
+import { Role } from './role.model';
+import { User } from './user.model';
+import { UserGroup } from './user-group.model';
 
 // ####################################################################################################
 // ## CLASE AssignedPermissions

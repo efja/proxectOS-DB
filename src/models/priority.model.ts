@@ -1,7 +1,7 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Entity, Property, ManyToOne, ManyToMany, OneToMany } from '@mikro-orm/core';
+import { Entity, Property } from '@mikro-orm/core';
 
 import { BaseEntity } from "./base-entity.model";
 
