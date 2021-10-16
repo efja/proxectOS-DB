@@ -5,9 +5,7 @@ import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/
 
 import { AssignedStage } from './assigned-stage.model';
 import { BaseEntity } from "./base-entity.model";
-import { PerformanceApp } from './performanceapp.model';
-import { Project } from './project.model';
-import { Requirement } from './requirement.model';
+
 import { Role } from './role.model';
 import { State } from './state.model';
 import { User } from './user.model';
@@ -21,28 +19,22 @@ export class StateHistory extends BaseEntity {
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public log              : string;
+    public log                  : string;
 
     // Relacións
     @ManyToOne()
-    public oldState         : State;
+    public oldState?            : State;
     @ManyToOne()
-    public newState         : State;
+    public newState             : State;
+
+    @ManyToOne()
+    public createdBy            : User;
 
     @ManyToMany(() => Role)
-    public targetUserGroups : Collection<Role> = new Collection<Role>(this);
+    public visibleToUserGroups  : Collection<Role> = new Collection<Role>(this);
 
     @ManyToOne()
-    public createdBy        : User;
-
-    @ManyToOne()
-    public project?         : Project;
-    @ManyToOne()
-    public performance?     : PerformanceApp;
-    @ManyToOne()
-    public requirement?     : Requirement;
-    @ManyToOne()
-    public assignedStage?   : AssignedStage;
+    public assignedStage        : AssignedStage;
 
     // ************************************************************************************************
     // ** CONSTRUTOR

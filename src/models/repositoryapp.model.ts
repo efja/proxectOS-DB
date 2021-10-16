@@ -6,6 +6,7 @@ import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mi
 import { AssignedUser } from './assigned-user.model';
 import { BaseEntity } from "./base-entity.model";
 import { CommentApp } from './commentapp.model';
+import { UserGroup } from './user-group.model';
 import { User } from "./user.model";
 
 // ####################################################################################################
@@ -17,25 +18,28 @@ export class RepositoryApp extends BaseEntity {
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public expirationDate?  : Date;
+    public expirationDate?      : Date;
 
     @Property()
-    public name             : string;
+    public name                 : string;
     @Property()
-    public description      : string;
+    public description          : string;
     @Property()
     @Unique()
-    public uri              : string;
+    public uri                  : string;
 
     // Relacións
     @ManyToOne()
-    public createdBy        : User;
+    public createdBy            : User;
 
     @ManyToMany(() => AssignedUser)
-    public assignedUsers    : Collection<AssignedUser> = new Collection<AssignedUser>(this);
+    public assignedUsers        : Collection<AssignedUser> = new Collection<AssignedUser>(this);
+
+    @ManyToMany(() => UserGroup)
+    public visibleToUserGroups  : Collection<UserGroup> = new Collection<UserGroup>(this);
 
     @ManyToMany(() => CommentApp)
-    public comments         : Collection<CommentApp> = new Collection<CommentApp>(this);
+    public comments             : Collection<CommentApp> = new Collection<CommentApp>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

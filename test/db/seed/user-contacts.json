@@ -5,7 +5,7 @@
         "createdAt" : "2021-10-12T03:55:55.000+02:00",
         "updatedAt" : "2021-10-12T03:55:55.000+02:00",
 
-        "type"      : "email",
+        "type"      : "d514004d-9d7a-426b-9eed-972f592992fb",
         "contact"   : "Dulce.Renner20@hotmail.com"
     },
     {
@@ -14,7 +14,7 @@
         "createdAt" : "2021-10-12T03:55:55.000+02:00",
         "updatedAt" : "2021-10-12T03:55:55.000+02:00",
 
-        "type"      : "email",
+        "type"      : "d514004d-9d7a-426b-9eed-972f592992fb",
         "contact"   : "Marianna.Hegmann@gmail.com"
     },
     {
@@ -23,7 +23,7 @@
         "createdAt" : "2021-10-12T03:55:55.000+02:00",
         "updatedAt" : "2021-10-12T03:55:55.000+02:00",
 
-        "type"      : "email",
+        "type"      : "d514004d-9d7a-426b-9eed-972f592992fb",
         "contact"   : "Myriam.Dickinson91@gmail.com"
     },
     {
@@ -32,7 +32,7 @@
         "createdAt" : "2021-10-12T03:55:55.000+02:00",
         "updatedAt" : "2021-10-12T03:55:55.000+02:00",
 
-        "type"      : "email",
+        "type"      : "d514004d-9d7a-426b-9eed-972f592992fb",
         "contact"   : "Hilma_Ryan68@hotmail.com"
     },
     {
@@ -41,8 +41,8 @@
         "createdAt" : "2021-10-12T03:55:55.000+02:00",
         "updatedAt" : "2021-10-12T03:55:55.000+02:00",
 
-        "type"      : "teléfono",
-        "contact"   : "039.993.9024 x13427"
+        "type"      : "4efb8862-f051-47ec-ad7e-38a598d2c355",
+        "contact"   : "993902427"
     },
     {
         "_id"       : "573aaf4b-0aa7-45b9-984d-62595b892c37",
@@ -50,7 +50,7 @@
         "createdAt" : "2021-10-12T03:55:55.000+02:00",
         "updatedAt" : "2021-10-12T03:55:55.000+02:00",
 
-        "type"      : "teléfono",
-        "contact"   : "726-963-5772"
+        "type"      : "4ca68d78-1346-4385-9427-59a90b9a017b",
+        "contact"   : "726963772"
     }
 ]

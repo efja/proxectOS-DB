@@ -19,31 +19,29 @@ export class AssignedStage extends BaseEntity {
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public startDate        : Date;
+    public startDate?           : Date;
     @Property()
-    public finishDate       : Date;
+    public finishDate?          : Date;
     @Property()
-    public targetStartDate  : Date;
+    public targetStartDate?     : Date;
     @Property()
-    public targetFinishDate : Date;
+    public targetFinishDate?    : Date;
 
     // Relacións
     @ManyToOne()
-    public createdBy        : User;
+    public createdBy            : User;
 
     @ManyToOne()
-    public stage            : Stage;
+    public stage                : Stage;
 
     @ManyToOne()
-    public currentState     : State;
+    public currentState         : State;
 
-    @ManyToMany(() => AssignedUser)
-    public assignedUsers    : Collection<AssignedUser> = new Collection<AssignedUser>(this);
     @ManyToMany(() => User)
-    public validatingUsers  : Collection<User> = new Collection<User>(this);
+    public validationUsers      : Collection<User> = new Collection<User>(this);
 
     @ManyToMany(() => CommentApp)
-    public comments         : Collection<CommentApp> = new Collection<CommentApp>(this);
+    public comments             : Collection<CommentApp> = new Collection<CommentApp>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR

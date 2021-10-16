@@ -10,18 +10,13 @@
         "targetStartDate"   : "2021-09-30T08:00:00.000+02:00",
         "targetFinishDate"  : "2021-10-03T08:00:00.000+02:00",
 
-        "createdBy"         : "",
+        "createdBy"         : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
 
         "stage"             : "ced452ae-3d05-4422-a5c3-10929b97a9de",
 
-        "currentState"      : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
+        "currentState"      : "e34003f8-4dd1-47ce-ab2c-4bc41ee4dda3",
 
-        "assignedUsers"     : [
-            "1f2462e4-3c1b-411f-9393-216b078bada4",
-            "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
-            "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a"
-        ],
-        "validatingUsers"   : [
+        "validationUsers"   : [
             "1f2462e4-3c1b-411f-9393-216b078bada4"
         ],
         "comments"          : []
@@ -37,18 +32,13 @@
         "targetStartDate"   : "2021-03-01T08:00:00.000+01:00",
         "targetFinishDate"  : "2021-03-01T08:00:00.000+01:00",
 
-        "createdBy"         : "",
+        "createdBy"         : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
 
-        "stage"             : "fd6a2f6d-36c5-4b28-9352-bc5cfae75ae8",
+        "stage"             : "73e3c668-933b-4916-9273-248422c91204",
 
-        "currentState"      : "7515ca8b-887b-473a-a9dc-013000cfc79a",
+        "currentState"      : "e34003f8-4dd1-47ce-ab2c-4bc41ee4dda3",
 
-        "assignedUsers"     : [
-            "1f2462e4-3c1b-411f-9393-216b078bada4",
-            "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
-            "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a"
-        ],
-        "validatingUsers"   : [
+        "validationUsers"   : [
             "1f2462e4-3c1b-411f-9393-216b078bada4"
         ],
         "comments"          : []
@@ -64,18 +54,13 @@
         "targetStartDate"   : "2021-03-01T08:00:00.000+01:00",
         "targetFinishDate"  : "2021-03-01T08:00:00.000+01:00",
 
-        "createdBy"         : "",
+        "createdBy"         : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
 
         "stage"             : "a8b6d996-cc3c-45d4-912a-7a14521e4b13",
 
-        "currentState"      : "e0a03900-b86c-4cb6-a719-38a1738154d5",
+        "currentState"      : "e34003f8-4dd1-47ce-ab2c-4bc41ee4dda3",
 
-        "assignedUsers"     : [
-            "1f2462e4-3c1b-411f-9393-216b078bada4",
-            "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
-            "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a"
-        ],
-        "validatingUsers"   : [
+        "validationUsers"   : [
             "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
             "1f2462e4-3c1b-411f-9393-216b078bada4"
         ],
@@ -92,17 +77,13 @@
         "targetStartDate"   : "2021-03-01T08:00:00.000+01:00",
         "targetFinishDate"  : "2021-03-01T08:00:00.000+01:00",
 
-        "createdBy"         : "",
+        "createdBy"         : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
 
-        "stage"             : "a529a85b-07d1-445d-9677-fdb48769a872",
+        "stage"             : "",
 
         "currentState"      : "1f0c2752-c863-4b6c-8b1d-c65b801bc385",
 
-        "assignedUsers"     : [
-            "1f2462e4-3c1b-411f-9393-216b078bada4",
-            "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a"
-        ],
-        "validatingUsers"   : [
+        "validationUsers"   : [
             "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
             "1f2462e4-3c1b-411f-9393-216b078bada4"
         ],

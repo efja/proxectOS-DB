@@ -1,0 +1,19 @@
+[
+    {
+        "_id"           : "",
+        "id"            : "",
+        "createdAt"     : "",
+        "updatedAt"     : "",
+
+        "name"          : "",
+        "description"   : "",
+
+        "scale"         : "HOURS",
+
+        "unitCost"      : 0,
+
+        "createdBy"     : {},
+
+        "comments"      : []
+    }
+]

@@ -1,83 +1,89 @@
 [
     {
-        "_id"               : "38044c9a-5930-4de4-8cd0-14b93e7245ba",
-        "id"                : "38044c9a-5930-4de4-8cd0-14b93e7245ba",
-        "createdAt"         : "2021-04-11T05:43:46.000+02:00",
-        "updatedAt"         : "2021-04-11T05:43:46.000+02:00",
+        "_id"                   : "38044c9a-5930-4de4-8cd0-14b93e7245ba",
+        "id"                    : "38044c9a-5930-4de4-8cd0-14b93e7245ba",
+        "createdAt"             : "2021-04-11T05:43:46.000+02:00",
+        "updatedAt"             : "2021-04-11T05:43:46.000+02:00",
 
-        "log"               : "Creación da tarefa",
-        "oldState"          : null,
-        "newState"          : "7515ca8b-887b-473a-a9dc-013000cfc79a",
-        "targetUserGroups"  : [
+        "log"                   : "Creación da tarefa",
+
+        "oldState"              : null,
+        "newState"              : "7515ca8b-887b-473a-a9dc-013000cfc79a",
+
+        "createdBy"             : "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+
+        "visibleToUserGroups"   : [
             "86cb711c-6b5c-4400-a523-2aabda676736",
             "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
             "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
             "c5433574-2529-4799-8597-6cbc063b0712"
         ],
-        "project"           : null,
-        "performance"       : null,
-        "requirement"       : null,
-        "assignedStage"     : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
+
+        "assignedStage"         : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
     },
     {
-        "_id"               : "20404d68-10f7-4306-b000-48ceadad8151",
-        "id"                : "20404d68-10f7-4306-b000-48ceadad8151",
-        "createdAt"         : "2021-05-02T05:43:46.000+02:00",
-        "updatedAt"         : "2021-05-02T05:43:46.000+02:00",
+        "_id"                   : "20404d68-10f7-4306-b000-48ceadad8151",
+        "id"                    : "20404d68-10f7-4306-b000-48ceadad8151",
+        "createdAt"             : "2021-05-02T05:43:46.000+02:00",
+        "updatedAt"             : "2021-05-02T05:43:46.000+02:00",
 
-        "log"               : "Traballando a topito",
-        "oldState"          : "7515ca8b-887b-473a-a9dc-013000cfc79a",
-        "newState"          : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
-        "targetUserGroups"  : [
+        "log"                   : "Traballando a topito",
+
+        "oldState"              : "7515ca8b-887b-473a-a9dc-013000cfc79a",
+        "newState"              : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
+
+        "visibleToUserGroups"   : [
             "86cb711c-6b5c-4400-a523-2aabda676736",
             "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
             "e1701e18-ce0e-4a0b-aacf-6cc4095ff934",
             "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
             "c5433574-2529-4799-8597-6cbc063b0712"
         ],
-        "project"           : null,
-        "performance"       : null,
-        "requirement"       : null,
-        "assignedStage"     : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
+
+        "assignedStage"         : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
     },
     {
-        "_id"               : "5d056959-40f2-4855-bae7-e1df010ba2e9",
-        "id"                : "5d056959-40f2-4855-bae7-e1df010ba2e9",
-        "createdAt"         : "2021-05-18T05:43:46.000+02:00",
-        "updatedAt"         : "2021-05-18T05:43:46.000+02:00",
+        "_id"                   : "5d056959-40f2-4855-bae7-e1df010ba2e9",
+        "id"                    : "5d056959-40f2-4855-bae7-e1df010ba2e9",
+        "createdAt"             : "2021-05-18T05:43:46.000+02:00",
+        "updatedAt"             : "2021-05-18T05:43:46.000+02:00",
 
-        "log"               : "Hai que parar a tomar un café",
-        "oldState"          : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
-        "newState"          : "50c6a119-adba-4908-a384-8fa556250cbe",
-        "targetUserGroups"  : [
+        "log"                   : "Hai que parar a tomar un café",
+
+        "oldState"              : "1d7ca5b9-3c94-4a83-9d78-de8ec1dd66e9",
+        "newState"              : "50c6a119-adba-4908-a384-8fa556250cbe",
+
+        "createdBy"             : "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+
+        "visibleToUserGroups"   : [
             "86cb711c-6b5c-4400-a523-2aabda676736",
             "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
             "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
             "c5433574-2529-4799-8597-6cbc063b0712"
         ],
-        "project"           : null,
-        "performance"       : null,
-        "requirement"       : null,
-        "assignedStage"     : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
+
+        "assignedStage"         : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
     },
     {
-        "_id"               : "dd3c0c41-4161-4fa2-8728-d9b4d91efd7b",
-        "id"                : "dd3c0c41-4161-4fa2-8728-d9b4d91efd7b",
-        "createdAt"         : "2021-05-28T05:43:46.000+02:00",
-        "updatedAt"         : "2021-05-28T05:43:46.000+02:00",
+        "_id"                   : "dd3c0c41-4161-4fa2-8728-d9b4d91efd7b",
+        "id"                    : "dd3c0c41-4161-4fa2-8728-d9b4d91efd7b",
+        "createdAt"             : "2021-05-28T05:43:46.000+02:00",
+        "updatedAt"             : "2021-05-28T05:43:46.000+02:00",
 
-        "log"               : "Hai que parar antes de tomalo café que se escapan os clientes!!!",
-        "oldState"          : "50c6a119-adba-4908-a384-8fa556250cbe",
-        "newState"          : "e34003f8-4dd1-47ce-ab2c-4bc41ee4dda3",
-        "targetUserGroups"  : [
+        "log"                   : "Hai que parar antes de tomalo café que se escapan os clientes!!!",
+
+        "oldState"              : "50c6a119-adba-4908-a384-8fa556250cbe",
+        "newState"              : "e34003f8-4dd1-47ce-ab2c-4bc41ee4dda3",
+
+        "createdBy"             : "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
+
+        "visibleToUserGroups"  : [
             "86cb711c-6b5c-4400-a523-2aabda676736",
             "ea2240be-1ff1-48b4-94fe-e45d266fb1a4",
             "bfe4b8d0-ef6b-4383-a446-3b70a6c302cd",
             "c5433574-2529-4799-8597-6cbc063b0712"
         ],
-        "project"           : null,
-        "performance"       : null,
-        "requirement"       : null,
-        "assignedStage"     : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
+
+        "assignedStage"         : "d2805fa6-39a9-4852-a62b-b8e61cfc8e13"
     }
 ]

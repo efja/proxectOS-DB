@@ -5,12 +5,15 @@
         "createdAt"     : "",
         "updatedAt"     : "",
 
-        "name"          : "",
         "description"   : "",
-        "scale"         : "HOURS",
+
         "amount"        : 0,
-        "cost"          : 0,
+        "unitCost"      : 0,
+
         "createdBy"     : {},
+
+        "resource"      : {},
+
         "comments"      : []
     }
 ]

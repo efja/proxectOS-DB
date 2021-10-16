@@ -5,14 +5,16 @@
         "createdAt"         : "",
         "updatedAt"         : "",
 
-        "expirationDate"    : "",
-        "name"              : "",
-        "description"       : "",
-        "uri"               : "",
-        "createdBy"         : {},
-        "targetUserGroups"  : [],
+        "startDate"         : "",
+        "finishDate"        : "",
+        "targetStartDate"   : "",
+        "targetFinishDate"  : "",
 
-        "assignedUsers"     : [],
+        "createdBy"         : {},
+
+        "stage"             : {},
+
+        "currentState"      : {},
 
         "comments"          : []
     }

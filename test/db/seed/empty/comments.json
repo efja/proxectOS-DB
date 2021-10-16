@@ -5,15 +5,11 @@
         "createdAt"             : "",
         "updatedAt"             : "",
 
-        "log"                   : "",
-
-        "oldState"              : {},
-        "newState"              : {},
+        "expirationDate"        : null,
+        "title"                 : "",
+        "message"               : "",
 
         "createdBy"             : {},
-
-        "visibleToUserGroups"   : [],
-
-        "assignedStage"         : {}
+        "visibleToUserGroups"   : []
     }
 ]

@@ -10,15 +10,19 @@
         "targetStartDate"   : "",
         "targetFinishDate"  : "",
 
+        "name"              : "",
+        "description"       : "",
+
+        "assignedStages"    : [],
+
         "createdBy"         : {},
 
-        "stage"             : {},
+        "adminUsers"        : [],
 
-        "currentState"      : {},
+        "productOwner"      : {},
 
-        "assignedUsers"     : [],
-        "validatingUsers"   : [],
-
+        "requirements"      : [],
+        "repositories"      : [],
         "comments"          : []
     }
 ]

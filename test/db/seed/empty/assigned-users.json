@@ -6,7 +6,7 @@
         "updatedAt"             : "",
         "createdBy"             : "",
 
-        "assignedUser"          : "",
+        "assignedUser"          : {},
         "assignedRoles"         : [],
         "assignedUserGroups"    : []
     }

@@ -4,6 +4,7 @@
 import { Entity, Property } from '@mikro-orm/core';
 
 import { BaseEntity } from "./base-entity.model";
+import { UserContactType } from './user-contact-type.model';
 
 // ####################################################################################################
 // ## CLASE UserContact
@@ -14,7 +15,7 @@ export class UserContact extends BaseEntity {
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public type    : string;
+    public type    : UserContactType;
     @Property()
     public contact : string;
 

@@ -1,0 +1,120 @@
+[
+    {
+        "_id"           : "818e2873-807a-4923-9109-07cb253a6637",
+        "id"            : "818e2873-807a-4923-9109-07cb253a6637",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora análise",
+        "description"   : "Coste por hora dun analista.",
+
+        "scale"         : "HOUR",
+        "unitCost"      : 25,
+        "createdBy"     : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
+        "comments"      : []
+    },
+    {
+        "_id"           : "57c3c7a3-8c62-4ffc-9f1f-f6d08b188bc1",
+        "id"            : "57c3c7a3-8c62-4ffc-9f1f-f6d08b188bc1",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora comercial",
+        "description"   : "Coste por hora dun comercial.",
+
+        "scale"         : "HOUR",
+        "unitCost"      : 20,
+        "createdBy"     : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
+        "comments"      : []
+    },
+    {
+        "_id"           : "1fee800b-9a3d-47c8-a5c7-eacf75ba66e6",
+        "id"            : "1fee800b-9a3d-47c8-a5c7-eacf75ba66e6",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora programador junior 1",
+        "description"   : "Coste por hora dun programador junior nivel 1.",
+
+        "scale"         : "HOUR",
+
+        "unitCost"      : 15,
+        "createdBy"     : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
+        "comments"      : []
+    },
+    {
+        "_id"           : "a0e75efa-732f-45fa-8a2b-d07ed744c363",
+        "id"            : "a0e75efa-732f-45fa-8a2b-d07ed744c363",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora programador junior 2",
+        "description"   : "Coste por hora dun programador junior nivel 2.",
+
+        "scale"         : "HOUR",
+
+        "unitCost"      : 18,
+        "createdBy"     : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
+        "comments"      : []
+    },
+    {
+        "_id"           : "008e00e0-1e76-442a-ba48-a171175c5696",
+        "id"            : "008e00e0-1e76-442a-ba48-a171175c5696",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora programador senior 1",
+        "description"   : "Coste por hora dun programador senior nivel 1.",
+
+        "scale"         : "HOUR",
+
+        "unitCost"      : 22,
+        "createdBy"     : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
+        "comments"      : []
+    },
+    {
+        "_id"           : "4faf1e33-a063-4997-9655-e261ca55fa74",
+        "id"            : "4faf1e33-a063-4997-9655-e261ca55fa74",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora programador senior 2",
+        "description"   : "Coste por hora dun programador senior nivel 2.",
+
+        "scale"         : "HOUR",
+
+        "unitCost"      : 26,
+        "createdBy"     : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
+        "comments"      : []
+    },
+    {
+        "_id"           : "2580171b-661c-4f67-b248-22798a11d66e",
+        "id"            : "2580171b-661c-4f67-b248-22798a11d66e",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora implantación",
+        "description"   : "Coste por hora de implantación en produción.",
+
+        "scale"         : "HOUR",
+
+        "unitCost"      : 20,
+        "createdBy"     : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
+        "comments"      : []
+    },
+    {
+        "_id"           : "0faa0134-7b9e-47df-9763-9c5ef8066878",
+        "id"            : "0faa0134-7b9e-47df-9763-9c5ef8066878",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Rapsberry + SO",
+        "description"   : "Rapsberry con SO montado para despliegue de aplicacións lixeiras.",
+
+        "scale"         : "UNIT",
+
+        "unitCost"      : 150,
+        "createdBy"     : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
+        "comments"      : []
+    }
+]

@@ -5,15 +5,17 @@
         "createdAt"             : "",
         "updatedAt"             : "",
 
-        "log"                   : "",
-
-        "oldState"              : {},
-        "newState"              : {},
+        "expirationDate"        : "",
+        "name"                  : "",
+        "description"           : "",
+        "uri"                   : "",
 
         "createdBy"             : {},
 
+        "assignedUsers"         : [],
+
         "visibleToUserGroups"   : [],
 
-        "assignedStage"         : {}
+        "comments"              : []
     }
 ]

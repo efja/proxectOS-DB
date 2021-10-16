@@ -1,39 +1,52 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
+import { Collection, Entity, Property, ManyToOne, ManyToMany, Enum } from '@mikro-orm/core';
 
 import { BaseEntity } from "./base-entity.model";
+import { CommentApp } from './commentapp.model';
 import { User } from './user.model';
-import { UserGroup } from './user-group.model';
 
 // ####################################################################################################
-// ## CLASE CommentApp
+// ## ENUMS
+// ####################################################################################################
+export enum ResourceScale {
+    HOUR,
+    DAY,
+    WEEK,
+    UNIT,
+}
+
+// ####################################################################################################
+// ## CLASE Resource
 // ####################################################################################################
 @Entity()
-export class CommentApp extends BaseEntity {
+export class Resource extends BaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public expirationDate?      : Date;
+    public name         : string;
+    @Property()
+    public description  : string;
+
+    @Enum({ items: () => ResourceScale, array: false, default: ResourceScale.HOUR })
+    public scale        : ResourceScale.HOUR;
 
     @Property()
-    public title                : string;
-    @Property()
-    public message              : string;
+    public unitCost     : number;
 
     // Relacións
     @ManyToOne()
-    public createdBy            : User;
+    public createdBy    : User;
 
-    @ManyToMany(() => UserGroup)
-    public visibleToUserGroups  : Collection<UserGroup> = new Collection<UserGroup>(this);
+    @ManyToMany(() => CommentApp)
+    public comments     : Collection<CommentApp> = new Collection<CommentApp>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
-    constructor(obj?: Partial<CommentApp>) {
+    constructor(obj?: Partial<Resource>) {
         super();
         Object.assign(this, obj);
     }

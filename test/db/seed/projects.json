@@ -13,26 +13,13 @@
         "name"              : "Proxecto Tests",
         "description"       : "Nada relevante",
 
-        "assignedStages"    : [
-            "d2805fa6-39a9-4852-a62b-b8e61cfc8e13",
-            "fd6a2f6d-36c5-4b28-9352-bc5cfae75ae8",
-            "118e2ace-6e87-4d7c-9907-2d2942ff6653",
-            "a529a85b-07d1-445d-9677-fdb48769a872"
-        ],
-
-        "assignedUsers"     : [
-            "e6e8d0fd-5d3e-4f9d-afcf-fd3c243826de",
-            "e13d6980-bce7-485b-828a-cb7946d25d53",
-            "3821bf78-f1a3-46e7-bf53-09157d72a294",
-            "5242af8d-078d-4fc9-b1b7-511bd5441a16"
-        ],
-
         "createdBy"         : "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
-        "validatingUsers"   : [
-            "1fab1ed7-daa0-4d7b-9ae4-3d81ab47ba5a",
-            "b9c6f4f3-b9fc-4903-a0bd-e4c954da865d",
-            "1f2462e4-3c1b-411f-9393-216b078bada4"
+
+        "adminUsers"        : [
+            "3821bf78-f1a3-46e7-bf53-09157d72a294"
         ],
+
+        "productOwner"      : "1f2462e4-3c1b-411f-9393-216b078bada4",
 
         "requirements"      : [],
         "repositories"      : [

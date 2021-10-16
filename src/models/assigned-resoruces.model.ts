@@ -6,41 +6,31 @@ import { Collection, Entity, Property, ManyToOne, ManyToMany, Enum } from '@mikr
 import { BaseEntity } from "./base-entity.model";
 import { CommentApp } from './commentapp.model';
 import { User } from './user.model';
+import { Resource } from './resoruces.model';
+
 
 // ####################################################################################################
-// ## ENUMS
-// ####################################################################################################
-export enum ResourcesEstimationScale {
-    HOURS,
-    DAYS,
-    WEEKS,
-    EURO,
-    DOLLAR,
-}
-
-// ####################################################################################################
-// ## CLASE ResourcesEstimation
+// ## CLASE AssignedResources
 // ####################################################################################################
 @Entity()
-export class ResourcesEstimation extends BaseEntity {
+export class AssignedResources extends BaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public name         : string;
-    @Property()
     public description  : string;
 
-    @Enum({ items: () => ResourcesEstimationScale, array: false, default: ResourcesEstimationScale.HOURS })
-    public scale        : ResourcesEstimationScale.HOURS;
     @Property()
     public amount       : number;
     @Property()
-    public cost         : number;
+    public unitCost     : number;
 
     // Relacións
     @ManyToOne()
     public createdBy    : User;
+
+    @ManyToOne()
+    public resource     : Resource;
 
     @ManyToMany(() => CommentApp)
     public comments     : Collection<CommentApp> = new Collection<CommentApp>(this);
@@ -48,7 +38,7 @@ export class ResourcesEstimation extends BaseEntity {
     // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
-    constructor(obj?: Partial<ResourcesEstimation>) {
+    constructor(obj?: Partial<AssignedResources>) {
         super();
         Object.assign(this, obj);
     }

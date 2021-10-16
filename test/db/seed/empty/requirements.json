@@ -14,13 +14,14 @@
         "description"       : "",
 
         "assignedStages"    : [],
-
-        "assignedUsers"     : [],
+        "priority"          : {},
+        "type"              : {},
 
         "createdBy"         : {},
-        "validatingUsers"   : [],
 
-        "requirements"      : [],
+        "adminUsers"        : [],
+
+        "performances"      : [],
         "repositories"      : [],
         "comments"          : []
     }

@@ -8,9 +8,10 @@ import { AssignedStage } from './assigned-stage.model';
 import { BaseEntity } from "./base-entity.model";
 import { CommentApp } from './commentapp.model';
 import { Priority } from './priority.model';
-import { ResourcesEstimation } from './resoruces-estimation.model';
+import { Resource } from './resoruces.model';
 import { Type } from './type.model';
 import { User } from './user.model';
+import { UserGroup } from './user-group.model';
 
 // ####################################################################################################
 // ## CLASE PerformanceApp
@@ -21,28 +22,18 @@ export class PerformanceApp extends BaseEntity {
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public startDate                : Date;
+    public startDate?               : Date;
     @Property()
-    public finishDate               : Date;
+    public finishDate?              : Date;
     @Property()
-    public targetStartDate          : Date;
+    public targetStartDate?         : Date;
     @Property()
-    public targetFinishDate         : Date;
+    public targetFinishDate?        : Date;
 
     @Property()
     public name                     : string;
     @Property()
     public description              : string;
-
-    @Property()
-    public totalEstimatedHours      : number;
-    @Property()
-    public totalHoursConsumed       : number;
-
-    @Property()
-    public totalEstimatedResources  : number;
-    @Property()
-    public totalResourcesConsumed   : number;
 
     // Relacións
     @ManyToMany(() => PerformanceApp)
@@ -56,22 +47,19 @@ export class PerformanceApp extends BaseEntity {
     @ManyToOne()
     public type                     : Type;
 
+    @ManyToOne()
+    public createdBy                : User;
+
     @ManyToMany(() => AssignedUser)
     public assignedUsers            : Collection<AssignedUser> = new Collection<AssignedUser>(this);
 
-    @ManyToOne()
-    public createdBy                : User;
-    public validatingUsers          : Collection<User> = new Collection<User>(this);
+    @ManyToMany(() => UserGroup)
+    public visibleToUserGroups      : Collection<UserGroup> = new Collection<UserGroup>(this);
 
-    @ManyToMany(() => ResourcesEstimation)
-    public estimatedHours           : Collection<ResourcesEstimation> = new Collection<ResourcesEstimation>(this);
-    @ManyToMany(() => ResourcesEstimation)
-    public hoursConsumed            : Collection<ResourcesEstimation> = new Collection<ResourcesEstimation>(this);
-
-    @ManyToMany(() => ResourcesEstimation)
-    public estimatedResources       : Collection<ResourcesEstimation> = new Collection<ResourcesEstimation>(this);
-    @ManyToMany(() => ResourcesEstimation)
-    public resourcesConsumed        : Collection<ResourcesEstimation> = new Collection<ResourcesEstimation>(this);
+    @ManyToMany(() => Resource)
+    public estimatedResources       : Collection<Resource> = new Collection<Resource>(this);
+    @ManyToMany(() => Resource)
+    public resourcesConsumed        : Collection<Resource> = new Collection<Resource>(this);
 
     @ManyToMany(() => CommentApp)
     public comments                 : Collection<CommentApp> = new Collection<CommentApp>(this);
