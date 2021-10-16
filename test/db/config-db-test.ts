@@ -34,12 +34,12 @@ export class DBTestConnection {
     password  : string
   ) {
     this.options = {
-      entities          : ['bin/models/*.js'],
-      entitiesTs        : ['src/models/*.ts'],
+      entities    : ['bin/models/*.js'],
+      entitiesTs  : ['src/models/*.ts'],
 
-      clientUrl: `mongodb://${user}:${password}@${host}:${port}/${dbName}?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`,
+      clientUrl   : `mongodb://${user}:${password}@${host}:${port}/${dbName}?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`,
 
-      timezone          : '+02:00',
+      timezone    : '+02:00',
     }
 
     switch (dbms) {
