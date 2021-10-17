@@ -13,7 +13,7 @@ import { Stage } from '../../src/models/stage.model';
 import { State } from '../../src/models/state.model';
 
 // MODELOS CUNHA SOA DEPENDENCIA
-import { Resource } from '../../src/models/resoruces.model';
+import { Resource } from '../../src/models/resource.model';
 import { UserContact } from '../../src/models/user-contact.model';
 import { UserGroup } from '../../src/models/user-group.model';
 

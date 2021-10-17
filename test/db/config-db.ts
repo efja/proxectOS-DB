@@ -93,9 +93,33 @@ export class DBTestConnection {
   }
 
   /**
+   * Elimina os datos pasados por parámetro da BD.
+   *
+   * @param listObj Lista de objexectos a eliminar na BD
+   */
+  public async dropAllData(listObj: CustomBaseEntity[]) {
+    if (this.orm) {
+      try {
+        await this.orm.em.removeAndFlush(listObj);
+      } catch (error) {
+        console.log('error dropAllData:>> ', error);
+      }
+    }
+  }
+
+  /**
+   * Crea tódalas coleccións da BD balerias.
+   */
+  public async createCollections() {
+    if (this.orm) {
+      await this.orm.em.getDriver().createCollections();
+    }
+  }
+
+  /**
    * Elimina tódalas coleccións da BD.
    */
-  public async dropAllData() {
+  public async dropCollections() {
     if (this.orm) {
       await this.orm.em.getDriver().dropCollections();
     }
@@ -110,14 +134,10 @@ export class DBTestConnection {
   public async inicializeData(listObj: CustomBaseEntity[], dropAllData: boolean = false) {
     if (this.orm) {
       if (dropAllData) {
-        try {
-          await this.orm.em.removeAndFlush(listObj);
-        } catch (error) {
-          console.log('error dropAllData:>> ', error);
-        }
+        await this.dropAllData(listObj);
       }
 
-      await this.orm.em.getDriver().createCollections();
+      await this.createCollections();
 
       try {
         await this.orm.em.persistAndFlush(listObj);

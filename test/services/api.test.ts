@@ -2,53 +2,22 @@
 // ## IMPORTACIÓNS
 // ####################################################################################################
 import i18next from "i18next";
-import supertest from 'supertest';
+import HttpStatus from 'http-status-codes';
 
-import { App } from '../../src/services/api.service';
 import { DBTestConnection } from "../db/config-db";
-import { ObjectFactory } from '../db/load-data';
-
-// ####################################################################################################
-// ## CONSTANTES
-// ####################################################################################################
-// CONSTANTES DO ENTORNO
-const {
-    APP_NAME,
-    API_PREFIX,
-
+import {
+    API_BASE,
+    api_name,
+    api_version,
     DBMS,
     DB_HOST,
-    DB_PORT,
-    DB_NAME,
-
     DB_LOGIN,
+    DB_NAME,
     DB_PASS,
-} = process.env;
-
-// OUTRAS CONSTANTES
-const api_name = APP_NAME;
-const api_version = process.env.npm_package_version;
-const apiVersion = getAPIVersion();
-
-const API_BASE = `/api/${apiVersion}`;
-
-// Aplicación
-const app = new App();
-
-// Request para testing
-const request = supertest(app.getApp());
-
-// ####################################################################################################
-// ## UTILIDADES
-// ####################################################################################################
-function getAPIVersion () {
-    let apiFullVersion = process.env.npm_package_version.split(".");
-    let apiPrefix = API_PREFIX;
-
-    let result = `${apiPrefix}${apiFullVersion[0]}`;
-
-    return result;
-};
+    DB_PORT,
+    FAKE_TEXT,
+    request
+} from "./commons";
 
 // ####################################################################################################
 // ## TESTS GROUPS
@@ -70,14 +39,14 @@ describe('Probas básicas de conexión cá BD', () => {
         expect(await conn.orm.isConnected()).toBe(true);
     });
 
-    test('conexión: KO', async () => {
+    test('conexión KO', async () => {
         const conn = new DBTestConnection(
             DBMS,
             DB_HOST,
             DB_PORT,
             DB_NAME,
             DB_LOGIN,
-            `fake_${DB_PASS}`
+            `${DB_PASS}${FAKE_TEXT}`
         );
         let result = null;
 
@@ -94,68 +63,21 @@ describe('Probas básicas de conexión cá BD', () => {
     });
 });
 
-describe('Probas básicas de conexión da API', () => {
-    // ************************************************************************************************
-    // ** ATRIBUTOS
-    // ************************************************************************************************
-    const db: DBTestConnection = new DBTestConnection(
-        DBMS,
-        DB_HOST,
-        DB_PORT,
-        DB_NAME,
-        DB_LOGIN,
-        DB_PASS
-    );
-
-    // Lista de datos
-    const dataList = new ObjectFactory();
-
-    // ************************************************************************************************
-    // ** TAREFAS PREVIAS E POSTERIORES
-    // ************************************************************************************************
-	beforeAll(async () => {
-        await db.init();
-		await db.dropAllData();
-	});
-
-	beforeEach(async () => {
-        await db.inicializeData(dataList.allModels, true);
-	});
-
-	afterAll(async () => {
-		// await db.dropAllData();
-		await db.close();
-	});
-
+describe('Probas básicas de conexión coa API (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Info API (GET)', async() => {
+    test(`Info API: <${API_BASE}>`, async() => {
         const response = await request.get(API_BASE);
 
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(HttpStatus.OK);
         expect(response.body).toBe(i18next.t('WELCOME', { app: api_name, version: api_version }));
     });
 
-    test('All Projets (GET)', async() => {
-        const response = await request.get(`${API_BASE}/projects`);
-        const {
-            code,
-            data,
-            total,
-            from,
-            limit,
-            message,
-            error,
-        } = response.body
+    test(`Info API URL errónea: <${API_BASE}${FAKE_TEXT}>`, async() => {
+        const response = await request.get(`${API_BASE}${FAKE_TEXT}`);
 
-        expect(response.status).toBe(200);
-        expect(code).toBe(200);
-        expect(data).toBeDefined();
-        expect(total).toBe(0);
-        expect(from).toBe(0);
-        expect(limit).toBe(0);
-        expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.GET_ALL'));
-        // expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.GET_ALL'));
+        expect(response.status).toBe(HttpStatus.NOT_FOUND);
+        expect(response.body).not.toBe(i18next.t('WELCOME', { app: api_name, version: api_version }));
     });
 });

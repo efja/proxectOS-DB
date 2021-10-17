@@ -7,7 +7,7 @@ import { CustomBaseEntity } from "./base-entity.model";
 
 import { CommentApp } from './commentapp.model';
 import { User } from './user.model';
-import { Resource } from './resoruce.model';
+import { Resource } from './resource.model';
 
 
 // ####################################################################################################
