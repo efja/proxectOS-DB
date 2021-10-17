@@ -20,14 +20,9 @@
 
         "userSchedule"      : null,
 
-        "contacts"          : [
-            "616b4e251dd454892f40a86d"
-        ],
+        "contacts"          : [],
 
-        "defaultUserGroups" : [
-            "616b4e251dd454892f40a86a",
-            "616b4e54c4efa9d9ccc5d11c"
-        ]
+        "defaultUserGroups" : []
     },
     {
         "_id"               : "616b4dd523f371ed0309e105",
@@ -55,14 +50,9 @@
 
         "userSchedule"      : "616b4e54c4efa9d9caa5d11c",
 
-        "contacts"          : [
-            "616b4e881d942868f6ca6cfc"
-        ],
+        "contacts"          : [],
 
-        "defaultUserGroups" : [
-            "616b4e251dd454892f40a86a",
-            "616b4b58eb372265b9c3101d"
-        ]
+        "defaultUserGroups" : []
     },
     {
         "_id"               : "616b4df3a2facc1a9c4145a1",
@@ -85,16 +75,9 @@
 
         "userSchedule"      : "616b4e96b77dda30e702f720",
 
-        "contacts"          : [
-            "616b4eb5e84fc78231692d5f",
-            "a36b4e55e84fc78231692d5f"
-        ],
+        "contacts"          : [],
 
-        "defaultUserGroups" : [
-            "616b4e251dd454892f40a86a",
-            "616b4ee74fb0c1c58625e9c9",
-            "616b4ef96fb29ff203f48491"
-        ]
+        "defaultUserGroups" : []
     },
     {
         "_id"               : "616b4e0bd149c8f6632ac84a",
@@ -117,15 +100,8 @@
 
         "userSchedule"      : "616b4e96b77dda30e702f720",
 
-        "contacts"          : [
-            "616b4f1570caacff5a860220",
-            "ae6b4f1570caacff5a8602cc"
-        ],
+        "contacts"          : [],
 
-        "defaultUserGroups" : [
-            "616b4e251dd454892f40a86a",
-            "616b4ee74fb0c1c58625e9c9",
-            "616b4f40395664595aab6292"
-        ]
+        "defaultUserGroups" : []
     }
 ]

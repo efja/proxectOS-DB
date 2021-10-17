@@ -16,9 +16,7 @@
 
         "currentState"      : "616b520a74fe6e519606f0e3",
 
-        "validationUsers"   : [
-            "616b4dbb9f7ee9e407c28a1b"
-        ],
+        "validationUsers"   : [],
         "comments"          : []
     },
     {
@@ -38,9 +36,7 @@
 
         "currentState"      : "616b520a74fe6e519606f0e3",
 
-        "validationUsers"   : [
-            "616b4dbb9f7ee9e407c28a1b"
-        ],
+        "validationUsers"   : [],
         "comments"          : []
     },
     {
@@ -60,10 +56,7 @@
 
         "currentState"      : "616b520a74fe6e519606f0e3",
 
-        "validationUsers"   : [
-            "616b4dd523f371ed0309e105",
-            "616b4dbb9f7ee9e407c28a1b"
-        ],
+        "validationUsers"   : [],
         "comments"          : []
     },
     {
@@ -79,14 +72,11 @@
 
         "createdBy"         : "616b4df3a2facc1a9c4145a1",
 
-        "stage"             : "",
+        "stage"             : "616b563a41cecfff2b4dabe2",
 
         "currentState"      : "616b5762f3b9e15088f87b19",
 
-        "validationUsers"   : [
-            "616b4dd523f371ed0309e105",
-            "616b4dbb9f7ee9e407c28a1b"
-        ],
+        "validationUsers"   : [],
         "comments"          : []
     }
 ]

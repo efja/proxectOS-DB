@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mikro-orm/core';
 
-import { BaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./base-entity.model";
 
 import { AssignedStage } from './assigned-stage.model';
 import { AssignedUser } from './assigned-user.model';
@@ -16,7 +16,7 @@ import { User } from './user.model';
 // ## CLASE Project
 // ####################################################################################################
 @Entity()
-export class Project extends BaseEntity {
+export class Project extends CustomBaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************

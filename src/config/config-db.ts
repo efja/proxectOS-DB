@@ -73,7 +73,7 @@ export class DBConnection {
   /**
    * Incia os parámteros do SXBD segundo os parámetros pasados no construtor.
    */
-  configure() {
+  configure(): void {
     switch (this.dbms) {
       case 'postgresql':
       case 'pgsql':
@@ -89,8 +89,14 @@ export class DBConnection {
         break;
     }
   }
-  public async init():Promise<boolean> {
-    let result:boolean = true;
+
+  /**
+   * Inicia os parámetros da conexión co SXBD.
+   *
+   * @returns Promise<boolean>
+   */
+  public async init(): Promise<boolean> {
+    let result: boolean = true;
 
     try {
       this.orm = await MikroORM.init(this.options);
@@ -102,11 +108,11 @@ export class DBConnection {
   }
 
   /**
-   * Inicia a conexión co SXBD
+   * Inicia a conexión co SXBD e devolve un string cá cadea de conexión.
    *
-   * @returns string
+   * @returns Promise<string>
    */
-  async start() {
+  async start(): Promise<string> {
     try {
       let connected = await this.init();
 
@@ -124,7 +130,7 @@ export class DBConnection {
   }
 
   /**
-   * Remata a conexión co SXBD
+   * Remata a conexión co SXBD.
    */
   async stop() {
     if (this.orm) {
@@ -133,7 +139,7 @@ export class DBConnection {
   }
 
   /**
-   * Devolve a cadea de conexión co SXBD
+   * Devolve a cadea de conexión co SXBD.
    *
    * @returns string
    */

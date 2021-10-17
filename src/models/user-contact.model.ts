@@ -1,9 +1,9 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Entity, Property } from '@mikro-orm/core';
+import { Entity, ManyToOne, Property } from '@mikro-orm/core';
 
-import { BaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./base-entity.model";
 
 import { UserContactType } from './user-contact-type.model';
 
@@ -11,11 +11,11 @@ import { UserContactType } from './user-contact-type.model';
 // ## CLASE UserContact
 // ####################################################################################################
 @Entity()
-export class UserContact extends BaseEntity {
+export class UserContact extends CustomBaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    @Property()
+    @ManyToOne()
     public type    : UserContactType;
     @Property()
     public contact : string;

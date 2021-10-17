@@ -1,0 +1,54 @@
+[
+    {
+        "id"                : "616b4dbb9f7ee9e407c28a1b",
+
+        "contacts"          : [
+            "616b4e251dd454892f40a86d"
+        ],
+
+        "defaultUserGroups" : [
+            "616b4e251dd454892f40a86a",
+            "616b4e54c4efa9d9ccc5d11c"
+        ]
+    },
+    {
+        "id"                : "616b4dd523f371ed0309e105",
+
+        "contacts"          : [
+            "616b4e881d942868f6ca6cfc"
+        ],
+
+        "defaultUserGroups" : [
+            "616b4e251dd454892f40a86a",
+            "616b4b58eb372265b9c3101d"
+        ]
+    },
+    {
+        "id"                : "616b4df3a2facc1a9c4145a1",
+
+        "contacts"          : [
+            "616b4eb5e84fc78231692d5f",
+            "a36b4e55e84fc78231692d5f"
+        ],
+
+        "defaultUserGroups" : [
+            "616b4e251dd454892f40a86a",
+            "616b4ee74fb0c1c58625e9c9",
+            "616b4ef96fb29ff203f48491"
+        ]
+    },
+    {
+        "id"                : "616b4e0bd149c8f6632ac84a",
+
+        "contacts"          : [
+            "616b4f1570caacff5a860220",
+            "ae6b4f1570caacff5a8602cc"
+        ],
+
+        "defaultUserGroups" : [
+            "616b4e251dd454892f40a86a",
+            "616b4ee74fb0c1c58625e9c9",
+            "616b4f40395664595aab6292"
+        ]
+    }
+]

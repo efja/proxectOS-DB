@@ -1,0 +1,43 @@
+[
+    {
+        "id"                    : "616b5155e60062e408935707",
+
+        "visibleToUserGroups"   : [
+            "616b5015d32984b61f6ad57e",
+            "616b50508003db4c84fbe94a",
+            "616b4bb2d34ebe7bd6e155e2",
+            "616b4ef96fb29ff203f48491"
+        ]
+    },
+    {
+        "id"                    : "616b51a5eff59b6da399f850",
+
+        "visibleToUserGroups"   : [
+            "616b5015d32984b61f6ad57e",
+            "616b50508003db4c84fbe94a",
+            "616b4e54c4efa9d9ccc5d11c",
+            "616b4bb2d34ebe7bd6e155e2",
+            "616b4ef96fb29ff203f48491"
+        ]
+    },
+    {
+        "id"                    : "616b51df00edfe209655a44e",
+
+        "visibleToUserGroups"   : [
+            "616b5015d32984b61f6ad57e",
+            "616b50508003db4c84fbe94a",
+            "616b4bb2d34ebe7bd6e155e2",
+            "616b4ef96fb29ff203f48491"
+        ]
+    },
+    {
+        "id"                    : "616b5223c6b5226ce892d1e5",
+
+        "visibleToUserGroups"  : [
+            "616b5015d32984b61f6ad57e",
+            "616b50508003db4c84fbe94a",
+            "616b4bb2d34ebe7bd6e155e2",
+            "616b4ef96fb29ff203f48491"
+        ]
+    }
+]

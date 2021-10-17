@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mikro-orm/core';
 
-import { BaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./base-entity.model";
 
 import { UserContact } from "./user-contact.model";
 import { UserGroup } from './user-group.model';
@@ -13,7 +13,7 @@ import { UserSchedule } from './user-schedule.model';
 // ## CLASE User
 // ####################################################################################################
 @Entity()
-export class User extends BaseEntity {
+export class User extends CustomBaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************

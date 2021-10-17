@@ -1,31 +1,12 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { TsMorphMetadataProvider } from "@mikro-orm/reflection";
 import i18next from "i18next";
 import supertest from 'supertest';
+
 import { App } from '../../src/services/api.service';
-import { SchemaGenerator } from '@mikro-orm/knex';
-import { DBConnection } from '../../src/config/config-db';
-import { BaseEntity } from '../../src/models/base-entity.model';
-import { ConnectionOptions, EntityCaseNamingStrategy, MikroORM, Options, Platform, QueryResult } from '@mikro-orm/core';
-import { Configuration, Connection } from '@mikro-orm/core';
-import { DBTestConnection } from "../db/config-db-test";
-import { MongoHighlighter } from "@mikro-orm/mongo-highlighter";
-import { MongoDriver } from '@mikro-orm/mongodb';
-
-// ####################################################################################################
-// ## UTILIDADES
-// ####################################################################################################
-
-const getAPIVersion = () => {
-    let apiFullVersion = process.env.npm_package_version.split(".");
-    let apiPrefix = API_PREFIX;
-
-    let result = `${apiPrefix}${apiFullVersion[0]}`;
-
-    return result;
-};
+import { DBTestConnection } from "../db/config-db";
+import { ObjectFactory } from '../db/load-data';
 
 // ####################################################################################################
 // ## CONSTANTES
@@ -58,13 +39,25 @@ const app = new App();
 const request = supertest(app.getApp());
 
 // ####################################################################################################
+// ## UTILIDADES
+// ####################################################################################################
+function getAPIVersion () {
+    let apiFullVersion = process.env.npm_package_version.split(".");
+    let apiPrefix = API_PREFIX;
+
+    let result = `${apiPrefix}${apiFullVersion[0]}`;
+
+    return result;
+};
+
+// ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Connection', () => {
+describe('Probas básicas de conexión cá BD', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Connection Ok', async () => {
+    test('conexión OK', async () => {
         const conn = await new DBTestConnection(
             DBMS,
             DB_HOST,
@@ -77,7 +70,7 @@ describe('Connection', () => {
         expect(await conn.orm.isConnected()).toBe(true);
     });
 
-    test('Connection Failed', async () => {
+    test('conexión: KO', async () => {
         const conn = new DBTestConnection(
             DBMS,
             DB_HOST,
@@ -114,6 +107,9 @@ describe('Probas básicas de conexión da API', () => {
         DB_PASS
     );
 
+    // Lista de datos
+    const dataList = new ObjectFactory();
+
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
     // ************************************************************************************************
@@ -123,14 +119,13 @@ describe('Probas básicas de conexión da API', () => {
 	});
 
 	beforeEach(async () => {
-        await db.inicializeData([], true);
+        await db.inicializeData(dataList.allModels, true);
 	});
 
 	afterAll(async () => {
 		// await db.dropAllData();
 		await db.close();
 	});
-
 
     // ************************************************************************************************
     // ** TESTS
@@ -164,7 +159,3 @@ describe('Probas básicas de conexión da API', () => {
         // expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.GET_ALL'));
     });
 });
-function MongoError(MongoError: any) {
-    throw new Error("Function not implemented.");
-}
-

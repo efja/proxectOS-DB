@@ -8,10 +8,7 @@
 
         "assignedUser"          : "616b4e0bd149c8f6632ac84a",
         "assignedRoles"         : [],
-        "assignedUserGroups"    : [
-            "616b4f40395664595aab6292",
-            "616b4ee74fb0c1c58625e9c9"
-        ]
+        "assignedUserGroups"    : []
     },
     {
         "_id"                   : "616b524d366c2aa993b56590",
@@ -22,10 +19,7 @@
 
         "assignedUser"          : "616b4df3a2facc1a9c4145a1",
         "assignedRoles"         : [],
-        "assignedUserGroups"    : [
-            "616b4ef96fb29ff203f48491",
-            "616b4ee74fb0c1c58625e9c9"
-        ]
+        "assignedUserGroups"    : []
     },
     {
         "_id"                   : "616b536db0dacf733ea4e230",
@@ -36,23 +30,17 @@
 
         "assignedUser"          : "616b4dbb9f7ee9e407c28a1b",
         "assignedRoles"         : [],
-        "assignedUserGroups"    : [
-            "616b4e54c4efa9d9ccc5d11c"
-        ]
+        "assignedUserGroups"    : []
     },
     {
         "_id"                   : "616b53800be709e632d13214",
-        "id"                    : "616b536db0dacf733ea4e230",
+        "id"                    : "616b53800be709e632d13214",
         "createdAt"             : "2020-12-23T20:22:47.000+01:00",
         "updatedAt"             : "2020-12-23T20:22:47.000+01:00",
         "createdBy"             : "616b4b58eb372265b9c3101d",
 
         "assignedUser"          : "616b4dd523f371ed0309e105",
-        "assignedRoles"         : [
-            "616b50a667047be27ff546f8"
-        ],
-        "assignedUserGroups"    : [
-            "616b4bb2d34ebe7bd6e155e2"
-        ]
+        "assignedRoles"         : [],
+        "assignedUserGroups"    : []
     }
 ]

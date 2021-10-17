@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany, Enum } from '@mikro-orm/core';
 
-import { BaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./base-entity.model";
 
 import { CommentApp } from './commentapp.model';
 import { User } from './user.model';
@@ -22,7 +22,7 @@ export enum ResourceScale {
 // ## CLASE Resource
 // ####################################################################################################
 @Entity()
-export class Resource extends BaseEntity {
+export class Resource extends CustomBaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************

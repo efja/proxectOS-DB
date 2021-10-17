@@ -8,9 +8,7 @@
         "name"          : "Administradores de sistema",
         "description"   : "",
 
-        "defaultRoles"  : [
-            "616b5035a068860b800f6949"
-        ]
+        "defaultRoles"  : []
     },
     {
         "_id"           : "616b50508003db4c84fbe94a",
@@ -21,9 +19,7 @@
         "name"          : "Administradores",
         "description"   : "",
 
-        "defaultRoles"  : [
-            "616b50a667047be27ff546f8"
-        ]
+        "defaultRoles"  : []
     },
     {
         "_id"           : "616b4e54c4efa9d9ccc5d11c",
@@ -34,9 +30,7 @@
         "name"          : "Clientes",
         "description"   : "",
 
-        "defaultRoles"  : [
-            "616b50bb4ad767564d05653d"
-        ]
+        "defaultRoles"  : []
     },
     {
         "_id"           : "616b4bb2d34ebe7bd6e155e2",
@@ -47,10 +41,7 @@
         "name"          : "Comerciais",
         "description"   : "",
 
-        "defaultRoles"  : [
-            "616b50df1b72f5d9539703a7",
-            "616b50eeca13b1e1550caca1"
-        ]
+        "defaultRoles"  : []
     },
     {
         "_id"           : "616b4ee74fb0c1c58625e9c9",
@@ -61,10 +52,7 @@
         "name"          : "Programadores",
         "description"   : "",
 
-        "defaultRoles"  : [
-            "616b50df1b72f5d9539703a7",
-            "616b50eeca13b1e1550caca1"
-        ]
+        "defaultRoles"  : []
     },
     {
         "_id"           : "616b4ef96fb29ff203f48491",
@@ -75,9 +63,7 @@
         "name"          : "Responsables",
         "description"   : "",
 
-        "defaultRoles"  : [
-            "616b50a667047be27ff546f8"
-        ]
+        "defaultRoles"  : []
     },
     {
         "_id"           : "616b4e251dd454892f40a86a",
@@ -88,9 +74,7 @@
         "name"          : "Todos",
         "description"   : "",
 
-        "defaultRoles"  : [
-            "616b50bb4ad767564d05653d"
-        ]
+        "defaultRoles"  : []
     },
     {
         "_id"           : "616b4f40395664595aab6292",
@@ -101,9 +85,6 @@
         "name"          : "Validadores",
         "description"   : "",
 
-        "defaultRoles"  : [
-            "616b50df1b72f5d9539703a7",
-            "616b50eeca13b1e1550caca1"
-        ]
+        "defaultRoles"  : []
     }
 ]

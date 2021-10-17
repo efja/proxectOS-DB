@@ -15,21 +15,12 @@
 
         "createdBy"         : "616b4df3a2facc1a9c4145a1",
 
-        "adminUsers"        : [
-            "616b524d366c2aa993b56590"
-        ],
+        "adminUsers"        : [],
 
         "productOwner"      : "616b4dbb9f7ee9e407c28a1b",
 
         "requirements"      : [],
-        "repositories"      : [
-            "616b55642c479482e52a2f81",
-            "616b5564462b9b0f7138f718",
-            "616b55646a86e73af521b0ed",
-            "616b5564edcaf7c282ccd7b2"
-        ],
-        "comments"          : [
-            "616b4fdafe3f5d99619aeb75"
-        ]
+        "repositories"      : [],
+        "comments"          : []
     }
 ]

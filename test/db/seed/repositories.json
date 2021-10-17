@@ -10,20 +10,11 @@
         "description"           : "",
         "uri"                   : "https://gitlab.iessanclemente.net/dawm/a18franciscogc.git",
         "createdBy"             : "616b4b58eb372265b9c3101d",
-        "visibleToUserGroups"   : [
-            "616b4ef96fb29ff203f48491",
-            "616b4ee74fb0c1c58625e9c9",
-            "616b50508003db4c84fbe94a"
-        ],
+        "visibleToUserGroups"   : [],
 
-        "assignedUsers"         : [
-            "616b523c3cafa4214f535025 ",
-            "616b524d366c2aa993b56590"
-        ],
+        "assignedUsers"         : [],
 
-        "comments"              : [
-            "616b4fedc0c559d10b709c9b"
-        ]
+        "comments"              : []
     },
     {
         "_id"                   : "616b5564462b9b0f7138f718",
@@ -36,16 +27,9 @@
         "description"           : "",
         "uri"                   : "https://gitlab.iessanclemente.net/a18franciscogc/proxectos-api.git",
         "createdBy"             : "616b4b58eb372265b9c3101d",
-        "visibleToUserGroups"  : [
-            "616b4ef96fb29ff203f48491",
-            "616b4ee74fb0c1c58625e9c9",
-            "616b50508003db4c84fbe94a"
-        ],
+        "visibleToUserGroups"   : [],
 
-        "assignedUsers"         : [
-            "616b523c3cafa4214f535025 ",
-            "616b524d366c2aa993b56590"
-        ],
+        "assignedUsers"         : [],
 
         "comments"              : []
     },
@@ -60,16 +44,9 @@
         "description"           : "",
         "uri"                   : "https://gitlab.iessanclemente.net/a18franciscogc/proxectos-db.git",
         "createdBy"             : "616b4b58eb372265b9c3101d",
-        "visibleToUserGroups"   : [
-            "616b4ef96fb29ff203f48491",
-            "616b4ee74fb0c1c58625e9c9",
-            "616b50508003db4c84fbe94a"
-        ],
+        "visibleToUserGroups"   : [],
 
-        "assignedUsers"         : [
-            "616b523c3cafa4214f535025 ",
-            "616b524d366c2aa993b56590"
-        ],
+        "assignedUsers"         : [],
 
         "comments"              : []
     },
@@ -84,16 +61,9 @@
         "description"           : "",
         "uri"                   : "https://gitlab.iessanclemente.net/a18franciscogc/proxectos-ui.git",
         "createdBy"             : "616b4b58eb372265b9c3101d",
-        "visibleToUserGroups"   : [
-            "616b4ef96fb29ff203f48491",
-            "616b4ee74fb0c1c58625e9c9",
-            "616b50508003db4c84fbe94a"
-        ],
+        "visibleToUserGroups"   : [],
 
-        "assignedUsers"         : [
-            "616b523c3cafa4214f535025 ",
-            "616b524d366c2aa993b56590"
-        ],
+        "assignedUsers"         : [],
 
         "comments"              : []
     }

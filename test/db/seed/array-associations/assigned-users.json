@@ -1,0 +1,35 @@
+[
+    {
+        "id"                    : "616b523c3cafa4214f535025",
+
+        "assignedUserGroups"    : [
+            "616b4f40395664595aab6292",
+            "616b4ee74fb0c1c58625e9c9"
+        ]
+    },
+    {
+        "id"                    : "616b524d366c2aa993b56590",
+
+        "assignedUserGroups"    : [
+            "616b4ef96fb29ff203f48491",
+            "616b4ee74fb0c1c58625e9c9"
+        ]
+    },
+    {
+        "id"                    : "616b536db0dacf733ea4e230",
+
+        "assignedUserGroups"    : [
+            "616b4e54c4efa9d9ccc5d11c"
+        ]
+    },
+    {
+        "id"                    : "616b536db0dacf733ea4e230",
+
+        "assignedRoles"         : [
+            "616b50a667047be27ff546f8"
+        ],
+        "assignedUserGroups"    : [
+            "616b4bb2d34ebe7bd6e155e2"
+        ]
+    }
+]

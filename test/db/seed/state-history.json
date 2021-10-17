@@ -12,12 +12,7 @@
 
         "createdBy"             : "616b4dd523f371ed0309e105",
 
-        "visibleToUserGroups"   : [
-            "616b5015d32984b61f6ad57e",
-            "616b50508003db4c84fbe94a",
-            "616b4bb2d34ebe7bd6e155e2",
-            "616b4ef96fb29ff203f48491"
-        ],
+        "visibleToUserGroups"   : [],
 
         "assignedStage"         : "616b5190265cafd5a3176e1f"
     },
@@ -32,13 +27,7 @@
         "oldState"              : "616b516b289b9cacbd37547c",
         "newState"              : "734b51a5eff59b6da399f850",
 
-        "visibleToUserGroups"   : [
-            "616b5015d32984b61f6ad57e",
-            "616b50508003db4c84fbe94a",
-            "616b4e54c4efa9d9ccc5d11c",
-            "616b4bb2d34ebe7bd6e155e2",
-            "616b4ef96fb29ff203f48491"
-        ],
+        "visibleToUserGroups"   : [],
 
         "assignedStage"         : "616b5190265cafd5a3176e1f"
     },
@@ -55,12 +44,7 @@
 
         "createdBy"             : "616b4dd523f371ed0309e105",
 
-        "visibleToUserGroups"   : [
-            "616b5015d32984b61f6ad57e",
-            "616b50508003db4c84fbe94a",
-            "616b4bb2d34ebe7bd6e155e2",
-            "616b4ef96fb29ff203f48491"
-        ],
+        "visibleToUserGroups"   : [],
 
         "assignedStage"         : "616b5190265cafd5a3176e1f"
     },
@@ -77,12 +61,7 @@
 
         "createdBy"             : "616b4dd523f371ed0309e105",
 
-        "visibleToUserGroups"  : [
-            "616b5015d32984b61f6ad57e",
-            "616b50508003db4c84fbe94a",
-            "616b4bb2d34ebe7bd6e155e2",
-            "616b4ef96fb29ff203f48491"
-        ],
+        "visibleToUserGroups"   : [],
 
         "assignedStage"         : "616b5190265cafd5a3176e1f"
     }

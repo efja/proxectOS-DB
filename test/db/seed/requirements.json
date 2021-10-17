@@ -18,13 +18,9 @@
 
         "createdBy"         : "616b4df3a2facc1a9c4145a1",
 
-        "adminUsers"        : [
-            "616b524d366c2aa993b56590"
-        ],
+        "adminUsers"        : [],
 
-        "performances"      : [
-            "616b54c49d9c094a09963e20"
-        ],
+        "performances"      : [],
         "repositories"      : [],
         "comments"          : []
     },
@@ -45,16 +41,11 @@
         "priority"          : "616b54dd3f87b251f1f7cfce",
         "type"              : "616b4cb3661a771102c3fc94",
 
-        "adminUsers"        : [
-            "616b524d366c2aa993b56590"
-        ],
-
         "createdBy"         : "616b4df3a2facc1a9c4145a1",
-        "validationUsers"   : [],
 
-        "performances"      : [
-            "616b54ed1c52323aeb4429b0"
-        ],
+        "adminUsers"        : [],
+
+        "performances"      : [],
         "repositories"      : [],
         "comments"          : []
     }

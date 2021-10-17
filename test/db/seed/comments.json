@@ -9,9 +9,7 @@
         "title"                 : "Proba de mensaxe con caducidade",
         "message"               : "Esta mensaxe foi vencida o 21 do 2 do 2021",
         "createdBy"             : "616b4dd523f371ed0309e105",
-        "visibleToUserGroups"  : [
-            "616b4e251dd454892f40a86a"
-        ]
+        "visibleToUserGroups"   : []
     },
     {
         "_id"                   : "616b4fedc0c559d10b709c9b",
@@ -23,8 +21,6 @@
         "title"                 : "",
         "message"               : "",
         "createdBy"             : "616b4dd523f371ed0309e105",
-        "visibleToUserGroups"   : [
-            "616b4e251dd454892f40a86a"
-        ]
+        "visibleToUserGroups"   : []
     }
 ]

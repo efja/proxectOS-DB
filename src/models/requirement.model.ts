@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
-import { BaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./base-entity.model";
 
 import { AssignedUser } from './assigned-user.model';
 import { CommentApp } from './commentapp.model';
@@ -17,7 +17,7 @@ import { User } from "./user.model";
 // ## CLASE Requirement
 // ####################################################################################################
 @Entity()
-export class Requirement extends BaseEntity {
+export class Requirement extends CustomBaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************

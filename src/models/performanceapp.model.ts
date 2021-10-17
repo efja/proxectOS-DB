@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
-import { BaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./base-entity.model";
 
 import { AssignedResource } from './assigned-resoruce.model';
 import { AssignedUser } from './assigned-user.model';
@@ -18,7 +18,7 @@ import { UserGroup } from './user-group.model';
 // ## CLASE PerformanceApp
 // ####################################################################################################
 @Entity()
-export class PerformanceApp extends BaseEntity {
+export class PerformanceApp extends CustomBaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
