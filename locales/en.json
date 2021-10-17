@@ -8,10 +8,19 @@
             "SUCCESS": {
                 "GET_ALL": "All projects fetched successfully",
                 "GET_SINGLE": "Project fetched successfully",
-                "CREATE": "Project created successfully",
-                "UPDATE": "Project updated successfully",
-                "DELETE": "Project deleted successfully"
-            }
+                "CREATE": "Successfully created project",
+				"CREATE_LIST": "Successfully created projects",
+                "UPDATE": "Successfully updated project",
+                "DELETE": "Project removed successfully"
+            },
+			"ERROR": {
+				"GET_ALL": "No projects found",
+				"GET_SINGLE": "The project could not be obtained",
+				"CREATE": "The project could not be created",
+				"CREATE_LIST": "Projects could not be created",
+				"UPDATE": "The project could not be updated",
+				"DELETE": "Could not delete project"
+			}
         }
     }
 }

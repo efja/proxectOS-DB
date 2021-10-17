@@ -9,8 +9,17 @@
 				"GET_ALL": "Tódolos proxectos recuperáronse correctamente",
 				"GET_SINGLE": "Proxecto obtido con éxito",
 				"CREATE": "Proxecto creado con éxito",
+				"CREATE_LIST": "Proxectos creados con éxito",
 				"UPDATE": "Proxecto actualizado con éxito",
 				"DELETE": "Proxecto eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "Non se atopou ningún proxecto",
+				"GET_SINGLE": "O proxecto non se puido obter",
+				"CREATE": "Non se puido crear o proxecto",
+				"CREATE_LIST": "Non se puideron crear os proxectos",
+				"UPDATE": "Non se puido actualizar o proxecto",
+				"DELETE": "Non se puido eliminar o proxecto"
 			}
 		}
 	}
