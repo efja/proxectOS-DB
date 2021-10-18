@@ -1,12 +1,132 @@
 {
-	"WELCOME": "Bienvenidos a {{app}}, versión: {{version}}",
+	"WELCOME": "Bienvenidos la {{app}}, versión: {{version}}",
 	"COMMON": {
 		"CREATED_DATE": "Fecha de creación"
+	},
+	"ASSIGNED_RESOURCE": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Recursos Asignados se han recuperado correctamente",
+				"GET_SINGLE": "Recurso Asignado obtenido con éxito",
+				"CREATE": "Recurso Asignado creado con éxito",
+				"CREATE_LIST": "Recursos Asignados creados con éxito",
+				"UPDATE": "Recurso Asignado actualizado con éxito",
+				"DELETE": "Recurso Asignado eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Recurso Asignado",
+				"GET_SINGLE": "El Recurso Asignado no se ha podido obter",
+				"CREATE": "No se ha podido crear el Recurso Asignado",
+				"CREATE_LIST": "No se han podido crear los Recursos Asignados",
+				"UPDATE": "No se ha podido actualizar el Recurso Asignado",
+				"DELETE": "No se ha podido eliminar el Recurso Asignado"
+			}
+		}
+	},
+	"ASSIGNED_STAGE": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todas las Etapas Asignadas se han recuperado correctamente",
+				"GET_SINGLE": "Etapa Asignada obtenida con éxito",
+				"CREATE": "Etapa Asignada creada con éxito",
+				"CREATE_LIST": "Etapas Asignadas creadas con éxito",
+				"UPDATE": "Etapa Asignada actualizada con éxito",
+				"DELETE": "Etapa Asignada eliminada correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningunha Etapa Asignada",
+				"GET_SINGLE": "La Etapa Asignadanon se puido obter",
+				"CREATE": "No se ha podido crear la Etapa Asignada",
+				"CREATE_LIST": "No se han podido crear las Etapas Asignadas",
+				"UPDATE": "No se ha podido actualizar la Etapa Asignada",
+				"DELETE": "No se ha podido eliminar la Etapa Asignada"
+			}
+		}
+	},
+	"ASSIGNED_USER": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Usuarios Asignados se han recuperado correctamente",
+				"GET_SINGLE": "Usuario Asignado obtenido con éxito",
+				"CREATE": "Usuario Asignado creado con éxito",
+				"CREATE_LIST": "Usuarios Asignados creados con éxito",
+				"UPDATE": "Usuario Asignado actualizado con éxito",
+				"DELETE": "Usuario Asignado eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Usuario Asignado",
+				"GET_SINGLE": "El Usuario Asignado no se ha podido obter",
+				"CREATE": "No se ha podido crear el Usuario Asignado",
+				"CREATE_LIST": "No se han podido crear los Usuarios Asignados",
+				"UPDATE": "No se ha podido actualizar el Usuario Asignado",
+				"DELETE": "No se ha podido eliminar el Usuario Asignado"
+			}
+		}
+	},
+	"COMMENT": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Comentarios se han recuperado correctamente",
+				"GET_SINGLE": "Comentario obtenido con éxito",
+				"CREATE": "Comentario creado con éxito",
+				"CREATE_LIST": "Comentarios creados con éxito",
+				"UPDATE": "Comentario actualizado con éxito",
+				"DELETE": "Comentario eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Comentario",
+				"GET_SINGLE": "El Comentario no se ha podido obter",
+				"CREATE": "No se ha podido crear el Comentario",
+				"CREATE_LIST": "No se han podido crear los Comentarios",
+				"UPDATE": "No se ha podido actualizar el Comentario",
+				"DELETE": "No se ha podido eliminar el Comentario"
+			}
+		}
+	},
+	"PERFORMANCE": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todas las Actuaciones se han recuperado correctamente",
+				"GET_SINGLE": "Actuación obtenida con éxito",
+				"CREATE": "Actuación creada con éxito",
+				"CREATE_LIST": "Actuaciones creadas con éxito",
+				"UPDATE": "Actuación actualizada con éxito",
+				"DELETE": "Actuación eliminada correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningunha Actuación",
+				"GET_SINGLE": "La Actuación no se ha podido obter",
+				"CREATE": "No se ha podido crear la Actuación",
+				"CREATE_LIST": "No se han podido crear las Actuaciones",
+				"UPDATE": "No se ha podido actualizar la Actuación",
+				"DELETE": "No se ha podido eliminar la Actuación"
+			}
+		}
+	},
+	"PRIORITY": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todas las Prioridades se han recuperado correctamente",
+				"GET_SINGLE": "Prioridad obtenida con éxito",
+				"CREATE": "Prioridad creada con éxito",
+				"CREATE_LIST": "Prioridades creadas con éxito",
+				"UPDATE": "Prioridad actualizada con éxito",
+				"DELETE": "Prioridad eliminada correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningunha Prioridad",
+				"GET_SINGLE": "La Prioridad no se ha podido obter",
+				"CREATE": "No se ha podido crear la Prioridad",
+				"CREATE_LIST": "No se han podido crear las Prioridades",
+				"UPDATE": "No se ha podido actualizar la Prioridad",
+				"DELETE": "No se ha podido eliminar la Prioridad"
+			}
+		}
 	},
 	"PROJECT": {
 		"SERVICE": {
 			"SUCCESS": {
-				"GET_ALL": "Todos los proyectos se recuperaron correctamente",
+				"GET_ALL": "Todos los proyectos se han recuperaron correctamente",
 				"GET_SINGLE": "Proyecto obtenido con éxito",
 				"CREATE": "Proyecto creado con éxito",
 				"CREATE_LIST": "Proyectos creados con éxito",
@@ -20,6 +140,226 @@
 				"CREATE": "No se ha podido crear el proyecto",
 				"UPDATE": "No se ha podido actualizar el proyecto",
 				"DELETE": "No se ha podido eliminar el proyecto"
+			}
+		}
+	},
+	"REQUIREMENT": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Requisitos se han recuperado correctamente",
+				"GET_SINGLE": "Requisito obtenido con éxito",
+				"CREATE": "Requisito creado con éxito",
+				"CREATE_LIST": "Requisitos creados con éxito",
+				"UPDATE": "Requisito actualizado con éxito",
+				"DELETE": "Requisito eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Requisito",
+				"GET_SINGLE": "El Requisito no se ha podido obter",
+				"CREATE": "No se ha podido crear el Requisito",
+				"CREATE_LIST": "No se han podido crear los Requisitos",
+				"UPDATE": "No se ha podido actualizar el Requisito",
+				"DELETE": "No se ha podido eliminar el Requisito"
+			}
+		}
+	},
+	"RESOURCE": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Recursos se han recuperado correctamente",
+				"GET_SINGLE": "Recurso obtenido con éxito",
+				"CREATE": "Recurso creado con éxito",
+				"CREATE_LIST": "Recursos creados con éxito",
+				"UPDATE": "Recurso actualizado con éxito",
+				"DELETE": "Recurso eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Recurso",
+				"GET_SINGLE": "El Recurso no se ha podido obter",
+				"CREATE": "No se ha podido crear el Recurso",
+				"CREATE_LIST": "No se han podido crear los Recursos",
+				"UPDATE": "No se ha podido actualizar el Recurso",
+				"DELETE": "No se ha podido eliminar el Recurso"
+			}
+		}
+	},
+	"STAGE": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todas las Etapas se han recuperado correctamente",
+				"GET_SINGLE": "Etapa obtenida con éxito",
+				"CREATE": "Etapa creada con éxito",
+				"CREATE_LIST": "Etapas creadas con éxito",
+				"UPDATE": "Etapa actualizada con éxito",
+				"DELETE": "Etapa eliminada correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningunha Etapa",
+				"GET_SINGLE": "La Etapa no se ha podido obter",
+				"CREATE": "No se ha podido crear la Etapa",
+				"CREATE_LIST": "No se han podido crear las Etapas",
+				"UPDATE": "No se ha podido actualizar la Etapa",
+				"DELETE": "No se ha podido eliminar la Etapa"
+			}
+		}
+	},
+	"STATE": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Estados se han recuperado correctamente",
+				"GET_SINGLE": "Estado obtenido con éxito",
+				"CREATE": "Estado creado con éxito",
+				"CREATE_LIST": "Estados creados con éxito",
+				"UPDATE": "Estado actualizado con éxito",
+				"DELETE": "Estado eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Estado",
+				"GET_SINGLE": "El Estado no se ha podido obter",
+				"CREATE": "No se ha podido crear el Estado",
+				"CREATE_LIST": "No se han podido crear los Estados",
+				"UPDATE": "No se ha podido actualizar el Estado",
+				"DELETE": "No se ha podido eliminar el Estado"
+			}
+		}
+	},
+	"STATE_HISTORY": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Históricos de Estados se han recuperado correctamente",
+				"GET_SINGLE": "Histórico de Estado obtenido con éxito",
+				"CREATE": "Histórico de Estado creado con éxito",
+				"CREATE_LIST": "Históricos de Estados creados con éxito",
+				"UPDATE": "Histórico de Estado actualizado con éxito",
+				"DELETE": "Histórico de Estado eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Histórico de Estado",
+				"GET_SINGLE": "El Histórico de Estado no se ha podido obter",
+				"CREATE": "No se ha podido crear el Histórico de Estado",
+				"CREATE_LIST": "No se han podido crear los Históricos de Estados",
+				"UPDATE": "No se ha podido actualizar el Histórico de Estado",
+				"DELETE": "No se ha podido eliminar el Histórico de Estado"
+			}
+		}
+	},
+	"TYPE": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Tipos se han recuperado correctamente",
+				"GET_SINGLE": "Tipo obtenido con éxito",
+				"CREATE": "Tipo creado con éxito",
+				"CREATE_LIST": "Tipos creados con éxito",
+				"UPDATE": "Tipo actualizado con éxito",
+				"DELETE": "Tipo eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Tipo",
+				"GET_SINGLE": "El Tipo no se ha podido obter",
+				"CREATE": "No se ha podido crear el Tipo",
+				"CREATE_LIST": "No se han podido crear los Tipos",
+				"UPDATE": "No se ha podido actualizar el Tipo",
+				"DELETE": "No se ha podido eliminar el Tipo"
+			}
+		}
+	},
+	"USER": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Usuarios se han recuperado correctamente",
+				"GET_SINGLE": "Usuario obtenido con éxito",
+				"CREATE": "Usuario creado con éxito",
+				"CREATE_LIST": "Usuarios creados con éxito",
+				"UPDATE": "Usuario actualizado con éxito",
+				"DELETE": "Usuario eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Usuario",
+				"GET_SINGLE": "El Usuario no se ha podido obter",
+				"CREATE": "No se ha podido crear el Usuario",
+				"CREATE_LIST": "No se han podido crear los Usuarios",
+				"UPDATE": "No se ha podido actualizar el Usuario",
+				"DELETE": "No se ha podido eliminar el Usuario"
+			}
+		}
+	},
+	"USER_CONTACT": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Contactos de Usuarios se han recuperado correctamente",
+				"GET_SINGLE": "Contacto de Usuario obtenido con éxito",
+				"CREATE": "Contacto de Usuario creado con éxito",
+				"CREATE_LIST": "Contactos de Usuarios creados con éxito",
+				"UPDATE": "Contacto de Usuario actualizado con éxito",
+				"DELETE": "Contacto de Usuario eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Contacto de Usuario",
+				"GET_SINGLE": "El Contacto de Usuario no se ha podido obter",
+				"CREATE": "No se ha podido crear el Contacto de Usuario",
+				"CREATE_LIST": "No se han podido crear los Contactos de Usuarios",
+				"UPDATE": "No se ha podido actualizar el Contacto de Usuario",
+				"DELETE": "No se ha podido eliminar el Contacto de Usuario"
+			}
+		}
+	},
+	"USER_CONTACT_TYPE": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Tipos Contacto de Usuario se han recuperado correctamente",
+				"GET_SINGLE": "Tipo Contacto de Usuario obtenido con éxito",
+				"CREATE": "Tipo Contacto de Usuario creado con éxito",
+				"CREATE_LIST": "Tipos Contacto de Usuario creados con éxito",
+				"UPDATE": "Tipo Contacto de Usuario actualizado con éxito",
+				"DELETE": "Tipo Contacto de Usuario eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Tipo Contacto de Usuario",
+				"GET_SINGLE": "El Tipo Contacto de Usuario no se ha podido obter",
+				"CREATE": "No se ha podido crear el Tipo Contacto de Usuario",
+				"CREATE_LIST": "No se han podido crear los Tipos Contacto de Usuario",
+				"UPDATE": "No se ha podido actualizar el Tipo Contacto de Usuario",
+				"DELETE": "No se ha podido eliminar el Tipo Contacto de Usuario"
+			}
+		}
+	},
+	"USER_GROUP": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Grupo de Usuarios se han recuperado correctamente",
+				"GET_SINGLE": "Grupo de Usuario obtenido con éxito",
+				"CREATE": "Grupos de Usuarios creado con éxito",
+				"CREATE_LIST": "Grupo de Usuarios creados con éxito",
+				"UPDATE": "Grupo de Usuario actualizado con éxito",
+				"DELETE": "Grupo de Usuario eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Grupo de Usuario",
+				"GET_SINGLE": "El Grupo de Usuario no se ha podido obter",
+				"CREATE": "No se ha podido crear el Grupo de Usuario",
+				"CREATE_LIST": "No se han podido crear los Grupos de Usuarios",
+				"UPDATE": "No se ha podido actualizar el Grupo de Usuario",
+				"DELETE": "No se ha podido eliminar el Grupo de Usuario"
+			}
+		}
+	},
+	"USER_SCHEDULE": {
+		"SERVICE": {
+			"SUCCESS": {
+				"GET_ALL": "Todos los Calendarios de Usuario se han recuperado correctamente",
+				"GET_SINGLE": "Calendario de Usuario obtenido con éxito",
+				"CREATE": "Calendario de Usuario creado con éxito",
+				"CREATE_LIST": "Calendarios de Usuario creados con éxito",
+				"UPDATE": "Calendario de Usuario actualizado con éxito",
+				"DELETE": "Calendario de Usuario eliminado correctamente"
+			},
+			"ERROR": {
+				"GET_ALL": "No se ha encontrado ningún Calendario de Usuario",
+				"GET_SINGLE": "El Calendario de Usuario no se ha podido obter",
+				"CREATE": "No se ha podido crear el Calendario de Usuario",
+				"CREATE_LIST": "No se han podido crear los Calendarios de Usuario",
+				"UPDATE": "No se ha podido actualizar el Calendario de Usuario",
+				"DELETE": "No se ha podido eliminar el Calendario de Usuario"
 			}
 		}
 	}
