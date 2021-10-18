@@ -1,0 +1,107 @@
+[
+    {
+        "_id"               : "616b4dbb9f7ee9e407c28a1b",
+        "id"                : "616b4dbb9f7ee9e407c28a1b",
+        "createdAt"         : "2021-01-25T07:05:37.000+01:00",
+        "updatedAt"         : "2021-01-25T07:05:37.000+01:00",
+
+        "name"              : "Marta",
+        "firstSurname"      : "Calderón",
+        "secondSurname"     : "Ramírez",
+
+        "login"             : "martacr",
+        "password"          : "abc123.",
+
+        "isCustomer"        : true,
+
+        "salary"            : 0,
+        "flexibleSchedule"  : false,
+        "vacantions"        : [],
+
+        "userSchedule"      : null,
+
+        "contacts"          : [],
+
+        "defaultUserGroups" : []
+    },
+    {
+        "_id"               : "616b4dd523f371ed0309e105",
+        "id"                : "616b4dd523f371ed0309e105",
+        "createdAt"         : "2021-01-25T07:05:37.000+01:00",
+        "updatedAt"         : "2021-01-25T07:05:37.000+01:00",
+
+        "name"              : "Gerardo",
+        "firstSurname"      : "Tovar",
+        "secondSurname"     : "Lozano",
+
+        "login"             : "gerardotl",
+        "password"          : "abc123.",
+
+        "isCustomer"        : false,
+
+        "salary"            : 38564,
+        "flexibleSchedule"  : true,
+        "vacantions"        : [
+            "2021-08-12T00:00:00.000+02:00",
+            "2021-08-134T00:00:00.000+02:00",
+            "2021-08-16T00:00:00.000+02:00",
+            "2021-08-17T00:00:00.000+02:00"
+        ],
+
+        "userSchedule"      : "616b4e54c4efa9d9caa5d11c",
+
+        "contacts"          : [],
+
+        "defaultUserGroups" : []
+    },
+    {
+        "_id"               : "616b4df3a2facc1a9c4145a1",
+        "id"                : "616b4df3a2facc1a9c4145a1",
+        "createdAt"         : "2021-01-25T07:05:37.000+01:00",
+        "updatedAt"         : "2021-01-25T07:05:37.000+01:00",
+
+        "name"              : "Ester",
+        "firstSurname"      : "Henríquez",
+        "secondSurname"     : "Lucero",
+
+        "login"             : "esterhl",
+        "password"          : "abc123.",
+
+        "isCustomer"        : false,
+
+        "salary"            : 17752,
+        "flexibleSchedule"  : false,
+        "vacantions"        : [],
+
+        "userSchedule"      : "616b4e96b77dda30e702f720",
+
+        "contacts"          : [],
+
+        "defaultUserGroups" : []
+    },
+    {
+        "_id"               : "616b4e0bd149c8f6632ac84a",
+        "id"                : "616b4e0bd149c8f6632ac84a",
+        "createdAt"         : "2021-01-25T07:05:37.000+01:00",
+        "updatedAt"         : "2021-01-25T07:05:37.000+01:00",
+
+        "name"              : "Mariana",
+        "firstSurname"      : "Armijo",
+        "secondSurname"     : "Esparza",
+
+        "login"             : "marianaae",
+        "password"          : "abc123.",
+
+        "isCustomer"        : false,
+
+        "salary"            : 23596,
+        "flexibleSchedule"  : true,
+        "vacantions"        : [],
+
+        "userSchedule"      : "616b4e96b77dda30e702f720",
+
+        "contacts"          : [],
+
+        "defaultUserGroups" : []
+    }
+]

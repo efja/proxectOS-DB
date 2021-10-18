@@ -1,0 +1,28 @@
+[
+    {
+        "_id"               : "",
+        "id"                : "",
+        "createdAt"         : "",
+        "updatedAt"         : "",
+
+        "startDate"         : "",
+        "finishDate"        : "",
+        "targetStartDate"   : "",
+        "targetFinishDate"  : "",
+
+        "name"              : "",
+        "description"       : "",
+
+        "assignedStages"    : [],
+
+        "createdBy"         : {},
+
+        "adminUsers"        : [],
+
+        "productOwner"      : {},
+
+        "requirements"      : [],
+        "repositories"      : [],
+        "comments"          : []
+    }
+]

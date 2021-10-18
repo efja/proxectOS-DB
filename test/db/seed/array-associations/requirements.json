@@ -1,0 +1,24 @@
+[
+    {
+        "id"                : "616b5398fe14967a5820e0fc",
+
+        "adminUsers"        : [
+            "616b524d366c2aa993b56590"
+        ],
+
+        "performances"      : [
+            "616b54c49d9c094a09963e20"
+        ]
+    },
+    {
+        "id"                : "616b53c2f6b1ac380d5e7f66",
+
+        "adminUsers"        : [
+            "616b524d366c2aa993b56590"
+        ],
+
+        "performances"      : [
+            "616b54ed1c52323aeb4429b0"
+        ]
+    }
+]

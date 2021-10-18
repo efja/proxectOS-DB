@@ -1,0 +1,21 @@
+[
+    {
+        "_id"               : "",
+        "id"                : "",
+        "createdAt"         : "",
+        "updatedAt"         : "",
+
+        "startDate"         : "",
+        "finishDate"        : "",
+        "targetStartDate"   : "",
+        "targetFinishDate"  : "",
+
+        "createdBy"         : {},
+
+        "stage"             : {},
+
+        "currentState"      : {},
+
+        "comments"          : []
+    }
+]

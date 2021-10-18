@@ -1,0 +1,14 @@
+[
+    {
+        "_id"           : "",
+        "id"            : "",
+        "createdAt"     : "",
+        "updatedAt"     : "",
+
+        "description"   : "",
+
+        "worksWeekends" : false,
+        "weeklyHours"   : 40,
+        "holidays"      : []
+    }
+]

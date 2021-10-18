@@ -1,0 +1,19 @@
+[
+    {
+        "_id"                   : "",
+        "id"                    : "",
+        "createdAt"             : "",
+        "updatedAt"             : "",
+
+        "log"                   : "",
+
+        "oldState"              : {},
+        "newState"              : {},
+
+        "createdBy"             : {},
+
+        "visibleToUserGroups"   : [],
+
+        "assignedStage"         : {}
+    }
+]

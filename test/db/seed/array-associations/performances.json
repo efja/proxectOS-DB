@@ -1,0 +1,59 @@
+[
+    {
+        "id"                        : "616b54c49d9c094a09963e20",
+
+        "assignedStages"            : [
+            "616b5190265cafd5a3176e1f",
+            "616b58798d0b95f25fbf4206"
+        ],
+
+        "assignedUsers"             : [
+            "616b536db0dacf733ea4e230",
+            "616b524d366c2aa993b56590"
+        ],
+
+        "visibleToUserGroups"       : [
+            "616b50508003db4c84fbe94a",
+            "616b4bb2d34ebe7bd6e155e2",
+            "616b4ee74fb0c1c58625e9c9",
+            "616b4ef96fb29ff203f48491"
+        ]
+    },
+    {
+        "id"                        : "616b54ed1c52323aeb4429b0",
+
+        "performances"              : [
+            "616b58efd04d339fdd236c16"
+        ],
+        "assignedStages"            : [
+            "616b586b4086679f2dc6744c"
+        ],
+
+        "assignedUsers"             : [
+            "616b536db0dacf733ea4e230",
+            "616b524d366c2aa993b56590"
+        ],
+
+        "visibleToUserGroups"       : [
+            "616b50508003db4c84fbe94a",
+            "616b4bb2d34ebe7bd6e155e2",
+            "616b4ee74fb0c1c58625e9c9",
+            "616b4ef96fb29ff203f48491"
+        ]
+    },
+    {
+        "id"                        : "616b58efd04d339fdd236c16",
+
+        "assignedUsers"             : [
+            "616b536db0dacf733ea4e230",
+            "616b524d366c2aa993b56590"
+        ],
+
+        "visibleToUserGroups"       : [
+            "616b50508003db4c84fbe94a",
+            "616b4bb2d34ebe7bd6e155e2",
+            "616b4ee74fb0c1c58625e9c9",
+            "616b4ef96fb29ff203f48491"
+        ]
+    }
+]

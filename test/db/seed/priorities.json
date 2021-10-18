@@ -1,0 +1,38 @@
+[
+    {
+        "_id"           : "616b53b04be617848ac51d42",
+        "id"            : "616b53b04be617848ac51d42",
+        "createdAt"     : "2021-10-11T10:23:05.000+02:00",
+        "updatedAt"     : "2021-10-11T10:23:05.000+02:00",
+
+        "name"          : "Alta",
+        "description"   : "Este apartado urxe rematalo o antes posible."
+    },
+    {
+        "_id"           : "616b55152dd82617a3cdf818",
+        "id"            : "616b55152dd82617a3cdf818",
+        "createdAt"     : "2021-10-11T10:23:05.000+02:00",
+        "updatedAt"     : "2021-10-11T10:23:05.000+02:00",
+
+        "name"          : "Media",
+        "description"   : "Este apartado ten preferencia."
+    },
+    {
+        "_id"           : "616b55248eaad55a06c73607",
+        "id"            : "616b55248eaad55a06c73607",
+        "createdAt"     : "2021-10-11T10:23:05.000+02:00",
+        "updatedAt"     : "2021-10-11T10:23:05.000+02:00",
+
+        "name"          : "Baixa",
+        "description"   : "Este apartado non é urxente rematar con el."
+    },
+    {
+        "_id"           : "616b54dd3f87b251f1f7cfce",
+        "id"            : "616b54dd3f87b251f1f7cfce",
+        "createdAt"     : "2021-10-11T10:23:05.000+02:00",
+        "updatedAt"     : "2021-10-11T10:23:05.000+02:00",
+
+        "name"          : "Por defecto",
+        "description"   : "Este apartado non ten unha prioridade asignada."
+    }
+]

@@ -1,0 +1,32 @@
+[
+    {
+        "id"                : "616b5190265cafd5a3176e1f",
+
+        "validationUsers"   : [
+            "616b4dbb9f7ee9e407c28a1b"
+        ]
+    },
+    {
+        "id"                : "616b586b4086679f2dc6744c",
+
+        "validationUsers"   : [
+            "616b4dbb9f7ee9e407c28a1b"
+        ]
+    },
+    {
+        "id"                : "616b58798d0b95f25fbf4206",
+
+        "validationUsers"   : [
+            "616b4dd523f371ed0309e105",
+            "616b4dbb9f7ee9e407c28a1b"
+        ]
+    },
+    {
+        "id"                : "616b588c7188f6fd639fbf14",
+
+        "validationUsers"   : [
+            "616b4dd523f371ed0309e105",
+            "616b4dbb9f7ee9e407c28a1b"
+        ]
+    }
+]

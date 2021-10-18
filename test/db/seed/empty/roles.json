@@ -1,0 +1,17 @@
+[
+    {
+        "_id"           : "",
+        "id"            : "",
+        "createdAt"     : "",
+        "updatedAt"     : "",
+
+        "name"          : "",
+        "description"   : "",
+        "isSystemAdmin" : false,
+
+        "create"        : false,
+        "delete"        : false,
+        "read"          : false,
+        "update"        : false
+    }
+]

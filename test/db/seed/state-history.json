@@ -1,0 +1,68 @@
+[
+    {
+        "_id"                   : "616b5155e60062e408935707",
+        "id"                    : "616b5155e60062e408935707",
+        "createdAt"             : "2021-04-11T05:43:46.000+02:00",
+        "updatedAt"             : "2021-04-11T05:43:46.000+02:00",
+
+        "log"                   : "Creación da tarefa",
+
+        "oldState"              : null,
+        "newState"              : "616b516b289b9cacbd37547c",
+
+        "createdBy"             : "616b4dd523f371ed0309e105",
+
+        "visibleToUserGroups"   : [],
+
+        "assignedStage"         : "616b5190265cafd5a3176e1f"
+    },
+    {
+        "_id"                   : "616b51a5eff59b6da399f850",
+        "id"                    : "616b51a5eff59b6da399f850",
+        "createdAt"             : "2021-05-02T05:43:46.000+02:00",
+        "updatedAt"             : "2021-05-02T05:43:46.000+02:00",
+
+        "log"                   : "Traballando a topito",
+
+        "oldState"              : "616b516b289b9cacbd37547c",
+        "newState"              : "734b51a5eff59b6da399f850",
+
+        "visibleToUserGroups"   : [],
+
+        "assignedStage"         : "616b5190265cafd5a3176e1f"
+    },
+    {
+        "_id"                   : "616b51df00edfe209655a44e",
+        "id"                    : "616b51df00edfe209655a44e",
+        "createdAt"             : "2021-05-18T05:43:46.000+02:00",
+        "updatedAt"             : "2021-05-18T05:43:46.000+02:00",
+
+        "log"                   : "Hai que parar a tomar un café",
+
+        "oldState"              : "734b51a5eff59b6da399f850",
+        "newState"              : "616b51f99f0cb221e580e2d6",
+
+        "createdBy"             : "616b4dd523f371ed0309e105",
+
+        "visibleToUserGroups"   : [],
+
+        "assignedStage"         : "616b5190265cafd5a3176e1f"
+    },
+    {
+        "_id"                   : "616b5223c6b5226ce892d1e5",
+        "id"                    : "616b5223c6b5226ce892d1e5",
+        "createdAt"             : "2021-05-28T05:43:46.000+02:00",
+        "updatedAt"             : "2021-05-28T05:43:46.000+02:00",
+
+        "log"                   : "Hai que parar antes de tomalo café que se escapan os clientes!!!",
+
+        "oldState"              : "616b51f99f0cb221e580e2d6",
+        "newState"              : "616b520a74fe6e519606f0e3",
+
+        "createdBy"             : "616b4dd523f371ed0309e105",
+
+        "visibleToUserGroups"   : [],
+
+        "assignedStage"         : "616b5190265cafd5a3176e1f"
+    }
+]

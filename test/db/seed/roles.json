@@ -1,0 +1,107 @@
+[
+    {
+        "_id"           : "616b5035a068860b800f6949",
+        "id"            : "616b5035a068860b800f6949",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
+
+        "name"          : "Administrador Sistema",
+        "description"   : "Control total do sistema.",
+        "isSystemAdmin" : true,
+
+        "create"        : true,
+        "delete"        : true,
+        "read"          : true,
+        "update"        : true
+    },
+    {
+        "_id"           : "616b50a667047be27ff546f8",
+        "id"            : "616b50a667047be27ff546f8",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
+
+        "name"          : "Administrador",
+        "description"   : "Control total.",
+        "isSystemAdmin" : false,
+
+        "create"        : true,
+        "delete"        : true,
+        "read"          : true,
+        "update"        : true
+    },
+    {
+        "_id"           : "616b55f2212adb1fef238f8e",
+        "id"            : "616b55f2212adb1fef238f8e",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
+
+        "name"          : "Só lectura",
+        "description"   : "Só pode ver a información do elemento.",
+        "isSystemAdmin" : false,
+
+        "create"        : false,
+        "delete"        : false,
+        "read"          : true,
+        "update"        : false
+    },
+    {
+        "_id"           : "616b50df1b72f5d9539703a7",
+        "id"            : "616b50df1b72f5d9539703a7",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
+
+        "name"          : "Actualización",
+        "description"   : "Pode ver e actualizar a información do elemento.",
+        "isSystemAdmin" : false,
+
+        "create"        : false,
+        "delete"        : false,
+        "read"          : true,
+        "update"        : true
+    },
+    {
+        "_id"           : "616b50eeca13b1e1550caca1",
+        "id"            : "616b50eeca13b1e1550caca1",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
+
+        "name"          : "Creación",
+        "description"   : "Pode crear un novo elemento,",
+        "isSystemAdmin" : false,
+
+        "create"        : true,
+        "delete"        : false,
+        "read"          : false,
+        "update"        : false
+    },
+    {
+        "_id"           : "616b560350725e692fe66a31",
+        "id"            : "616b560350725e692fe66a31",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
+
+        "name"          : "Eliminación",
+        "description"   : "Pode ver a información do elemento e borralo.",
+        "isSystemAdmin" : false,
+
+        "create"        : false,
+        "delete"        : true,
+        "read"          : true,
+        "update"        : false
+    },
+    {
+        "_id"           : "616b50bb4ad767564d05653d",
+        "id"            : "616b50bb4ad767564d05653d",
+        "createdAt"     : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"     : "2021-09-29T22:51:54.000+02:00",
+
+        "name"          : "Sen permisos",
+        "description"   : "Destinado ó grupo Todos para evitar asignar permisos accidentalmente.",
+        "isSystemAdmin" : false,
+
+        "create"        : false,
+        "delete"        : false,
+        "read"          : false,
+        "update"        : false
+    }
+]

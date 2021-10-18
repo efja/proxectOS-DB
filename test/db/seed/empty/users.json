@@ -1,0 +1,27 @@
+[
+    {
+        "_id"               : "",
+        "id"                : "",
+        "createdAt"         : "",
+        "updatedAt"         : "",
+
+        "name"              : "",
+        "firstSurname"      : "",
+        "secondSurname"     : "",
+
+        "login"             : "",
+        "password"          : "",
+
+        "isCustomer"        : false,
+
+        "salary"            : 0,
+        "flexibleSchedule"  : true,
+        "vacantions"        : [],
+
+        "userSchedule"      : {},
+
+        "contacts"          : [],
+
+        "defaultUserGroups" : []
+    }
+]

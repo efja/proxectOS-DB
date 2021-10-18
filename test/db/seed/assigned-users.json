@@ -1,0 +1,46 @@
+[
+    {
+        "_id"                   : "616b523c3cafa4214f535025",
+        "id"                    : "616b523c3cafa4214f535025",
+        "createdAt"             : "2020-12-23T20:22:47.000+01:00",
+        "updatedAt"             : "2020-12-23T20:22:47.000+01:00",
+        "createdBy"             : "616b4b58eb372265b9c3101d",
+
+        "assignedUser"          : "616b4e0bd149c8f6632ac84a",
+        "assignedRoles"         : [],
+        "assignedUserGroups"    : []
+    },
+    {
+        "_id"                   : "616b524d366c2aa993b56590",
+        "id"                    : "616b524d366c2aa993b56590",
+        "createdAt"             : "2020-12-23T20:22:47.000+01:00",
+        "updatedAt"             : "2020-12-23T20:22:47.000+01:00",
+        "createdBy"             : "616b4b58eb372265b9c3101d",
+
+        "assignedUser"          : "616b4df3a2facc1a9c4145a1",
+        "assignedRoles"         : [],
+        "assignedUserGroups"    : []
+    },
+    {
+        "_id"                   : "616b536db0dacf733ea4e230",
+        "id"                    : "616b536db0dacf733ea4e230",
+        "createdAt"             : "2020-12-23T20:22:47.000+01:00",
+        "updatedAt"             : "2020-12-23T20:22:47.000+01:00",
+        "createdBy"             : "616b4b58eb372265b9c3101d",
+
+        "assignedUser"          : "616b4dbb9f7ee9e407c28a1b",
+        "assignedRoles"         : [],
+        "assignedUserGroups"    : []
+    },
+    {
+        "_id"                   : "616b53800be709e632d13214",
+        "id"                    : "616b53800be709e632d13214",
+        "createdAt"             : "2020-12-23T20:22:47.000+01:00",
+        "updatedAt"             : "2020-12-23T20:22:47.000+01:00",
+        "createdBy"             : "616b4b58eb372265b9c3101d",
+
+        "assignedUser"          : "616b4dd523f371ed0309e105",
+        "assignedRoles"         : [],
+        "assignedUserGroups"    : []
+    }
+]

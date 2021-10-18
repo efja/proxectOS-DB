@@ -1,0 +1,16 @@
+[
+    {
+        "id"                    : "616b4fdafe3f5d99619aeb75",
+
+        "visibleToUserGroups"  : [
+            "616b4e251dd454892f40a86a"
+        ]
+    },
+    {
+        "id"                    : "616b4fedc0c559d10b709c9b",
+
+        "visibleToUserGroups"   : [
+            "616b4e251dd454892f40a86a"
+        ]
+    }
+]

@@ -1,0 +1,137 @@
+[
+    {
+        "_id"           : "616b4bedf3b1a02bb182fab8",
+        "id"            : "616b4bedf3b1a02bb182fab8",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Atualización",
+        "description"   : "Mellora dunha característica ou especificiación."
+    },
+    {
+        "_id"           : "616b4c2cbcdddfb9f32e8220",
+        "id"            : "616b4c2cbcdddfb9f32e8220",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Ampliación",
+        "description"   : "Ampliación das funcionalidades orixinais dunha característica ou especificación."
+    },
+    {
+        "_id"           : "616b4c4284bceba467c30f97",
+        "id"            : "616b4c4284bceba467c30f97",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Dependencia",
+        "description"   : "Especificación que outras partes necesitan para funcionar."
+    },
+    {
+        "_id"           : "616b4c5bba378330b57ec5d1",
+        "id"            : "616b4c5bba378330b57ec5d1",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Dependencia externa",
+        "description"   : "Requerimento de recursos alleos que se precisan para funcionar."
+    },
+    {
+        "_id"           : "616b4c713212cc19fc5db66f",
+        "id"            : "616b4c713212cc19fc5db66f",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Erro funcional",
+        "description"   : "Erro na execución dalgunha solución implementada."
+    },
+    {
+        "_id"           : "616b4c712400f44f0c0586e9",
+        "id"            : "616b4c712400f44f0c0586e9",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Erro de deseño",
+        "description"   : "Erro probocado por unha mala análise dunha característica ou especificación."
+    },
+    {
+        "_id"           : "616b4cb3661a771102c3fc94",
+        "id"            : "616b4cb3661a771102c3fc94",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Especificación",
+        "description"   : "Especificación que debe implementarse no proxecto."
+    },
+    {
+        "_id"           : "616b4cdb604e68cb6380d12e",
+        "id"            : "616b4cdb604e68cb6380d12e",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Especificación Nova",
+        "description"   : ""
+    },
+    {
+        "_id"           : "616b4ced55fe504bad934f1a",
+        "id"            : "616b4ced55fe504bad934f1a",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Mellora",
+        "description"   : "Característica ou especificación que mellorará o proxecto."
+    },
+    {
+        "_id"           : "616b4d0864e9d8c73ea7c5a7",
+        "id"            : "616b4d0864e9d8c73ea7c5a7",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Optimización",
+        "description"   : "Refactorización destinada a mellorar o rendemento ou o consumo de recursos dunha solución xa implementada."
+    },
+    {
+        "_id"           : "616b4d08134885f6c71d9180",
+        "id"            : "616b4d08134885f6c71d9180",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Refactorización",
+        "description"   : "Cambio do código e/ou o deseño dun código xa implementado."
+    },
+    {
+        "_id"           : "616b4d2d7c68ec2f05340ca8",
+        "id"            : "616b4d2d7c68ec2f05340ca8",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Semente de datos",
+        "description"   : "Datos para precargar o sistema con información por defecto ou habitual."
+    },
+    {
+        "_id"           : "616b4d4a788fabc70aae3a32",
+        "id"            : "616b4d4a788fabc70aae3a32",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Semente de datos de probas",
+        "description"   : "Datos para precargar o sistema con información destinada a facer Testing."
+    },
+    {
+        "_id"           : "616b4d6f5fd6829746b592e6",
+        "id"            : "616b4d6f5fd6829746b592e6",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Test - sistema",
+        "description"   : "Comprobacións para a comprobación do correcto funcionamento do sistema"
+    },
+    {
+        "_id"           : "616b4d6f080b0df18aab30d4",
+        "id"            : "616b4d6f080b0df18aab30d4",
+        "createdAt"     : "2021-09-30T12:00:45.000+02:00",
+        "updatedAt"     : "2021-09-30T12:00:45.000+02:00",
+
+        "name"          : "Test - unitario",
+        "description"   : "Comprobación dunha parate do código"
+    }
+]

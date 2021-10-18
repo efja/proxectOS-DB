@@ -1,0 +1,82 @@
+[
+    {
+        "_id"               : "616b5190265cafd5a3176e1f",
+        "id"                : "616b5190265cafd5a3176e1f",
+        "createdAt"         : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"         : "2021-09-29T22:51:54.000+02:00",
+
+        "startDate"         : "2021-09-30T11:49:50.000+02:00",
+        "finishDate"        : null,
+        "targetStartDate"   : "2021-09-30T08:00:00.000+02:00",
+        "targetFinishDate"  : "2021-10-03T08:00:00.000+02:00",
+
+        "createdBy"         : "616b4df3a2facc1a9c4145a1",
+
+        "stage"             : "616b561b41663da69a3fc807",
+
+        "currentState"      : "616b520a74fe6e519606f0e3",
+
+        "validationUsers"   : [],
+        "comments"          : []
+    },
+    {
+        "_id"               : "616b586b4086679f2dc6744c",
+        "id"                : "616b586b4086679f2dc6744c",
+        "createdAt"         : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"         : "2021-09-29T22:51:54.000+02:00",
+
+        "startDate"         : "2021-06-21T23:07:03.000+02:00",
+        "finishDate"        : "2021-06-21T23:07:03.000+02:00",
+        "targetStartDate"   : "2021-03-01T08:00:00.000+01:00",
+        "targetFinishDate"  : "2021-03-01T08:00:00.000+01:00",
+
+        "createdBy"         : "616b4df3a2facc1a9c4145a1",
+
+        "stage"             : "616b562a63f7e081cdba8841",
+
+        "currentState"      : "616b520a74fe6e519606f0e3",
+
+        "validationUsers"   : [],
+        "comments"          : []
+    },
+    {
+        "_id"               : "616b58798d0b95f25fbf4206",
+        "id"                : "616b58798d0b95f25fbf4206",
+        "createdAt"         : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"         : "2021-09-29T22:51:54.000+02:00",
+
+        "startDate"         : "2021-06-21T23:07:03.000+02:00",
+        "finishDate"        : "2021-06-21T23:07:03.000+02:00",
+        "targetStartDate"   : "2021-03-01T08:00:00.000+01:00",
+        "targetFinishDate"  : "2021-03-01T08:00:00.000+01:00",
+
+        "createdBy"         : "616b4df3a2facc1a9c4145a1",
+
+        "stage"             : "616b563a41cecfff2b4dabe2",
+
+        "currentState"      : "616b520a74fe6e519606f0e3",
+
+        "validationUsers"   : [],
+        "comments"          : []
+    },
+    {
+        "_id"               : "616b588c7188f6fd639fbf14",
+        "id"                : "616b588c7188f6fd639fbf14",
+        "createdAt"         : "2021-09-29T22:51:54.000+02:00",
+        "updatedAt"         : "2021-09-29T22:51:54.000+02:00",
+
+        "startDate"         : "2021-06-21T23:07:03.000+02:00",
+        "finishDate"        : "2021-06-21T23:07:03.000+02:00",
+        "targetStartDate"   : "2021-03-01T08:00:00.000+01:00",
+        "targetFinishDate"  : "2021-03-01T08:00:00.000+01:00",
+
+        "createdBy"         : "616b4df3a2facc1a9c4145a1",
+
+        "stage"             : "616b563a41cecfff2b4dabe2",
+
+        "currentState"      : "616b5762f3b9e15088f87b19",
+
+        "validationUsers"   : [],
+        "comments"          : []
+    }
+]

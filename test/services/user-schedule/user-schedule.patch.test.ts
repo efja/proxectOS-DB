@@ -1,0 +1,123 @@
+// ####################################################################################################
+// ## IMPORTACIÓNS
+// ####################################################################################################
+import i18next from "i18next";
+import HttpStatus from 'http-status-codes';
+import * as jsonpatch from 'fast-json-patch';
+
+import { UserSchedule } from '../../../src/models/user-schedule.model';
+
+import {
+    API_BASE,
+    dataList,
+    db,
+    FAKE_TEXT,
+    request,
+} from "../commons";
+
+// ####################################################################################################
+// ## TESTS GROUPS
+// ####################################################################################################
+describe('Probas DATOS API - UserSchedules (PATCH)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "userSchedules";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.userSchedules);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+	});
+
+	afterAll(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`Actualizar UserSchedule: <${dataList.userSchedules[0].id}>`, async() => {
+        const userSchedule0 = dataList.userSchedules[0] as UserSchedule;
+        const userSchedule1 = dataList.userSchedules[0] as UserSchedule;
+
+        // Modificase o modelo UserSchedule
+        userSchedule1.description = userSchedule1.description + FAKE_TEXT;
+
+        // Xerase o objexecto tipo HTTP PATCH
+        const objPatch = jsonpatch.compare(userSchedule0, userSchedule1);
+
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/`).send(objPatch);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.OK);
+        expect(code).toBe(HttpStatus.OK);
+        expect(data).toBeDefined();
+
+        // ** Datos cambiados
+        expect(data.description).toBeDefined();
+        expect(data.description).not.toBe(userSchedule0.description);
+        expect(data.description).toBe(userSchedule1.description);
+
+        // ** Datos NON cambiados
+        // Comprobanse algúns datos obrigatorios
+        expect(data.id).toBeDefined();
+        expect(data.id).toBe(userSchedule0.id);
+        expect(data.id).toBe(userSchedule1.id);
+
+        expect(data.worksWeekends).toBeDefined();
+        expect(data.worksWeekends).toBe(userSchedule0.worksWeekends);
+        expect(data.worksWeekends).toBe(userSchedule1.worksWeekends);
+
+        expect(message).toBe(i18next.t('USER_SCHEDULE.SERVICE.SUCCESS.UPDATE'));
+    });
+
+    test(`Actualizar UserSchedule con datos erróneos:`, async() => {
+        const userSchedule0 = dataList.userSchedules[0] as UserSchedule;
+        const userSchedule1 = dataList.userSchedules[0] as UserSchedule;
+
+        // Modificase o modelo UserSchedule
+        userSchedule1.description = userSchedule1.description + FAKE_TEXT;
+
+        // Xerase o objexecto tipo HTTP PATCH
+        const objPatch = jsonpatch.compare(userSchedule0, userSchedule1);
+
+        objPatch[0].path = FAKE_TEXT; // Dato incorrecto
+
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/`).send(objPatch);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(message).toBe(i18next.t('USER_SCHEDULE.SERVICE.ERROR.UPDATE'));
+    });
+});

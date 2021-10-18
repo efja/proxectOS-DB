@@ -1,0 +1,26 @@
+[
+    {
+        "_id"               : "616b553aca22fab83e008975",
+        "id"                : "616b553aca22fab83e008975",
+        "createdAt"         : "2020-03-28T16:34:45.000+02:00",
+        "updatedAt"         : "2021-10-15T01:00:02.000+02:00",
+
+        "startDate"         : "2020-04-28T16:34:45.000+02:00",
+        "finishDate"        : null,
+        "targetStartDate"   : "2020-04-28T16:34:45.000+02:00",
+        "targetFinishDate"  : "2021-12-15T01:00:02.000+02:00",
+
+        "name"              : "Proxecto Tests",
+        "description"       : "Nada relevante",
+
+        "createdBy"         : "616b4df3a2facc1a9c4145a1",
+
+        "adminUsers"        : [],
+
+        "productOwner"      : "616b4dbb9f7ee9e407c28a1b",
+
+        "requirements"      : [],
+        "repositories"      : [],
+        "comments"          : []
+    }
+]

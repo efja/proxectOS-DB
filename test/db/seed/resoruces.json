@@ -1,0 +1,120 @@
+[
+    {
+        "_id"           : "616b5698e88e2f9d864a4ccb",
+        "id"            : "616b5698e88e2f9d864a4ccb",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora análise",
+        "description"   : "Coste por hora dun analista.",
+
+        "scale"         : "HOUR",
+        "unitCost"      : 25,
+        "createdBy"     : "616b4df3a2facc1a9c4145a1",
+        "comments"      : []
+    },
+    {
+        "_id"           : "616b56a7d6409bfa924b6869",
+        "id"            : "616b56a7d6409bfa924b6869",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora comercial",
+        "description"   : "Coste por hora dun comercial.",
+
+        "scale"         : "HOUR",
+        "unitCost"      : 20,
+        "createdBy"     : "616b4df3a2facc1a9c4145a1",
+        "comments"      : []
+    },
+    {
+        "_id"           : "616b56b6e47f38106de0b115",
+        "id"            : "616b56b6e47f38106de0b115",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora programador junior 1",
+        "description"   : "Coste por hora dun programador junior nivel 1.",
+
+        "scale"         : "HOUR",
+
+        "unitCost"      : 15,
+        "createdBy"     : "616b4df3a2facc1a9c4145a1",
+        "comments"      : []
+    },
+    {
+        "_id"           : "616b56c73a49f1c11f1c61c6",
+        "id"            : "616b56c73a49f1c11f1c61c6",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora programador junior 2",
+        "description"   : "Coste por hora dun programador junior nivel 2.",
+
+        "scale"         : "HOUR",
+
+        "unitCost"      : 18,
+        "createdBy"     : "616b4df3a2facc1a9c4145a1",
+        "comments"      : []
+    },
+    {
+        "_id"           : "616b56d5325fc5840d740f7a",
+        "id"            : "616b56d5325fc5840d740f7a",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora programador senior 1",
+        "description"   : "Coste por hora dun programador senior nivel 1.",
+
+        "scale"         : "HOUR",
+
+        "unitCost"      : 22,
+        "createdBy"     : "616b4df3a2facc1a9c4145a1",
+        "comments"      : []
+    },
+    {
+        "_id"           : "616b56e8752bf8df49eb78d7",
+        "id"            : "616b56e8752bf8df49eb78d7",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora programador senior 2",
+        "description"   : "Coste por hora dun programador senior nivel 2.",
+
+        "scale"         : "HOUR",
+
+        "unitCost"      : 26,
+        "createdBy"     : "616b4df3a2facc1a9c4145a1",
+        "comments"      : []
+    },
+    {
+        "_id"           : "616b56f85b550d39195c78cb",
+        "id"            : "616b56f85b550d39195c78cb",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Hora implantación",
+        "description"   : "Coste por hora de implantación en produción.",
+
+        "scale"         : "HOUR",
+
+        "unitCost"      : 20,
+        "createdBy"     : "616b4df3a2facc1a9c4145a1",
+        "comments"      : []
+    },
+    {
+        "_id"           : "616b5707d5349c8ffec70a91",
+        "id"            : "616b5707d5349c8ffec70a91",
+        "createdAt"     : "2021-10-14T07:59:11.000+02:00",
+        "updatedAt"     : "2021-10-14T07:59:11.000+02:00",
+
+        "name"          : "Rapsberry + SO",
+        "description"   : "Rapsberry con SO montado para despliegue de aplicacións lixeiras.",
+
+        "scale"         : "UNIT",
+
+        "unitCost"      : 150,
+        "createdBy"     : "616b4df3a2facc1a9c4145a1",
+        "comments"      : []
+    }
+]

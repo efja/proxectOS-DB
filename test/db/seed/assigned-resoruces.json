@@ -1,0 +1,70 @@
+[
+    {
+        "_id"           : "616b5827a0aca10c5a100f89",
+        "id"            : "616b5827a0aca10c5a100f89",
+        "createdAt"     : "2021-10-01T17:27:09.000+02:00",
+        "updatedAt"     : "2021-10-01T17:27:09.000+02:00",
+
+        "description"   : "Análise e deseño do sistema",
+
+        "amount"        : 100,
+        "unitCost"      : 25,
+
+        "createdBy"     : "616b4df3a2facc1a9c4145a1",
+
+        "resource"      : "616b5698e88e2f9d864a4ccb",
+
+        "comments"      : []
+    },
+    {
+        "_id"           : "616b5834dcfe88144a7e7b6c",
+        "id"            : "616b5834dcfe88144a7e7b6c",
+        "createdAt"     : "2021-10-01T17:27:09.000+02:00",
+        "updatedAt"     : "2021-10-01T17:27:09.000+02:00",
+
+        "description"   : "Implementación da básica",
+
+        "amount"        : 250,
+        "unitCost"      : 15,
+
+        "createdBy"     : "616b4df3a2facc1a9c4145a1",
+
+        "resource"      : "616b56b6e47f38106de0b115",
+
+        "comments"      : []
+    },
+    {
+        "_id"           : "616b5843f450837faaec2c09",
+        "id"            : "616b5843f450837faaec2c09",
+        "createdAt"     : "2021-10-01T17:27:09.000+02:00",
+        "updatedAt"     : "2021-10-01T17:27:09.000+02:00",
+
+        "description"   : "Implementación da seguridade e a optimización do código",
+
+        "amount"        : 300,
+        "unitCost"      : 26,
+
+        "createdBy"     : "616b4df3a2facc1a9c4145a1",
+
+        "resource"      : "616b56e8752bf8df49eb78d7",
+
+        "comments"      : []
+    },
+    {
+        "_id"           : "616b58503143bf56f57b8cdd",
+        "id"            : "616b58503143bf56f57b8cdd",
+        "createdAt"     : "2021-10-01T17:27:09.000+02:00",
+        "updatedAt"     : "2021-10-01T17:27:09.000+02:00",
+
+        "description"   : "Para o despregamento do sistema",
+
+        "amount"        : 1,
+        "unitCost"      : 150,
+
+        "createdBy"     : "616b4df3a2facc1a9c4145a1",
+
+        "resource"      : "616b5707d5349c8ffec70a91",
+
+        "comments"      : []
+    }
+]

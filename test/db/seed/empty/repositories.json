@@ -1,0 +1,21 @@
+[
+    {
+        "_id"                   : "",
+        "id"                    : "",
+        "createdAt"             : "",
+        "updatedAt"             : "",
+
+        "expirationDate"        : "",
+        "name"                  : "",
+        "description"           : "",
+        "uri"                   : "",
+
+        "createdBy"             : {},
+
+        "assignedUsers"         : [],
+
+        "visibleToUserGroups"   : [],
+
+        "comments"              : []
+    }
+]

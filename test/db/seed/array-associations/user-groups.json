@@ -1,0 +1,61 @@
+[
+    {
+        "id"            : "616b5015d32984b61f6ad57e",
+
+        "defaultRoles"  : [
+            "616b5035a068860b800f6949"
+        ]
+    },
+    {
+        "id"            : "616b50508003db4c84fbe94a",
+
+        "defaultRoles"  : [
+            "616b50a667047be27ff546f8"
+        ]
+    },
+    {
+        "id"            : "616b4e54c4efa9d9ccc5d11c",
+
+        "defaultRoles"  : [
+            "616b50bb4ad767564d05653d"
+        ]
+    },
+    {
+        "id"            : "616b4bb2d34ebe7bd6e155e2",
+
+        "defaultRoles"  : [
+            "616b50df1b72f5d9539703a7",
+            "616b50eeca13b1e1550caca1"
+        ]
+    },
+    {
+        "id"            : "616b4ee74fb0c1c58625e9c9",
+
+        "defaultRoles"  : [
+            "616b50df1b72f5d9539703a7",
+            "616b50eeca13b1e1550caca1"
+        ]
+    },
+    {
+        "id"            : "616b4ef96fb29ff203f48491",
+
+        "defaultRoles"  : [
+            "616b50a667047be27ff546f8"
+        ]
+    },
+    {
+        "id"            : "616b4e251dd454892f40a86a",
+
+        "defaultRoles"  : [
+            "616b50bb4ad767564d05653d"
+        ]
+    },
+    {
+        "id"            : "616b4f40395664595aab6292",
+
+        "defaultRoles"  : [
+            "616b50df1b72f5d9539703a7",
+            "616b50eeca13b1e1550caca1"
+        ]
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "_id"                   : "616b4fdafe3f5d99619aeb75",
+        "id"                    : "616b4fdafe3f5d99619aeb75",
+        "createdAt"             : "2021-01-06T01:16:59.000+01:00",
+        "updatedAt"             : "2021-01-06T01:16:59.000+01:00",
+
+        "expirationDate"        : "2021-02-21T05:54:20.000+01:00",
+        "title"                 : "Proba de mensaxe con caducidade",
+        "message"               : "Esta mensaxe foi vencida o 21 do 2 do 2021",
+        "createdBy"             : "616b4dd523f371ed0309e105",
+        "visibleToUserGroups"   : []
+    },
+    {
+        "_id"                   : "616b4fedc0c559d10b709c9b",
+        "id"                    : "616b4fedc0c559d10b709c9b",
+        "createdAt"             : "2021-01-06T01:16:59.000+01:00",
+        "updatedAt"             : "2021-01-06T01:16:59.000+01:00",
+
+        "expirationDate"        : null,
+        "title"                 : "",
+        "message"               : "",
+        "createdBy"             : "616b4dd523f371ed0309e105",
+        "visibleToUserGroups"   : []
+    }
+]
