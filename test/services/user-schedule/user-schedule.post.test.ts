@@ -5,7 +5,7 @@ import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
 import { User } from "../../../src/models/user.model";
-import { AssignedResource } from '../../../src/models/assigned-resource.model';
+import { UserSchedule } from '../../../src/models/user-schedule.model';
 
 import {
     API_BASE,
@@ -17,11 +17,11 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - AssignedResources (POST)', () => {
+describe('Probas DATOS API - UserSchedules (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "assignedResources";
+    const ENDPOINT = "userSchedules";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -49,10 +49,10 @@ describe('Probas DATOS API - AssignedResources (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
-        const assignedResource = dataList.assignedResources[0] as AssignedResource;
+    test(`Crear UserSchedule: <${dataList.userSchedules[0].id}>`, async() => {
+        const userSchedule = dataList.userSchedules[0] as UserSchedule;
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(assignedResource);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(userSchedule);
         const {
             code,
             data,
@@ -68,22 +68,21 @@ describe('Probas DATOS API - AssignedResources (POST)', () => {
 
         // Comprobanse algúns datos obrigatorios
         expect(data.id).toBeDefined();
-        expect(data.id).toBe(assignedResource.id);
+        expect(data.id).toBe(userSchedule.id);
 
         expect(data.description).toBeDefined();
-        expect(data.description).toBe(assignedResource.description);
+        expect(data.description).toBe(userSchedule.description);
 
-        // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(assignedResource.amount);
-        expect(data.targetFinishDate).toBe(assignedResource.amount);
+        expect(data.worksWeekends).toBeDefined();
+        expect(data.worksWeekends).toBe(userSchedule.worksWeekends);
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.CREATE'));
+        expect(message).toBe(i18next.t('USER_SCHEDULE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear AssignedResource con datos erróneos:`, async() => {
-        const badAssignedResource = dataList.users[0] as User;
+    test(`Crear UserSchedule con datos erróneos:`, async() => {
+        const badUserSchedule = dataList.users[0] as User;
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badAssignedResource);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badUserSchedule);
         const {
             code,
             data,
@@ -100,24 +99,24 @@ describe('Probas DATOS API - AssignedResources (POST)', () => {
         // Comprobanse algúns datos obrigatorios
         expect(data.id).toBeUndefined();
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.CREATE'));
+        expect(message).toBe(i18next.t('USER_SCHEDULE.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de AssignedResources:', async() => {
-        const assignedResources = [
-            dataList.assignedResources[0] as AssignedResource,
-            dataList.assignedResources[0] as AssignedResource,
+    test('Crear lista de UserSchedules:', async() => {
+        const userSchedules = [
+            dataList.userSchedules[0] as UserSchedule,
+            dataList.userSchedules[0] as UserSchedule,
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        assignedResources[0]._id = "616c6b4c9c7900e7011c9615";
-        assignedResources[0].id  = "616c6b4c9c7900e7011c9615";
+        userSchedules[0]._id = "616c6b4c9c7900e7011c9615";
+        userSchedules[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        assignedResources[1]._id = "616c6b6602067b3bd0d5ffbc";
-        assignedResources[1].id  = "616c6b6602067b3bd0d5ffbc";
+        userSchedules[1]._id = "616c6b6602067b3bd0d5ffbc";
+        userSchedules[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(assignedResources);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(userSchedules);
         const {
             code,
             data,
@@ -134,36 +133,36 @@ describe('Probas DATOS API - AssignedResources (POST)', () => {
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(assignedResources.length);
+        expect(data).toHaveLength(userSchedules.length);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(assignedResources[0]);
-        expect(data[0].id).not.toBe(assignedResources[1]);
+        expect(data[0].id).toBe(userSchedules[0]);
+        expect(data[0].id).not.toBe(userSchedules[1]);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(assignedResources[1]);
-        expect(data[1].id).not.toBe(assignedResources[0]);
+        expect(data[1].id).toBe(userSchedules[1]);
+        expect(data[1].id).not.toBe(userSchedules[0]);
 
-        expect(total).toBe(dataList.assignedResources.length);
+        expect(total).toBe(dataList.userSchedules.length);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.CREATE_LIST'));
+        expect(message).toBe(i18next.t('USER_SCHEDULE.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de AssignedResources algúns con datos erróneos:', async() => {
-        const badAssignedResources = [
-            dataList.assignedResources[0] as AssignedResource,
+    test('Crear lista de UserSchedules algúns con datos erróneos:', async() => {
+        const badUserSchedules = [
+            dataList.userSchedules[0] as UserSchedule,
             dataList.users[0] as User,
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badAssignedResources[0]._id = "616c6b4c9c7900e7011c9615";
-        badAssignedResources[0].id  = "616c6b4c9c7900e7011c9615";
+        badUserSchedules[0]._id = "616c6b4c9c7900e7011c9615";
+        badUserSchedules[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badAssignedResources[1]._id = "616c6b6602067b3bd0d5ffbc";
-        badAssignedResources[1].id  = "616c6b6602067b3bd0d5ffbc";
+        badUserSchedules[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badUserSchedules[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badAssignedResources);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badUserSchedules);
         const {
             code,
             data,
@@ -180,13 +179,13 @@ describe('Probas DATOS API - AssignedResources (POST)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badAssignedResources.length);
+        expect(data).not.toHaveLength(badUserSchedules.length);
 
-        expect(total).not.toBe(badAssignedResources.length);
+        expect(total).not.toBe(badUserSchedules.length);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.CREATE_LIST'));
+        expect(message).toBe(i18next.t('USER_SCHEDULE.SERVICE.ERROR.CREATE_LIST'));
     });
 });

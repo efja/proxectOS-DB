@@ -22,15 +22,13 @@ import { UserGroup } from '../../src/models/user-group.model';
 import { User } from '../../src/models/user.model';
 import { CommentApp } from '../../src/models/commentapp.model';
 import { AssignedUser } from '../../src/models/assigned-user.model';
-import { AssignedResource } from '../../src/models/assigned-resoruce.model';
+import { AssignedResource } from '../../src/models/assigned-resource.model';
 import { AssignedStage } from '../../src/models/assigned-stage.model';
 import { RepositoryApp } from '../../src/models/repositoryapp.model';
 import { PerformanceApp } from '../../src/models/performanceapp.model';
 import { Requirement } from '../../src/models/requirement.model';
 import { StateHistory } from '../../src/models/state-history.model';
 import { Project } from '../../src/models/project.model';
-import { Collection } from '@mikro-orm/core';
-import { ObjectId } from '@mikro-orm/mongodb';
 
 // ####################################################################################################
 // ## CONSTANTES
@@ -45,7 +43,7 @@ const stagesJson            = require('./seed/stages.json');
 const statesJson            = require('./seed/states.json');
 
 // MODELOS CUNHA SOA DEPENDENCIA
-const resorucesJson         = require('./seed/resoruces.json');
+const resourcesJson         = require('./seed/resources.json');
 const userContactsJson      = require('./seed/user-contacts.json');
 const userGroupsJson        = require('./seed/user-groups.json');
 
@@ -53,12 +51,12 @@ const userGroupsJson        = require('./seed/user-groups.json');
 const usersJson             = require('./seed/users.json');
 const commentsJson          = require('./seed/comments.json');
 const assignedUsersJson     = require('./seed/assigned-users.json');
-const assignedResourcesJson = require('./seed/assigned-resoruces.json');
+const assignedResourcesJson = require('./seed/assigned-resources.json');
 const assignedStagesJson    = require('./seed/assigned-stages.json');
 const repositoriesJson      = require('./seed/repositories.json');
 const performancesJson      = require('./seed/performances.json');
 const requirementsJson      = require('./seed/requirements.json');
-const stateHistoryJson      = require('./seed/state-history.json');
+const statesHistoryJson     = require('./seed/state-history.json');
 const projectsJson          = require('./seed/projects.json');
 
 // MODELOS CUNHA SOA DEPENDENCIA // TODO: valorar se é necesario aínda que para os test non o vexo
@@ -86,13 +84,13 @@ export class ObjectFactory {
     priorities          : CustomBaseEntity[] = [];
     roles               : CustomBaseEntity[] = [];
     types               : CustomBaseEntity[] = [];
-    UserContactTypes    : CustomBaseEntity[] = [];
+    userContactTypes    : CustomBaseEntity[] = [];
     userSchedules       : CustomBaseEntity[] = [];
     stages              : CustomBaseEntity[] = [];
     states              : CustomBaseEntity[] = [];
 
     // MODELOS CUNHA SOA DEPENDENCIA
-    resoruces           : CustomBaseEntity[] = [];
+    resources           : CustomBaseEntity[] = [];
     userContacts        : CustomBaseEntity[] = [];
     userGroups          : CustomBaseEntity[] = [];
 
@@ -105,7 +103,7 @@ export class ObjectFactory {
     repositories        : CustomBaseEntity[] = [];
     performances        : CustomBaseEntity[] = [];
     requirements        : CustomBaseEntity[] = [];
-    stateHistory        : CustomBaseEntity[] = [];
+    statesHistory       : CustomBaseEntity[] = [];
     projects            : CustomBaseEntity[] = [];
 
     // LISTA DE MODELOS
@@ -119,13 +117,13 @@ export class ObjectFactory {
         this.priorities          =  this.parseDataList2AnyEntityList(prioritiesJson, "Priority");
         this.roles               =  this.parseDataList2AnyEntityList(rolesJson, "Role");
         this.types               =  this.parseDataList2AnyEntityList(typesJson, "Type");
-        this.UserContactTypes    =  this.parseDataList2AnyEntityList(userContactTypesJson, "UserContactType");
+        this.userContactTypes    =  this.parseDataList2AnyEntityList(userContactTypesJson, "UserContactType");
         this.userSchedules       =  this.parseDataList2AnyEntityList(userSchedulesJson, "UserSchedule");
         this.stages              =  this.parseDataList2AnyEntityList(stagesJson, "Stage");
         this.states              =  this.parseDataList2AnyEntityList(statesJson, "State");
 
         // MODELOS CUNHA SOA DEPENDENCIA
-        this.resoruces           =  this.parseDataList2AnyEntityList(resorucesJson, "Resource");
+        this.resources           =  this.parseDataList2AnyEntityList(resourcesJson, "Resource");
         this.userContacts        =  this.parseDataList2AnyEntityList(userContactsJson, "UserContact");
         this.userGroups          =  this.parseDataList2AnyEntityList(userGroupsJson, "UserGroup");
 
@@ -138,7 +136,7 @@ export class ObjectFactory {
         this.repositories        =  this.parseDataList2AnyEntityList(repositoriesJson, "RepositoryApp");
         this.performances        =  this.parseDataList2AnyEntityList(performancesJson, "PerformanceApp");
         this.requirements        =  this.parseDataList2AnyEntityList(requirementsJson, "Requirement");
-        this.stateHistory        =  this.parseDataList2AnyEntityList(stateHistoryJson, "StateHistory");
+        this.statesHistory       =  this.parseDataList2AnyEntityList(statesHistoryJson, "StateHistory");
         this.projects            =  this.parseDataList2AnyEntityList(projectsJson, "Project");
 
         // LISTA DE MODELOS
@@ -164,13 +162,13 @@ export class ObjectFactory {
         result.push(...this.priorities);
         result.push(...this.roles);
         result.push(...this.types);
-        result.push(...this.UserContactTypes);
+        result.push(...this.userContactTypes);
         result.push(...this.userSchedules);
         result.push(...this.stages);
         result.push(...this.states);
 
         // MODELOS CUNHA SOA DEPENDENCIA
-        result.push(...this.resoruces);
+        result.push(...this.resources);
         result.push(...this.userContacts);
         result.push(...this.userGroups);
 
@@ -183,7 +181,7 @@ export class ObjectFactory {
         result.push(...this.repositories);
         result.push(...this.performances);
         result.push(...this.requirements);
-        result.push(...this.stateHistory);
+        result.push(...this.statesHistory);
         result.push(...this.projects);
 
         return result;

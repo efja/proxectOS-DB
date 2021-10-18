@@ -62,3 +62,20 @@ export function getAPIVersion () {
 
     return result;
 };
+
+export function changeDate(originDate: Date, seed: string = "2021-12-27T21:38:21.000+01:00"): Date {
+
+    // Comprobase se a data de Comezo está definida e se non é inicializase o seu valor
+    let result: Date = originDate
+        ? new Date(originDate)
+        : new Date(seed);
+
+    // Modificase a nova data para garantir que é diferente á anterior
+    if (result.getDate() >= 1 && result.getDate() < 28) {
+        result.setDate(result.getDate() + 1);
+    } else {
+        result.setDate(28);
+    }
+
+    return result;
+}

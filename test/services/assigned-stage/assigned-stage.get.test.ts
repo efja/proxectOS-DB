@@ -3,7 +3,8 @@
 // ####################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
-import { AssignedResource } from '../../../src/models/assigned-resource.model';
+import { AssignedStage } from '../../../src/models/assigned-stage.model';
+
 
 import {
     API_BASE,
@@ -16,11 +17,11 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Projects (GET)', () => {
+describe('Probas DATOS API - AssignedStages (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "assignedResources";
+    const ENDPOINT = "assignedStages";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -31,7 +32,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
 	});
 
 	beforeEach(async () => {
-        await db.inicializeData(dataList.assignedResources, true);
+        await db.inicializeData(dataList.assignedStages, true);
 	});
 
 	afterAll(async () => {
@@ -43,7 +44,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos AssignedResources:', async() => {
+    test('Tódolos AssignedStages:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -61,17 +62,17 @@ describe('Probas DATOS API - Projects (GET)', () => {
         expect(code).toBe(HttpStatus.OK);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(dataList.assignedResources.length);
+        expect(data).toHaveLength(dataList.assignedStages.length);
 
-        expect(total).toBe(dataList.assignedResources.length);
+        expect(total).toBe(dataList.assignedStages.length);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedResources[0].id}`);
+    test(`AssignedStage: <${dataList.assignedStages[0].id}>`, async() => {
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedStages[0].id}`);
         const {
             code,
             data,
@@ -79,7 +80,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
             error,
         } = response.body
 
-        const assignedResource = dataList.assignedResources[0] as AssignedResource;
+        const assignedStage = dataList.assignedStages[0] as AssignedStage;
 
         expect(error).toBeUndefined();
 
@@ -89,22 +90,20 @@ describe('Probas DATOS API - Projects (GET)', () => {
 
         // Comprobanse algúns datos obrigatorios
         expect(data.id).toBeDefined();
-        expect(data.id).toBe(assignedResource.id);
+        expect(data.id).toBe(assignedStage.id);
 
-        expect(data.description).toBeDefined();
-        expect(data.description).toBe(assignedResource.description);
+        expect(data.stage).toBeDefined();
+        expect(data.stage.id).toBe(assignedStage.stage.id);
 
-        expect(data.amount).toBeDefined();
-        expect(data.amount).toBe(assignedResource.amount);
+        // Comprobanse algúns datos opcionais
+        expect(data.startDate).toBe(assignedStage.startDate);
+        expect(data.targetFinishDate).toBe(assignedStage.targetFinishDate);
 
-        expect(data.resource).toBeDefined();
-        expect(data.resource.id).toBe(assignedResource.resource.id);
-
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`AssignedResource inexistente:`, async() => {
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedResources[0].id}${FAKE_TEXT}`);
+    test(`AssignedStage inexistente:`, async() => {
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedStages[0].id}${FAKE_TEXT}`);
         const {
             code,
             data,
@@ -118,6 +117,6 @@ describe('Probas DATOS API - Projects (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.GET_SINGLE'));
+        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.ERROR.GET_SINGLE'));
     });
 });

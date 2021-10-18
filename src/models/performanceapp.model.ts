@@ -5,7 +5,7 @@ import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/
 
 import { CustomBaseEntity } from "./base-entity.model";
 
-import { AssignedResource } from './assigned-resoruce.model';
+import { AssignedResource } from './assigned-resource.model';
 import { AssignedUser } from './assigned-user.model';
 import { AssignedStage } from './assigned-stage.model';
 import { CommentApp } from './commentapp.model';

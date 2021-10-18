@@ -3,7 +3,8 @@
 // ####################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
-import { AssignedResource } from '../../../src/models/assigned-resource.model';
+
+import { CommentApp } from '../../../src/models/commentapp.model';
 
 import {
     API_BASE,
@@ -16,11 +17,11 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - AssignedResources (PUT)', () => {
+describe('Probas DATOS API - CommentApps (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "assignedResources";
+    const ENDPOINT = "commentApps";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -32,7 +33,7 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
 	});
 
 	beforeEach(async () => {
-        await db.inicializeData(dataList.assignedResources);
+        await db.inicializeData(dataList.comments);
 	});
 
 	afterEach(async () => {
@@ -48,15 +49,15 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
-        const assignedResource0 = dataList.assignedResources[0] as AssignedResource;
-        const assignedResource1 = dataList.assignedResources[0] as AssignedResource;
+    test(`Actualizar CommentApp: <${dataList.comments[0].id}>`, async() => {
+        const commentApp0 = dataList.comments[0] as CommentApp;
+        const commentApp1 = dataList.comments[0] as CommentApp;
 
-        // Modificase o modelo AssignedResource (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
-        assignedResource1.description = assignedResource1.description + FAKE_TEXT;
-        assignedResource1.unitCost = assignedResource1.unitCost + 10;
+        // Modificase o modelo CommentApp (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
+        commentApp1.title = commentApp1.title + FAKE_TEXT;
+        commentApp1.message = commentApp1.message + FAKE_TEXT;
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(assignedResource1);
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(commentApp1);
         const {
             code,
             data,
@@ -71,37 +72,37 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
         expect(data).toBeDefined();
 
         // ** Datos cambiados
-        expect(data.description).toBeDefined();
-        expect(data.description).not.toBe(assignedResource0.description);
-        expect(data.description).toBe(assignedResource1.description);
+        expect(data.title).toBeDefined();
+        expect(data.title).not.toBe(commentApp0.title);
+        expect(data.title).toBe(commentApp1.title);
 
-        expect(data.unitCost).toBeDefined();
-        expect(data.unitCost).not.toBe(assignedResource0.unitCost);
-        expect(data.unitCost).toBe(assignedResource1.unitCost);
+        expect(data.message).toBeDefined();
+        expect(data.message).not.toBe(commentApp0.message);
+        expect(data.message).toBe(commentApp1.message);
 
         // ** Datos NON cambiados
         // Comprobanse algúns datos obrigatorios
         expect(data.id).toBeDefined();
-        expect(data.id).toBe(assignedResource0.id);
-        expect(data.id).toBe(assignedResource1.id);
+        expect(data.id).toBe(commentApp0.id);
+        expect(data.id).toBe(commentApp1.id);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(assignedResource0.amount);
-        expect(data.startDate).toBe(assignedResource1.amount);
+        expect(data.expirationDate).toBe(commentApp0.expirationDate);
+        expect(data.expirationDate).toBe(commentApp1.expirationDate);
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('COMMENT.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar AssignedResource con datos erróneos:`, async() => {
-        const assignedResource0 = dataList.assignedResources[0] as AssignedResource;
+    test(`Actualizar CommentApp con datos erróneos:`, async() => {
+        const commentApp0 = dataList.comments[0] as CommentApp;
 
-        // Modificase o modelo AssignedResource
-        assignedResource0.description = assignedResource0.description + FAKE_TEXT;
+        // Modificase o modelo CommentApp
+        commentApp0.title = commentApp0.title + FAKE_TEXT;
 
-        const assignedResource1 = assignedResource0 as any;
-        assignedResource1.unitCost = assignedResource0.description + FAKE_TEXT; // Dato erróneo
+        const commentApp1 = commentApp0 as any;
+        commentApp1.expirationDate = commentApp0.title + FAKE_TEXT; // Dato erróneo
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(assignedResource1);
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(commentApp1);
         const {
             code,
             data,
@@ -115,6 +116,6 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.UPDATE'));
+        expect(message).toBe(i18next.t('COMMENT.SERVICE.ERROR.UPDATE'));
     });
 });

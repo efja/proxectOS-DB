@@ -3,7 +3,9 @@
 // ####################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
-import { AssignedResource } from '../../../src/models/assigned-resource.model';
+import * as jsonpatch from 'fast-json-patch';
+
+import { Priority } from '../../../src/models/priority.model';
 
 import {
     API_BASE,
@@ -16,11 +18,11 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - AssignedResources (PUT)', () => {
+describe('Probas DATOS API - Prioritys (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "assignedResources";
+    const ENDPOINT = "priorities";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -32,7 +34,7 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
 	});
 
 	beforeEach(async () => {
-        await db.inicializeData(dataList.assignedResources);
+        await db.inicializeData(dataList.priorities);
 	});
 
 	afterEach(async () => {
@@ -48,15 +50,17 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
-        const assignedResource0 = dataList.assignedResources[0] as AssignedResource;
-        const assignedResource1 = dataList.assignedResources[0] as AssignedResource;
+    test(`Actualizar Priority: <${dataList.priorities[0].id}>`, async() => {
+        const priority0 = dataList.priorities[0] as Priority;
+        const priority1 = dataList.priorities[0] as Priority;
 
-        // Modificase o modelo AssignedResource (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
-        assignedResource1.description = assignedResource1.description + FAKE_TEXT;
-        assignedResource1.unitCost = assignedResource1.unitCost + 10;
+        // Modificase o modelo Priority
+        priority1.name = priority1.name + FAKE_TEXT;
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(assignedResource1);
+        // Xerase o objexecto tipo HTTP PATCH
+        const objPatch = jsonpatch.compare(priority0, priority1);
+
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/`).send(objPatch);
         const {
             code,
             data,
@@ -71,37 +75,36 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
         expect(data).toBeDefined();
 
         // ** Datos cambiados
-        expect(data.description).toBeDefined();
-        expect(data.description).not.toBe(assignedResource0.description);
-        expect(data.description).toBe(assignedResource1.description);
-
-        expect(data.unitCost).toBeDefined();
-        expect(data.unitCost).not.toBe(assignedResource0.unitCost);
-        expect(data.unitCost).toBe(assignedResource1.unitCost);
+        expect(data.name).toBeDefined();
+        expect(data.name).not.toBe(priority0.name);
+        expect(data.name).toBe(priority1.name);
 
         // ** Datos NON cambiados
         // Comprobanse algúns datos obrigatorios
         expect(data.id).toBeDefined();
-        expect(data.id).toBe(assignedResource0.id);
-        expect(data.id).toBe(assignedResource1.id);
+        expect(data.id).toBe(priority0.id);
+        expect(data.id).toBe(priority1.id);
 
-        // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(assignedResource0.amount);
-        expect(data.startDate).toBe(assignedResource1.amount);
+        expect(data.description).toBeDefined();
+        expect(data.description).toBe(priority0.description);
+        expect(data.description).toBe(priority1.description);
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('PRIORITY.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar AssignedResource con datos erróneos:`, async() => {
-        const assignedResource0 = dataList.assignedResources[0] as AssignedResource;
+    test(`Actualizar Priority con datos erróneos:`, async() => {
+        const priority0 = dataList.priorities[0] as Priority;
+        const priority1 = dataList.priorities[0] as Priority;
 
-        // Modificase o modelo AssignedResource
-        assignedResource0.description = assignedResource0.description + FAKE_TEXT;
+        // Modificase o modelo Priority
+        priority1.name = priority1.name + FAKE_TEXT;
 
-        const assignedResource1 = assignedResource0 as any;
-        assignedResource1.unitCost = assignedResource0.description + FAKE_TEXT; // Dato erróneo
+        // Xerase o objexecto tipo HTTP PATCH
+        const objPatch = jsonpatch.compare(priority0, priority1);
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(assignedResource1);
+        objPatch[0].path = FAKE_TEXT; // Dato incorrecto
+
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/`).send(objPatch);
         const {
             code,
             data,
@@ -115,6 +118,6 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.UPDATE'));
+        expect(message).toBe(i18next.t('PRIORITY.SERVICE.ERROR.UPDATE'));
     });
 });

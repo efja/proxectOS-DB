@@ -3,7 +3,9 @@
 // ####################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
-import { AssignedResource } from '../../../src/models/assigned-resource.model';
+import * as jsonpatch from 'fast-json-patch';
+
+import { AssignedUser } from '../../../src/models/assigned-user.model';
 
 import {
     API_BASE,
@@ -12,15 +14,16 @@ import {
     FAKE_TEXT,
     request,
 } from "../commons";
+import { User } from "../../../src/models/user.model";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - AssignedResources (PUT)', () => {
+describe('Probas DATOS API - AssignedUsers (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "assignedResources";
+    const ENDPOINT = "assignedUsers";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -32,7 +35,7 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
 	});
 
 	beforeEach(async () => {
-        await db.inicializeData(dataList.assignedResources);
+        await db.inicializeData(dataList.assignedUsers);
 	});
 
 	afterEach(async () => {
@@ -48,15 +51,19 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
-        const assignedResource0 = dataList.assignedResources[0] as AssignedResource;
-        const assignedResource1 = dataList.assignedResources[0] as AssignedResource;
+    test(`Actualizar AssignedUser: <${dataList.assignedUsers[0].id}>`, async() => {
+        const assignedUser0 = dataList.assignedUsers[0] as AssignedUser;
+        const assignedUser1 = dataList.assignedUsers[0] as AssignedUser;
 
-        // Modificase o modelo AssignedResource (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
-        assignedResource1.description = assignedResource1.description + FAKE_TEXT;
-        assignedResource1.unitCost = assignedResource1.unitCost + 10;
+        // Modificase o modelo AssignedUser
+        assignedUser1.assignedUser = dataList.users[0].id != assignedUser1.assignedUser.id
+            ? dataList.users[0] as User
+            : dataList.users[1] as User;
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(assignedResource1);
+        // Xerase o objexecto tipo HTTP PATCH
+        const objPatch = jsonpatch.compare(assignedUser0, assignedUser1);
+
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/`).send(objPatch);
         const {
             code,
             data,
@@ -71,37 +78,34 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
         expect(data).toBeDefined();
 
         // ** Datos cambiados
-        expect(data.description).toBeDefined();
-        expect(data.description).not.toBe(assignedResource0.description);
-        expect(data.description).toBe(assignedResource1.description);
-
-        expect(data.unitCost).toBeDefined();
-        expect(data.unitCost).not.toBe(assignedResource0.unitCost);
-        expect(data.unitCost).toBe(assignedResource1.unitCost);
+        expect(data.assignedUser).toBeDefined();
+        expect(data.assignedUser.id).not.toBe(assignedUser0.assignedUser.id);
+        expect(data.assignedUser.id).toBe(assignedUser1.assignedUser.id);
 
         // ** Datos NON cambiados
         // Comprobanse algúns datos obrigatorios
         expect(data.id).toBeDefined();
-        expect(data.id).toBe(assignedResource0.id);
-        expect(data.id).toBe(assignedResource1.id);
+        expect(data.id).toBe(assignedUser0.id);
+        expect(data.id).toBe(assignedUser1.id);
 
-        // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(assignedResource0.amount);
-        expect(data.startDate).toBe(assignedResource1.amount);
-
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('ASSIGNED_USER.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar AssignedResource con datos erróneos:`, async() => {
-        const assignedResource0 = dataList.assignedResources[0] as AssignedResource;
+    test(`Actualizar AssignedUser con datos erróneos:`, async() => {
+        const assignedUser0 = dataList.assignedUsers[0] as AssignedUser;
+        const assignedUser1 = dataList.assignedUsers[0] as AssignedUser;
 
-        // Modificase o modelo AssignedResource
-        assignedResource0.description = assignedResource0.description + FAKE_TEXT;
+        // Modificase o modelo AssignedUser
+        assignedUser1.assignedUser = dataList.users[0].id != assignedUser1.assignedUser.id
+        ? dataList.users[0] as User
+        : dataList.users[1] as User;
 
-        const assignedResource1 = assignedResource0 as any;
-        assignedResource1.unitCost = assignedResource0.description + FAKE_TEXT; // Dato erróneo
+        // Xerase o objexecto tipo HTTP PATCH
+        const objPatch = jsonpatch.compare(assignedUser0, assignedUser1);
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(assignedResource1);
+        objPatch[0].path = FAKE_TEXT; // Dato incorrecto
+
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/`).send(objPatch);
         const {
             code,
             data,
@@ -115,6 +119,6 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.UPDATE'));
+        expect(message).toBe(i18next.t('ASSIGNED_USER.SERVICE.ERROR.UPDATE'));
     });
 });

@@ -4,7 +4,7 @@
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import * as jsonpatch from 'fast-json-patch';
-import { AssignedResource } from '../../../src/models/assigned-resoruce.model';
+import { AssignedResource } from '../../../src/models/assigned-resource.model';
 
 import {
     API_BASE,

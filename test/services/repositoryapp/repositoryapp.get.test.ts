@@ -3,7 +3,8 @@
 // ####################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
-import { AssignedResource } from '../../../src/models/assigned-resource.model';
+
+import { RepositoryApp } from '../../../src/models/repositoryapp.model';
 
 import {
     API_BASE,
@@ -16,11 +17,11 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Projects (GET)', () => {
+describe('Probas DATOS API - RepositoryApps (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "assignedResources";
+    const ENDPOINT = "repositoryApps";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -31,7 +32,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
 	});
 
 	beforeEach(async () => {
-        await db.inicializeData(dataList.assignedResources, true);
+        await db.inicializeData(dataList.repositories, true);
 	});
 
 	afterAll(async () => {
@@ -43,7 +44,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos AssignedResources:', async() => {
+    test('Tódolos RepositoryApps:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -61,17 +62,17 @@ describe('Probas DATOS API - Projects (GET)', () => {
         expect(code).toBe(HttpStatus.OK);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(dataList.assignedResources.length);
+        expect(data).toHaveLength(dataList.repositories.length);
 
-        expect(total).toBe(dataList.assignedResources.length);
+        expect(total).toBe(dataList.repositories.length);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedResources[0].id}`);
+    test(`RepositoryApp: <${dataList.repositories[0].id}>`, async() => {
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.repositories[0].id}`);
         const {
             code,
             data,
@@ -79,7 +80,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
             error,
         } = response.body
 
-        const assignedResource = dataList.assignedResources[0] as AssignedResource;
+        const repositoryApp = dataList.repositories[0] as RepositoryApp;
 
         expect(error).toBeUndefined();
 
@@ -89,22 +90,22 @@ describe('Probas DATOS API - Projects (GET)', () => {
 
         // Comprobanse algúns datos obrigatorios
         expect(data.id).toBeDefined();
-        expect(data.id).toBe(assignedResource.id);
+        expect(data.id).toBe(repositoryApp.id);
+
+        expect(data.name).toBeDefined();
+        expect(data.name).toBe(repositoryApp.name);
 
         expect(data.description).toBeDefined();
-        expect(data.description).toBe(assignedResource.description);
+        expect(data.description).toBe(repositoryApp.description);
 
-        expect(data.amount).toBeDefined();
-        expect(data.amount).toBe(assignedResource.amount);
+        // Comprobanse algúns datos opcionais
+        expect(data.expirationDate).toBe(repositoryApp.expirationDate);
 
-        expect(data.resource).toBeDefined();
-        expect(data.resource.id).toBe(assignedResource.resource.id);
-
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`AssignedResource inexistente:`, async() => {
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedResources[0].id}${FAKE_TEXT}`);
+    test(`RepositoryApp inexistente:`, async() => {
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.repositories[0].id}${FAKE_TEXT}`);
         const {
             code,
             data,
@@ -118,6 +119,6 @@ describe('Probas DATOS API - Projects (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.GET_SINGLE'));
+        expect(message).toBe(i18next.t('REPOSITORY.SERVICE.ERROR.GET_SINGLE'));
     });
 });
