@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, ManyToOne, ManyToMany, Property } from '@mikro-orm/core';
 
-import { BaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./base-entity.model";
 
 import { CommentApp } from './commentapp.model';
 import { User } from './user.model';
@@ -14,7 +14,7 @@ import { State } from "./state.model";
 // ## CLASE AssignedPermissions
 // ####################################################################################################
 @Entity()
-export class AssignedStage extends BaseEntity {
+export class AssignedStage extends CustomBaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************

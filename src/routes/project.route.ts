@@ -30,11 +30,7 @@ export class ProjectRoutes {
     this.router.get('/:id', this.projectController.getProject);
 
     // POST
-    this.router.post(
-      '',
-      this.projectController.newProject,
-      this.projectController.newProject
-    );
+    this.router.post('', this.projectController.newProject);
 
     // PATCH
     this.router.patch('/:id', this.projectController.updateProject);

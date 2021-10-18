@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
-import { BaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./base-entity.model";
 
 import { User } from './user.model';
 import { UserGroup } from './user-group.model';
@@ -12,7 +12,7 @@ import { UserGroup } from './user-group.model';
 // ## CLASE CommentApp
 // ####################################################################################################
 @Entity()
-export class CommentApp extends BaseEntity {
+export class CommentApp extends CustomBaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************

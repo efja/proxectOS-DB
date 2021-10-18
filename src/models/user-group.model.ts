@@ -1,9 +1,9 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { Collection, Entity, Property, ManyToMany, Unique } from '@mikro-orm/core';
+import { Collection, Entity, Property, ManyToMany, Unique, wrap } from '@mikro-orm/core';
 
-import { BaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./base-entity.model";
 
 import { Role } from './role.model';
 
@@ -11,7 +11,7 @@ import { Role } from './role.model';
 // ## CLASE User
 // ####################################################################################################
 @Entity()
-export class UserGroup extends BaseEntity {
+export class UserGroup extends CustomBaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -23,16 +23,14 @@ export class UserGroup extends BaseEntity {
 
     // Relacións
     @ManyToMany(() => Role)
-    public defaultRoles     : Collection<Role> = new Collection<Role>(this);
-
-    // @ManyToMany(() => User)
-    // public users        : Collection<User> = new Collection<User>(this);
+    public defaultRoles : Collection<Role> = new Collection<Role>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR
     // ************************************************************************************************
     constructor(obj?: Partial<UserGroup>) {
         super();
+
         Object.assign(this, obj);
     }
 

@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
-import { BaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./base-entity.model";
 
 import { AssignedStage } from './assigned-stage.model';
 import { Role } from './role.model';
@@ -14,7 +14,7 @@ import { User } from './user.model';
 // ## CLASE StateHistory
 // ####################################################################################################
 @Entity()
-export class StateHistory extends BaseEntity {
+export class StateHistory extends CustomBaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************

@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
-import { BaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./base-entity.model";
 
 import { Role } from './role.model';
 import { User } from './user.model';
@@ -13,7 +13,7 @@ import { UserGroup } from './user-group.model';
 // ## CLASE AssignedPermissions
 // ####################################################################################################
 @Entity()
-export class AssignedUser extends BaseEntity {
+export class AssignedUser extends CustomBaseEntity {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
