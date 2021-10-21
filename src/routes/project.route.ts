@@ -3,6 +3,7 @@
 // ####################################################################################################
 import express, { Router, IRouter } from 'express';
 import { ProjectController } from '../controllers/project.controller';
+import { ProjectService } from '../services/project.service';
 
 // ####################################################################################################
 // ## CLASE ProjectRoutes
@@ -11,7 +12,7 @@ export class ProjectRoutes {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private projectController = new ProjectController();
+  private projectController :ProjectController = new ProjectController();
   private router = Router();
 
   // ************************************************************************************************
