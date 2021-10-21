@@ -5,11 +5,14 @@ import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
 import { UserContactType } from '../../../src/models/user-contact-type.model';
-
 import {
+    app,
+    runApp,
+
     API_BASE,
     dataList,
     db,
+
     FAKE_TEXT,
     request
 } from "../commons";
@@ -29,6 +32,8 @@ describe('Probas DATOS API - UserContactTypes (GET)', () => {
 	beforeAll(async () => {
         await db.init();
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -36,6 +41,8 @@ describe('Probas DATOS API - UserContactTypes (GET)', () => {
 	});
 
 	afterAll(async () => {
+        await app.stop();
+
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 		await db.close();
@@ -63,6 +70,7 @@ describe('Probas DATOS API - UserContactTypes (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataList.userContactTypes.length);
+        expect(data[0].id).toBe(dataList.userContactTypes[0].id);
 
         expect(total).toBe(dataList.userContactTypes.length);
         expect(from).toBe(0);

@@ -5,11 +5,14 @@ import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import { AssignedStage } from '../../../src/models/assigned-stage.model';
 
-
 import {
+    app,
+    runApp,
+
     API_BASE,
     dataList,
     db,
+
     FAKE_TEXT,
     request
 } from "../commons";
@@ -29,6 +32,8 @@ describe('Probas DATOS API - AssignedStages (GET)', () => {
 	beforeAll(async () => {
         await db.init();
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -36,6 +41,8 @@ describe('Probas DATOS API - AssignedStages (GET)', () => {
 	});
 
 	afterAll(async () => {
+        await app.stop();
+
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 		await db.close();
@@ -63,6 +70,7 @@ describe('Probas DATOS API - AssignedStages (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataList.assignedStages.length);
+        expect(data[0].id).toBe(dataList.assignedStages[0].id);
 
         expect(total).toBe(dataList.assignedStages.length);
         expect(from).toBe(0);

@@ -33,12 +33,6 @@ export const FAKE_TEXT = "_fake";
 
 export const API_BASE = `/api/${apiVersion}`;
 
-// Aplicación
-export const app = new App();
-
-// Request para testing
-export const request = supertest(app.getApp());
-
 export const db: DBTestConnection = new DBTestConnection(
     DBMS,
     DB_HOST,
@@ -47,6 +41,25 @@ export const db: DBTestConnection = new DBTestConnection(
     DB_LOGIN,
     DB_PASS
 );
+
+// Aplicación
+export const app = new App();
+
+export async function runApp() {
+    app.setDbOptions(
+        DBMS,
+        DB_HOST,
+        DB_PORT,
+        DB_NAME,
+        DB_LOGIN,
+        DB_PASS
+    );
+    await app.dbConnection();
+    await app.start();
+}
+
+// Request para testing
+export const request = supertest(app.getAppExpress());
 
 // Lista de datos
 export const dataList = new ObjectFactory();

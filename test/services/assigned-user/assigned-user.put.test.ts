@@ -7,11 +7,15 @@ import HttpStatus from 'http-status-codes';
 import { AssignedUser } from '../../../src/models/assigned-user.model';
 
 import {
+    app,
+    runApp,
+
     API_BASE,
     dataList,
     db,
+
     FAKE_TEXT,
-    request,
+    request
 } from "../commons";
 import { User } from "../../../src/models/user.model";
 
@@ -31,6 +35,8 @@ describe('Probas DATOS API - AssignedUsers (PUT)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -42,6 +48,8 @@ describe('Probas DATOS API - AssignedUsers (PUT)', () => {
 	});
 
 	afterAll(async () => {
+        await app.stop();
+
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 		await db.close();

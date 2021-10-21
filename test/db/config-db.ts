@@ -16,6 +16,14 @@ export class DBTestConnection {
   // ** ATRIBUTOS
   // ************************************************************************************************
   protected dbms      : string;
+  protected host      : string;
+  protected port      : number;
+
+  protected dbName    : string;
+
+  protected user      : string;
+  protected password  : string;
+  protected clientUrl : string;
   public options      : Options;
   public orm          : MikroORM<MongoDriver>;
   protected protocol  : string;
@@ -33,12 +41,15 @@ export class DBTestConnection {
     password  : string
   ) {
     this.dbms     = dbms;
+    this.host     = host;
+    this.port     = Number(port);
+    this.dbName   = dbName;
+    this.user     = user;
+    this.password = password;
 
     this.options = {
       entities    : ['bin/models/*.js'],
       entitiesTs  : ['src/models/*.ts'],
-
-      clientUrl   : `mongodb://${user}:${password}@${host}:${port}/${dbName}?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`,
 
       timezone    : '+02:00',
     }
@@ -54,20 +65,25 @@ export class DBTestConnection {
    * Incia os parámteros do SXBD segundo os parámetros pasados no construtor.
    */
   configure(): void {
+    let uriOptions = "";
+
     switch (this.dbms) {
       case 'postgresql':
       case 'pgsql':
-        this.options.type = 'postgresql';
         this.protocol = 'postgres';
+        this.options.type = 'postgresql';
         break;
       case 'mongodb':
       case 'mongo':
       default:
+        this.protocol = 'mongodb';
         this.options.type = 'mongo';
         this.options.highlighter = new MongoHighlighter();
-        this.protocol = 'mongodb';
+        uriOptions = "?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false"
         break;
     }
+
+    this.options.clientUrl = `${this.protocol}://${this.user}:${this.password}@${this.host}:${this.port}/${this.dbName}${uriOptions}`;
   }
 
   /**

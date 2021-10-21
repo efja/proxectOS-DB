@@ -5,16 +5,19 @@ import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
 import { DBTestConnection } from "../db/config-db";
+import { app, runApp } from './commons';
 import {
     API_BASE,
     api_name,
     api_version,
+
     DBMS,
     DB_HOST,
     DB_LOGIN,
     DB_NAME,
     DB_PASS,
     DB_PORT,
+
     FAKE_TEXT,
     request
 } from "./commons";
@@ -22,11 +25,11 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas básicas de conexión cá BD', () => {
+describe('1: Probas para ver se a BD está levantada', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('conexión OK', async () => {
+    test('1.1: Conexión OK', async () => {
         const conn = await new DBTestConnection(
             DBMS,
             DB_HOST,
@@ -39,7 +42,7 @@ describe('Probas básicas de conexión cá BD', () => {
         expect(await conn.orm.isConnected()).toBe(true);
     });
 
-    test('conexión KO', async () => {
+    test('1.2: Conexión KO', async () => {
         const conn = new DBTestConnection(
             DBMS,
             DB_HOST,
@@ -63,18 +66,36 @@ describe('Probas básicas de conexión cá BD', () => {
     });
 });
 
-describe('Probas básicas de conexión coa API (GET)', () => {
+describe('2: Probas básicas de conexión coa API (GET)', () => {
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await runApp();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+	});
+
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Info API: <${API_BASE}>`, async() => {
+    test(`2.1: Info API: <${API_BASE}>`, async() => {
         const response = await request.get(API_BASE);
 
         expect(response.status).toBe(HttpStatus.OK);
         expect(response.body).toBe(i18next.t('WELCOME', { app: api_name, version: api_version }));
     });
 
-    test(`Info API URL errónea: <${API_BASE}${FAKE_TEXT}>`, async() => {
+    test(`2.2: Conexión cá BD:`, async() => {
+        const conn = await app.getDb().checkConnection();
+
+        expect(conn.isConnected).toBe(true);
+        expect(await conn.orm).toBeDefined();
+    });
+
+    test(`2.3: Info API URL errónea: <${API_BASE}${FAKE_TEXT}>`, async() => {
         const response = await request.get(`${API_BASE}${FAKE_TEXT}`);
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);

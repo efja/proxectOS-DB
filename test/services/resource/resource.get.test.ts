@@ -5,11 +5,14 @@ import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
 import { Resource } from '../../../src/models/resource.model';
-
 import {
+    app,
+    runApp,
+
     API_BASE,
     dataList,
     db,
+
     FAKE_TEXT,
     request
 } from "../commons";
@@ -29,6 +32,8 @@ describe('Probas DATOS API - Resources (GET)', () => {
 	beforeAll(async () => {
         await db.init();
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -36,6 +41,8 @@ describe('Probas DATOS API - Resources (GET)', () => {
 	});
 
 	afterAll(async () => {
+        await app.stop();
+
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 		await db.close();
@@ -63,6 +70,7 @@ describe('Probas DATOS API - Resources (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataList.resources.length);
+        expect(data[0].id).toBe(dataList.resources[0].id);
 
         expect(total).toBe(dataList.resources.length);
         expect(from).toBe(0);

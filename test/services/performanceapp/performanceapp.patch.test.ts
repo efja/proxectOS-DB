@@ -8,11 +8,15 @@ import * as jsonpatch from 'fast-json-patch';
 import { PerformanceApp } from '../../../src/models/performanceapp.model';
 
 import {
+    app,
+    runApp,
+
     API_BASE,
     dataList,
     db,
+
     FAKE_TEXT,
-    request,
+    request
 } from "../commons";
 
 // ####################################################################################################
@@ -31,6 +35,8 @@ describe('Probas DATOS API - PerformanceApps (PATCH)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -42,6 +48,8 @@ describe('Probas DATOS API - PerformanceApps (PATCH)', () => {
 	});
 
 	afterAll(async () => {
+        await app.stop();
+
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 		await db.close();

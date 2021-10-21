@@ -8,9 +8,14 @@ import { User } from "../../../src/models/user.model";
 import { AssignedResource } from '../../../src/models/assigned-resource.model';
 
 import {
+    app,
+    runApp,
+
     API_BASE,
     dataList,
     db,
+
+    FAKE_TEXT,
     request
 } from "../commons";
 
@@ -30,6 +35,8 @@ describe('Probas DATOS API - AssignedResources (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -41,6 +48,8 @@ describe('Probas DATOS API - AssignedResources (POST)', () => {
 	});
 
 	afterAll(async () => {
+        await app.stop();
+
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 		await db.close();

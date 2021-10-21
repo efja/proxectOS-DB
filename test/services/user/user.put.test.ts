@@ -7,11 +7,15 @@ import HttpStatus from 'http-status-codes';
 import { User } from '../../../src/models/user.model';
 
 import {
+    app,
+    runApp,
+
     API_BASE,
     dataList,
     db,
+
     FAKE_TEXT,
-    request,
+    request
 } from "../commons";
 
 // ####################################################################################################
@@ -30,6 +34,8 @@ describe('Probas DATOS API - Users (PUT)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -41,6 +47,8 @@ describe('Probas DATOS API - Users (PUT)', () => {
 	});
 
 	afterAll(async () => {
+        await app.stop();
+
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 		await db.close();
