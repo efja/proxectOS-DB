@@ -24,7 +24,7 @@ export class ProjectController {
   constructor() { }
 
   // ************************************************************************************************
-  // ** MÉTODOS CRUD (CONSULTA)
+  // ** MÉTODOS CRUD (READ)
   // ************************************************************************************************
   /**
    * Recupera tódolos proxectos
@@ -39,18 +39,30 @@ export class ProjectController {
     next  : next
   ): Promise<any> => {
     try {
+      let message;
+      let error;
+      let code = HttpStatus.NOT_FOUND;
+
       const data = await this.projectService.getAllProjects();
 
+      if (data == null) {
+        error = req.t('PROJECT.SERVICE.ERROR.GET_ALL');
+      } else {
+        code = HttpStatus.OK;
+        message = req.t('PROJECT.SERVICE.SUCCESS.GET_ALL');
+      }
+
       let responseData : ResponseData = {
-        code    : HttpStatus.OK,
+        code,
         data    : data,
         total   : data.length,
         from    : 0,
         limit   : 0,
-        message : req.t('PROJECT.SERVICE.SUCCESS.GET_ALL'),
+        message,
+        error,
       };
 
-      res.status(HttpStatus.OK).json(responseData);
+      res.status(code).json(responseData);
     } catch (error) {
       next(error);
     }
@@ -69,15 +81,28 @@ export class ProjectController {
     next  : next
   ): Promise<any> => {
     try {
-      const data = {};
+      let code = HttpStatus.NOT_FOUND;
+      let message;
+      let error;
+
+      const { id } = req.params;
+      const data = await this.projectService.getProject(id);
+
+      if (data == null) {
+        error = req.t('PROJECT.SERVICE.ERROR.GET_SINGLE');
+      } else {
+        code = HttpStatus.OK;
+        message = req.t('PROJECT.SERVICE.SUCCESS.GET_SINGLE');
+      }
 
       let responseData : ResponseData = {
-        code    : HttpStatus.OK,
+        code,
         data    : data,
-        message : req.t('PROJECT.SERVICE.SUCCESS.GET_SINGLE')
+        message,
+        error,
       };
 
-      res.status(HttpStatus.OK).json(responseData);
+      res.status(code).json(responseData);
     } catch (error) {
       next(error);
     }

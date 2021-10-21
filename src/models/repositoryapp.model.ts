@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany, Unique } from '@mikro-orm/core';
 
-import { CustomBaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./custom-base-entity.model";
 
 import { AssignedUser } from './assigned-user.model';
 import { CommentApp } from './commentapp.model';

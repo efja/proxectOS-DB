@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToMany, Unique, wrap } from '@mikro-orm/core';
 
-import { CustomBaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./custom-base-entity.model";
 
 import { Role } from './role.model';
 
