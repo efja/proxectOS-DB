@@ -20,14 +20,6 @@ const {
     APP_HOST,
     APP_PORT,
     API_PREFIX,
-
-    DBMS,
-    DB_HOST,
-    DB_PORT,
-    DB_NAME,
-
-    DB_LOGIN,
-    DB_PASS,
 } = process.env;
 
 // ####################################################################################################
@@ -39,15 +31,8 @@ export class App {
     // ************************************************************************************************
     private app         : Application;
     private apiVersion  : string | number;
-    private db          : DBConnection = new DBConnection(
-        DBMS,
-        DB_HOST,
-        DB_PORT,
-        DB_NAME,
-
-        DB_LOGIN,
-        DB_PASS,
-    );
+    private db          : DBConnection;
+    private appServer   : any;
 
     // ************************************************************************************************
     // ** CONSTRUTOR
@@ -62,55 +47,38 @@ export class App {
     }
 
     // ************************************************************************************************
-    // ** MÉTODOS
+    // ** GETTERS
     // ************************************************************************************************
     /**
-     * Inicia a conexión coa Base de Datos
+     * Devolve a instancia desta clase
+     *
+     * @returns unha instancia desta clase
      */
-    public dbConnection() {
-        this.db.start();
-
+    public getApp(): App {
         return this;
     }
 
     /**
-     * Finaliza a conexión coa Base de Datos
+     * Devolve a instancia de express manexado por esta clase.
+     *
+     * @returns unha instancia desta clase
      */
-    public dbConnectionStop() {
-        this.db.stop();
-
-        return this;
+    public getAppExpress(): Application {
+        return this.app;
     }
 
     /**
-     * Toma o número de versión a partir da versión definida no ficheiro json
+     * Devolve a instancia desta clase
+     *
+     * @returns unha instancia desta clase
      */
-    public getAPIVersion():string {
-        let apiFullVersion = process.env.npm_package_version.split(".");
-        let apiPrefix = API_PREFIX;
-
-        let result = `${apiPrefix}${apiFullVersion[0]}`;
-
-        return result;
+    public getDb(): DBConnection {
+        return this.db;
     }
 
-    /**
-     * Inicializa os idiomas
-     */
-    public languages(): void {
-        i18next
-            .use(i18nextBack)
-            .use(i18nextMidd.LanguageDetector)
-            .init(
-                {
-                    fallbackLng: 'gl',
-                    backend: {
-                        loadPath: './locales/{{lng}}.json'
-                    }
-                }
-            );
-    }
-
+    // ************************************************************************************************
+    // ** MÉTODOS DE CONFIGURACIÓN
+    // ************************************************************************************************
     /**
      * Inicializa os middlewares
      */
@@ -128,38 +96,119 @@ export class App {
         this.app.use(`/api/${this.apiVersion}`, routes());
     }
 
+    // ************************************************************************************************
+    // ** MÉTODOS DE INICIO PARADA
+    // ************************************************************************************************
     /**
      * Arranca a aplicación
      */
-    public start(): void {
-        this.app.listen(APP_PORT, () => {
+    public start(): App {
+        this.appServer = this.app.listen(APP_PORT, () => {
             console.log(colors.bgBlue(`Aplicación levantada en: ${APP_HOST}:${APP_PORT}/api/${this.apiVersion}/`));
         });
+
+        return this;
     }
 
     /**
      * Para a aplicación
      */
-    public stop(): void {
-        this.dbConnectionStop();
-        this.app.close();
+    public async stop() {
+        await this.dbConnectionStop();
+        this.appServer.close();
+    }
+
+    // ************************************************************************************************
+    // ** MÉTODOS DE BASE DE DATOS
+    // ************************************************************************************************
+    /**
+     * Inicia a conexión coa Base de Datos
+     */
+    public async dbConnection() {
+        await this.db.startInfo();
+
+        return this;
     }
 
     /**
-     * Devolve a instancia desta clase
-     *
-     * @returns unha instancia desta clase
+     * Establece a configuración da BD cos parámetros do entorno de execución.
      */
-    public getApp(): Application {
-        return this.app;
+    public async setDbOptionsFromEnv() {
+        this.db = new DBConnection();
+
+        return this;
     }
 
     /**
-     * Devolve a instancia desta clase
+     * Establece a configuración da BD con parámetros personalizados.
      *
-     * @returns unha instancia desta clase
+     * @param dbms Sistema Xestor de Base de Datos (siglas en inglés)
+     * @param host Máquina do DBMS
+     * @param port Porto do servicio do DBMS
+     * @param dbName Nome da BD
+     * @param user Usuario de conexión
+     * @param password Contrasinal
      */
-    public getDb(): DBConnection {
-        return this.db;
+    public async setDbOptions(
+      dbms      : string,
+      host      : string,
+      port      : string,
+      dbName    : string,
+
+      user      : string,
+      password  : string
+    ) {
+        this.db = new DBConnection();
+        this.db .setOptions(
+            dbms,
+            host,
+            port,
+            dbName,
+            user,
+            password
+          );
+
+        return this;
     }
+
+    /**
+     * Finaliza a conexión coa Base de Datos
+     */
+    public async dbConnectionStop() {
+        await this.db.close();
+
+        return this;
+    }
+    /**
+     * Inicializa os idiomas
+     */
+    public languages(): void {
+        i18next
+            .use(i18nextBack)
+            .use(i18nextMidd.LanguageDetector)
+            .init(
+                {
+                    fallbackLng: 'gl',
+                    backend: {
+                        loadPath: './locales/{{lng}}.json'
+                    }
+                }
+            );
+    }
+
+    // ************************************************************************************************
+    // ** UTILIDADES
+    // ************************************************************************************************
+    /**
+     * Toma o número de versión a partir da versión definida no ficheiro json
+     */
+    public getAPIVersion():string {
+        let apiFullVersion = process.env.npm_package_version.split(".");
+        let apiPrefix = API_PREFIX;
+
+        let result = `${apiPrefix}${apiFullVersion[0]}`;
+
+        return result;
+    }
+
 }

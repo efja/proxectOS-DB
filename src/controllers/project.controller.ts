@@ -7,6 +7,7 @@ import { ProjectService } from '../services/project.service';
 
 import { req, res, next } from 'express';
 import { ResponseData } from '../interfaces/response-data.interface';
+import { DBConnection } from '../config/config-db';
 
 // ####################################################################################################
 // ## CLASE ProjectController
@@ -15,7 +16,7 @@ export class ProjectController {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  public ProjectService = new ProjectService();
+  public projectService : ProjectService = new ProjectService();
 
   // ************************************************************************************************
   // ** CONSTRUTOR
@@ -38,7 +39,7 @@ export class ProjectController {
     next  : next
   ): Promise<any> => {
     try {
-      const data = [];
+      const data = await this.projectService.getAllProjects();
 
       let responseData : ResponseData = {
         code    : HttpStatus.OK,
