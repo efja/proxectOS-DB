@@ -1,7 +1,7 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { CustomBaseEntity } from '../../src/models/base-entity.model';
+import { CustomBaseEntity } from '../../src/models/custom-base-entity.model';
 
 // MODELOS SEN DEPENDENCIAS
 import { Priority } from '../../src/models/priority.model';

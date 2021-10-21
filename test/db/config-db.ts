@@ -5,7 +5,8 @@ import { MikroORM, Options } from '@mikro-orm/core';
 import { Configuration } from '@mikro-orm/core';
 import { MongoHighlighter } from '@mikro-orm/mongo-highlighter';
 import { MongoDriver } from '@mikro-orm/mongodb';
-import { CustomBaseEntity } from '../../src/models/base-entity.model';
+import { CustomBaseEntity } from '../../src/models/custom-base-entity.model';
+import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 
 
 // ####################################################################################################
@@ -48,10 +49,13 @@ export class DBTestConnection {
     this.password = password;
 
     this.options = {
-      entities    : ['bin/models/*.js'],
-      entitiesTs  : ['src/models/*.ts'],
+      entities          : ['bin/models/*.js'],
+      entitiesTs        : ['src/models/*.ts'],
 
-      timezone    : '+02:00',
+      timezone          : '+02:00',
+
+      metadataProvider  : TsMorphMetadataProvider,
+      // debug             : true,
     }
 
     // Inicialización do servicio
@@ -70,9 +74,6 @@ export class DBTestConnection {
     switch (this.dbms) {
       case 'postgresql':
       case 'pgsql':
-        this.protocol = 'postgres';
-        this.options.type = 'postgresql';
-        break;
       case 'mongodb':
       case 'mongo':
       default:

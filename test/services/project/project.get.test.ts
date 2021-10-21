@@ -17,6 +17,7 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
@@ -41,11 +42,14 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         await db.inicializeData(dataList.projects, true);
 	});
 
+	// afterEach(async () => {
+	// 	await db.dropAllData(dataList.allModels);
+	// 	await db.dropCollections();
+	// });
+
 	afterAll(async () => {
         await app.stop();
 
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
 		await db.close();
 	});
 
@@ -65,6 +69,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.OK);
         expect(code).toBe(HttpStatus.OK);
@@ -92,6 +97,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         const project = dataList.projects[0] as Project;
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.OK);
         expect(code).toBe(HttpStatus.OK);
@@ -108,8 +114,8 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         expect(data.description).toBe(project.description);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(project.startDate);
-        expect(data.targetFinishDate).toBe(project.targetFinishDate);
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(project.startDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(project.targetFinishDate));
 
         expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.GET_SINGLE'));
     });
@@ -124,11 +130,12 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         } = response.body
 
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeUndefined();
+        expect(data).toBeNull();
 
-        expect(message).toBe(i18next.t('PROJECT.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.GET_SINGLE'));
     });
 });
