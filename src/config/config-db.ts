@@ -71,6 +71,23 @@ export class DBConnection {
   // ************************************************************************************************
   // ** MÉTODOS CONFIGURACIÓN
   // ************************************************************************************************
+  /**
+   * Establece a configuración da BD cos parámetros do entorno de execución.
+   */
+  public setOptionsFromEnv() {
+    this.setOptions(DBMS, DB_HOST, DB_PORT, DB_NAME, DB_LOGIN, DB_PASS,);
+  }
+
+  /**
+   * Establece a configuración da BD con parámetros personalizados.
+   *
+   * @param dbms Sistema Xestor de Base de Datos (siglas en inglés)
+   * @param host Máquina do DBMS
+   * @param port Porto do servicio do DBMS
+   * @param dbName Nome da BD
+   * @param user Usuario de conexión
+   * @param password Contrasinal
+   */
   public setOptions(
     dbms      : string,
     host      : string,
@@ -87,38 +104,6 @@ export class DBConnection {
     this.user     = user;
     this.password = password;
 
-    this.options = {
-      entities    : ['bin/models/*.js'],
-      entitiesTs  : ['src/models/*.ts'],
-
-      clientUrl   : this.clientUrl,
-
-      timezone    : '+02:00',
-
-      metadataProvider  : TsMorphMetadataProvider,
-    };
-
-    this.configure();
-  }
-  public setOptionsFromEnv() {
-    this.dbms     = DBMS;
-    this.host     = DB_HOST;
-    this.port     = Number(DB_PORT);
-    this.dbName   = DB_NAME;
-    this.user     = DB_LOGIN;
-    this.password = DB_PASS;
-
-    this.options = {
-      entities    : ['bin/models/*.js'],
-      entitiesTs  : ['src/models/*.ts'],
-
-      clientUrl   : this.clientUrl,
-
-      timezone    : '+02:00',
-
-      metadataProvider  : TsMorphMetadataProvider,
-    };
-
     this.configure();
   }
 
@@ -128,12 +113,20 @@ export class DBConnection {
   public configure(): void {
     let uriOptions = "";
 
+    this.options = {
+      entities    : ['bin/models/*.js'],
+      entitiesTs  : ['src/models/*.ts'],
+
+      clientUrl   : this.clientUrl,
+
+      timezone    : '+02:00',
+
+      metadataProvider  : TsMorphMetadataProvider,
+    };
+
     switch (this.dbms) {
       case 'postgresql':
       case 'pgsql':
-        this.protocol = 'postgresql';
-        this.options.type = 'postgresql';
-        break;
       case 'mongodb':
       case 'mongo':
       default:

@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
-import { CustomBaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./custom-base-entity.model";
 
 import { User } from './user.model';
 import { UserGroup } from './user-group.model';

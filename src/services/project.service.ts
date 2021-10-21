@@ -3,19 +3,8 @@
 // ####################################################################################################
 import { QueryOrder } from '@mikro-orm/core';
 
-import { App } from './api.service';
 import { DBConnection } from '../config/config-db';
 import { Project } from '../models/project.model';
-
-const {
-  DBMS,
-  DB_HOST,
-  DB_PORT,
-  DB_NAME,
-
-  DB_LOGIN,
-  DB_PASS,
-} = process.env;
 
 // ####################################################################################################
 // ## CLASE ProjectService
@@ -24,7 +13,6 @@ export class ProjectService {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private app         : App;
   private db          : DBConnection;
   private respository : any;
 
@@ -36,7 +24,7 @@ export class ProjectService {
   }
 
   // ************************************************************************************************
-  // ** MÉTODOS
+  // ** MÉTODOS CONEXIÓN BD
   // ************************************************************************************************
   private async createDbConnection() {
     this.db = new DBConnection();
@@ -45,8 +33,59 @@ export class ProjectService {
     this.respository = this.db.getRepository(Project);
 
   }
-  public async getAllProjects(): Promise<any[]> {
-    let result : any[] = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
+
+  // ************************************************************************************************
+  // ** CRUD
+  // ************************************************************************************************
+  // ------------------------------------------------------------------------------------------------
+  // -- CREATE
+  // ------------------------------------------------------------------------------------------------
+  public async createProject(): Promise<Project> {
+    let result : Project = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
+
+    return result;
+  }
+
+  // ------------------------------------------------------------------------------------------------
+  // -- READ
+  // ------------------------------------------------------------------------------------------------
+  // GET
+  public async getAllProjects(): Promise<Project[]> {
+    let result : Project[] = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
+
+    return result;
+  }
+
+  // GET
+  public async getProject(id: string): Promise<Project> {
+    let result : Project = await this.respository.findOne(id);
+
+    return result;
+  }
+
+  // ------------------------------------------------------------------------------------------------
+  // -- UPDATE
+  // ------------------------------------------------------------------------------------------------
+  // PUT
+  public async updateProject(): Promise<Project> {
+    let result : Project = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
+
+    return result;
+  }
+
+  // PATCH
+  public async modifyProject(): Promise<Project> {
+    let result : Project = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
+
+    return result;
+  }
+
+  // ------------------------------------------------------------------------------------------------
+  // -- DELETE
+  // ------------------------------------------------------------------------------------------------
+  // DELETE
+  public async deleteProject(): Promise<Project> {
+    let result : Project = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
 
     return result;
   }

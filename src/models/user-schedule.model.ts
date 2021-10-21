@@ -3,7 +3,7 @@
 // ####################################################################################################
 import { Entity, Property } from '@mikro-orm/core';
 
-import { CustomBaseEntity } from "./base-entity.model";
+import { CustomBaseEntity } from "./custom-base-entity.model";
 
 // ####################################################################################################
 // ## CLASE UserSchedule
