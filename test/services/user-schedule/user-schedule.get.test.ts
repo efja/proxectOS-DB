@@ -5,11 +5,14 @@ import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
 import { UserSchedule } from '../../../src/models/user-schedule.model';
-
 import {
+    app,
+    runApp,
+
     API_BASE,
     dataList,
     db,
+
     FAKE_TEXT,
     request
 } from "../commons";
@@ -29,6 +32,8 @@ describe('Probas DATOS API - UserSchedules (GET)', () => {
 	beforeAll(async () => {
         await db.init();
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -36,6 +41,8 @@ describe('Probas DATOS API - UserSchedules (GET)', () => {
 	});
 
 	afterAll(async () => {
+        await app.stop();
+
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 		await db.close();
@@ -63,6 +70,7 @@ describe('Probas DATOS API - UserSchedules (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataList.userSchedules.length);
+        expect(data[0].id).toBe(dataList.userSchedules[0].id);
 
         expect(total).toBe(dataList.userSchedules.length);
         expect(from).toBe(0);

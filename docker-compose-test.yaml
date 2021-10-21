@@ -11,8 +11,3 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=abc123.
       - MONGODB_DATABASE=ProxectOS-test
-    volumes:
-      - proxectos-db-test:/data/db
-volumes:
-  proxectos-db-test:
-    external: false

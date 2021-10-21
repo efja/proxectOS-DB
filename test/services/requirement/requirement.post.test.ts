@@ -8,9 +8,14 @@ import { Requirement } from '../../../src/models/requirement.model';
 import { User } from "../../../src/models/user.model";
 
 import {
+    app,
+    runApp,
+
     API_BASE,
     dataList,
     db,
+
+    FAKE_TEXT,
     request
 } from "../commons";
 

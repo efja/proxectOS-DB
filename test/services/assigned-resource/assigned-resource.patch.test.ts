@@ -7,11 +7,15 @@ import * as jsonpatch from 'fast-json-patch';
 import { AssignedResource } from '../../../src/models/assigned-resource.model';
 
 import {
+    app,
+    runApp,
+
     API_BASE,
     dataList,
     db,
+
     FAKE_TEXT,
-    request,
+    request
 } from "../commons";
 
 // ####################################################################################################
@@ -30,6 +34,8 @@ describe('Probas DATOS API - AssignedResources (PATCH)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -37,10 +43,12 @@ describe('Probas DATOS API - AssignedResources (PATCH)', () => {
 	});
 
 	afterEach(async () => {
-		await db.dropAllData(dataList.allModels);
+        await db.dropAllData(dataList.allModels);
 	});
 
 	afterAll(async () => {
+        await app.stop();
+
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 		await db.close();

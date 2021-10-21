@@ -7,9 +7,13 @@ import HttpStatus from 'http-status-codes';
 import { Project } from '../../../src/models/project.model';
 
 import {
+    app,
+    runApp,
+
     API_BASE,
     dataList,
     db,
+
     FAKE_TEXT,
     request
 } from "../commons";
@@ -17,7 +21,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Projects (GET)', () => {
+describe('1: Probas DATOS API - Projects (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -29,6 +33,8 @@ describe('Probas DATOS API - Projects (GET)', () => {
 	beforeAll(async () => {
         await db.init();
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -36,6 +42,8 @@ describe('Probas DATOS API - Projects (GET)', () => {
 	});
 
 	afterAll(async () => {
+        await app.stop();
+
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 		await db.close();
@@ -44,7 +52,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos Projects:', async() => {
+    test('1.1: Tódolos Projects:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -63,6 +71,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataList.projects.length);
+        expect(data[0].id).toBe(dataList.projects[0].id);
 
         expect(total).toBe(dataList.projects.length);
         expect(from).toBe(0);
@@ -71,7 +80,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
         expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`Project: <${dataList.projects[0].id}>`, async() => {
+    test(`1.2: Project: <${dataList.projects[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.projects[0].id}`);
         const {
             code,
@@ -105,7 +114,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
         expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`Project inexistente:`, async() => {
+    test(`1.3: Project inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.projects[0].id}${FAKE_TEXT}`);
         const {
             code,
