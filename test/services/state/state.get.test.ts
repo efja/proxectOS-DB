@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - States (GET)', () => {
+describe('1: Probas DATOS API - States (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - States (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos States:', async() => {
+    test('1.1: Consultar tódolos States:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - States (GET)', () => {
         expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`State: <${dataList.states[0].id}>`, async() => {
+    test(`1.2: Consultar State: <${dataList.states[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.states[0].id}`);
         const {
             code,
@@ -109,7 +109,7 @@ describe('Probas DATOS API - States (GET)', () => {
         expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`State inexistente:`, async() => {
+    test(`1.3: Consultar State inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.states[0].id}${FAKE_TEXT}`);
         const {
             code,

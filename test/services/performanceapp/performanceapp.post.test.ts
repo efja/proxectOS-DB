@@ -18,11 +18,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - PerformanceApps (POST)', () => {
+describe('1: Probas DATOS API - PerformanceApps (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +55,7 @@ describe('Probas DATOS API - PerformanceApps (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear PerformanceApp: <${dataList.performances[0].id}>`, async() => {
+    test(`1.1: Crear PerformanceApp: <${dataList.performances[0].id}>`, async() => {
         const performanceApp = dataList.performances[0] as PerformanceApp;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(performanceApp);
@@ -82,13 +83,13 @@ describe('Probas DATOS API - PerformanceApps (POST)', () => {
         expect(data.description).toBe(performanceApp.description);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(performanceApp.startDate);
-        expect(data.targetFinishDate).toBe(performanceApp.targetFinishDate);
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(performanceApp.startDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp.targetFinishDate));
 
         expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear PerformanceApp con datos erróneos:`, async() => {
+    test(`1.2: Crear PerformanceApp con datos erróneos:`, async() => {
         const badPerformanceApp = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badPerformanceApp);
@@ -111,7 +112,7 @@ describe('Probas DATOS API - PerformanceApps (POST)', () => {
         expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de PerformanceApps:', async() => {
+    test('1.3: Crear lista de PerformanceApps:', async() => {
         const performanceApps = [
             dataList.performances[0] as PerformanceApp,
             dataList.performances[0] as PerformanceApp,
@@ -157,7 +158,7 @@ describe('Probas DATOS API - PerformanceApps (POST)', () => {
         expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de PerformanceApps algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de PerformanceApps algúns con datos erróneos:', async() => {
         const badPerformanceApps = [
             dataList.performances[0] as PerformanceApp,
             dataList.users[0] as User,

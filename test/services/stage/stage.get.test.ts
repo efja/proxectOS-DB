@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Stages (GET)', () => {
+describe('1: Probas DATOS API - Stages (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - Stages (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos Stages:', async() => {
+    test('1.1: Consultar tódolos Stages:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - Stages (GET)', () => {
         expect(message).toBe(i18next.t('STAGE.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`Stage: <${dataList.stages[0].id}>`, async() => {
+    test(`1.2: Consultar Stage: <${dataList.stages[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.stages[0].id}`);
         const {
             code,
@@ -109,7 +109,7 @@ describe('Probas DATOS API - Stages (GET)', () => {
         expect(message).toBe(i18next.t('STAGE.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`Stage inexistente:`, async() => {
+    test(`1.3: Consultar Stage inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.stages[0].id}${FAKE_TEXT}`);
         const {
             code,

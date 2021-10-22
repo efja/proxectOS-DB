@@ -18,11 +18,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Requirements (POST)', () => {
+describe('1: Probas DATOS API - Requirements (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +55,7 @@ describe('Probas DATOS API - Requirements (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear Requirement: <${dataList.requirements[0].id}>`, async() => {
+    test(`1.1: Crear Requirement: <${dataList.requirements[0].id}>`, async() => {
         const requirement = dataList.requirements[0] as Requirement;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(requirement);
@@ -82,13 +83,13 @@ describe('Probas DATOS API - Requirements (POST)', () => {
         expect(data.description).toBe(requirement.description);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(requirement.startDate);
-        expect(data.targetFinishDate).toBe(requirement.targetFinishDate);
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(requirement.startDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(requirement.targetFinishDate));
 
         expect(message).toBe(i18next.t('REQUIREMENT.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear Requirement con datos erróneos:`, async() => {
+    test(`1.2: Crear Requirement con datos erróneos:`, async() => {
         const badRequirement = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badRequirement);
@@ -111,7 +112,7 @@ describe('Probas DATOS API - Requirements (POST)', () => {
         expect(message).toBe(i18next.t('REQUIREMENT.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de Requirements:', async() => {
+    test('1.3: Crear lista de Requirements:', async() => {
         const requirements = [
             dataList.requirements[0] as Requirement,
             dataList.requirements[0] as Requirement,
@@ -157,7 +158,7 @@ describe('Probas DATOS API - Requirements (POST)', () => {
         expect(message).toBe(i18next.t('REQUIREMENT.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de Requirements algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de Requirements algúns con datos erróneos:', async() => {
         const badRequirements = [
             dataList.requirements[0] as Requirement,
             dataList.users[0] as User,

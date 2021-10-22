@@ -18,11 +18,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - CommentApps (POST)', () => {
+describe('1: Probas DATOS API - CommentApps (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +55,7 @@ describe('Probas DATOS API - CommentApps (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear CommentApp: <${dataList.comments[0].id}>`, async() => {
+    test(`1.1: Crear CommentApp: <${dataList.comments[0].id}>`, async() => {
         const commentApp = dataList.comments[0] as CommentApp;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(commentApp);
@@ -82,12 +83,12 @@ describe('Probas DATOS API - CommentApps (POST)', () => {
         expect(data.message).toBe(commentApp.message);
 
         // Comprobanse algúns datos opcionais
-        expect(data.expirationDate).toBe(commentApp.expirationDate);
+        expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(commentApp.expirationDate));
 
         expect(message).toBe(i18next.t('COMMENT.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear CommentApp con datos erróneos:`, async() => {
+    test(`1.2: Crear CommentApp con datos erróneos:`, async() => {
         const badCommentApp = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badCommentApp);
@@ -110,7 +111,7 @@ describe('Probas DATOS API - CommentApps (POST)', () => {
         expect(message).toBe(i18next.t('COMMENT.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de CommentApps:', async() => {
+    test('1.3: Crear lista de CommentApps:', async() => {
         const commentApps = [
             dataList.comments[0] as CommentApp,
             dataList.comments[0] as CommentApp,
@@ -156,7 +157,7 @@ describe('Probas DATOS API - CommentApps (POST)', () => {
         expect(message).toBe(i18next.t('COMMENT.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de CommentApps algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de CommentApps algúns con datos erróneos:', async() => {
         const badCommentApps = [
             dataList.comments[0] as CommentApp,
             dataList.users[0] as User,

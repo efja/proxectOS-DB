@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - UserContactTypes (PATCH)', () => {
+describe('1: Probas DATOS API - UserContactTypes (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -58,7 +58,7 @@ describe('Probas DATOS API - UserContactTypes (PATCH)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar UserContactType: <${dataList.userContactTypes[0].id}>`, async() => {
+    test(`1.1: Actualizar UserContactType: <${dataList.userContactTypes[0].id}>`, async() => {
         const userContactType0 = dataList.userContactTypes[0] as UserContactType;
         const userContactType1 = dataList.userContactTypes[0] as UserContactType;
 
@@ -96,7 +96,7 @@ describe('Probas DATOS API - UserContactTypes (PATCH)', () => {
         expect(message).toBe(i18next.t('USER_CONTACT_TYPE.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar UserContactType con datos erróneos:`, async() => {
+    test(`1.2: Actualizar UserContactType con datos erróneos:`, async() => {
         const userContactType0 = dataList.userContactTypes[0] as UserContactType;
         const userContactType1 = dataList.userContactTypes[0] as UserContactType;
 

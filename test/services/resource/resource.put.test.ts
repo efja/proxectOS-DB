@@ -21,7 +21,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Resources (PUT)', () => {
+describe('1: Probas DATOS API - Resources (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -57,7 +57,7 @@ describe('Probas DATOS API - Resources (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar Resource: <${dataList.resources[0].id}>`, async() => {
+    test(`1.1: Actualizar Resource: <${dataList.resources[0].id}>`, async() => {
         const resource0 = dataList.resources[0] as Resource;
         const resource1 = dataList.resources[0] as Resource;
 
@@ -97,7 +97,7 @@ describe('Probas DATOS API - Resources (PUT)', () => {
         expect(message).toBe(i18next.t('RESOURCE.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar Resource con datos erróneos:`, async() => {
+    test(`1.2: Actualizar Resource con datos erróneos:`, async() => {
         const resource0 = dataList.resources[0] as Resource;
 
         // Modificase o modelo Resource

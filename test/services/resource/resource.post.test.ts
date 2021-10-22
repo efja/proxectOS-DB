@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Resources (POST)', () => {
+describe('1: Probas DATOS API - Resources (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +54,7 @@ describe('Probas DATOS API - Resources (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear Resource: <${dataList.resources[0].id}>`, async() => {
+    test(`1.1: Crear Resource: <${dataList.resources[0].id}>`, async() => {
         const resource = dataList.resources[0] as Resource;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(resource);
@@ -84,7 +84,7 @@ describe('Probas DATOS API - Resources (POST)', () => {
         expect(message).toBe(i18next.t('RESOURCE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear Resource con datos erróneos:`, async() => {
+    test(`1.2: Crear Resource con datos erróneos:`, async() => {
         const badResource = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badResource);
@@ -107,7 +107,7 @@ describe('Probas DATOS API - Resources (POST)', () => {
         expect(message).toBe(i18next.t('RESOURCE.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de Resources:', async() => {
+    test('1.3: Crear lista de Resources:', async() => {
         const resources = [
             dataList.resources[0] as Resource,
             dataList.resources[0] as Resource,
@@ -153,7 +153,7 @@ describe('Probas DATOS API - Resources (POST)', () => {
         expect(message).toBe(i18next.t('RESOURCE.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de Resources algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de Resources algúns con datos erróneos:', async() => {
         const badResources = [
             dataList.resources[0] as Resource,
             dataList.users[0] as User,

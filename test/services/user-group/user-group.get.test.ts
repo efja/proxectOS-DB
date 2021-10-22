@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - UserGroups (GET)', () => {
+describe('1: Probas DATOS API - UserGroups (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - UserGroups (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos UserGroups:', async() => {
+    test('1.1: Consultar tódolos UserGroups:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - UserGroups (GET)', () => {
         expect(message).toBe(i18next.t('USER_GROUP.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`UserGroup: <${dataList.userGroups[0].id}>`, async() => {
+    test(`1.2: Consultar UserGroup: <${dataList.userGroups[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.userGroups[0].id}`);
         const {
             code,
@@ -109,7 +109,7 @@ describe('Probas DATOS API - UserGroups (GET)', () => {
         expect(message).toBe(i18next.t('USER_GROUP.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`UserGroup inexistente:`, async() => {
+    test(`1.3: Consultar UserGroup inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.userGroups[0].id}${FAKE_TEXT}`);
         const {
             code,

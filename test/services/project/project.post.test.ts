@@ -18,11 +18,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Projects (POST)', () => {
+describe('1: Probas DATOS API - Projects (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +55,7 @@ describe('Probas DATOS API - Projects (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear Project: <${dataList.projects[0].id}>`, async() => {
+    test(`1.1: Crear Project: <${dataList.projects[0].id}>`, async() => {
         const project = dataList.projects[0] as Project;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(project);
@@ -82,13 +83,13 @@ describe('Probas DATOS API - Projects (POST)', () => {
         expect(data.description).toBe(project.description);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(project.startDate);
-        expect(data.targetFinishDate).toBe(project.targetFinishDate);
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(project.startDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(project.targetFinishDate));
 
         expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear Project con datos erróneos:`, async() => {
+    test(`1.2: Crear Project con datos erróneos:`, async() => {
         const badProject = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badProject);
@@ -111,7 +112,7 @@ describe('Probas DATOS API - Projects (POST)', () => {
         expect(message).toBe(i18next.t('PROJECT.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de Projects:', async() => {
+    test('1.3: Crear lista de Projects:', async() => {
         const projects = [
             dataList.projects[0] as Project,
             dataList.projects[0] as Project,
@@ -157,7 +158,7 @@ describe('Probas DATOS API - Projects (POST)', () => {
         expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de Projects algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de Projects algúns con datos erróneos:', async() => {
         const badProjects = [
             dataList.projects[0] as Project,
             dataList.users[0] as User,

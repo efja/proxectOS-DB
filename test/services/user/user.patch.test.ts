@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Users (PATCH)', () => {
+describe('1: Probas DATOS API - Users (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -58,7 +58,7 @@ describe('Probas DATOS API - Users (PATCH)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar User: <${dataList.users[0].id}>`, async() => {
+    test(`1.1: Actualizar User: <${dataList.users[0].id}>`, async() => {
         const user0 = dataList.users[0] as User;
         const user1 = dataList.users[0] as User;
 
@@ -100,7 +100,7 @@ describe('Probas DATOS API - Users (PATCH)', () => {
         expect(message).toBe(i18next.t('USER.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar User con datos erróneos:`, async() => {
+    test(`1.2: Actualizar User con datos erróneos:`, async() => {
         const user0 = dataList.users[0] as User;
         const user1 = dataList.users[0] as User;
 

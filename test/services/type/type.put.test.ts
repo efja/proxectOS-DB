@@ -21,7 +21,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Types (PUT)', () => {
+describe('1: Probas DATOS API - Types (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -57,7 +57,7 @@ describe('Probas DATOS API - Types (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar Type: <${dataList.types[0].id}>`, async() => {
+    test(`1.1: Actualizar Type: <${dataList.types[0].id}>`, async() => {
         const type0 = dataList.types[0] as Type;
         const type1 = dataList.types[0] as Type;
 
@@ -97,7 +97,7 @@ describe('Probas DATOS API - Types (PUT)', () => {
         expect(message).toBe(i18next.t('TYPE.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar Type con datos erróneos:`, async() => {
+    test(`1.2: Actualizar Type con datos erróneos:`, async() => {
         const type0 = dataList.types[0] as Type;
 
         // Modificase o modelo Type

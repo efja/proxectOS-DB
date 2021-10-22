@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Types (GET)', () => {
+describe('1: Probas DATOS API - Types (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - Types (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos Types:', async() => {
+    test('1.1: Consultar tódolos Types:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - Types (GET)', () => {
         expect(message).toBe(i18next.t('TYPE.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`Type: <${dataList.types[0].id}>`, async() => {
+    test(`1.2: Consultar Type: <${dataList.types[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.types[0].id}`);
         const {
             code,
@@ -109,7 +109,7 @@ describe('Probas DATOS API - Types (GET)', () => {
         expect(message).toBe(i18next.t('TYPE.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`Type inexistente:`, async() => {
+    test(`1.3: Consultar Type inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.types[0].id}${FAKE_TEXT}`);
         const {
             code,

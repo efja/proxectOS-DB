@@ -21,7 +21,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - UserGroups (PUT)', () => {
+describe('1: Probas DATOS API - UserGroups (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -57,7 +57,7 @@ describe('Probas DATOS API - UserGroups (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar UserGroup: <${dataList.userGroups[0].id}>`, async() => {
+    test(`1.1: Actualizar UserGroup: <${dataList.userGroups[0].id}>`, async() => {
         const userGroup0 = dataList.userGroups[0] as UserGroup;
         const userGroup1 = dataList.userGroups[0] as UserGroup;
 
@@ -97,7 +97,7 @@ describe('Probas DATOS API - UserGroups (PUT)', () => {
         expect(message).toBe(i18next.t('USER_GROUP.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar UserGroup con datos erróneos:`, async() => {
+    test(`1.2: Actualizar UserGroup con datos erróneos:`, async() => {
         const userGroup0 = dataList.userGroups[0] as UserGroup;
 
         // Modificase o modelo UserGroup

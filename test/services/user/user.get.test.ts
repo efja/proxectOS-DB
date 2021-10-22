@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Users (GET)', () => {
+describe('1: Probas DATOS API - Users (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - Users (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos Users:', async() => {
+    test('1.1: Consultar tódolos Users:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - Users (GET)', () => {
         expect(message).toBe(i18next.t('USER.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`User: <${dataList.users[0].id}>`, async() => {
+    test(`1.2: Consultar User: <${dataList.users[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.users[0].id}`);
         const {
             code,
@@ -109,7 +109,7 @@ describe('Probas DATOS API - Users (GET)', () => {
         expect(message).toBe(i18next.t('USER.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`User inexistente:`, async() => {
+    test(`1.3: Consultar User inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.users[0].id}${FAKE_TEXT}`);
         const {
             code,

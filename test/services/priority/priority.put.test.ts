@@ -21,7 +21,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Prioritys (PUT)', () => {
+describe('1: Probas DATOS API - Priorities (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -57,7 +57,7 @@ describe('Probas DATOS API - Prioritys (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar Priority: <${dataList.priorities[0].id}>`, async() => {
+    test(`1.1: Actualizar Priority: <${dataList.priorities[0].id}>`, async() => {
         const priority0 = dataList.priorities[0] as Priority;
         const priority1 = dataList.priorities[0] as Priority;
 
@@ -97,7 +97,7 @@ describe('Probas DATOS API - Prioritys (PUT)', () => {
         expect(message).toBe(i18next.t('PRIORITY.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar Priority con datos erróneos:`, async() => {
+    test(`1.2: Actualizar Priority con datos erróneos:`, async() => {
         const priority0 = dataList.priorities[0] as Priority;
 
         // Modificase o modelo Priority

@@ -21,7 +21,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - UserSchedules (PUT)', () => {
+describe('1: Probas DATOS API - UserSchedules (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -57,7 +57,7 @@ describe('Probas DATOS API - UserSchedules (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar UserSchedule: <${dataList.userSchedules[0].id}>`, async() => {
+    test(`1.1: Actualizar UserSchedule: <${dataList.userSchedules[0].id}>`, async() => {
         const userSchedule0 = dataList.userSchedules[0] as UserSchedule;
         const userSchedule1 = dataList.userSchedules[0] as UserSchedule;
 
@@ -97,7 +97,7 @@ describe('Probas DATOS API - UserSchedules (PUT)', () => {
         expect(message).toBe(i18next.t('USER_SCHEDULE.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar UserSchedule con datos erróneos:`, async() => {
+    test(`1.2: Actualizar UserSchedule con datos erróneos:`, async() => {
         const userSchedule0 = dataList.userSchedules[0] as UserSchedule;
 
         // Modificase o modelo UserSchedule

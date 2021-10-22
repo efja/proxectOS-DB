@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - AssignedUsers (GET)', () => {
+describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - AssignedUsers (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos AssignedUsers:', async() => {
+    test('1.1: Consultar tódolos AssignedUsers:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - AssignedUsers (GET)', () => {
         expect(message).toBe(i18next.t('ASSIGNED_USER.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`AssignedUser: <${dataList.assignedUsers[0].id}>`, async() => {
+    test(`1.2: Consultar AssignedUser: <${dataList.assignedUsers[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedUsers[0].id}`);
         const {
             code,
@@ -106,7 +106,7 @@ describe('Probas DATOS API - AssignedUsers (GET)', () => {
         expect(message).toBe(i18next.t('ASSIGNED_USER.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`AssignedUser inexistente:`, async() => {
+    test(`1.3: Consultar AssignedUser inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedUsers[0].id}${FAKE_TEXT}`);
         const {
             code,

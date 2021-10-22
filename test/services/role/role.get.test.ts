@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Roles (GET)', () => {
+describe('1: Probas DATOS API - Roles (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - Roles (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos Roles:', async() => {
+    test('1.1: Consultar tódolos Roles:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - Roles (GET)', () => {
         expect(message).toBe(i18next.t('ROLE.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`Role: <${dataList.roles[0].id}>`, async() => {
+    test(`1.2: Consultar Role: <${dataList.roles[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.roles[0].id}`);
         const {
             code,
@@ -113,7 +113,7 @@ describe('Probas DATOS API - Roles (GET)', () => {
         expect(message).toBe(i18next.t('ROLE.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`Role inexistente:`, async() => {
+    test(`1.3: Consultar Role inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.roles[0].id}${FAKE_TEXT}`);
         const {
             code,

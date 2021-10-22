@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Prioritys (POST)', () => {
+describe('1: Probas DATOS API - Priorities (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +54,7 @@ describe('Probas DATOS API - Prioritys (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear Priority: <${dataList.priorities[0].id}>`, async() => {
+    test(`1.1: Crear Priority: <${dataList.priorities[0].id}>`, async() => {
         const priority = dataList.priorities[0] as Priority;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(priority);
@@ -84,7 +84,7 @@ describe('Probas DATOS API - Prioritys (POST)', () => {
         expect(message).toBe(i18next.t('PRIORITY.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear Priority con datos erróneos:`, async() => {
+    test(`1.2: Crear Priority con datos erróneos:`, async() => {
         const badPriority = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badPriority);
@@ -107,7 +107,7 @@ describe('Probas DATOS API - Prioritys (POST)', () => {
         expect(message).toBe(i18next.t('PRIORITY.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de Prioritys:', async() => {
+    test('1.3: Crear lista de Priorities:', async() => {
         const priorities = [
             dataList.priorities[0] as Priority,
             dataList.priorities[0] as Priority,
@@ -153,21 +153,21 @@ describe('Probas DATOS API - Prioritys (POST)', () => {
         expect(message).toBe(i18next.t('PRIORITY.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de Prioritys algúns con datos erróneos:', async() => {
-        const badPrioritys = [
+    test('1.4: Crear lista de Priorities algúns con datos erróneos:', async() => {
+        const badPriorities = [
             dataList.priorities[0] as Priority,
             dataList.users[0] as User,
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badPrioritys[0]._id = "616c6b4c9c7900e7011c9615";
-        badPrioritys[0].id  = "616c6b4c9c7900e7011c9615";
+        badPriorities[0]._id = "616c6b4c9c7900e7011c9615";
+        badPriorities[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badPrioritys[1]._id = "616c6b6602067b3bd0d5ffbc";
-        badPrioritys[1].id  = "616c6b6602067b3bd0d5ffbc";
+        badPriorities[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badPriorities[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badPrioritys);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badPriorities);
         const {
             code,
             data,
@@ -184,9 +184,9 @@ describe('Probas DATOS API - Prioritys (POST)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badPrioritys.length);
+        expect(data).not.toHaveLength(badPriorities.length);
 
-        expect(total).not.toBe(badPrioritys.length);
+        expect(total).not.toBe(badPriorities.length);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);

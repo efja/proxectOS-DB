@@ -21,7 +21,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - States (PUT)', () => {
+describe('1: Probas DATOS API - States (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -57,7 +57,7 @@ describe('Probas DATOS API - States (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar State: <${dataList.states[0].id}>`, async() => {
+    test(`1.1: Actualizar State: <${dataList.states[0].id}>`, async() => {
         const state0 = dataList.states[0] as State;
         const state1 = dataList.states[0] as State;
 
@@ -97,7 +97,7 @@ describe('Probas DATOS API - States (PUT)', () => {
         expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar State con datos erróneos:`, async() => {
+    test(`1.2: Actualizar State con datos erróneos:`, async() => {
         const state0 = dataList.states[0] as State;
 
         // Modificase o modelo State

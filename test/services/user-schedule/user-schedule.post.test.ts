@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - UserSchedules (POST)', () => {
+describe('1: Probas DATOS API - UserSchedules (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +54,7 @@ describe('Probas DATOS API - UserSchedules (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear UserSchedule: <${dataList.userSchedules[0].id}>`, async() => {
+    test(`1.1: Crear UserSchedule: <${dataList.userSchedules[0].id}>`, async() => {
         const userSchedule = dataList.userSchedules[0] as UserSchedule;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(userSchedule);
@@ -84,7 +84,7 @@ describe('Probas DATOS API - UserSchedules (POST)', () => {
         expect(message).toBe(i18next.t('USER_SCHEDULE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear UserSchedule con datos erróneos:`, async() => {
+    test(`1.2: Crear UserSchedule con datos erróneos:`, async() => {
         const badUserSchedule = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badUserSchedule);
@@ -107,7 +107,7 @@ describe('Probas DATOS API - UserSchedules (POST)', () => {
         expect(message).toBe(i18next.t('USER_SCHEDULE.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de UserSchedules:', async() => {
+    test('1.3: Crear lista de UserSchedules:', async() => {
         const userSchedules = [
             dataList.userSchedules[0] as UserSchedule,
             dataList.userSchedules[0] as UserSchedule,
@@ -153,7 +153,7 @@ describe('Probas DATOS API - UserSchedules (POST)', () => {
         expect(message).toBe(i18next.t('USER_SCHEDULE.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de UserSchedules algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de UserSchedules algúns con datos erróneos:', async() => {
         const badUserSchedules = [
             dataList.userSchedules[0] as UserSchedule,
             dataList.users[0] as User,

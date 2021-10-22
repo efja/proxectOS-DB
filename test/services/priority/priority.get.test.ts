@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Prioritys (GET)', () => {
+describe('1: Probas DATOS API - Priorities (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - Prioritys (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos Prioritys:', async() => {
+    test('1.1: Consultar tódolos Priorities:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - Prioritys (GET)', () => {
         expect(message).toBe(i18next.t('PRIORITY.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`Priority: <${dataList.priorities[0].id}>`, async() => {
+    test(`1.2: Consultar Priority: <${dataList.priorities[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.priorities[0].id}`);
         const {
             code,
@@ -109,7 +109,7 @@ describe('Probas DATOS API - Prioritys (GET)', () => {
         expect(message).toBe(i18next.t('PRIORITY.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`Priority inexistente:`, async() => {
+    test(`1.3: Consultar Priority inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.priorities[0].id}${FAKE_TEXT}`);
         const {
             code,

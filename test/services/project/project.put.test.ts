@@ -17,11 +17,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Projects (PUT)', () => {
+describe('1: Probas DATOS API - Projects (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -57,7 +58,7 @@ describe('Probas DATOS API - Projects (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar Project: <${dataList.projects[0].id}>`, async() => {
+    test(`1.1: Actualizar Project: <${dataList.projects[0].id}>`, async() => {
         const project0 = dataList.projects[0] as Project;
         const project1 = dataList.projects[0] as Project;
 
@@ -95,15 +96,15 @@ describe('Probas DATOS API - Projects (PUT)', () => {
         expect(data.id).toBe(project1.id);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(project0.startDate);
-        expect(data.startDate).toBe(project1.startDate);
-        expect(data.targetFinishDate).toBe(project0.targetFinishDate);
-        expect(data.targetFinishDate).toBe(project1.targetFinishDate);
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(project0.startDate));
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(project1.startDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(project0.targetFinishDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(project1.targetFinishDate));
 
         expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar Project con datos erróneos:`, async() => {
+    test(`1.2: Actualizar Project con datos erróneos:`, async() => {
         const project0 = dataList.projects[0] as Project;
 
         // Modificase o modelo Project

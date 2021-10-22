@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Resources (GET)', () => {
+describe('1: Probas DATOS API - Resources (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - Resources (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos Resources:', async() => {
+    test('1.1: Consultar tódolos Resources:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - Resources (GET)', () => {
         expect(message).toBe(i18next.t('RESOURCE.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`Resource: <${dataList.resources[0].id}>`, async() => {
+    test(`1.2: Consultar Resource: <${dataList.resources[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.resources[0].id}`);
         const {
             code,
@@ -109,7 +109,7 @@ describe('Probas DATOS API - Resources (GET)', () => {
         expect(message).toBe(i18next.t('RESOURCE.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`Resource inexistente:`, async() => {
+    test(`1.3: Consultar Resource inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.resources[0].id}${FAKE_TEXT}`);
         const {
             code,

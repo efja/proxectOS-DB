@@ -15,11 +15,12 @@ import {
     FAKE_TEXT,
     request,
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - AssignedStages (PATCH)', () => {
+describe('1: Probas DATOS API - AssignedStages (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +52,7 @@ describe('Probas DATOS API - AssignedStages (PATCH)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar AssignedStage: <${dataList.assignedStages[0].id}>`, async() => {
+    test(`1.1: Actualizar AssignedStage: <${dataList.assignedStages[0].id}>`, async() => {
         const assignedStage0 = dataList.assignedStages[0] as AssignedStage;
         const assignedStage1 = dataList.assignedStages[0] as AssignedStage
 
@@ -80,8 +81,8 @@ describe('Probas DATOS API - AssignedStages (PATCH)', () => {
 
         // ** Datos cambiados
         expect(data.startDate).toBeDefined();
-        expect(data.startDate).not.toBe(assignedStage0.startDate);
-        expect(data.startDate).toBe(newStartDate);
+        expect(date2LocaleISO(data.startDate)).not.toBe(date2LocaleISO(assignedStage0.startDate));
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(newStartDate));
 
         // ** Datos NON cambiados
         // Comprobanse algúns datos obrigatorios
@@ -90,13 +91,13 @@ describe('Probas DATOS API - AssignedStages (PATCH)', () => {
         expect(data.id).toBe(assignedStage1.id);
 
         // Comprobanse algúns datos opcionais
-        expect(data.targetFinishDate).toBe(assignedStage0.targetFinishDate);
-        expect(data.targetFinishDate).toBe(assignedStage1.targetFinishDate);
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(assignedStage0.targetFinishDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(assignedStage1.targetFinishDate));
 
         expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar AssignedStage con datos erróneos:`, async() => {
+    test(`1.2: Actualizar AssignedStage con datos erróneos:`, async() => {
         const assignedStage0 = dataList.assignedStages[0] as AssignedStage;
         const assignedStage1 = dataList.assignedStages[0] as AssignedStage;
 

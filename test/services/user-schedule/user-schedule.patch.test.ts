@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - UserSchedules (PATCH)', () => {
+describe('1: Probas DATOS API - UserSchedules (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -58,7 +58,7 @@ describe('Probas DATOS API - UserSchedules (PATCH)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar UserSchedule: <${dataList.userSchedules[0].id}>`, async() => {
+    test(`1.1: Actualizar UserSchedule: <${dataList.userSchedules[0].id}>`, async() => {
         const userSchedule0 = dataList.userSchedules[0] as UserSchedule;
         const userSchedule1 = dataList.userSchedules[0] as UserSchedule;
 
@@ -100,7 +100,7 @@ describe('Probas DATOS API - UserSchedules (PATCH)', () => {
         expect(message).toBe(i18next.t('USER_SCHEDULE.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar UserSchedule con datos erróneos:`, async() => {
+    test(`1.2: Actualizar UserSchedule con datos erróneos:`, async() => {
         const userSchedule0 = dataList.userSchedules[0] as UserSchedule;
         const userSchedule1 = dataList.userSchedules[0] as UserSchedule;
 

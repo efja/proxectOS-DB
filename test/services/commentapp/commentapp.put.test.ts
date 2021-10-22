@@ -17,11 +17,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - CommentApps (PUT)', () => {
+describe('1: Probas DATOS API - CommentApps (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -57,7 +58,7 @@ describe('Probas DATOS API - CommentApps (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar CommentApp: <${dataList.comments[0].id}>`, async() => {
+    test(`1.1: Actualizar CommentApp: <${dataList.comments[0].id}>`, async() => {
         const commentApp0 = dataList.comments[0] as CommentApp;
         const commentApp1 = dataList.comments[0] as CommentApp;
 
@@ -95,13 +96,13 @@ describe('Probas DATOS API - CommentApps (PUT)', () => {
         expect(data.id).toBe(commentApp1.id);
 
         // Comprobanse algúns datos opcionais
-        expect(data.expirationDate).toBe(commentApp0.expirationDate);
-        expect(data.expirationDate).toBe(commentApp1.expirationDate);
+        expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(commentApp0.expirationDate));
+        expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(commentApp1.expirationDate));
 
         expect(message).toBe(i18next.t('COMMENT.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar CommentApp con datos erróneos:`, async() => {
+    test(`1.2: Actualizar CommentApp con datos erróneos:`, async() => {
         const commentApp0 = dataList.comments[0] as CommentApp;
 
         // Modificase o modelo CommentApp

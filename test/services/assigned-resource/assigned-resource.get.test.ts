@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Projects (GET)', () => {
+describe('1: Probas DATOS API - Projects (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos AssignedResources:', async() => {
+    test('1.1: Consultar tódolos AssignedResources:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
         expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
+    test(`1.2: Consultar AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedResources[0].id}`);
         const {
             code,
@@ -112,7 +112,7 @@ describe('Probas DATOS API - Projects (GET)', () => {
         expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`AssignedResource inexistente:`, async() => {
+    test(`1.3: Consultar AssignedResource inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedResources[0].id}${FAKE_TEXT}`);
         const {
             code,

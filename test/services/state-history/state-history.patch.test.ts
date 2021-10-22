@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - StateHistorys (PATCH)', () => {
+describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -58,7 +58,7 @@ describe('Probas DATOS API - StateHistorys (PATCH)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar StateHistory: <${dataList.statesHistory[0].id}>`, async() => {
+    test(`1.1: Actualizar StateHistory: <${dataList.statesHistory[0].id}>`, async() => {
         const stateHistory0 = dataList.statesHistory[0] as StateHistory;
         const stateHistory1 = dataList.statesHistory[0] as StateHistory;
 
@@ -104,7 +104,7 @@ describe('Probas DATOS API - StateHistorys (PATCH)', () => {
         expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar StateHistory con datos erróneos:`, async() => {
+    test(`1.2: Actualizar StateHistory con datos erróneos:`, async() => {
         const stateHistory0 = dataList.statesHistory[0] as StateHistory;
         const stateHistory1 = dataList.statesHistory[0] as StateHistory;
 

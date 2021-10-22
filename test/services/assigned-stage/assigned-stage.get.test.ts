@@ -16,11 +16,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - AssignedStages (GET)', () => {
+describe('1: Probas DATOS API - AssignedStages (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +52,7 @@ describe('Probas DATOS API - AssignedStages (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos AssignedStages:', async() => {
+    test('1.1: Consultar tódolos AssignedStages:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +80,7 @@ describe('Probas DATOS API - AssignedStages (GET)', () => {
         expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`AssignedStage: <${dataList.assignedStages[0].id}>`, async() => {
+    test(`1.2: Consultar AssignedStage: <${dataList.assignedStages[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedStages[0].id}`);
         const {
             code,
@@ -104,13 +105,13 @@ describe('Probas DATOS API - AssignedStages (GET)', () => {
         expect(data.stage.id).toBe(assignedStage.stage.id);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(assignedStage.startDate);
-        expect(data.targetFinishDate).toBe(assignedStage.targetFinishDate);
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(assignedStage.startDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(assignedStage.targetFinishDate));
 
         expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`AssignedStage inexistente:`, async() => {
+    test(`1.3: Consultar AssignedStage inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedStages[0].id}${FAKE_TEXT}`);
         const {
             code,

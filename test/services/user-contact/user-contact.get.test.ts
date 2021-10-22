@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - UserContacts (GET)', () => {
+describe('1: Probas DATOS API - UserContacts (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - UserContacts (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos UserContacts:', async() => {
+    test('1.1: Consultar tódolos UserContacts:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - UserContacts (GET)', () => {
         expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`UserContact: <${dataList.userContacts[0].id}>`, async() => {
+    test(`1.2: Consultar UserContact: <${dataList.userContacts[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.userContacts[0].id}`);
         const {
             code,
@@ -106,7 +106,7 @@ describe('Probas DATOS API - UserContacts (GET)', () => {
         expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`UserContact inexistente:`, async() => {
+    test(`1.3: Consultar UserContact inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.userContacts[0].id}${FAKE_TEXT}`);
         const {
             code,

@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Types (POST)', () => {
+describe('1: Probas DATOS API - Types (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +54,7 @@ describe('Probas DATOS API - Types (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear Type: <${dataList.types[0].id}>`, async() => {
+    test(`1.1: Crear Type: <${dataList.types[0].id}>`, async() => {
         const type = dataList.types[0] as Type;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(type);
@@ -84,7 +84,7 @@ describe('Probas DATOS API - Types (POST)', () => {
         expect(message).toBe(i18next.t('TYPE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear Type con datos erróneos:`, async() => {
+    test(`1.2: Crear Type con datos erróneos:`, async() => {
         const badType = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badType);
@@ -107,7 +107,7 @@ describe('Probas DATOS API - Types (POST)', () => {
         expect(message).toBe(i18next.t('TYPE.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de Types:', async() => {
+    test('1.3: Crear lista de Types:', async() => {
         const types = [
             dataList.types[0] as Type,
             dataList.types[0] as Type,
@@ -153,7 +153,7 @@ describe('Probas DATOS API - Types (POST)', () => {
         expect(message).toBe(i18next.t('TYPE.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de Types algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de Types algúns con datos erróneos:', async() => {
         const badTypes = [
             dataList.types[0] as Type,
             dataList.users[0] as User,

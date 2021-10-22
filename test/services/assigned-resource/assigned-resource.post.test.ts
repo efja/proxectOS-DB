@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - AssignedResources (POST)', () => {
+describe('1: Probas DATOS API - AssignedResources (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -58,7 +58,7 @@ describe('Probas DATOS API - AssignedResources (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
+    test(`1.1: Crear AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
         const assignedResource = dataList.assignedResources[0] as AssignedResource;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(assignedResource);
@@ -83,13 +83,13 @@ describe('Probas DATOS API - AssignedResources (POST)', () => {
         expect(data.description).toBe(assignedResource.description);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(assignedResource.amount);
-        expect(data.targetFinishDate).toBe(assignedResource.amount);
+        expect(date2LocaleISO(data.startDate)).toBe(assignedResource.amount);
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(assignedResource.amount);
 
         expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear AssignedResource con datos erróneos:`, async() => {
+    test(`1.2: Crear AssignedResource con datos erróneos:`, async() => {
         const badAssignedResource = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badAssignedResource);
@@ -112,7 +112,7 @@ describe('Probas DATOS API - AssignedResources (POST)', () => {
         expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de AssignedResources:', async() => {
+    test('1.3: Crear lista de AssignedResources:', async() => {
         const assignedResources = [
             dataList.assignedResources[0] as AssignedResource,
             dataList.assignedResources[0] as AssignedResource,
@@ -158,7 +158,7 @@ describe('Probas DATOS API - AssignedResources (POST)', () => {
         expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de AssignedResources algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de AssignedResources algúns con datos erróneos:', async() => {
         const badAssignedResources = [
             dataList.assignedResources[0] as AssignedResource,
             dataList.users[0] as User,

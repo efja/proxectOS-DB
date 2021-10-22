@@ -16,11 +16,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - PerformanceApps (GET)', () => {
+describe('1: Probas DATOS API - PerformanceApps (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +52,7 @@ describe('Probas DATOS API - PerformanceApps (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos PerformanceApps:', async() => {
+    test('1.1: Consultar tódolos PerformanceApps:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +80,7 @@ describe('Probas DATOS API - PerformanceApps (GET)', () => {
         expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`PerformanceApp: <${dataList.performances[0].id}>`, async() => {
+    test(`1.2: Consultar PerformanceApp: <${dataList.performances[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.performances[0].id}`);
         const {
             code,
@@ -107,13 +108,13 @@ describe('Probas DATOS API - PerformanceApps (GET)', () => {
         expect(data.description).toBe(performanceApp.description);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(performanceApp.startDate);
-        expect(data.targetFinishDate).toBe(performanceApp.targetFinishDate);
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(performanceApp.startDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp.targetFinishDate));
 
         expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`PerformanceApp inexistente:`, async() => {
+    test(`1.3: Consultar PerformanceApp inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.performances[0].id}${FAKE_TEXT}`);
         const {
             code,

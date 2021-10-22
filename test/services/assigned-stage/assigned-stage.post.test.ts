@@ -18,11 +18,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - AssignedStages (POST)', () => {
+describe('1: Probas DATOS API - AssignedStages (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +55,7 @@ describe('Probas DATOS API - AssignedStages (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear AssignedStage: <${dataList.assignedStages[0].id}>`, async() => {
+    test(`1.1: Crear AssignedStage: <${dataList.assignedStages[0].id}>`, async() => {
         const assignedStage = dataList.assignedStages[0] as AssignedStage;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(assignedStage);
@@ -76,19 +77,19 @@ describe('Probas DATOS API - AssignedStages (POST)', () => {
         expect(data.id).toBe(assignedStage.id);
 
         expect(data.startDate).toBeDefined();
-        expect(data.startDate).toBe(assignedStage.startDate);
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(assignedStage.startDate));
 
-        expect(data.finishDate).toBeDefined();
-        expect(data.finishDate).toBe(assignedStage.finishDate);
+        expect(date2LocaleISO(data.finishDate)).toBeDefined();
+        expect(date2LocaleISO(data.finishDate)).toBe(date2LocaleISO(assignedStage.finishDate));
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(assignedStage.startDate);
-        expect(data.targetFinishDate).toBe(assignedStage.targetFinishDate);
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(assignedStage.startDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(assignedStage.targetFinishDate));
 
         expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear AssignedStage con datos erróneos:`, async() => {
+    test(`1.2: Crear AssignedStage con datos erróneos:`, async() => {
         const badAssignedStage = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badAssignedStage);
@@ -111,7 +112,7 @@ describe('Probas DATOS API - AssignedStages (POST)', () => {
         expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de AssignedStages:', async() => {
+    test('1.3: Crear lista de AssignedStages:', async() => {
         const assignedStages = [
             dataList.assignedStages[0] as AssignedStage,
             dataList.assignedStages[0] as AssignedStage,
@@ -157,7 +158,7 @@ describe('Probas DATOS API - AssignedStages (POST)', () => {
         expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de AssignedStages algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de AssignedStages algúns con datos erróneos:', async() => {
         const badAssignedStages = [
             dataList.assignedStages[0] as AssignedStage,
             dataList.users[0] as User,

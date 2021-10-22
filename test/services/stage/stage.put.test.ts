@@ -21,7 +21,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Stages (PUT)', () => {
+describe('1: Probas DATOS API - Stages (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -57,7 +57,7 @@ describe('Probas DATOS API - Stages (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar Stage: <${dataList.stages[0].id}>`, async() => {
+    test(`1.1: Actualizar Stage: <${dataList.stages[0].id}>`, async() => {
         const stage0 = dataList.stages[0] as Stage;
         const stage1 = dataList.stages[0] as Stage;
 
@@ -97,7 +97,7 @@ describe('Probas DATOS API - Stages (PUT)', () => {
         expect(message).toBe(i18next.t('STAGE.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar Stage con datos erróneos:`, async() => {
+    test(`1.2: Actualizar Stage con datos erróneos:`, async() => {
         const stage0 = dataList.stages[0] as Stage;
 
         // Modificase o modelo Stage

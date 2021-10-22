@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - StateHistorys (POST)', () => {
+describe('1: Probas DATOS API - StateHistorys (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +54,7 @@ describe('Probas DATOS API - StateHistorys (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear StateHistory: <${dataList.statesHistory[0].id}>`, async() => {
+    test(`1.1: Crear StateHistory: <${dataList.statesHistory[0].id}>`, async() => {
         const stateHistory = dataList.statesHistory[0] as StateHistory;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(stateHistory);
@@ -87,7 +87,7 @@ describe('Probas DATOS API - StateHistorys (POST)', () => {
         expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear StateHistory con datos erróneos:`, async() => {
+    test(`1.2: Crear StateHistory con datos erróneos:`, async() => {
         const badStateHistory = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badStateHistory);
@@ -110,7 +110,7 @@ describe('Probas DATOS API - StateHistorys (POST)', () => {
         expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de StateHistorys:', async() => {
+    test('1.3: Crear lista de StateHistorys:', async() => {
         const statesHistory = [
             dataList.statesHistory[0] as StateHistory,
             dataList.statesHistory[0] as StateHistory,
@@ -156,7 +156,7 @@ describe('Probas DATOS API - StateHistorys (POST)', () => {
         expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de StateHistorys algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de StateHistorys algúns con datos erróneos:', async() => {
         const badStateHistorys = [
             dataList.statesHistory[0] as StateHistory,
             dataList.users[0] as User,

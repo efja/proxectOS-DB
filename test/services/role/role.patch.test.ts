@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Roles (PATCH)', () => {
+describe('1: Probas DATOS API - Roles (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -58,7 +58,7 @@ describe('Probas DATOS API - Roles (PATCH)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar Role: <${dataList.roles[0].id}>`, async() => {
+    test(`1.1: Actualizar Role: <${dataList.roles[0].id}>`, async() => {
         const role0 = dataList.roles[0] as Role;
         const role1 = dataList.roles[0] as Role;
 
@@ -106,7 +106,7 @@ describe('Probas DATOS API - Roles (PATCH)', () => {
         expect(message).toBe(i18next.t('ROLE.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar Role con datos erróneos:`, async() => {
+    test(`1.2: Actualizar Role con datos erróneos:`, async() => {
         const role0 = dataList.roles[0] as Role;
         const role1 = dataList.roles[0] as Role;
 

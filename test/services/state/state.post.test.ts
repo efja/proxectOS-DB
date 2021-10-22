@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - States (POST)', () => {
+describe('1: Probas DATOS API - States (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +54,7 @@ describe('Probas DATOS API - States (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear State: <${dataList.states[0].id}>`, async() => {
+    test(`1.1: Crear State: <${dataList.states[0].id}>`, async() => {
         const state = dataList.states[0] as State;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(state);
@@ -84,7 +84,7 @@ describe('Probas DATOS API - States (POST)', () => {
         expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear State con datos erróneos:`, async() => {
+    test(`1.2: Crear State con datos erróneos:`, async() => {
         const badState = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badState);
@@ -107,7 +107,7 @@ describe('Probas DATOS API - States (POST)', () => {
         expect(message).toBe(i18next.t('STATE.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de States:', async() => {
+    test('1.3: Crear lista de States:', async() => {
         const states = [
             dataList.states[0] as State,
             dataList.states[0] as State,
@@ -153,7 +153,7 @@ describe('Probas DATOS API - States (POST)', () => {
         expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de States algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de States algúns con datos erróneos:', async() => {
         const badStates = [
             dataList.states[0] as State,
             dataList.users[0] as User,

@@ -17,11 +17,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - RepositoryApps (PUT)', () => {
+describe('1: Probas DATOS API - RepositoryApps (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -57,7 +58,7 @@ describe('Probas DATOS API - RepositoryApps (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar RepositoryApp: <${dataList.repositories[0].id}>`, async() => {
+    test(`1.1: Actualizar RepositoryApp: <${dataList.repositories[0].id}>`, async() => {
         const repositoryApp0 = dataList.repositories[0] as RepositoryApp;
         const repositoryApp1 = dataList.repositories[0] as RepositoryApp;
 
@@ -95,13 +96,13 @@ describe('Probas DATOS API - RepositoryApps (PUT)', () => {
         expect(data.id).toBe(repositoryApp1.id);
 
         // Comprobanse algúns datos opcionais
-        expect(data.expirationDate).toBe(repositoryApp0.expirationDate);
-        expect(data.expirationDate).toBe(repositoryApp1.expirationDate);
+        expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(repositoryApp0.expirationDate));
+        expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(repositoryApp1.expirationDate));
 
         expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar RepositoryApp con datos erróneos:`, async() => {
+    test(`1.2: Actualizar RepositoryApp con datos erróneos:`, async() => {
         const repositoryApp0 = dataList.repositories[0] as RepositoryApp;
 
         // Modificase o modelo RepositoryApp

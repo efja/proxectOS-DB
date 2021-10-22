@@ -16,11 +16,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from '../../../src/helpers/date.helper';
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Requirements (GET)', () => {
+describe('1: Probas DATOS API - Requirements (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +52,7 @@ describe('Probas DATOS API - Requirements (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos Requirements:', async() => {
+    test('1.1: Consultar tódolos Requirements:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +80,7 @@ describe('Probas DATOS API - Requirements (GET)', () => {
         expect(message).toBe(i18next.t('REQUIREMENT.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`Requirement: <${dataList.requirements[0].id}>`, async() => {
+    test(`1.2: Consultar Requirement: <${dataList.requirements[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.requirements[0].id}`);
         const {
             code,
@@ -107,13 +108,13 @@ describe('Probas DATOS API - Requirements (GET)', () => {
         expect(data.description).toBe(requirement.description);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(requirement.startDate);
-        expect(data.targetFinishDate).toBe(requirement.targetFinishDate);
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(requirement.startDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(requirement.targetFinishDate));
 
         expect(message).toBe(i18next.t('REQUIREMENT.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`Requirement inexistente:`, async() => {
+    test(`1.3: Consultar Requirement inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.requirements[0].id}${FAKE_TEXT}`);
         const {
             code,

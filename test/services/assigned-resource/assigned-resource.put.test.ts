@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - AssignedResources (PUT)', () => {
+describe('1: Probas DATOS API - AssignedResources (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -56,7 +56,7 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
+    test(`1.1: Actualizar AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
         const assignedResource0 = dataList.assignedResources[0] as AssignedResource;
         const assignedResource1 = dataList.assignedResources[0] as AssignedResource;
 
@@ -94,13 +94,13 @@ describe('Probas DATOS API - AssignedResources (PUT)', () => {
         expect(data.id).toBe(assignedResource1.id);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(assignedResource0.amount);
-        expect(data.startDate).toBe(assignedResource1.amount);
+        expect(date2LocaleISO(data.startDate)).toBe(assignedResource0.amount);
+        expect(date2LocaleISO(data.startDate)).toBe(assignedResource1.amount);
 
         expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar AssignedResource con datos erróneos:`, async() => {
+    test(`1.2: Actualizar AssignedResource con datos erróneos:`, async() => {
         const assignedResource0 = dataList.assignedResources[0] as AssignedResource;
 
         // Modificase o modelo AssignedResource

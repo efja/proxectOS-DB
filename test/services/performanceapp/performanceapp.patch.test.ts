@@ -18,11 +18,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - PerformanceApps (PATCH)', () => {
+describe('1: Probas DATOS API - PerformanceApps (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -58,7 +59,7 @@ describe('Probas DATOS API - PerformanceApps (PATCH)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar PerformanceApp: <${dataList.performances[0].id}>`, async() => {
+    test(`1.1: Actualizar PerformanceApp: <${dataList.performances[0].id}>`, async() => {
         const performanceApp0 = dataList.performances[0] as PerformanceApp;
         const performanceApp1 = dataList.performances[0] as PerformanceApp;
 
@@ -98,15 +99,15 @@ describe('Probas DATOS API - PerformanceApps (PATCH)', () => {
         expect(data.description).toBe(performanceApp1.description);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(performanceApp0.startDate);
-        expect(data.startDate).toBe(performanceApp1.startDate);
-        expect(data.targetFinishDate).toBe(performanceApp0.targetFinishDate);
-        expect(data.targetFinishDate).toBe(performanceApp1.targetFinishDate);
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(performanceApp0.startDate));
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(performanceApp1.startDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp0.targetFinishDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp1.targetFinishDate));
 
         expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar PerformanceApp con datos erróneos:`, async() => {
+    test(`1.2: Actualizar PerformanceApp con datos erróneos:`, async() => {
         const performanceApp0 = dataList.performances[0] as PerformanceApp;
         const performanceApp1 = dataList.performances[0] as PerformanceApp;
 
@@ -135,3 +136,4 @@ describe('Probas DATOS API - PerformanceApps (PATCH)', () => {
         expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.UPDATE'));
     });
 });
+

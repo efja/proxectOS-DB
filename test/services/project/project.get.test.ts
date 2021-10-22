@@ -56,7 +56,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('1.1: Tódolos Projects:', async() => {
+    test('1.1: Consultar tódolos Projects:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -85,7 +85,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`1.2: Project: <${dataList.projects[0].id}>`, async() => {
+    test(`1.2: Consultar Project: <${dataList.projects[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.projects[0].id}`);
         const {
             code,
@@ -114,13 +114,13 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         expect(data.description).toBe(project.description);
 
         // Comprobanse algúns datos opcionais
-        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(project.startDate));
-        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(project.targetFinishDate));
+        expect(date2LocaleISO(date2LocaleISO(data.startDate))).toBe(date2LocaleISO(project.startDate));
+        expect(date2LocaleISO(date2LocaleISO(data.targetFinishDate))).toBe(date2LocaleISO(project.targetFinishDate));
 
         expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`1.3: Project inexistente:`, async() => {
+    test(`1.3: Consultar Project inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.projects[0].id}${FAKE_TEXT}`);
         const {
             code,

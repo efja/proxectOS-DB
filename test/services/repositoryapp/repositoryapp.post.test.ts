@@ -18,11 +18,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - RepositoryApps (POST)', () => {
+describe('1: Probas DATOS API - RepositoryApps (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +55,7 @@ describe('Probas DATOS API - RepositoryApps (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear RepositoryApp: <${dataList.repositories[0].id}>`, async() => {
+    test(`1.1: Crear RepositoryApp: <${dataList.repositories[0].id}>`, async() => {
         const repositoryApp = dataList.repositories[0] as RepositoryApp;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(repositoryApp);
@@ -82,12 +83,12 @@ describe('Probas DATOS API - RepositoryApps (POST)', () => {
         expect(data.description).toBe(repositoryApp.description);
 
         // Comprobanse algúns datos opcionais
-        expect(data.expirationDate).toBe(repositoryApp.expirationDate);
+        expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(repositoryApp.expirationDate));
 
         expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear RepositoryApp con datos erróneos:`, async() => {
+    test(`1.2: Crear RepositoryApp con datos erróneos:`, async() => {
         const badRepositoryApp = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badRepositoryApp);
@@ -110,7 +111,7 @@ describe('Probas DATOS API - RepositoryApps (POST)', () => {
         expect(message).toBe(i18next.t('REPOSITORY.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de RepositoryApps:', async() => {
+    test('1.3: Crear lista de RepositoryApps:', async() => {
         const repositoryApps = [
             dataList.repositories[0] as RepositoryApp,
             dataList.repositories[0] as RepositoryApp,
@@ -156,7 +157,7 @@ describe('Probas DATOS API - RepositoryApps (POST)', () => {
         expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de RepositoryApps algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de RepositoryApps algúns con datos erróneos:', async() => {
         const badRepositoryApps = [
             dataList.repositories[0] as RepositoryApp,
             dataList.users[0] as User,

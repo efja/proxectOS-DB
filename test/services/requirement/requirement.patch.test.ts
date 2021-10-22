@@ -18,11 +18,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Requirements (PATCH)', () => {
+describe('1: Probas DATOS API - Requirements (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -58,7 +59,7 @@ describe('Probas DATOS API - Requirements (PATCH)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar Requirement: <${dataList.requirements[0].id}>`, async() => {
+    test(`1.1: Actualizar Requirement: <${dataList.requirements[0].id}>`, async() => {
         const requirement0 = dataList.requirements[0] as Requirement;
         const requirement1 = dataList.requirements[0] as Requirement;
 
@@ -98,15 +99,15 @@ describe('Probas DATOS API - Requirements (PATCH)', () => {
         expect(data.description).toBe(requirement1.description);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(requirement0.startDate);
-        expect(data.startDate).toBe(requirement1.startDate);
-        expect(data.targetFinishDate).toBe(requirement0.targetFinishDate);
-        expect(data.targetFinishDate).toBe(requirement1.targetFinishDate);
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(requirement0.startDate));
+        expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(requirement1.startDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(requirement0.targetFinishDate));
+        expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(requirement1.targetFinishDate));
 
         expect(message).toBe(i18next.t('REQUIREMENT.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar Requirement con datos erróneos:`, async() => {
+    test(`1.2: Actualizar Requirement con datos erróneos:`, async() => {
         const requirement0 = dataList.requirements[0] as Requirement;
         const requirement1 = dataList.requirements[0] as Requirement;
 

@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - UserContactTypes (GET)', () => {
+describe('1: Probas DATOS API - UserContactTypes (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - UserContactTypes (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos UserContactTypes:', async() => {
+    test('1.1: Consultar tódolos UserContactTypes:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - UserContactTypes (GET)', () => {
         expect(message).toBe(i18next.t('USER_CONTACT_TYPE.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`UserContactType: <${dataList.userContactTypes[0].id}>`, async() => {
+    test(`1.2: Consultar UserContactType: <${dataList.userContactTypes[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.userContactTypes[0].id}`);
         const {
             code,
@@ -106,7 +106,7 @@ describe('Probas DATOS API - UserContactTypes (GET)', () => {
         expect(message).toBe(i18next.t('USER_CONTACT_TYPE.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`UserContactType inexistente:`, async() => {
+    test(`1.3: Consultar UserContactType inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.userContactTypes[0].id}${FAKE_TEXT}`);
         const {
             code,

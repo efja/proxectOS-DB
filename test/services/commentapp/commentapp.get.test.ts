@@ -16,11 +16,12 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - CommentApps (GET)', () => {
+describe('1: Probas DATOS API - CommentApps (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +52,7 @@ describe('Probas DATOS API - CommentApps (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos CommentApps:', async() => {
+    test('1.1: Consultar tódolos CommentApps:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +80,7 @@ describe('Probas DATOS API - CommentApps (GET)', () => {
         expect(message).toBe(i18next.t('COMMENT.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`CommentApp: <${dataList.comments[0].id}>`, async() => {
+    test(`1.2: Consultar CommentApp: <${dataList.comments[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.comments[0].id}`);
         const {
             code,
@@ -107,12 +108,12 @@ describe('Probas DATOS API - CommentApps (GET)', () => {
         expect(data.message).toBe(commentApp.message);
 
         // Comprobanse algúns datos opcionais
-        expect(data.expirationDate).toBe(commentApp.expirationDate);
+        expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(commentApp.expirationDate));
 
         expect(message).toBe(i18next.t('COMMENT.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`CommentApp inexistente:`, async() => {
+    test(`1.3: Consultar CommentApp inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.comments[0].id}${FAKE_TEXT}`);
         const {
             code,

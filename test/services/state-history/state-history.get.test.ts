@@ -20,7 +20,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - StateHistorys (GET)', () => {
+describe('1: Probas DATOS API - StateHistorys (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -51,7 +51,7 @@ describe('Probas DATOS API - StateHistorys (GET)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test('Tódolos StateHistorys:', async() => {
+    test('1.1: Consultar tódolos StateHistorys:', async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}`);
         const {
             code,
@@ -79,7 +79,7 @@ describe('Probas DATOS API - StateHistorys (GET)', () => {
         expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET_ALL'));
     });
 
-    test(`StateHistory: <${dataList.statesHistory[0].id}>`, async() => {
+    test(`1.2: Consultar StateHistory: <${dataList.statesHistory[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.statesHistory[0].id}`);
         const {
             code,
@@ -112,7 +112,7 @@ describe('Probas DATOS API - StateHistorys (GET)', () => {
         expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET_SINGLE'));
     });
 
-    test(`StateHistory inexistente:`, async() => {
+    test(`1.3: Consultar StateHistory inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.statesHistory[0].id}${FAKE_TEXT}`);
         const {
             code,

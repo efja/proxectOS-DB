@@ -22,7 +22,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Stages (POST)', () => {
+describe('1: Probas DATOS API - Stages (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -54,7 +54,7 @@ describe('Probas DATOS API - Stages (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Crear Stage: <${dataList.stages[0].id}>`, async() => {
+    test(`1.1: Crear Stage: <${dataList.stages[0].id}>`, async() => {
         const stage = dataList.stages[0] as Stage;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(stage);
@@ -84,7 +84,7 @@ describe('Probas DATOS API - Stages (POST)', () => {
         expect(message).toBe(i18next.t('STAGE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`Crear Stage con datos erróneos:`, async() => {
+    test(`1.2: Crear Stage con datos erróneos:`, async() => {
         const badStage = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badStage);
@@ -107,7 +107,7 @@ describe('Probas DATOS API - Stages (POST)', () => {
         expect(message).toBe(i18next.t('STAGE.SERVICE.ERROR.CREATE'));
     });
 
-    test('Crear lista de Stages:', async() => {
+    test('1.3: Crear lista de Stages:', async() => {
         const stages = [
             dataList.stages[0] as Stage,
             dataList.stages[0] as Stage,
@@ -153,7 +153,7 @@ describe('Probas DATOS API - Stages (POST)', () => {
         expect(message).toBe(i18next.t('STAGE.SERVICE.SUCCESS.CREATE_LIST'));
     });
 
-    test('Crear lista de Stages algúns con datos erróneos:', async() => {
+    test('1.4: Crear lista de Stages algúns con datos erróneos:', async() => {
         const badStages = [
             dataList.stages[0] as Stage,
             dataList.users[0] as User,

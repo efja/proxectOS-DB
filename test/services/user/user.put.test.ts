@@ -21,7 +21,7 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('Probas DATOS API - Users (PUT)', () => {
+describe('1: Probas DATOS API - Users (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
@@ -57,7 +57,7 @@ describe('Probas DATOS API - Users (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`Actualizar User: <${dataList.users[0].id}>`, async() => {
+    test(`1.1: Actualizar User: <${dataList.users[0].id}>`, async() => {
         const user0 = dataList.users[0] as User;
         const user1 = dataList.users[0] as User;
 
@@ -97,7 +97,7 @@ describe('Probas DATOS API - Users (PUT)', () => {
         expect(message).toBe(i18next.t('USER.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`Actualizar User con datos erróneos:`, async() => {
+    test(`1.2: Actualizar User con datos erróneos:`, async() => {
         const user0 = dataList.users[0] as User;
 
         // Modificase o modelo User
