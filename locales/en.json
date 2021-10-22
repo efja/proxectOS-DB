@@ -3,7 +3,13 @@
     "COMMON": {
         "CREATED_DATE": "Creation date"
     },
+	"ERROR": {
+		"ALREADY_EXIST_MALE": "The {{entity}} co ID {{id}} x exists in the database",
+		"ALREADY_EXIST_FEMALE": "The {{entity}} co ID {{id}} x exists in the database"
+	},
 	"ASSIGNED_RESOURCE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All Assigned Resources have been successfully recovered",
@@ -24,6 +30,8 @@
 		}
 	},
 	"ASSIGNED_STAGE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All Assigned Stages have been successfully recovered",
@@ -44,6 +52,8 @@
 		}
 	},
 	"ASSIGNED_USER": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All Assigned Users recovered successfully",
@@ -64,6 +74,8 @@
 		}
 	},
 	"COMMENT": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All Comments Retrieved successfully ",
@@ -84,6 +96,8 @@
 		}
 	},
 	"PERFORMANCE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All Actions Recovered Successfully ",
@@ -104,6 +118,8 @@
 		}
 	},
 	"PRIORITY": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All Priorities Recovered Successfully ",
@@ -124,6 +140,8 @@
 		}
 	},
     "PROJECT": {
+		"NAME": "project",
+		"NAME_PLURAL": "projects",
         "SERVICE": {
             "SUCCESS": {
                 "GET_ALL": "All projects fetched successfully ",
@@ -144,6 +162,8 @@
         }
     },
 	"REQUIREMENT": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All Requirements Retrieved Successfully ",
@@ -164,6 +184,8 @@
 		}
 	},
 	"RESOURCE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All Resources Recovered Successfully ",
@@ -184,6 +206,8 @@
 		}
 	},
 	"STAGE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All Stages Recovered Successfully ",
@@ -204,6 +228,8 @@
 		}
 	},
 	"STATE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All states have recovered successfully ",
@@ -224,6 +250,8 @@
 		}
 	},
 	"STATE_HISTORY": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All State Historians have recovered successfully ",
@@ -244,6 +272,8 @@
 		}
 	},
 	"TYPE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All Types Recovered Successfully ",
@@ -264,6 +294,8 @@
 		}
 	},
 	"USER": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All Users Recovered Successfully ",
@@ -284,6 +316,8 @@
 		}
 	},
 	"USER_CONTACT": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All User Contacts Recovered Successfully ",
@@ -304,6 +338,8 @@
 		}
 	},
 	"USER_CONTACT_TYPE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All User Contact Types Retrieved Successfully ",
@@ -324,6 +360,8 @@
 		}
 	},
 	"USER_GROUP": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All User Groups recovered successfully ",
@@ -344,6 +382,8 @@
 		}
 	},
 	"USER_SCHEDULE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "All User Calendars have been successfully retrieved ",
