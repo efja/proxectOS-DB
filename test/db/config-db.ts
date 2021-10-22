@@ -148,7 +148,7 @@ export class DBTestConnection {
    * @param listObj Lista de objexectos a introducir na BD
    * @param dropAllData Flag para decidir se debe borrar a información previa da BD ou non.
    */
-  public async inicializeData(listObj: CustomBaseEntity[], dropAllData: boolean = false) {
+  public async inicializeData(listObj: any[], dropAllData: boolean = false) {
     if (this.orm) {
       if (dropAllData) {
         await this.dropAllData(listObj);
@@ -164,5 +164,21 @@ export class DBTestConnection {
     } else {
       throw Error("Database connection not established");
     }
+  }
+
+  /**
+   * Devolve un repositorio de Mikro-orm para MongoDB.
+   *
+   * @param entityName nome da entidade da que se quere devolver o repositorio
+   * @returns repositorio de Mikro-orm
+   */
+   public getRepository(entityName) {
+    let result = null;
+
+    if (this.orm) {
+      result = this.orm.em.getRepository(entityName);
+    }
+
+    return result;
   }
 }

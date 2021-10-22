@@ -36,6 +36,8 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -43,12 +45,13 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
 	});
 
 	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
@@ -67,6 +70,7 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -92,7 +96,7 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
     test(`1.2: Crear Project con datos erróneos:`, async() => {
         const badProject = dataList.users[0] as User;
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badProject);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badProject);
         const {
             code,
             data,
@@ -101,21 +105,19 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         } = response.body
 
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        // Comprobanse algúns datos obrigatorios
-        expect(data.id).toBeUndefined();
-
-        expect(message).toBe(i18next.t('PROJECT.SERVICE.ERROR.CREATE'));
+        expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.CREATE'));
     });
 
     test('1.3: Crear lista de Projects:', async() => {
         const projects = [
-            dataList.projects[0] as Project,
-            dataList.projects[0] as Project,
+            new Project(dataList.projects[0]),
+            new Project(dataList.projects[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -126,7 +128,7 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         projects[1]._id = "616c6b6602067b3bd0d5ffbc";
         projects[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(projects);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(projects);
         const {
             code,
             data,
@@ -138,6 +140,7 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -145,13 +148,13 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         expect(data).toBeDefined();
         expect(data).toHaveLength(projects.length);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(projects[0]);
-        expect(data[0].id).not.toBe(projects[1]);
+        expect(data[0].id).toBe(projects[0].id);
+        expect(data[0].id).not.toBe(projects[1].id);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(projects[1]);
-        expect(data[1].id).not.toBe(projects[0]);
+        expect(data[1].id).toBe(projects[1].id);
+        expect(data[1].id).not.toBe(projects[0].id);
 
-        expect(total).toBe(dataList.projects.length);
+        expect(total).toBe(projects.length);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
@@ -160,8 +163,8 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
 
     test('1.4: Crear lista de Projects algúns con datos erróneos:', async() => {
         const badProjects = [
-            dataList.projects[0] as Project,
-            dataList.users[0] as User,
+            new Project(dataList.projects[0]),
+            new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -172,7 +175,7 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         badProjects[1]._id = "616c6b6602067b3bd0d5ffbc";
         badProjects[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badProjects);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badProjects);
         const {
             code,
             data,
@@ -184,18 +187,74 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         } = response.body
 
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badProjects.length);
 
         expect(total).not.toBe(badProjects.length);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('PROJECT.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.CREATE_LIST'));
+    });
+});
+
+describe('2: Probas DATOS API - Projects (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "projects";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.projects, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear Project: <${dataList.projects[0].id}> QUE XA EXISTE`, async() => {
+        const project = dataList.projects[0] as Project;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(project);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('PROJECT.NAME'), id: project.id }));
     });
 });

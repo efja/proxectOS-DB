@@ -42,10 +42,10 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         await db.inicializeData(dataList.projects, true);
 	});
 
-	// afterEach(async () => {
-	// 	await db.dropAllData(dataList.allModels);
-	// 	await db.dropCollections();
-	// });
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
 
 	afterAll(async () => {
         await app.stop();

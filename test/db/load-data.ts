@@ -277,7 +277,6 @@ export class ObjectFactory {
                 break;
         }
 
-
         return obj;
     }
 }
