@@ -1,7 +1,8 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import { QueryOrder } from '@mikro-orm/core';
+import HttpStatus from 'http-status-codes';
+import { QueryOrder, wrap } from '@mikro-orm/core';
 
 import { DBConnection } from '../config/config-db';
 import { Project } from '../models/project.model';
@@ -35,55 +36,102 @@ export class ProjectService {
   }
 
   // ************************************************************************************************
-  // ** CRUD
+  // ** MÉTODOS CRUD (CREACIÓN)
   // ************************************************************************************************
   // ------------------------------------------------------------------------------------------------
-  // -- CREATE
+  // -- POST
   // ------------------------------------------------------------------------------------------------
-  public async createProject(): Promise<Project> {
-    let result : Project = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
+  public async createProject(project: Project): Promise<any> {
+    let result : any = HttpStatus.CONFLICT;
+
+    try {
+      let temp = null;
+
+      // Comprobase que non exista a entidade na BD
+      if (project.id != null) {
+        temp = await this.respository.findOne(project.id);
+      }
+
+      if (temp == null) {
+        await this.respository.persistAndFlush(project);
+        result = project;
+      }
+    } catch (error) {
+      result = null;
+    }
+    return result;
+  }
+
+  public async createProjectList(projects: Project[]): Promise<Project[]> {
+    let result : Project[] = [];
+
+    try {
+      await this.respository.persistAndFlush(projects);
+      result = projects;
+    } catch (error) {
+      console.log('error persistAndFlush:>> ', error);
+    }
 
     return result;
   }
 
+  // ************************************************************************************************
+  // ** MÉTODOS CRUD (READ)
+  // ************************************************************************************************
   // ------------------------------------------------------------------------------------------------
-  // -- READ
+  // -- GET
   // ------------------------------------------------------------------------------------------------
-  // GET
   public async getAllProjects(): Promise<Project[]> {
-    let result : Project[] = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
+    let result : Project[];
+
+    try {
+      result = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
+    } catch (error) {
+      result = null;
+    }
 
     return result;
   }
 
-  // GET
   public async getProject(id: string): Promise<Project> {
-    let result : Project = await this.respository.findOne(id);
+    let result : Project;
+
+    try {
+      result = await this.respository.findOne(id);
+    } catch (error) {
+      result = null;
+    }
 
     return result;
   }
 
+  // ************************************************************************************************
+  // ** MÉTODOS CRUD (UPDATE)
+  // ************************************************************************************************
   // ------------------------------------------------------------------------------------------------
-  // -- UPDATE
+  // -- PUT
   // ------------------------------------------------------------------------------------------------
-  // PUT
   public async updateProject(): Promise<Project> {
     let result : Project = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
 
     return result;
   }
 
-  // PATCH
+  // ------------------------------------------------------------------------------------------------
+  // -- PATCH
+  // ------------------------------------------------------------------------------------------------
   public async modifyProject(): Promise<Project> {
     let result : Project = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
 
     return result;
   }
 
+  // ************************************************************************************************
+  // ** MÉTODOS CRUD (DELETE)
+  // ************************************************************************************************
   // ------------------------------------------------------------------------------------------------
   // -- DELETE
   // ------------------------------------------------------------------------------------------------
-  // DELETE
   public async deleteProject(): Promise<Project> {
     let result : Project = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
 

@@ -3,7 +3,13 @@
 	"COMMON": {
 		"CREATED_DATE": "Fecha de creación"
 	},
+	"ERROR": {
+		"ALREADY_EXIST_MALE": "El {{entity}} co ID {{id}} xa existe na base de datos",
+		"ALREADY_EXIST_FEMALE": "La {{entity}} co ID {{id}} xa existe na base de datos"
+	},
 	"ASSIGNED_RESOURCE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Recursos Asignados se han recuperado correctamente",
@@ -24,6 +30,8 @@
 		}
 	},
 	"ASSIGNED_STAGE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todas las Etapas Asignadas se han recuperado correctamente",
@@ -44,6 +52,8 @@
 		}
 	},
 	"ASSIGNED_USER": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Usuarios Asignados se han recuperado correctamente",
@@ -64,6 +74,8 @@
 		}
 	},
 	"COMMENT": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Comentarios se han recuperado correctamente",
@@ -84,6 +96,8 @@
 		}
 	},
 	"PERFORMANCE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todas las Actuaciones se han recuperado correctamente",
@@ -104,6 +118,8 @@
 		}
 	},
 	"PRIORITY": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todas las Prioridades se han recuperado correctamente",
@@ -124,9 +140,11 @@
 		}
 	},
 	"PROJECT": {
+		"NAME": "Proyecto",
+		"NAME_PLURAL": "Proyectos",
 		"SERVICE": {
 			"SUCCESS": {
-				"GET_ALL": "Todos los proyectos se han recuperaron correctamente",
+				"GET_ALL": "Todos los Proyectos se han recuperaron correctamente",
 				"GET_SINGLE": "Proyecto obtenido con éxito",
 				"CREATE": "Proyecto creado con éxito",
 				"CREATE_LIST": "Proyectos creados con éxito",
@@ -134,16 +152,18 @@
 				"DELETE": "Proyecto eliminado correctamente"
 			},
 			"ERROR": {
-				"GET_ALL": "No se ha encontrado ningún proyecto",
-				"GET_SINGLE": "El proyecto no se ha podido obtener",
-				"CREATE_LIST": "No se han podido crear los proyectos",
-				"CREATE": "No se ha podido crear el proyecto",
-				"UPDATE": "No se ha podido actualizar el proyecto",
-				"DELETE": "No se ha podido eliminar el proyecto"
+				"GET_ALL": "No se ha encontrado ningún Proyecto",
+				"GET_SINGLE": "El Proyecto no se ha podido obtener",
+				"CREATE_LIST": "No se han podido crear los Proyectos",
+				"CREATE": "No se ha podido crear el Proyecto",
+				"UPDATE": "No se ha podido actualizar el Proyecto",
+				"DELETE": "No se ha podido eliminar el Proyecto"
 			}
 		}
 	},
 	"REQUIREMENT": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Requisitos se han recuperado correctamente",
@@ -164,6 +184,8 @@
 		}
 	},
 	"RESOURCE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Recursos se han recuperado correctamente",
@@ -184,6 +206,8 @@
 		}
 	},
 	"STAGE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todas las Etapas se han recuperado correctamente",
@@ -204,6 +228,8 @@
 		}
 	},
 	"STATE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Estados se han recuperado correctamente",
@@ -224,6 +250,8 @@
 		}
 	},
 	"STATE_HISTORY": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Históricos de Estados se han recuperado correctamente",
@@ -244,6 +272,8 @@
 		}
 	},
 	"TYPE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Tipos se han recuperado correctamente",
@@ -264,6 +294,8 @@
 		}
 	},
 	"USER": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Usuarios se han recuperado correctamente",
@@ -284,6 +316,8 @@
 		}
 	},
 	"USER_CONTACT": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Contactos de Usuarios se han recuperado correctamente",
@@ -304,6 +338,8 @@
 		}
 	},
 	"USER_CONTACT_TYPE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Tipos Contacto de Usuario se han recuperado correctamente",
@@ -324,6 +360,8 @@
 		}
 	},
 	"USER_GROUP": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Grupo de Usuarios se han recuperado correctamente",
@@ -344,6 +382,8 @@
 		}
 	},
 	"USER_SCHEDULE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Todos los Calendarios de Usuario se han recuperado correctamente",

@@ -114,12 +114,10 @@ export class DBConnection {
     let uriOptions = "";
 
     this.options = {
-      entities    : ['bin/models/*.js'],
-      entitiesTs  : ['src/models/*.ts'],
+      entities          : ['bin/models/*.js'],
+      entitiesTs        : ['src/models/*.ts'],
 
-      clientUrl   : this.clientUrl,
-
-      timezone    : '+02:00',
+      timezone          : '+02:00',
 
       metadataProvider  : TsMorphMetadataProvider,
     };

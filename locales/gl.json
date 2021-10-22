@@ -3,7 +3,13 @@
 	"COMMON": {
 		"CREATED_DATE": "Data de creación"
 	},
+	"ERROR": {
+		"ALREADY_EXIST_MALE": "O {{entity}} co ID {{id}} xa existe na base de datos",
+		"ALREADY_EXIST_FEMALE": "A {{entity}} co ID {{id}} xa existe na base de datos"
+	},
 	"ASSIGNED_RESOURCE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Recursos Asignados recuperáronse correctamente",
@@ -24,6 +30,8 @@
 		}
 	},
 	"ASSIGNED_STAGE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolas Etapas Asignadas recuperáronse correctamente",
@@ -44,6 +52,8 @@
 		}
 	},
 	"ASSIGNED_USER": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Usuarios Asignados recuperáronse correctamente",
@@ -64,6 +74,8 @@
 		}
 	},
 	"COMMENT": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Comentarios recuperáronse correctamente",
@@ -84,6 +96,8 @@
 		}
 	},
 	"PERFORMANCE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolas Actuacións recuperáronse correctamente",
@@ -104,6 +118,8 @@
 		}
 	},
 	"PRIORITY": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolas Prioridades recuperáronse correctamente",
@@ -124,6 +140,8 @@
 		}
 	},
 	"PROJECT": {
+		"NAME": "Proxecto",
+		"NAME_PLURAL": "Proxectos",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Proxectos recuperáronse correctamente",
@@ -144,6 +162,8 @@
 		}
 	},
 	"REQUIREMENT": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Requerimentos recuperáronse correctamente",
@@ -164,6 +184,8 @@
 		}
 	},
 	"RESOURCE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Recursos recuperáronse correctamente",
@@ -184,6 +206,8 @@
 		}
 	},
 	"STAGE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolas Etapas recuperáronse correctamente",
@@ -204,6 +228,8 @@
 		}
 	},
 	"STATE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Estados recuperáronse correctamente",
@@ -224,6 +250,8 @@
 		}
 	},
 	"STATE_HISTORY": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Históricos de Estados recuperáronse correctamente",
@@ -244,6 +272,8 @@
 		}
 	},
 	"TYPE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Tipos recuperáronse correctamente",
@@ -264,6 +294,8 @@
 		}
 	},
 	"USER": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Usuarios recuperáronse correctamente",
@@ -284,6 +316,8 @@
 		}
 	},
 	"USER_CONTACT": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Contactos de Usuarios recuperáronse correctamente",
@@ -304,6 +338,8 @@
 		}
 	},
 	"USER_CONTACT_TYPE": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Tipos Contacto de Usuario recuperáronse correctamente",
@@ -324,9 +360,11 @@
 		}
 	},
 	"USER_GROUP": {
+		"NAME": "",
+		"NAME_PLURAL": "",
 		"SERVICE": {
 			"SUCCESS": {
-				"GET_ALL": "Tódolos Grupo de Usuarios recuperáronse correctamente",
+				"GET_ALL": "Tódolos Grupos de Usuarios recuperáronse correctamente",
 				"GET_SINGLE": "Grupo de Usuario obtido con éxito",
 				"CREATE": "Grupos de Usuarios creado con éxito",
 				"CREATE_LIST": "Grupo de Usuarios creados con éxito",
@@ -344,6 +382,8 @@
 		}
 	},
 	"USER_SCHEDULE": {
+		"NAME": "Calendario de Usuario",
+		"NAME_PLURAL": "Calendarios de Usuario",
 		"SERVICE": {
 			"SUCCESS": {
 				"GET_ALL": "Tódolos Calendarios de Usuario recuperáronse correctamente",

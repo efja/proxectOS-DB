@@ -32,6 +32,7 @@ export class ProjectRoutes {
 
     // POST
     this.router.post('', this.projectController.newProject);
+    this.router.post('/Multiple', this.projectController.newProjectList);
 
     // PATCH
     this.router.patch('/:id', this.projectController.updateProject);
