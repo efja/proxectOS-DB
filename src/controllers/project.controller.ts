@@ -4,6 +4,7 @@
 // ####################################################################################################
 import HttpStatus from 'http-status-codes';
 import { ProjectService } from '../services/project.service';
+import qs from 'qs';
 
 import { req, res, next } from 'express';
 import { ResponseData } from '../interfaces/response-data.interface';
@@ -167,7 +168,16 @@ export class ProjectController {
       let error;
       let code = HttpStatus.NOT_FOUND;
 
-      const data = await this.projectService.getAllProjects();
+      const {
+        orderBy,
+        limit,
+        offset,
+        ...query
+      } = req.query
+
+      const queryParams = qs.parse(query);
+
+      let data = await this.projectService.getAllProjects(queryParams, orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -177,13 +187,14 @@ export class ProjectController {
         code = HttpStatus.OK;
         message = req.t('PROJECT.SERVICE.SUCCESS.GET_ALL');
       } else {
+        data = null;
         error = req.t('PROJECT.SERVICE.ERROR.GET_ALL');
       }
 
       const responseData : ResponseData = {
         code    : code,
         data    : data,
-        total   : data.length,
+        total   : (data && data.length) ? data.length : 0,
         from    : 0,
         limit   : 0,
         message : message,
@@ -214,7 +225,9 @@ export class ProjectController {
       let error;
 
       const { id } = req.params;
-      const data = await this.projectService.getProject(id);
+      const queryParams = qs.parse(req.query);
+
+      const data = await this.projectService.getProject(id, queryParams);
 
       if (
         data != undefined &&
