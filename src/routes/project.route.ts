@@ -26,19 +26,19 @@ export class ProjectRoutes {
   // ** RUTAS
   // ************************************************************************************************
   private routes = () => {
-    // GET
-    this.router.get('', this.projectController.getAllProjects);
-    this.router.get('/:id', this.projectController.getProject);
-
     // POST
     this.router.post('', this.projectController.newProject);
     this.router.post('/Multiple', this.projectController.newProjectList);
 
-    // PATCH
-    this.router.patch('/:id', this.projectController.updateProject);
+    // GET
+    this.router.get('', this.projectController.getAllProjects);
+    this.router.get('/:id', this.projectController.getProject);
 
     // PUT
     this.router.put('/:id', this.projectController.updateProject);
+
+    // PATCH
+    this.router.patch('/:id', this.projectController.modifyProject);
 
     // DELETE
     this.router.delete('/:id', this.projectController.deleteProject);

@@ -8,6 +8,7 @@ import { ProjectService } from '../services/project.service';
 import { req, res, next } from 'express';
 import { ResponseData } from '../interfaces/response-data.interface';
 import { Project } from '../models/project.model';
+import { Operation } from 'fast-json-patch';
 
 // ####################################################################################################
 // ## CLASE ProjectController
@@ -27,7 +28,7 @@ export class ProjectController {
   // ** MÉTODOS CRUD (CREACIÓN)
   // ************************************************************************************************
   /**
-   * Crea un novo proxecto
+   * Crea un novo proxecto. (POST)
    *
    * @param req - obxecto da petición
    * @param res - obxecto da resposta
@@ -43,7 +44,7 @@ export class ProjectController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      let project: Project = new Project(req.body);
+      const project: Project = new Project(req.body);
 
       let data;
 
@@ -51,7 +52,11 @@ export class ProjectController {
         data = await this.projectService.createProject(project);
       }
 
-      if (data != undefined && data != null && data != HttpStatus.CONFLICT) {
+      if (
+        data != undefined &&
+        data != null &&
+        data != HttpStatus.CONFLICT
+      ) {
         code = HttpStatus.CREATED;
         message = req.t('PROJECT.SERVICE.SUCCESS.CREATE');
       } else if (data == HttpStatus.CONFLICT) {
@@ -61,7 +66,7 @@ export class ProjectController {
         error = req.t('PROJECT.SERVICE.ERROR.CREATE');
       }
 
-      let responseData : ResponseData = {
+      const responseData : ResponseData = {
         code,
         data,
         message,
@@ -75,7 +80,7 @@ export class ProjectController {
   };
 
   /**
-   * Crea os proxectos dunha dunha lista pasada.
+   * Crea os proxectos dunha dunha lista pasada. (POST)
    *
    * @param req - obxecto da petición
    * @param res - obxecto da resposta
@@ -91,7 +96,7 @@ export class ProjectController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      let projects: Project[] = req.body;
+      const projects: Project[] = req.body;
 
       let data;
       let continueProcess: boolean = true;
@@ -109,18 +114,24 @@ export class ProjectController {
       }
 
       if (continueProcess && projects && projects.length > 0) {
-        console.log("----------------------------------------------");
         data = await this.projectService.createProjectList(projects);
       }
 
-      if (data != undefined && data != null) {
+      if (
+        data != undefined &&
+        data != null &&
+        data != HttpStatus.CONFLICT
+      ) {
         code = HttpStatus.CREATED;
         message = req.t('PROJECT.SERVICE.SUCCESS.CREATE_LIST');
+      } else if (data == HttpStatus.CONFLICT) {
+        data = undefined;
+        error = req.t('ERROR.ALREADY_EXIST_MALE', { entity: req.t('PROJECT.NAME'), id: "MULTIPLE" });
       } else {
         error = req.t('PROJECT.SERVICE.ERROR.CREATE_LIST');
       }
 
-      let responseData : ResponseData = {
+      const responseData : ResponseData = {
         code    : code,
         data    : data,
         total   : (data && data.length) ? data.length : 0,
@@ -140,7 +151,7 @@ export class ProjectController {
   // ** MÉTODOS CRUD (READ)
   // ************************************************************************************************
   /**
-   * Recupera tódolos proxectos
+   * Recupera tódolos proxectos. (GET)
    *
    * @param req - obxecto da petición
    * @param res - obxecto da resposta
@@ -158,14 +169,18 @@ export class ProjectController {
 
       const data = await this.projectService.getAllProjects();
 
-      if (data != undefined && data != null) {
+      if (
+        data != undefined &&
+        data != null &&
+        data != HttpStatus.NOT_FOUND
+      ) {
         code = HttpStatus.OK;
         message = req.t('PROJECT.SERVICE.SUCCESS.GET_ALL');
       } else {
         error = req.t('PROJECT.SERVICE.ERROR.GET_ALL');
       }
 
-      let responseData : ResponseData = {
+      const responseData : ResponseData = {
         code    : code,
         data    : data,
         total   : data.length,
@@ -182,7 +197,7 @@ export class ProjectController {
   };
 
   /**
-   * Recupera un proxecto en concreto
+   * Recupera un proxecto en concreto. (GET)
    *
    * @param req - obxecto da petición
    * @param res - obxecto da resposta
@@ -201,14 +216,18 @@ export class ProjectController {
       const { id } = req.params;
       const data = await this.projectService.getProject(id);
 
-      if (data != undefined && data != null) {
+      if (
+        data != undefined &&
+        data != null &&
+        data != HttpStatus.NOT_FOUND
+      ) {
         code = HttpStatus.OK;
         message = req.t('PROJECT.SERVICE.SUCCESS.GET_SINGLE');
       } else {
         error = req.t('PROJECT.SERVICE.ERROR.GET_SINGLE');
       }
 
-      let responseData : ResponseData = {
+      const responseData : ResponseData = {
         code,
         data,
         message,
@@ -225,7 +244,7 @@ export class ProjectController {
   // ** MÉTODOS CRUD (UPDATE)
   // ************************************************************************************************
   /**
-   * Actualiza un proxecto
+   * Actualiza un proxecto. (PUT)
    *
    * @param req - obxecto da petición
    * @param res - obxecto da resposta
@@ -241,16 +260,99 @@ export class ProjectController {
       let error;
       let code = HttpStatus.NOT_FOUND;
 
-      const data = {};
+      const { id } = req.params;
+      const project: Project = new Project(req.body);
 
-      if (data != undefined && data != null) {
-        code = HttpStatus.ACCEPTED;
-        message = req.t('PROJECT.SERVICE.SUCCESS.UPDATE');
-      } else {
-        error = req.t('PROJECT.SERVICE.ERROR.UPDATE');
+      let data;
+
+      if (project && project.name && project.description) {
+        data = await this.projectService.updateProject(id, project);
       }
 
-      let responseData : ResponseData = {
+      if (
+        data != undefined &&
+        data != null &&
+        data != HttpStatus.NOT_FOUND &&
+        data != HttpStatus.CONFLICT
+      ) {
+        code = HttpStatus.CREATED;
+        message = req.t('PROJECT.SERVICE.SUCCESS.UPDATE');
+      } else if (data == HttpStatus.CONFLICT) {
+        code = HttpStatus.CONFLICT;
+        data = undefined;
+        error = req.t('ERROR.CONFLICT', { entity: req.t('PROJECT.NAME'), id: id });
+      } else {
+        data = undefined;
+        error = req.t('ERROR.NOT_FOUND_MALE', { entity: req.t('PROJECT.NAME'), id: id });
+      }
+
+      const responseData : ResponseData = {
+        code,
+        data,
+        message,
+        error,
+      };
+
+      res.status(code).json(responseData);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  /**
+   * Actualiza un proxecto. (PATCH)
+   *
+   * @param req - obxecto da petición
+   * @param res - obxecto da resposta
+   * @param next
+   */
+   public modifyProject = async (
+    req   : req,
+    res   : res,
+    next  : next
+  ): Promise<any> => {
+    try {
+      let message;
+      let error;
+      let code = HttpStatus.NOT_FOUND;
+
+      const { id } = req.params;
+      const tempPatch: Operation[] = req.body;
+      let objPatch: Operation[] = [];
+
+      let data;
+
+      if (tempPatch.length > 0) {
+        // Quitanse as modficacións de ids.
+        objPatch = tempPatch.filter(op => !op.path.includes("id"));
+      }
+
+      if (objPatch.length > 0) {
+
+        data = await this.projectService.modifyProject(id, objPatch);
+
+        if (
+          data != undefined &&
+          data != null &&
+          data != HttpStatus.NOT_FOUND &&
+          data != HttpStatus.CONFLICT
+        ) {
+          code = HttpStatus.CREATED;
+          message = req.t('PROJECT.SERVICE.SUCCESS.UPDATE');
+        } else if (data == HttpStatus.CONFLICT) {
+          code = HttpStatus.CONFLICT;
+          data = undefined;
+          error = req.t('ERROR.CONFLICT', { entity: req.t('PROJECT.NAME'), id: id });
+        } else {
+          data = undefined;
+          error = req.t('ERROR.NOT_FOUND_MALE', { entity: req.t('PROJECT.NAME'), id: id });
+        }
+      } else {
+        code = HttpStatus.BAD_REQUEST;
+        error = req.t('ERROR.BAD_REQUEST', { entity: req.t('PROJECT.NAME') });
+      }
+
+      const responseData : ResponseData = {
         code,
         data,
         message,
@@ -267,7 +369,7 @@ export class ProjectController {
   // ** MÉTODOS CRUD (DELETE)
   // ************************************************************************************************
   /**
-   * Elimina un proxecto concreto
+   * Elimina un proxecto concreto. (DELETE)
    *
    * @param req - obxecto da petición
    * @param res - obxecto da resposta
@@ -285,14 +387,18 @@ export class ProjectController {
 
       const data = {};
 
-      if (data != undefined && data != null) {
+      if (
+        data != undefined &&
+        data != null &&
+        data != HttpStatus.NOT_FOUND
+      ) {
         code = HttpStatus.OK;
         message = req.t('PROJECT.SERVICE.SUCCESS.DELETE');
       } else {
         error = req.t('PROJECT.SERVICE.ERROR.DELETE');
       }
 
-      let responseData : ResponseData = {
+      const responseData : ResponseData = {
         code,
         data,
         message,
