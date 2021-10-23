@@ -104,8 +104,45 @@ describe('1: Probas DATOS API - Projects (PUT)', () => {
 
         expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.UPDATE'));
     });
+});
 
-    test(`1.2: Actualizar Project con datos erróneos:`, async() => {
+describe('1: Probas DATOS API - Projects ERROS (PUT)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "projects";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.projects);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+
+    test(`2.1: Actualizar Project con datos erróneos:`, async() => {
         const project0 = new Project(dataList.projects[0]);
 
         // Modificase o modelo Project
@@ -132,7 +169,7 @@ describe('1: Probas DATOS API - Projects (PUT)', () => {
         expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('PROJECT.NAME'), id: project0.id }));
     });
 
-    test(`1.3: Actualizar Project que non existe:`, async() => {
+    test(`2.2: Actualizar Project que non existe:`, async() => {
         const project0 = new Project(dataList.projects[0]);
 
         // Modificase o modelo Project

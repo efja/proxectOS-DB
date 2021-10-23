@@ -93,28 +93,7 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`1.2: Crear Project con datos erróneos:`, async() => {
-        const badProject = dataList.users[0] as User;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badProject);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-        expect(message).toBeUndefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.CREATE'));
-    });
-
-    test('1.3: Crear lista de Projects:', async() => {
+    test('1.2: Crear lista de Projects:', async() => {
         const projects = [
             new Project(dataList.projects[0]),
             new Project(dataList.projects[0]),
@@ -160,8 +139,85 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
 
         expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.CREATE_LIST'));
     });
+});
 
-    test('1.4: Crear lista de Projects algúns con datos erróneos:', async() => {
+describe('2: Probas DATOS API - Projects ERROS (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "projects";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.projects, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear Project con datos erróneos:`, async() => {
+        const badProject = dataList.users[0] as User;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badProject);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.CREATE'));
+    });
+
+    test(`2.2: Crear Project: <${dataList.projects[0].id}> QUE XA EXISTE`, async() => {
+        const project = dataList.projects[0] as Project;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(project);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('PROJECT.NAME'), id: project.id }));
+    });
+
+    test('2.3: Crear lista de Projects algúns con datos erróneos:', async() => {
         const badProjects = [
             new Project(dataList.projects[0]),
             new User(dataList.users[0]),
@@ -200,61 +256,5 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         expect(limit).toBe(0);
 
         expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.CREATE_LIST'));
-    });
-});
-
-describe('2: Probas DATOS API - Projects (POST)', () => {
-    // ************************************************************************************************
-    // ** ATRIBUTOS
-    // ************************************************************************************************
-    const ENDPOINT = "projects";
-
-    // ************************************************************************************************
-    // ** TAREFAS PREVIAS E POSTERIORES
-    // ************************************************************************************************
-	beforeAll(async () => {
-        await db.init();
-		await db.dropCollections();
-
-        await runApp();
-	});
-
-	beforeEach(async () => {
-        await db.inicializeData(dataList.projects, true);
-	});
-
-	afterEach(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
-	});
-
-	afterAll(async () => {
-        await app.stop();
-
-		await db.close();
-	});
-
-    // ************************************************************************************************
-    // ** TESTS
-    // ************************************************************************************************
-    test(`2.1: Crear Project: <${dataList.projects[0].id}> QUE XA EXISTE`, async() => {
-        const project = dataList.projects[0] as Project;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(project);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-        expect(message).toBeUndefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('PROJECT.NAME'), id: project.id }));
     });
 });
