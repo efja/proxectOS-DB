@@ -4,8 +4,12 @@
         "CREATED_DATE": "Creation date"
     },
 	"ERROR": {
-		"ALREADY_EXIST_MALE": "The {{entity}} co ID {{id}} x exists in the database",
-		"ALREADY_EXIST_FEMALE": "The {{entity}} co ID {{id}} x exists in the database"
+		"BAD_REQUEST": "Bad request for {{entity}}",
+		"CONFLICT": "There was a conflict with the operation of {{entity}} with ID {{id}}",
+		"NOT_FOUND_MALE": "No {{entity}} with ID {{id}} found in the database",
+		"NOT_FOUND_FEMALE": "No {{entity}} with ID {{id}} found in the database",
+		"ALREADY_EXIST_MALE": "The {{entity}} with ID {{id}} already exists in the database",
+		"ALREADY_EXIST_FEMALE": "The {{entity}} with ID {{id}} already exists in the database"
 	},
 	"ASSIGNED_RESOURCE": {
 		"NAME": "",

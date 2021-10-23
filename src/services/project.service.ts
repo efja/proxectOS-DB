@@ -6,6 +6,8 @@ import { QueryOrder, wrap } from '@mikro-orm/core';
 
 import { DBConnection } from '../config/config-db';
 import { Project } from '../models/project.model';
+import { Operation } from 'fast-json-patch';
+import * as jsonpatch from 'fast-json-patch';
 
 // ####################################################################################################
 // ## CLASE ProjectService
@@ -53,8 +55,12 @@ export class ProjectService {
       }
 
       if (temp == null) {
-        await this.respository.persistAndFlush(project);
-        result = project;
+        temp = new Project();
+        wrap(temp).assign(project, { em: this.db.orm.em });
+
+        await this.respository.persist(temp).flush();
+
+        result = temp;
       }
     } catch (error) {
       result = null;
@@ -62,14 +68,35 @@ export class ProjectService {
     return result;
   }
 
-  public async createProjectList(projects: Project[]): Promise<Project[]> {
-    let result : Project[] = [];
+  public async createProjectList(projects: Project[]): Promise<any> {
+    let result : any = HttpStatus.CONFLICT;
 
     try {
-      await this.respository.persistAndFlush(projects);
-      result = projects;
+      let temp = null;
+      let projectIds = null;
+
+      // Búscase se os obxectos pasados teñen definido o ID
+      for (let project of projects) {
+        if (project.id != null) {
+          if (projectIds == null) {
+            projectIds = [];
+          }
+
+          projectIds.push(project.id);
+        }
+      }
+
+      // Comprobase que non existan as entidades na BD
+      if (projectIds != null) {
+        temp = await this.respository.find(projectIds);
+      }
+
+      if (temp == null || temp.length == 0) {
+        await this.respository.persistAndFlush(projects);
+        result = projects;
+      }
     } catch (error) {
-      console.log('error persistAndFlush:>> ', error);
+      result = null;
     }
 
     return result;
@@ -81,8 +108,8 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- GET
   // ------------------------------------------------------------------------------------------------
-  public async getAllProjects(): Promise<Project[]> {
-    let result : Project[];
+  public async getAllProjects(): Promise<any> {
+    let result : any = HttpStatus.NOT_FOUND;
 
     try {
       result = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
@@ -93,8 +120,8 @@ export class ProjectService {
     return result;
   }
 
-  public async getProject(id: string): Promise<Project> {
-    let result : Project;
+  public async getProject(id: string): Promise<any> {
+    let result : any = HttpStatus.NOT_FOUND;
 
     try {
       result = await this.respository.findOne(id);
@@ -111,8 +138,33 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- PUT
   // ------------------------------------------------------------------------------------------------
-  public async updateProject(): Promise<Project> {
-    let result : Project = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
+  public async updateProject(id: string, project: Project): Promise<any> {
+    let result : any = HttpStatus.NOT_FOUND;
+
+    try {
+      let temp = null;
+
+      // Comprobase que non exista a entidade na BD
+      if (id != null) {
+        temp = await this.respository.findOne(id);
+      }
+
+      if (temp != null) {
+        try {
+          // Gárdanse os cambios na entidade
+          wrap(temp).assign(project, { em: this.db.orm.em });
+
+          // Actualizase a informanción na BD
+          await this.respository.flush();
+
+          result = temp;
+        } catch (error) {
+          result = HttpStatus.CONFLICT;
+        }
+      }
+    } catch (error) {
+      result = null;
+    }
 
     return result;
   }
@@ -120,8 +172,39 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- PATCH
   // ------------------------------------------------------------------------------------------------
-  public async modifyProject(): Promise<Project> {
-    let result : Project = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
+  public async modifyProject(id: string, objPatch: Operation[]): Promise<any> {
+    let result : any = HttpStatus.NOT_FOUND;
+
+    try {
+      let temp = null;
+
+      // Comprobase que non exista a entidade na BD
+      if (id != null) {
+        temp = await this.respository.findOne(id);
+      }
+
+      if (temp != null) {
+        try {
+          // Comprobase que o JSONPatch sexa correcto
+          let testPatch = jsonpatch.validate(objPatch, temp);
+
+          // Se o validador non produce resultados daquela o JSONPatch é correcto
+          if (testPatch == undefined) {
+            // Aplicase o JSONPatch
+            jsonpatch.applyPatch(temp, objPatch);
+
+            // Persístese a información na base de datos
+            result = await this.updateProject(id, temp);
+          } else {
+            result = HttpStatus.CONFLICT;
+          }
+        } catch (error) {
+          result = HttpStatus.CONFLICT;
+        }
+      }
+    } catch (error) {
+      result = null;
+    }
 
     return result;
   }

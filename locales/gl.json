@@ -4,8 +4,12 @@
 		"CREATED_DATE": "Data de creación"
 	},
 	"ERROR": {
-		"ALREADY_EXIST_MALE": "O {{entity}} co ID {{id}} xa existe na base de datos",
-		"ALREADY_EXIST_FEMALE": "A {{entity}} co ID {{id}} xa existe na base de datos"
+		"BAD_REQUEST": "Petición errónea para {{entity}}",
+		"CONFLICT": "Producíuse un conflito coa operación de {{entity}} coa ID {{id}}",
+		"NOT_FOUND_MALE": "Non se atopou ningún {{entity}} coa ID {{id}} na base de datos",
+		"NOT_FOUND_FEMALE": "Non se atopou ningunha {{entity}} coa ID {{id}} na base de datos",
+		"ALREADY_EXIST_MALE": "O {{entity}} coa ID {{id}} xa existe na base de datos",
+		"ALREADY_EXIST_FEMALE": "A {{entity}} co aID {{id}} xa existe na base de datos"
 	},
 	"ASSIGNED_RESOURCE": {
 		"NAME": "",
