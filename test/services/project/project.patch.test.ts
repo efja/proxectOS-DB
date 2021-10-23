@@ -60,8 +60,8 @@ describe('1: Probas DATOS API - Projects (PATCH)', () => {
     // ** TESTS
     // ************************************************************************************************
     test(`1.1: Actualizar Project: <${dataList.projects[0].id}>`, async() => {
-        const project0 = dataList.projects[0] as Project;
-        const project1 = dataList.projects[0] as Project;
+        const project0 = new Project(dataList.projects[0]);
+        const project1 = new Project(dataList.projects[0]);
 
         // Modificase o modelo Project
         project1.name = project1.name + FAKE_TEXT;
@@ -109,8 +109,8 @@ describe('1: Probas DATOS API - Projects (PATCH)', () => {
     });
 
     test(`1.2: Actualizar Project con datos erróneos:`, async() => {
-        const project0 = dataList.projects[0] as Project;
-        const project1 = dataList.projects[0] as Project;
+        const project0 = new Project(dataList.projects[0]);
+        const project1 = new Project(dataList.projects[0]);
 
         // Modificase o modelo Project
         project1.name = project1.name + FAKE_TEXT;
