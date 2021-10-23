@@ -83,8 +83,8 @@ describe('1: Probas DATOS API - AssignedResources (POST)', () => {
         expect(data.description).toBe(assignedResource.description);
 
         // Comprobanse algúns datos opcionais
-        expect(date2LocaleISO(data.startDate)).toBe(assignedResource.amount);
-        expect(date2LocaleISO(data.targetFinishDate)).toBe(assignedResource.amount);
+        expect(data.amount).toBe(assignedResource.amount);
+        expect(data.amount).toBe(assignedResource.amount);
 
         expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.CREATE'));
     });

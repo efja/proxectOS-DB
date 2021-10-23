@@ -19,6 +19,7 @@ import {
     request
 } from "../commons";
 import { date2LocaleISO } from "../../../src/helpers/date.helper";
+import { ObjectId } from "@mikro-orm/mongodb";
 
 // ####################################################################################################
 // ## TESTS GROUPS
@@ -68,7 +69,7 @@ describe('1: Probas DATOS API - Projects (PATCH)', () => {
         // Xerase o objexecto tipo HTTP PATCH
         const objPatch = jsonpatch.compare(project0, project1);
 
-        const response = await request.patch(`${API_BASE}/${ENDPOINT}/`).send(objPatch);
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/${project0.id}`).send(objPatch);
         const {
             code,
             data,
@@ -77,9 +78,10 @@ describe('1: Probas DATOS API - Projects (PATCH)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
-        expect(response.status).toBe(HttpStatus.OK);
-        expect(code).toBe(HttpStatus.OK);
+        expect(response.status).toBe(HttpStatus.CREATED);
+        expect(code).toBe(HttpStatus.CREATED);
         expect(data).toBeDefined();
 
         // ** Datos cambiados
@@ -118,7 +120,7 @@ describe('1: Probas DATOS API - Projects (PATCH)', () => {
 
         objPatch[0].path = FAKE_TEXT; // Dato incorrecto
 
-        const response = await request.patch(`${API_BASE}/${ENDPOINT}/`).send(objPatch);
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/${project0.id}`).send(objPatch);
         const {
             code,
             data,
@@ -127,11 +129,40 @@ describe('1: Probas DATOS API - Projects (PATCH)', () => {
         } = response.body
 
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(message).toBe(i18next.t('PROJECT.SERVICE.ERROR.UPDATE'));
+        expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('PROJECT.NAME'), id: project0.id }));
+    });
+
+    test(`1.3: Actualizar Project que non existe:`, async() => {
+        const project0 = new Project(dataList.projects[0]);
+
+        // Modificase o modelo Project
+        project0.name = project0.name + FAKE_TEXT;
+
+        do {
+            project0.id = new ObjectId();
+        } while (project0.id == dataList.projects[0].id);
+
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${project0.id}`).send(project0);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.NOT_FOUND);
+        expect(code).toBe(HttpStatus.NOT_FOUND);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_MALE', { entity: i18next.t('PROJECT.NAME'), id: project0.id }));
     });
 });
