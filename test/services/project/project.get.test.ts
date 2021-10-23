@@ -89,8 +89,11 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
     test('1.2: Consultar tódolos Projects con parámetros de filtrado:', async() => {
         const queryParameters = qs.stringify(
             {
+                limit: 0,
+                orderBy: [{ name: "ASC" }],
                 name: {'$regex': 'Test' }
-            }
+            },
+            { arrayFormat: 'repeat' }
         );
 
         const response = await request.get(`${API_BASE}/${ENDPOINT}?${queryParameters}`);
