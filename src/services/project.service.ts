@@ -34,7 +34,6 @@ export class ProjectService {
 
     await this.db.init();
     this.respository = this.db.getRepository(Project);
-
   }
 
   // ************************************************************************************************
@@ -108,11 +107,21 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- GET
   // ------------------------------------------------------------------------------------------------
-  public async getAllProjects(): Promise<any> {
+  public async getAllProjects(
+    filters?: any,
+    orderBy = { name: QueryOrder.ASC },
+    limit: number = 0,
+    offset: number = 0
+  ): Promise<any> {
     let result : any = HttpStatus.NOT_FOUND;
 
     try {
-      result = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
+      result = await this.respository.find(filters, orderBy, limit, offset);
+
+      if (result.length == 0) {
+        result = HttpStatus.NOT_FOUND;
+      }
+
     } catch (error) {
       result = null;
     }
@@ -120,11 +129,11 @@ export class ProjectService {
     return result;
   }
 
-  public async getProject(id: string): Promise<any> {
+  public async getProject(id: string, filters?: any): Promise<any> {
     let result : any = HttpStatus.NOT_FOUND;
 
     try {
-      result = await this.respository.findOne(id);
+      result = await this.respository.findOne({ id, ...filters });
     } catch (error) {
       result = null;
     }
