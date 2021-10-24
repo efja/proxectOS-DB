@@ -8,17 +8,17 @@ import { req, res, next } from 'express';
 import qs from 'qs';
 
 import { ResponseData } from '../interfaces/response-data.interface';
-import { ProjectService } from '../services/project.service';
-import { Project } from '../models/project.model';
+import { AssignedResourceService } from '../services/assigned-resource.service';
+import { AssignedResource } from '../models/assigned-resource.model';
 
 // ####################################################################################################
-// ## CLASE ProjectController
+// ## CLASE AssignedResourceController
 // ####################################################################################################
-export class ProjectController {
+export class AssignedResourceController {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  public projectService : ProjectService = new ProjectService();
+  public assignedResourceService : AssignedResourceService = new AssignedResourceService();
 
   // ************************************************************************************************
   // ** CONSTRUTOR
@@ -45,12 +45,12 @@ export class ProjectController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const project: Project = new Project(req.body);
+      const assignedResource: AssignedResource = new AssignedResource(req.body);
 
       let data;
 
-      if (project && project.name && project.description) {
-        data = await this.projectService.create(project);
+      if (assignedResource && assignedResource.description && assignedResource.amount && assignedResource.unitCost) {
+        data = await this.assignedResourceService.create(assignedResource);
       }
 
       if (
@@ -59,13 +59,13 @@ export class ProjectController {
         data != HttpStatus.CONFLICT
       ) {
         code = HttpStatus.CREATED;
-        message = req.t('SUCCESS.CREATE', { entity: req.t('PROJECT.NAME') });
+        message = req.t('SUCCESS.CREATE', { entity: req.t('ASSIGNED_RESOURCE.NAME') });
       } else if (data == HttpStatus.CONFLICT) {
         data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t('PROJECT.NAME'), id: project.id });
+        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t('ASSIGNED_RESOURCE.NAME'), id: assignedResource.id });
       } else {
         data = undefined;
-        error = req.t('ERROR.CREATE', { entity: req.t('PROJECT.NAME') });
+        error = req.t('ERROR.CREATE', { entity: req.t('ASSIGNED_RESOURCE.NAME') });
       }
 
       const responseData : ResponseData = {
@@ -98,25 +98,25 @@ export class ProjectController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const projects: Project[] = req.body;
+      const assignedResources: AssignedResource[] = req.body;
 
       let data;
       let continueProcess: boolean = true;
 
-      for (let i = 0; i < projects.length; i++) {
-        let item = projects[i];
+      for (let i = 0; i < assignedResources.length; i++) {
+        let item = assignedResources[i];
 
-        if (item && item.name && item.description) {
+        if (item && item.description && item.amount && item.unitCost) {
           // Crease un proxecto novo para asegurar que vai a ser do tipo correcto
-          projects[i] = new Project(item);
+          assignedResources[i] = new AssignedResource(item);
         } else {
           continueProcess = false;
           break;
         }
       }
 
-      if (continueProcess && projects && projects.length > 0) {
-        data = await this.projectService.createList(projects);
+      if (continueProcess && assignedResources && assignedResources.length > 0) {
+        data = await this.assignedResourceService.createList(assignedResources);
       }
 
       if (
@@ -125,13 +125,13 @@ export class ProjectController {
         data != HttpStatus.CONFLICT
       ) {
         code = HttpStatus.CREATED;
-        message = req.t('SUCCESS.CREATE_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
+        message = req.t('SUCCESS.CREATE_LIST', { entity: req.t('ASSIGNED_RESOURCE.NAME_PLURAL') });
       } else if (data == HttpStatus.CONFLICT) {
         data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
+        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t('ASSIGNED_RESOURCE.NAME'), id: "MULTIPLE" });
       } else {
         data = undefined;
-        error = req.t('ERROR.CREATE_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
+        error = req.t('ERROR.CREATE_LIST', { entity: req.t('ASSIGNED_RESOURCE.NAME_PLURAL') });
       }
 
       const responseData : ResponseData = {
@@ -179,7 +179,7 @@ export class ProjectController {
 
       const queryParams = qs.parse(query);
 
-      let data = await this.projectService.getAll(queryParams, orderBy, limit, offset);
+      let data = await this.assignedResourceService.getAll(queryParams, orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -187,10 +187,10 @@ export class ProjectController {
         data != HttpStatus.NOT_FOUND
       ) {
         code = HttpStatus.OK;
-        message = req.t('SUCCESS.GET_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
+        message = req.t('SUCCESS.GET_LIST', { entity: req.t('ASSIGNED_RESOURCE.NAME_PLURAL') });
       } else {
         data = undefined;
-        error = req.t('ERROR.NOT_FOUND_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
+        error = req.t('ERROR.NOT_FOUND_LIST', { entity: req.t('ASSIGNED_RESOURCE.NAME_PLURAL') });
       }
 
       const responseData : ResponseData = {
@@ -229,7 +229,7 @@ export class ProjectController {
       const { id } = req.params;
       const queryParams = qs.parse(req.query);
 
-      let data = await this.projectService.get(id, queryParams);
+      let data = await this.assignedResourceService.get(id, queryParams);
 
       if (
         data != undefined &&
@@ -237,10 +237,10 @@ export class ProjectController {
         data != HttpStatus.NOT_FOUND
       ) {
         code = HttpStatus.OK;
-        message = req.t('SUCCESS.GET', { entity: req.t('PROJECT.NAME') });
+        message = req.t('SUCCESS.GET', { entity: req.t('ASSIGNED_RESOURCE.NAME') });
       } else {
         data = undefined;
-        error = req.t('ERROR.NOT_FOUND', { entity: req.t('PROJECT.NAME'), id: id });
+        error = req.t('ERROR.NOT_FOUND', { entity: req.t('ASSIGNED_RESOURCE.NAME'), id: id });
       }
 
       const responseData : ResponseData = {
@@ -277,12 +277,12 @@ export class ProjectController {
       let code = HttpStatus.NOT_FOUND;
 
       const { id } = req.params;
-      const project: Project = new Project(req.body);
+      const assignedResource: AssignedResource = new AssignedResource(req.body);
 
       let data;
 
-      if (project && project.name && project.description) {
-        data = await this.projectService.update(id, project);
+      if (assignedResource && assignedResource.description && assignedResource.amount && assignedResource.unitCost) {
+        data = await this.assignedResourceService.update(id, assignedResource);
       }
 
       if (
@@ -292,14 +292,14 @@ export class ProjectController {
         data != HttpStatus.CONFLICT
       ) {
         code = HttpStatus.CREATED;
-        message = req.t('SUCCESS.UPDATE', { entity: req.t('PROJECT.NAME'), id: id });
+        message = req.t('SUCCESS.UPDATE', { entity: req.t('ASSIGNED_RESOURCE.NAME'), id: id });
       } else if (data == HttpStatus.CONFLICT) {
         code = HttpStatus.CONFLICT;
         data = undefined;
-        error = req.t('ERROR.CONFLICT', { entity: req.t('PROJECT.NAME'), id: id });
+        error = req.t('ERROR.CONFLICT', { entity: req.t('ASSIGNED_RESOURCE.NAME'), id: id });
       } else {
         data = undefined;
-        error = req.t('ERROR.NOT_FOUND', { entity: req.t('PROJECT.NAME'), id: id });
+        error = req.t('ERROR.NOT_FOUND', { entity: req.t('ASSIGNED_RESOURCE.NAME'), id: id });
       }
 
       const responseData : ResponseData = {
@@ -345,7 +345,7 @@ export class ProjectController {
 
       if (objPatch.length > 0) {
 
-        data = await this.projectService.modify(id, objPatch);
+        data = await this.assignedResourceService.modify(id, objPatch);
 
         if (
           data != undefined &&
@@ -354,18 +354,18 @@ export class ProjectController {
           data != HttpStatus.CONFLICT
         ) {
           code = HttpStatus.CREATED;
-          message = req.t('SUCCESS.UPDATE', { entity: req.t('PROJECT.NAME'), id: id });
+          message = req.t('SUCCESS.UPDATE', { entity: req.t('ASSIGNED_RESOURCE.NAME'), id: id });
         } else if (data == HttpStatus.CONFLICT) {
           code = HttpStatus.CONFLICT;
           data = undefined;
-          error = req.t('ERROR.CONFLICT', { entity: req.t('PROJECT.NAME'), id: id });
+          error = req.t('ERROR.CONFLICT', { entity: req.t('ASSIGNED_RESOURCE.NAME'), id: id });
         } else {
           data = undefined;
-          error = req.t('ERROR.NOT_FOUND', { entity: req.t('PROJECT.NAME'), id: id });
+          error = req.t('ERROR.NOT_FOUND', { entity: req.t('ASSIGNED_RESOURCE.NAME'), id: id });
         }
       } else {
         code = HttpStatus.BAD_REQUEST;
-        error = req.t('ERROR.BAD_REQUEST', { entity: req.t('PROJECT.NAME') });
+        error = req.t('ERROR.BAD_REQUEST', { entity: req.t('ASSIGNED_RESOURCE.NAME') });
       }
 
       const responseData : ResponseData = {
@@ -403,7 +403,7 @@ export class ProjectController {
 
       const { id } = req.params;
 
-      let data = await this.projectService.delete(id);
+      let data = await this.assignedResourceService.delete(id);
 
       if (
         data != undefined &&
@@ -412,14 +412,14 @@ export class ProjectController {
         data != HttpStatus.NOT_FOUND
       ) {
         code = HttpStatus.OK;
-        message = req.t('SUCCESS.DELETE', { entity: req.t('PROJECT.NAME'), id: id });
+        message = req.t('SUCCESS.DELETE', { entity: req.t('ASSIGNED_RESOURCE.NAME'), id: id });
       } else if (data == HttpStatus.CONFLICT) {
         code = HttpStatus.CONFLICT;
         data = undefined;
-        error = req.t('ERROR.CONFLICT', { entity: req.t('PROJECT.NAME'), id: id });
+        error = req.t('ERROR.CONFLICT', { entity: req.t('ASSIGNED_RESOURCE.NAME'), id: id });
       } else {
         data = undefined;
-        error = req.t('ERROR.DELETE', { entity: req.t('PROJECT.NAME'), id: id });
+        error = req.t('ERROR.DELETE', { entity: req.t('ASSIGNED_RESOURCE.NAME'), id: id });
       }
 
       const responseData : ResponseData = {

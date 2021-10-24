@@ -6,19 +6,20 @@
 	"SUCCESS": {
 		"CREATE": "Entidade {{entity}} creada con éxito",
 		"CREATE_LIST": "Entidades {{entity}} creadas con éxito",
-		"DELETE": "Entidade {{entity}} eliminada correctamente",
+		"DELETE": "A entidade {{entity}} con ID {{id}} foi eliminada correctamente",
 		"GET": "Entidade {{entity}} obtida con éxito",
 		"GET_LIST": "Tódolas entidades {{entity}} recuperáronse correctamente",
 		"UPDATE": "Entidade {{entity}} coa ID {{id}} actualizada con éxito"
 	},
 	"ERROR": {
-		"ALREADY_EXIST": "A entidade {{entity}} coa ID {{id}} xa existe na base de datos",
+		"ALREADY_EXIST": "A entidade {{entity}} coa ID {{id}} xa existe",
+		"ALREADY_EXIST_LIST": "Algunha das entidades {{entity}} (ou todas) xa esiten",
 		"BAD_REQUEST": "Petición errónea para a entidade{{entity}}",
 		"CONFLICT": "Producíuse un conflito coa operación da entidade {{entity}} coa ID {{id}}",
 		"CREATE": "Non se puido crear a entidade {{entity}}",
 		"CREATE_LIST": "Non se puideron crear as entidades {{entity}}",
 		"DELETE": "Non se puido eliminar a entidade {{entity}} coa ID {{id}}",
-		"NOT_FOUND": "Non se atopou ningunha entidade {{entity}} coa ID {{id}} na base de datos",
+		"NOT_FOUND": "Non se atopou ningunha entidade {{entity}} coa ID {{id}}",
 		"NOT_FOUND_LIST": "Non se atopou ningunha entidade {{entity}}",
 		"UPDATE": "Non se puido actualizar a entidade {{entity}} coa ID {{id}}"
 	},

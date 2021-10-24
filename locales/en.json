@@ -6,19 +6,20 @@
 	"SUCCESS": {
 		"CREATE": "{{entity}} created successfully",
 		"CREATE_LIST": "{{entity}} created successfully",
-		"DELETE": "{{entity}} removed successfully",
+		"DELETE": "Entity {{entity}} with ID {{id}} has been successfully removed",
 		"GET": "{{entity}} obtained successfully",
 		"GET_LIST": "All {{entity}} have been successfully retrieved",
 		"UPDATE": "{{entity}} with ID {{id}} updated successfully"
 	},
 	"ERROR": {
-		"ALREADY_EXIST": "The {{entity}} with ID {{id}} already exists in the database",
+		"ALREADY_EXIST": "The {{entity}} with ID {{id}} already exists",
+		"ALREADY_EXIST_LIST": "Some of the entities {{entity}} (or all) are already",
 		"BAD_REQUEST": "Bad request for {{entity}}",
 		"CONFLICT": "There was a conflict with the operation of {{entity}} with ID {{id}}",
 		"CREATE": "Could not create {{entity}}",
 		"CREATE_LIST": "Could not create {{entity}}",
 		"DELETE": "Could not delete {{entity}} with ID {{id}}",
-		"NOT_FOUND": "Could not find any {{entity}} with ID {{id}} in the database",
+		"NOT_FOUND": "Could not find any {{entity}} with ID {{id}}",
 		"NOT_FOUND_LIST": "No {{entity}} found",
 		"UPDATE": "Could not update {{entity}} with ID {{id}}"
 	},

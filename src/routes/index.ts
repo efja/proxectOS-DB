@@ -2,6 +2,8 @@
 // ## IMPORTACIÓNS
 // ####################################################################################################
 import { IRouter, Router } from 'express';
+
+import { AssignedResourceRoutes } from './assigned-resource.route';
 import { ProjectRoutes } from './project.route';
 
 // ####################################################################################################
@@ -26,7 +28,7 @@ const router = Router();
   });
 
   // AssignedResource
-  router.use('/assignedResources', new ProjectRoutes().getRoutes());
+  router.use('/assignedResources', new AssignedResourceRoutes().getRoutes());
 
   // AssignedStage
   router.use('/assignedStages', new ProjectRoutes().getRoutes());
