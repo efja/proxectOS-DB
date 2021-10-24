@@ -3,11 +3,11 @@
 // ####################################################################################################
 import HttpStatus from 'http-status-codes';
 import { QueryOrder, wrap } from '@mikro-orm/core';
+import { Operation } from 'fast-json-patch';
+import * as jsonpatch from 'fast-json-patch';
 
 import { DBConnection } from '../config/config-db';
 import { Project } from '../models/project.model';
-import { Operation } from 'fast-json-patch';
-import * as jsonpatch from 'fast-json-patch';
 
 // ####################################################################################################
 // ## CLASE ProjectService
@@ -42,7 +42,7 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- POST
   // ------------------------------------------------------------------------------------------------
-  public async createProject(project: Project): Promise<any> {
+  public async create(project: Project): Promise<any> {
     let result : any = HttpStatus.CONFLICT;
 
     try {
@@ -67,7 +67,7 @@ export class ProjectService {
     return result;
   }
 
-  public async createProjectList(projects: Project[]): Promise<any> {
+  public async createList(projects: Project[]): Promise<any> {
     let result : any = HttpStatus.CONFLICT;
 
     try {
@@ -107,7 +107,7 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- GET
   // ------------------------------------------------------------------------------------------------
-  public async getAllProjects(
+  public async getAll(
     filters?: any,
     orderBy = { name: QueryOrder.ASC },
     limit: number = 0,
@@ -129,7 +129,7 @@ export class ProjectService {
     return result;
   }
 
-  public async getProject(id: string, filters?: any): Promise<any> {
+  public async get(id: string, filters?: any): Promise<any> {
     let result : any = HttpStatus.NOT_FOUND;
 
     try {
@@ -147,7 +147,7 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- PUT
   // ------------------------------------------------------------------------------------------------
-  public async updateProject(id: string, project: Project): Promise<any> {
+  public async update(id: string, project: Project): Promise<any> {
     let result : any = HttpStatus.NOT_FOUND;
 
     try {
@@ -181,7 +181,7 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- PATCH
   // ------------------------------------------------------------------------------------------------
-  public async modifyProject(id: string, objPatch: Operation[]): Promise<any> {
+  public async modify(id: string, objPatch: Operation[]): Promise<any> {
     let result : any = HttpStatus.NOT_FOUND;
 
     try {
@@ -203,7 +203,7 @@ export class ProjectService {
             jsonpatch.applyPatch(temp, objPatch);
 
             // Persístese a información na base de datos
-            result = await this.updateProject(id, temp);
+            result = await this.update(id, temp);
           } else {
             result = HttpStatus.CONFLICT;
           }
@@ -224,8 +224,30 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- DELETE
   // ------------------------------------------------------------------------------------------------
-  public async deleteProject(): Promise<Project> {
-    let result : Project = await this.respository.findAll({ name: QueryOrder.DESC }, 20);
+  public async delete(id: string): Promise<any> {
+    let result : any = HttpStatus.NOT_FOUND;
+
+    try {
+      let temp = null;
+
+      // Comprobase que non exista a entidade na BD
+      if (id != null) {
+        temp = await this.respository.findOne(id);
+      }
+
+      if (temp != null) {
+        try {
+          // Borrase a informanción na BD
+          await this.respository.remove(temp).flush();;
+
+          result = temp;
+        } catch (error) {
+          result = HttpStatus.CONFLICT;
+        }
+      }
+    } catch (error) {
+      result = null;
+    }
 
     return result;
   }

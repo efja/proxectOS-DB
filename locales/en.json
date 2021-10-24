@@ -3,408 +3,96 @@
     "COMMON": {
         "CREATED_DATE": "Creation date"
     },
+	"SUCCESS": {
+		"CREATE": "{{entity}} created successfully",
+		"CREATE_LIST": "{{entity}} created successfully",
+		"DELETE": "{{entity}} removed successfully",
+		"GET": "{{entity}} obtained successfully",
+		"GET_LIST": "All {{entity}} have been successfully retrieved",
+		"UPDATE": "{{entity}} with ID {{id}} updated successfully"
+	},
 	"ERROR": {
+		"ALREADY_EXIST": "The {{entity}} with ID {{id}} already exists in the database",
 		"BAD_REQUEST": "Bad request for {{entity}}",
 		"CONFLICT": "There was a conflict with the operation of {{entity}} with ID {{id}}",
-		"NOT_FOUND_MALE": "No {{entity}} with ID {{id}} found in the database",
-		"NOT_FOUND_FEMALE": "No {{entity}} with ID {{id}} found in the database",
-		"ALREADY_EXIST_MALE": "The {{entity}} with ID {{id}} already exists in the database",
-		"ALREADY_EXIST_FEMALE": "The {{entity}} with ID {{id}} already exists in the database"
+		"CREATE": "Could not create {{entity}}",
+		"CREATE_LIST": "Could not create {{entity}}",
+		"DELETE": "Could not delete {{entity}} with ID {{id}}",
+		"NOT_FOUND": "Could not find any {{entity}} with ID {{id}} in the database",
+		"NOT_FOUND_LIST": "No {{entity}} found",
+		"UPDATE": "Could not update {{entity}} with ID {{id}}"
 	},
+
 	"ASSIGNED_RESOURCE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All Assigned Resources have been successfully recovered",
-				"GET_SINGLE": "Assigned rResource obtained successfully",
-				"CREATE": "Assigned resource created successfully",
-				"CREATE_LIST": "Successfully created Assigned Resources",
-				"UPDATE": "Successfully updated Assigned Resource",
-				"DELETE": "Assigned resource deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No Assigned Resource Found",
-				"GET_SINGLE": "The Assigned Resource could not be obtained",
-				"CREATE": "The Assigned Resource could not be created",
-				"CREATE_LIST": "Unable to create Assigned Resources",
-				"UPDATE": "The Assigned Resource could not be updated",
-				"DELETE": "The Assigned Resource could not be deleted"
-			}
-		}
+		"NAME": "Assigned Resource",
+		"NAME_PLURAL": "Assigned Resources"
 	},
 	"ASSIGNED_STAGE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All Assigned Stages have been successfully recovered",
-				"GET_SINGLE": "Successfully assigned Assigned Stage",
-				"CREATE": "Assigned Stage successfully created",
-				"CREATE_LIST": "Successfully created Assigned Stages",
-				"UPDATE": "Successfully updated Assigned Stage",
-				"DELETE": "Assigned stage deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No Assigned Stage was found",
-				"GET_SINGLE": "The Assigned Stage could not be obtained",
-				"CREATE": "Could not create Assigned Stage",
-				"CREATE_LIST": "Could not create Assigned Stages",
-				"UPDATE": "Could not update Assigned Stage",
-				"DELETE": "The Assigned Stage could not be deleted"
-			}
-		}
+		"NAME": "Assigned Stage",
+		"NAME_PLURAL": "Assigned Stages"
 	},
 	"ASSIGNED_USER": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All Assigned Users recovered successfully",
-				"GET_SINGLE": "Successfully assigned Assigned User",
-				"CREATE": "Successfully created Assigned User",
-				"CREATE_LIST": "Successfully created Assigned Users",
-				"UPDATE": "Successfully updated Assigned User",
-				"DELETE": "Assigned user deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No Assigned Users Found",
-				"GET_SINGLE": "The Assigned User could not be obtained",
-				"CREATE": "Could not create Assigned User",
-				"CREATE_LIST": "Unable to create Assigned Users",
-				"UPDATE": "The Assigned User could not be updated",
-				"DELETE": "Could not delete Assigned Usero"
-			}
-		}
+		"NAME": "Assigned User",
+		"NAME_PLURAL": "Assigned Users"
 	},
 	"COMMENT": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All Comments Retrieved successfully ",
-				"GET_SINGLE":  "Successful comment",
-				"CREATE": "Successfully created comment ",
-				"CREATE_LIST":  "Comments created successfully",
-				"UPDATE": "Successfully updated comment ",
-				"DELETE": "Comment deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No Comments Found ",
-				"GET_SINGLE": "Comment could not be obtained",
-				"CREATE": "Could not create Comment ",
-				"CREATE_LIST":  "Could not create Comments",
-				"UPDATE": "Could not update Comment ",
-				"DELETE": "Could not delete Comment"
-			}
-		}
+		"NAME": "Comment",
+		"NAME_PLURAL": "Comments"
 	},
 	"PERFORMANCE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All Actions Recovered Successfully ",
-				"GET_SINGLE": "Successful performance ",
-				"CREATE": "Successfully created performance ",
-				"CREATE_LIST": "Successfully created performances ",
-				"UPDATE": "Successfully updated performance ",
-				"DELETE": "Performance deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No Performance Found ",
-				"GET_SINGLE": "The performance could not be obtained ",
-				"CREATE": "Could not create Performance ",
-				"CREATE_LIST": "Could not create Actions ",
-				"UPDATE": "Could not update Performance ",
-				"DELETE": "Could not delete Performance"
-			}
-		}
+		"NAME": "Performance",
+		"NAME_PLURAL": "Performances"
 	},
 	"PRIORITY": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All Priorities Recovered Successfully ",
-				"GET_SINGLE": "Successfully achieved priority ",
-				"CREATE": "Successfully created priority ",
-				"CREATE_LIST": "Successfully created priorities ",
-				"UPDATE": "Successfully updated priority ",
-				"DELETE": "Priority removed successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No Priority Found ",
-				"GET_SINGLE": "Priority could not be obtained ",
-				"CREATE": "Could not create Priority ",
-				"CREATE_LIST": "Could not create Priorities ",
-				"UPDATE": "Could not update Priority ",
-				"DELETE": "Could not delete Priority"
-			}
-		}
+		"NAME": "Priority",
+		"NAME_PLURAL": "Priorities"
 	},
-    "PROJECT": {
-		"NAME": "project",
-		"NAME_PLURAL": "projects",
-        "SERVICE": {
-            "SUCCESS": {
-                "GET_ALL": "All projects fetched successfully ",
-                "GET_SINGLE": "Project fetched successfully ",
-                "CREATE": "Successfully created project ",
-				"CREATE_LIST": "Successfully created projects ",
-                "UPDATE": "Successfully updated project ",
-                "DELETE": "Project removed successfully"
-            },
-			"ERROR": {
-				"GET_ALL": "No projects found ",
-				"GET_SINGLE": "The project could not be obtained ",
-				"CREATE": "The project could not be created ",
-				"CREATE_LIST": "Projects could not be created ",
-				"UPDATE": "The project could not be updated ",
-				"DELETE": "Could not delete project"
-			}
-        }
-    },
+	"PROJECT": {
+		"NAME": "Project",
+		"NAME_PLURAL": "Projects"
+	},
 	"REQUIREMENT": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All Requirements Retrieved Successfully ",
-				"GET_SINGLE": "Successfully obtained requirement ",
-				"CREATE": "Successfully created requirement ",
-				"CREATE_LIST": "Successfully created requirements ",
-				"UPDATE": "Successfully updated requirement ",
-				"DELETE": "Requirement removed successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No Requirements Found ",
-				"GET_SINGLE": "Requirement could not be obtained ",
-				"CREATE": "Could not create Requirement ",
-				"CREATE_LIST": "Could not create Requirements ",
-				"UPDATE": "Could not update Requirement ",
-				"DELETE": "Could not delete Requirement"
-			}
-		}
+		"NAME": "Resource",
+		"NAME_PLURAL": "Resources"
 	},
 	"RESOURCE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All Resources Recovered Successfully ",
-				"GET_SINGLE": "Resource obtained successfully ",
-				"CREATE": "Successfully created resource ",
-				"CREATE_LIST": "Successfully created resources ",
-				"UPDATE": "Successfully updated resource ",
-				"DELETE": "Feature deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No Resources Found ",
-				"GET_SINGLE": "Resource could not be obtained ",
-				"CREATE": "Could not create Resource ",
-				"CREATE_LIST": "Could not create Resources ",
-				"UPDATE": "Could not update Resource ",
-				"DELETE": "The resource could not be deleted"
-			}
-		}
+		"NAME": "Recurso",
+		"NAME_PLURAL": "Recursos"
 	},
 	"STAGE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All Stages Recovered Successfully ",
-				"GET_SINGLE": "Stage successfully obtained ",
-				"CREATE": "Stage created successfully ",
-				"CREATE_LIST": "Successfully created stages ",
-				"UPDATE": "Stage successfully updated ",
-				"DELETE": "Stage deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No Stage Found ",
-				"GET_SINGLE": "Stage could not be obtained ",
-				"CREATE": "Could not create Stage ",
-				"CREATE_LIST": "Could not create Stages ",
-				"UPDATE": "Could not update Stage ",
-				"DELETE": "Stage could not be deleted"
-			}
-		}
+		"NAME": "Stage",
+		"NAME_PLURAL": "Stages"
 	},
 	"STATE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All states have recovered successfully ",
-				"GET_SINGLE": "Status successfully obtained ",
-				"CREATE": "Successfully created status ",
-				"CREATE_LIST": "Successfully created states ",
-				"UPDATE": "Status successfully updated ",
-				"DELETE": "Status deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No state found ",
-				"GET_SINGLE": "The state could not be obtained ",
-				"CREATE": "Could not create state ",
-				"CREATE_LIST": "Could not create states ",
-				"UPDATE": "Could not update state ",
-				"DELETE": "The state could not be deleted"
-			}
-		}
+		"NAME": "State",
+		"NAME_PLURAL": "States"
 	},
 	"STATE_HISTORY": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All State Historians have recovered successfully ",
-				"GET_SINGLE": "Successfully obtained state history ",
-				"CREATE": "Successfully Created State History ",
-				"CREATE_LIST": "History of Successfully Created States ",
-				"UPDATE": "Successfully updated state history ",
-				"DELETE": "State history deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No State History Found ",
-				"GET_SINGLE": "State History could not be obtained ",
-				"CREATE": "Could not create State History ",
-				"CREATE_LIST": "Could not create State Historians ",
-				"UPDATE": "Could not update State History ",
-				"DELETE": "Could not delete State History"
-			}
-		}
+		"NAME": "State History",
+		"NAME_PLURAL": "States History"
 	},
 	"TYPE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All Types Recovered Successfully ",
-				"GET_SINGLE": "Successfully obtained type ",
-				"CREATE": "Successfully created type ",
-				"CREATE_LIST": "Successfully created types ",
-				"UPDATE": "Successfully updated type ",
-				"DELETE": "Type deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No Type Found ",
-				"GET_SINGLE": "O Tipo non se puido obter",
-				"CREATE": "Could not create Type ",
-				"CREATE_LIST": "Could not create Types ",
-				"UPDATE": "Could not update Type ",
-				"DELETE": "Could not delete Type"
-			}
-		}
+		"NAME": "Type",
+		"NAME_PLURAL": "Types"
 	},
 	"USER": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All Users Recovered Successfully ",
-				"GET_SINGLE": "Successfully obtained user ",
-				"CREATE": "Successfully created user ",
-				"CREATE_LIST": "Successfully created users ",
-				"UPDATE": "User successfully updated ",
-				"DELETE": "User deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No Users Found ",
-				"GET_SINGLE": "User could not be retrieved ",
-				"CREATE": "Could not create User ",
-				"CREATE_LIST": "Could not create Users ",
-				"UPDATE": "Could not update User ",
-				"DELETE": "Could not delete User"
-			}
-		}
+		"NAME": "User",
+		"NAME_PLURAL": "Users"
 	},
 	"USER_CONTACT": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All User Contacts Recovered Successfully ",
-				"GET_SINGLE": "Successful User Contact ",
-				"CREATE": "Successfully Created User Contact ",
-				"CREATE_LIST": "Successfully Created User Contacts ",
-				"UPDATE": "Successfully Updated User Contact ",
-				"DELETE": "User contact deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No User Contacts Found ",
-				"GET_SINGLE": "User Contact could not be obtained ",
-				"CREATE": "Could not create User Contact ",
-				"CREATE_LIST": "Could not create User Contacts ",
-				"UPDATE": "Could not update User Contact ",
-				"DELETE": "Could not delete User Contact"
-			}
-		}
+		"NAME": "User Contact",
+		"NAME_PLURAL": "User Contacts"
 	},
 	"USER_CONTACT_TYPE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All User Contact Types Retrieved Successfully ",
-				"GET_SINGLE": "Successful User Contact Type ",
-				"CREATE": "Successfully Created User Contact Type ",
-				"CREATE_LIST": "Successfully Created User Contact Types ",
-				"UPDATE": "Successfully Updated User Contact Type ",
-				"DELETE": "User Contact Type deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No User Contact Type Found ",
-				"GET_SINGLE": "Could not get User Contact Type ",
-				"CREATE": "Could not create User Contact Type ",
-				"CREATE_LIST": "Could not create User Contact Types ",
-				"UPDATE": "Could not update User Contact Type ",
-				"DELETE": "Could not delete User Contact Type"
-			}
-		}
+		"NAME": "User Contact Type",
+		"NAME_PLURAL": "User Contact Types"
 	},
 	"USER_GROUP": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All User Groups recovered successfully ",
-				"GET_SINGLE": "Successful User Group ",
-				"CREATE": "Successfully Created User Groups ",
-				"CREATE_LIST": "Successfully Created User Group ",
-				"UPDATE": "Successfully Updated User Group ",
-				"DELETE": "User group deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No User Groups Found ",
-				"GET_SINGLE": "User Group could not be obtained ",
-				"CREATE": "Could not create User Group ",
-				"CREATE_LIST": "Could not create User Groups ",
-				"UPDATE": "Could not update User Group ",
-				"DELETE": "Could not delete User Group"
-			}
-		}
+		"NAME": "User Group",
+		"NAME_PLURAL": "User Groups"
 	},
 	"USER_SCHEDULE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "All User Calendars have been successfully retrieved ",
-				"GET_SINGLE": "Successful User Calendar ",
-				"CREATE": "Successfully Created User Calendar ",
-				"CREATE_LIST": "Successfully Created User Calendars ",
-				"UPDATE": "Successfully updated User Calendar ",
-				"DELETE": "User Calendar deleted successfully"
-			},
-			"ERROR": {
-				"GET_ALL": "No User Calendar Found ",
-				"GET_SINGLE": "Could not get User Calendar ",
-				"CREATE": "Could not create User Calendar ",
-				"CREATE_LIST": "Could not create User Calendars ",
-				"UPDATE": "Could not update User Calendar ",
-				"DELETE": "Could not delete User Calendar"
-			}
-		}
+		"NAME": "User Schedule",
+		"NAME_PLURAL": "User Schedules"
 	}
 }

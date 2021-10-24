@@ -1,9 +1,8 @@
 // ####################################################################################################
 // ## IMPORTACIÓNS
 // ####################################################################################################
-import express, { Router, IRouter } from 'express';
+import { Router, IRouter } from 'express';
 import { ProjectController } from '../controllers/project.controller';
-import { ProjectService } from '../services/project.service';
 
 // ####################################################################################################
 // ## CLASE ProjectRoutes
@@ -27,21 +26,21 @@ export class ProjectRoutes {
   // ************************************************************************************************
   private routes = () => {
     // POST
-    this.router.post('', this.projectController.newProject);
-    this.router.post('/Multiple', this.projectController.newProjectList);
+    this.router.post('', this.projectController.create);
+    this.router.post('/Multiple', this.projectController.createList);
 
     // GET
-    this.router.get('', this.projectController.getAllProjects);
-    this.router.get('/:id', this.projectController.getProject);
+    this.router.get('', this.projectController.getAll);
+    this.router.get('/:id', this.projectController.get);
 
     // PUT
-    this.router.put('/:id', this.projectController.updateProject);
+    this.router.put('/:id', this.projectController.update);
 
     // PATCH
-    this.router.patch('/:id', this.projectController.modifyProject);
+    this.router.patch('/:id', this.projectController.modify);
 
     // DELETE
-    this.router.delete('/:id', this.projectController.deleteProject);
+    this.router.delete('/:id', this.projectController.delete);
   };
 
   // ************************************************************************************************

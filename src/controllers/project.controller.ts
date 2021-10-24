@@ -3,13 +3,13 @@
 // ## IMPORTACIÓNS
 // ####################################################################################################
 import HttpStatus from 'http-status-codes';
-import { ProjectService } from '../services/project.service';
+import { Operation } from 'fast-json-patch';
+import { req, res, next } from 'express';
 import qs from 'qs';
 
-import { req, res, next } from 'express';
 import { ResponseData } from '../interfaces/response-data.interface';
+import { ProjectService } from '../services/project.service';
 import { Project } from '../models/project.model';
-import { Operation } from 'fast-json-patch';
 
 // ####################################################################################################
 // ## CLASE ProjectController
@@ -35,7 +35,7 @@ export class ProjectController {
    * @param res - obxecto da resposta
    * @param next
    */
-  public newProject = async (
+  public create = async (
     req   : req,
     res   : res,
     next  : next
@@ -50,7 +50,7 @@ export class ProjectController {
       let data;
 
       if (project && project.name && project.description) {
-        data = await this.projectService.createProject(project);
+        data = await this.projectService.create(project);
       }
 
       if (
@@ -59,12 +59,13 @@ export class ProjectController {
         data != HttpStatus.CONFLICT
       ) {
         code = HttpStatus.CREATED;
-        message = req.t('PROJECT.SERVICE.SUCCESS.CREATE');
+        message = req.t('SUCCESS.CREATE', { entity: req.t('PROJECT.NAME') });
       } else if (data == HttpStatus.CONFLICT) {
         data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST_MALE', { entity: req.t('PROJECT.NAME'), id: project.id });
+        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t('PROJECT.NAME'), id: project.id });
       } else {
-        error = req.t('PROJECT.SERVICE.ERROR.CREATE');
+        data = undefined;
+        error = req.t('ERROR.CREATE', { entity: req.t('PROJECT.NAME') });
       }
 
       const responseData : ResponseData = {
@@ -87,7 +88,7 @@ export class ProjectController {
    * @param res - obxecto da resposta
    * @param next
    */
-  public newProjectList = async (
+  public createList = async (
     req   : req,
     res   : res,
     next  : next
@@ -115,7 +116,7 @@ export class ProjectController {
       }
 
       if (continueProcess && projects && projects.length > 0) {
-        data = await this.projectService.createProjectList(projects);
+        data = await this.projectService.createList(projects);
       }
 
       if (
@@ -124,12 +125,13 @@ export class ProjectController {
         data != HttpStatus.CONFLICT
       ) {
         code = HttpStatus.CREATED;
-        message = req.t('PROJECT.SERVICE.SUCCESS.CREATE_LIST');
+        message = req.t('SUCCESS.CREATE_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
       } else if (data == HttpStatus.CONFLICT) {
         data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST_MALE', { entity: req.t('PROJECT.NAME'), id: "MULTIPLE" });
+        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t('PROJECT.NAME'), id: "MULTIPLE" });
       } else {
-        error = req.t('PROJECT.SERVICE.ERROR.CREATE_LIST');
+        data = undefined;
+        error = req.t('ERROR.CREATE_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
       }
 
       const responseData : ResponseData = {
@@ -158,7 +160,7 @@ export class ProjectController {
    * @param res - obxecto da resposta
    * @param next
    */
-  public getAllProjects = async (
+  public getAll = async (
     req   : req,
     res   : res,
     next  : next
@@ -177,7 +179,7 @@ export class ProjectController {
 
       const queryParams = qs.parse(query);
 
-      let data = await this.projectService.getAllProjects(queryParams, orderBy, limit, offset);
+      let data = await this.projectService.getAll(queryParams, orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -185,10 +187,10 @@ export class ProjectController {
         data != HttpStatus.NOT_FOUND
       ) {
         code = HttpStatus.OK;
-        message = req.t('PROJECT.SERVICE.SUCCESS.GET_ALL');
+        message = req.t('SUCCESS.GET_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
       } else {
-        data = null;
-        error = req.t('PROJECT.SERVICE.ERROR.GET_ALL');
+        data = undefined;
+        error = req.t('ERROR.GET_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
       }
 
       const responseData : ResponseData = {
@@ -214,7 +216,7 @@ export class ProjectController {
    * @param res - obxecto da resposta
    * @param next
    */
-  public getProject = async (
+  public get = async (
     req   : req,
     res   : res,
     next  : next
@@ -227,7 +229,7 @@ export class ProjectController {
       const { id } = req.params;
       const queryParams = qs.parse(req.query);
 
-      const data = await this.projectService.getProject(id, queryParams);
+      let data = await this.projectService.get(id, queryParams);
 
       if (
         data != undefined &&
@@ -235,9 +237,10 @@ export class ProjectController {
         data != HttpStatus.NOT_FOUND
       ) {
         code = HttpStatus.OK;
-        message = req.t('PROJECT.SERVICE.SUCCESS.GET_SINGLE');
+        message = req.t('SUCCESS.GET', { entity: req.t('PROJECT.NAME') });
       } else {
-        error = req.t('PROJECT.SERVICE.ERROR.GET_SINGLE');
+        data = undefined;
+        error = req.t('ERROR.GET', { entity: req.t('PROJECT.NAME') });
       }
 
       const responseData : ResponseData = {
@@ -263,7 +266,7 @@ export class ProjectController {
    * @param res - obxecto da resposta
    * @param next
    */
-  public updateProject = async (
+  public update = async (
     req   : req,
     res   : res,
     next  : next
@@ -279,7 +282,7 @@ export class ProjectController {
       let data;
 
       if (project && project.name && project.description) {
-        data = await this.projectService.updateProject(id, project);
+        data = await this.projectService.update(id, project);
       }
 
       if (
@@ -289,14 +292,14 @@ export class ProjectController {
         data != HttpStatus.CONFLICT
       ) {
         code = HttpStatus.CREATED;
-        message = req.t('PROJECT.SERVICE.SUCCESS.UPDATE');
+        message = req.t('SUCCESS.UPDATE', { entity: req.t('PROJECT.NAME'), id: id });
       } else if (data == HttpStatus.CONFLICT) {
         code = HttpStatus.CONFLICT;
         data = undefined;
         error = req.t('ERROR.CONFLICT', { entity: req.t('PROJECT.NAME'), id: id });
       } else {
         data = undefined;
-        error = req.t('ERROR.NOT_FOUND_MALE', { entity: req.t('PROJECT.NAME'), id: id });
+        error = req.t('ERROR.NOT_FOUND', { entity: req.t('PROJECT.NAME'), id: id });
       }
 
       const responseData : ResponseData = {
@@ -319,7 +322,7 @@ export class ProjectController {
    * @param res - obxecto da resposta
    * @param next
    */
-   public modifyProject = async (
+   public modify = async (
     req   : req,
     res   : res,
     next  : next
@@ -342,7 +345,7 @@ export class ProjectController {
 
       if (objPatch.length > 0) {
 
-        data = await this.projectService.modifyProject(id, objPatch);
+        data = await this.projectService.modify(id, objPatch);
 
         if (
           data != undefined &&
@@ -351,14 +354,14 @@ export class ProjectController {
           data != HttpStatus.CONFLICT
         ) {
           code = HttpStatus.CREATED;
-          message = req.t('PROJECT.SERVICE.SUCCESS.UPDATE');
+          message = req.t('SUCCESS.UPDATE', { entity: req.t('PROJECT.NAME'), id: id });
         } else if (data == HttpStatus.CONFLICT) {
           code = HttpStatus.CONFLICT;
           data = undefined;
           error = req.t('ERROR.CONFLICT', { entity: req.t('PROJECT.NAME'), id: id });
         } else {
           data = undefined;
-          error = req.t('ERROR.NOT_FOUND_MALE', { entity: req.t('PROJECT.NAME'), id: id });
+          error = req.t('ERROR.NOT_FOUND', { entity: req.t('PROJECT.NAME'), id: id });
         }
       } else {
         code = HttpStatus.BAD_REQUEST;
@@ -388,27 +391,35 @@ export class ProjectController {
    * @param res - obxecto da resposta
    * @param next
    */
-  public deleteProject = async (
+  public delete = async (
     req   : req,
     res   : res,
     next  : next
   ): Promise<any> => {
     try {
+      let code = HttpStatus.NOT_FOUND;
       let message;
       let error;
-      let code = HttpStatus.NOT_FOUND;
 
-      const data = {};
+      const { id } = req.params;
+
+      let data = await this.projectService.delete(id);
 
       if (
         data != undefined &&
         data != null &&
+        data != HttpStatus.CONFLICT &&
         data != HttpStatus.NOT_FOUND
       ) {
         code = HttpStatus.OK;
-        message = req.t('PROJECT.SERVICE.SUCCESS.DELETE');
+        message = req.t('SUCCESS.DELETE', { entity: req.t('PROJECT.NAME') });
+      } else if (data == HttpStatus.CONFLICT) {
+        code = HttpStatus.CONFLICT;
+        data = undefined;
+        error = req.t('ERROR.CONFLICT', { entity: req.t('PROJECT.NAME'), id: id });
       } else {
-        error = req.t('PROJECT.SERVICE.ERROR.DELETE');
+        data = undefined;
+        error = req.t('ERROR.DELETE', { entity: req.t('PROJECT.NAME') });
       }
 
       const responseData : ResponseData = {
