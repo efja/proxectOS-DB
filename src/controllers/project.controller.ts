@@ -190,7 +190,7 @@ export class ProjectController {
         message = req.t('SUCCESS.GET_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
       } else {
         data = undefined;
-        error = req.t('ERROR.GET_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
+        error = req.t('ERROR.NOT_FOUND_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
       }
 
       const responseData : ResponseData = {
@@ -240,7 +240,7 @@ export class ProjectController {
         message = req.t('SUCCESS.GET', { entity: req.t('PROJECT.NAME') });
       } else {
         data = undefined;
-        error = req.t('ERROR.GET', { entity: req.t('PROJECT.NAME') });
+        error = req.t('ERROR.NOT_FOUND', { entity: req.t('PROJECT.NAME') });
       }
 
       const responseData : ResponseData = {
