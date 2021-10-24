@@ -15,7 +15,6 @@ import {
     dataList,
     db,
 
-    FAKE_TEXT,
     request
 } from "../commons";
 
@@ -35,6 +34,8 @@ describe('1: Probas DATOS API - States (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -42,12 +43,13 @@ describe('1: Probas DATOS API - States (POST)', () => {
 	});
 
 	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
@@ -66,6 +68,7 @@ describe('1: Probas DATOS API - States (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -84,33 +87,10 @@ describe('1: Probas DATOS API - States (POST)', () => {
         expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`1.2: Crear State con datos erróneos:`, async() => {
-        const badState = dataList.users[0] as User;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badState);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        // Comprobanse algúns datos obrigatorios
-        expect(data.id).toBeUndefined();
-
-        expect(message).toBe(i18next.t('STATE.SERVICE.ERROR.CREATE'));
-    });
-
-    test('1.3: Crear lista de States:', async() => {
+    test('1.2: Crear lista de States:', async() => {
         const states = [
-            dataList.states[0] as State,
-            dataList.states[0] as State,
+            new State(dataList.states[0]),
+            new State(dataList.states[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -121,7 +101,7 @@ describe('1: Probas DATOS API - States (POST)', () => {
         states[1]._id = "616c6b6602067b3bd0d5ffbc";
         states[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(states);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(states);
         const {
             code,
             data,
@@ -132,31 +112,111 @@ describe('1: Probas DATOS API - States (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = states.length;
+
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(states.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(states[0]);
-        expect(data[0].id).not.toBe(states[1]);
+        expect(data[0].id).toBe(states[0].id);
+        expect(data[0].id).not.toBe(states[1].id);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(states[1]);
-        expect(data[1].id).not.toBe(states[0]);
+        expect(data[1].id).toBe(states[1].id);
+        expect(data[1].id).not.toBe(states[0].id);
 
-        expect(total).toBe(dataList.states.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
         expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.CREATE_LIST'));
     });
+});
 
-    test('1.4: Crear lista de States algúns con datos erróneos:', async() => {
+describe('2: Probas DATOS API - States ERROS (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "states";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.states, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear State con datos erróneos:`, async() => {
+        const badState = dataList.users[0] as User;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badState);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('STATE.SERVICE.ERROR.CREATE'));
+    });
+
+    test(`2.2: Crear State: <${dataList.states[0].id}> QUE XA EXISTE`, async() => {
+        const state = dataList.states[0] as State;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(state);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('STATE.NAME'), id: state.id }));
+    });
+
+    test('2.3: Crear lista de States algúns con datos erróneos:', async() => {
         const badStates = [
-            dataList.states[0] as State,
-            dataList.users[0] as User,
+            new State(dataList.states[0]),
+            new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -167,7 +227,7 @@ describe('1: Probas DATOS API - States (POST)', () => {
         badStates[1]._id = "616c6b6602067b3bd0d5ffbc";
         badStates[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badStates);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badStates);
         const {
             code,
             data,
@@ -178,19 +238,21 @@ describe('1: Probas DATOS API - States (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = badStates.length;
+
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badStates.length);
 
-        expect(total).not.toBe(badStates.length);
+        expect(total).not.toBe(dataLength);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('STATE.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('STATE.SERVICE.ERROR.CREATE_LIST'));
     });
 });

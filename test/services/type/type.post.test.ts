@@ -15,7 +15,6 @@ import {
     dataList,
     db,
 
-    FAKE_TEXT,
     request
 } from "../commons";
 
@@ -35,6 +34,8 @@ describe('1: Probas DATOS API - Types (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -42,12 +43,13 @@ describe('1: Probas DATOS API - Types (POST)', () => {
 	});
 
 	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
@@ -66,6 +68,7 @@ describe('1: Probas DATOS API - Types (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -84,33 +87,10 @@ describe('1: Probas DATOS API - Types (POST)', () => {
         expect(message).toBe(i18next.t('TYPE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`1.2: Crear Type con datos erróneos:`, async() => {
-        const badType = dataList.users[0] as User;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badType);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        // Comprobanse algúns datos obrigatorios
-        expect(data.id).toBeUndefined();
-
-        expect(message).toBe(i18next.t('TYPE.SERVICE.ERROR.CREATE'));
-    });
-
-    test('1.3: Crear lista de Types:', async() => {
+    test('1.2: Crear lista de Types:', async() => {
         const types = [
-            dataList.types[0] as Type,
-            dataList.types[0] as Type,
+            new Type(dataList.types[0]),
+            new Type(dataList.types[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -121,7 +101,7 @@ describe('1: Probas DATOS API - Types (POST)', () => {
         types[1]._id = "616c6b6602067b3bd0d5ffbc";
         types[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(types);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(types);
         const {
             code,
             data,
@@ -132,31 +112,111 @@ describe('1: Probas DATOS API - Types (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = types.length;
+
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(types.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(types[0]);
-        expect(data[0].id).not.toBe(types[1]);
+        expect(data[0].id).toBe(types[0].id);
+        expect(data[0].id).not.toBe(types[1].id);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(types[1]);
-        expect(data[1].id).not.toBe(types[0]);
+        expect(data[1].id).toBe(types[1].id);
+        expect(data[1].id).not.toBe(types[0].id);
 
-        expect(total).toBe(dataList.types.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
         expect(message).toBe(i18next.t('TYPE.SERVICE.SUCCESS.CREATE_LIST'));
     });
+});
 
-    test('1.4: Crear lista de Types algúns con datos erróneos:', async() => {
+describe('2: Probas DATOS API - Types ERROS (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "types";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.types, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear Type con datos erróneos:`, async() => {
+        const badType = dataList.users[0] as User;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badType);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('TYPE.SERVICE.ERROR.CREATE'));
+    });
+
+    test(`2.2: Crear Type: <${dataList.types[0].id}> QUE XA EXISTE`, async() => {
+        const type = dataList.types[0] as Type;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(type);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('TYPE.NAME'), id: type.id }));
+    });
+
+    test('2.3: Crear lista de Types algúns con datos erróneos:', async() => {
         const badTypes = [
-            dataList.types[0] as Type,
-            dataList.users[0] as User,
+            new Type(dataList.types[0]),
+            new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -167,7 +227,7 @@ describe('1: Probas DATOS API - Types (POST)', () => {
         badTypes[1]._id = "616c6b6602067b3bd0d5ffbc";
         badTypes[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badTypes);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badTypes);
         const {
             code,
             data,
@@ -178,19 +238,21 @@ describe('1: Probas DATOS API - Types (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = badTypes.length;
+
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badTypes.length);
 
-        expect(total).not.toBe(badTypes.length);
+        expect(total).not.toBe(dataLength);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('TYPE.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('TYPE.SERVICE.ERROR.CREATE_LIST'));
     });
 });

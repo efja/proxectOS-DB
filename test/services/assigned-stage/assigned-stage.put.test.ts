@@ -3,18 +3,24 @@
 // ####################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from '@mikro-orm/mongodb';
+
+import { date2LocaleISO, } from "../../../src/helpers/date.helper";
 
 import { AssignedStage } from '../../../src/models/assigned-stage.model';
 
 import {
-    API_BASE,
+    app,
+    runApp,
     changeDate,
+
+    API_BASE,
     dataList,
     db,
+
     FAKE_TEXT,
-    request,
+    request
 } from "../commons";
-import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
@@ -32,6 +38,8 @@ describe('1: Probas DATOS API - AssignedStages (PUT)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -40,11 +48,12 @@ describe('1: Probas DATOS API - AssignedStages (PUT)', () => {
 
 	afterEach(async () => {
 		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
@@ -52,8 +61,8 @@ describe('1: Probas DATOS API - AssignedStages (PUT)', () => {
     // ** TESTS
     // ************************************************************************************************
     test(`1.1: Actualizar AssignedStage: <${dataList.assignedStages[0].id}>`, async() => {
-        const assignedStage0 = dataList.assignedStages[0] as AssignedStage;
-        const assignedStage1 = dataList.assignedStages[0] as AssignedStage;
+        const assignedStage0 = new AssignedStage(dataList.assignedStages[0]);
+        const assignedStage1 = new AssignedStage(dataList.assignedStages[0]);
 
         // Cambiamos a data de inicio
         const newStartDate = changeDate(assignedStage1.startDate);
@@ -63,7 +72,7 @@ describe('1: Probas DATOS API - AssignedStages (PUT)', () => {
         assignedStage1.startDate = newStartDate;
         assignedStage1.finishDate = newFinishDate;
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(assignedStage1);
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${dataList.assignedStages[0].id}`).send(assignedStage1);
         const {
             code,
             data,
@@ -72,9 +81,10 @@ describe('1: Probas DATOS API - AssignedStages (PUT)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
-        expect(response.status).toBe(HttpStatus.OK);
-        expect(code).toBe(HttpStatus.OK);
+        expect(response.status).toBe(HttpStatus.CREATED);
+        expect(code).toBe(HttpStatus.CREATED);
         expect(data).toBeDefined();
 
         // ** Datos cambiados
@@ -94,9 +104,46 @@ describe('1: Probas DATOS API - AssignedStages (PUT)', () => {
 
         expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.UPDATE'));
     });
+});
 
-    test(`1.2: Actualizar AssignedStage con datos erróneos:`, async() => {
-        const assignedStage0 = dataList.assignedStages[0] as AssignedStage;
+describe('1: Probas DATOS API - AssignedStages ERROS (PUT)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "assignedStages";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.assignedStages);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+
+    test(`2.1: Actualizar AssignedStage con datos erróneos:`, async() => {
+        const assignedStage0 = new AssignedStage(dataList.assignedStages[0]);
 
         // Cambiamos a data de inicio
         const newStartDate = changeDate(assignedStage0.startDate);
@@ -107,7 +154,7 @@ describe('1: Probas DATOS API - AssignedStages (PUT)', () => {
         const assignedStage1 = assignedStage0 as any;
         assignedStage1.startDate = assignedStage0.startDate + FAKE_TEXT; // Dato erróneo
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(assignedStage1);
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${assignedStage0.id}`).send(assignedStage1);
         const {
             code,
             data,
@@ -116,11 +163,45 @@ describe('1: Probas DATOS API - AssignedStages (PUT)', () => {
         } = response.body
 
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.ERROR.UPDATE'));
+        expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: assignedStage0.id }));
+    });
+
+    test(`2.2: Actualizar AssignedStage que non existe:`, async() => {
+        const assignedStage0 = new AssignedStage(dataList.assignedStages[0]);
+
+        // Cambiamos a data de inicio
+        const newStartDate = changeDate(assignedStage0.startDate);
+        const newFinishDate = changeDate(assignedStage0.finishDate);
+
+        // Modificase o modelo AssignedStage (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
+        assignedStage0.startDate = newStartDate;
+        assignedStage0.finishDate = newFinishDate;
+
+        do {
+            assignedStage0.id = new ObjectId();
+        } while (assignedStage0.id == dataList.assignedStages[0].id);
+
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${assignedStage0.id}`).send(assignedStage0);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.NOT_FOUND);
+        expect(code).toBe(HttpStatus.NOT_FOUND);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_MALE', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: assignedStage0.id }));
     });
 });

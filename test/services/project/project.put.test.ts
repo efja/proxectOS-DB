@@ -3,6 +3,9 @@
 // ####################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from '@mikro-orm/mongodb';
+
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 import { Project } from '../../../src/models/project.model';
 
@@ -17,8 +20,6 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
-import { date2LocaleISO } from "../../../src/helpers/date.helper";
-import { ObjectId } from '@mikro-orm/mongodb';
 
 // ####################################################################################################
 // ## TESTS GROUPS

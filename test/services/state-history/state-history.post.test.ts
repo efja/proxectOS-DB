@@ -15,7 +15,6 @@ import {
     dataList,
     db,
 
-    FAKE_TEXT,
     request
 } from "../commons";
 
@@ -35,6 +34,8 @@ describe('1: Probas DATOS API - StateHistorys (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -42,12 +43,13 @@ describe('1: Probas DATOS API - StateHistorys (POST)', () => {
 	});
 
 	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
@@ -66,6 +68,7 @@ describe('1: Probas DATOS API - StateHistorys (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -87,33 +90,10 @@ describe('1: Probas DATOS API - StateHistorys (POST)', () => {
         expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`1.2: Crear StateHistory con datos erróneos:`, async() => {
-        const badStateHistory = dataList.users[0] as User;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badStateHistory);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        // Comprobanse algúns datos obrigatorios
-        expect(data.id).toBeUndefined();
-
-        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.CREATE'));
-    });
-
-    test('1.3: Crear lista de StateHistorys:', async() => {
+    test('1.2: Crear lista de StateHistorys:', async() => {
         const statesHistory = [
-            dataList.statesHistory[0] as StateHistory,
-            dataList.statesHistory[0] as StateHistory,
+            new StateHistory(dataList.statesHistory[0]),
+            new StateHistory(dataList.statesHistory[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -124,7 +104,7 @@ describe('1: Probas DATOS API - StateHistorys (POST)', () => {
         statesHistory[1]._id = "616c6b6602067b3bd0d5ffbc";
         statesHistory[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(statesHistory);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(statesHistory);
         const {
             code,
             data,
@@ -135,31 +115,111 @@ describe('1: Probas DATOS API - StateHistorys (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = statesHistory.length;
+
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(statesHistory.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(statesHistory[0]);
-        expect(data[0].id).not.toBe(statesHistory[1]);
+        expect(data[0].id).toBe(statesHistory[0].id);
+        expect(data[0].id).not.toBe(statesHistory[1].id);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(statesHistory[1]);
-        expect(data[1].id).not.toBe(statesHistory[0]);
+        expect(data[1].id).toBe(statesHistory[1].id);
+        expect(data[1].id).not.toBe(statesHistory[0].id);
 
-        expect(total).toBe(dataList.statesHistory.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
         expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.CREATE_LIST'));
     });
+});
 
-    test('1.4: Crear lista de StateHistorys algúns con datos erróneos:', async() => {
+describe('2: Probas DATOS API - StateHistorys ERROS (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "statesHistory";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.statesHistory, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear StateHistory con datos erróneos:`, async() => {
+        const badStateHistory = dataList.users[0] as User;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badStateHistory);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.CREATE'));
+    });
+
+    test(`2.2: Crear StateHistory: <${dataList.statesHistory[0].id}> QUE XA EXISTE`, async() => {
+        const stateHistory = dataList.statesHistory[0] as StateHistory;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(stateHistory);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('STATE_HISTORY.NAME'), id: stateHistory.id }));
+    });
+
+    test('2.3: Crear lista de StateHistorys algúns con datos erróneos:', async() => {
         const badStateHistorys = [
-            dataList.statesHistory[0] as StateHistory,
-            dataList.users[0] as User,
+            new StateHistory(dataList.statesHistory[0]),
+            new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -170,7 +230,7 @@ describe('1: Probas DATOS API - StateHistorys (POST)', () => {
         badStateHistorys[1]._id = "616c6b6602067b3bd0d5ffbc";
         badStateHistorys[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badStateHistorys);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badStateHistorys);
         const {
             code,
             data,
@@ -181,19 +241,21 @@ describe('1: Probas DATOS API - StateHistorys (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = badStateHistorys.length;
+
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badStateHistorys.length);
 
-        expect(total).not.toBe(badStateHistorys.length);
+        expect(total).not.toBe(dataLength);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.CREATE_LIST'));
     });
 });

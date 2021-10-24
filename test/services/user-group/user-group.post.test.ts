@@ -4,8 +4,8 @@
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
-import { User } from "../../../src/models/user.model";
 import { UserGroup } from '../../../src/models/user-group.model';
+import { User } from "../../../src/models/user.model";
 
 import {
     app,
@@ -15,7 +15,6 @@ import {
     dataList,
     db,
 
-    FAKE_TEXT,
     request
 } from "../commons";
 
@@ -35,6 +34,8 @@ describe('1: Probas DATOS API - UserGroups (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -42,12 +43,13 @@ describe('1: Probas DATOS API - UserGroups (POST)', () => {
 	});
 
 	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
@@ -66,6 +68,7 @@ describe('1: Probas DATOS API - UserGroups (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -84,33 +87,10 @@ describe('1: Probas DATOS API - UserGroups (POST)', () => {
         expect(message).toBe(i18next.t('USER_GROUP.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`1.2: Crear UserGroup con datos erróneos:`, async() => {
-        const badUserGroup = dataList.users[0] as User;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badUserGroup);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        // Comprobanse algúns datos obrigatorios
-        expect(data.id).toBeUndefined();
-
-        expect(message).toBe(i18next.t('USER_GROUP.SERVICE.ERROR.CREATE'));
-    });
-
-    test('1.3: Crear lista de UserGroups:', async() => {
+    test('1.2: Crear lista de UserGroups:', async() => {
         const userGroups = [
-            dataList.userGroups[0] as UserGroup,
-            dataList.userGroups[0] as UserGroup,
+            new UserGroup(dataList.userGroups[0]),
+            new UserGroup(dataList.userGroups[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -121,7 +101,7 @@ describe('1: Probas DATOS API - UserGroups (POST)', () => {
         userGroups[1]._id = "616c6b6602067b3bd0d5ffbc";
         userGroups[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(userGroups);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(userGroups);
         const {
             code,
             data,
@@ -132,31 +112,111 @@ describe('1: Probas DATOS API - UserGroups (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = userGroups.length;
+
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(userGroups.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(userGroups[0]);
-        expect(data[0].id).not.toBe(userGroups[1]);
+        expect(data[0].id).toBe(userGroups[0].id);
+        expect(data[0].id).not.toBe(userGroups[1].id);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(userGroups[1]);
-        expect(data[1].id).not.toBe(userGroups[0]);
+        expect(data[1].id).toBe(userGroups[1].id);
+        expect(data[1].id).not.toBe(userGroups[0].id);
 
-        expect(total).toBe(dataList.userGroups.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
         expect(message).toBe(i18next.t('USER_GROUP.SERVICE.SUCCESS.CREATE_LIST'));
     });
+});
 
-    test('1.4: Crear lista de UserGroups algúns con datos erróneos:', async() => {
+describe('2: Probas DATOS API - UserGroups ERROS (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "userGroups";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.userGroups, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear UserGroup con datos erróneos:`, async() => {
+        const badUserGroup = dataList.users[0] as User;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badUserGroup);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('USER_GROUP.SERVICE.ERROR.CREATE'));
+    });
+
+    test(`2.2: Crear UserGroup: <${dataList.userGroups[0].id}> QUE XA EXISTE`, async() => {
+        const userGroup = dataList.userGroups[0] as UserGroup;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(userGroup);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('USER_GROUP.NAME'), id: userGroup.id }));
+    });
+
+    test('2.3: Crear lista de UserGroups algúns con datos erróneos:', async() => {
         const badUserGroups = [
-            dataList.userGroups[0] as UserGroup,
-            dataList.users[0] as User,
+            new UserGroup(dataList.userGroups[0]),
+            new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -167,7 +227,7 @@ describe('1: Probas DATOS API - UserGroups (POST)', () => {
         badUserGroups[1]._id = "616c6b6602067b3bd0d5ffbc";
         badUserGroups[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badUserGroups);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badUserGroups);
         const {
             code,
             data,
@@ -178,19 +238,21 @@ describe('1: Probas DATOS API - UserGroups (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = badUserGroups.length;
+
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badUserGroups.length);
 
-        expect(total).not.toBe(badUserGroups.length);
+        expect(total).not.toBe(dataLength);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('USER_GROUP.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('USER_GROUP.SERVICE.ERROR.CREATE_LIST'));
     });
 });

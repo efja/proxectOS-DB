@@ -4,8 +4,8 @@
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
-import { User } from "../../../src/models/user.model";
 import { UserContactType } from '../../../src/models/user-contact-type.model';
+import { User } from "../../../src/models/user.model";
 
 import {
     app,
@@ -15,7 +15,6 @@ import {
     dataList,
     db,
 
-    FAKE_TEXT,
     request
 } from "../commons";
 
@@ -35,6 +34,8 @@ describe('1: Probas DATOS API - UserContactTypes (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -42,19 +43,20 @@ describe('1: Probas DATOS API - UserContactTypes (POST)', () => {
 	});
 
 	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`1.:1 Crear UserContactType: <${dataList.userContactTypes[0].id}>`, async() => {
+    test(`1.1: Crear UserContactType: <${dataList.userContactTypes[0].id}>`, async() => {
         const userContactType = dataList.userContactTypes[0] as UserContactType;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(userContactType);
@@ -66,6 +68,7 @@ describe('1: Probas DATOS API - UserContactTypes (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -81,33 +84,10 @@ describe('1: Probas DATOS API - UserContactTypes (POST)', () => {
         expect(message).toBe(i18next.t('USER_CONTACT_TYPE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`1.2: Crear UserContactType con datos erróneos:`, async() => {
-        const badUserContactType = dataList.users[0] as User;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badUserContactType);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        // Comprobanse algúns datos obrigatorios
-        expect(data.id).toBeUndefined();
-
-        expect(message).toBe(i18next.t('USER_CONTACT_TYPE.SERVICE.ERROR.CREATE'));
-    });
-
-    test('1.3: Crear lista de UserContactTypes:', async() => {
+    test('1.2: Crear lista de UserContactTypes:', async() => {
         const userContactTypes = [
-            dataList.userContactTypes[0] as UserContactType,
-            dataList.userContactTypes[0] as UserContactType,
+            new UserContactType(dataList.userContactTypes[0]),
+            new UserContactType(dataList.userContactTypes[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -118,7 +98,7 @@ describe('1: Probas DATOS API - UserContactTypes (POST)', () => {
         userContactTypes[1]._id = "616c6b6602067b3bd0d5ffbc";
         userContactTypes[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(userContactTypes);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(userContactTypes);
         const {
             code,
             data,
@@ -129,31 +109,111 @@ describe('1: Probas DATOS API - UserContactTypes (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = userContactTypes.length;
+
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(userContactTypes.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(userContactTypes[0]);
-        expect(data[0].id).not.toBe(userContactTypes[1]);
+        expect(data[0].id).toBe(userContactTypes[0].id);
+        expect(data[0].id).not.toBe(userContactTypes[1].id);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(userContactTypes[1]);
-        expect(data[1].id).not.toBe(userContactTypes[0]);
+        expect(data[1].id).toBe(userContactTypes[1].id);
+        expect(data[1].id).not.toBe(userContactTypes[0].id);
 
-        expect(total).toBe(dataList.userContactTypes.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
         expect(message).toBe(i18next.t('USER_CONTACT_TYPE.SERVICE.SUCCESS.CREATE_LIST'));
     });
+});
 
-    test('1.4: Crear lista de UserContactTypes algúns con datos erróneos:', async() => {
+describe('2: Probas DATOS API - UserContactTypes ERROS (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "userContactTypes";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.userContactTypes, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear UserContactType con datos erróneos:`, async() => {
+        const badUserContactType = dataList.users[0] as User;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badUserContactType);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('USER_CONTACT_TYPE.SERVICE.ERROR.CREATE'));
+    });
+
+    test(`2.2: Crear UserContactType: <${dataList.userContactTypes[0].id}> QUE XA EXISTE`, async() => {
+        const userContactType = dataList.userContactTypes[0] as UserContactType;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(userContactType);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('USER_CONTACT_TYPE.NAME'), id: userContactType.id }));
+    });
+
+    test('2.3: Crear lista de UserContactTypes algúns con datos erróneos:', async() => {
         const badUserContactTypes = [
-            dataList.userContactTypes[0] as UserContactType,
-            dataList.users[0] as User,
+            new UserContactType(dataList.userContactTypes[0]),
+            new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -164,7 +224,7 @@ describe('1: Probas DATOS API - UserContactTypes (POST)', () => {
         badUserContactTypes[1]._id = "616c6b6602067b3bd0d5ffbc";
         badUserContactTypes[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badUserContactTypes);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badUserContactTypes);
         const {
             code,
             data,
@@ -175,19 +235,21 @@ describe('1: Probas DATOS API - UserContactTypes (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = badUserContactTypes.length;
+
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badUserContactTypes.length);
 
-        expect(total).not.toBe(badUserContactTypes.length);
+        expect(total).not.toBe(dataLength);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('USER_CONTACT_TYPE.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('USER_CONTACT_TYPE.SERVICE.ERROR.CREATE_LIST'));
     });
 });

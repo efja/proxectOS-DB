@@ -4,6 +4,8 @@
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
+
 import { Requirement } from '../../../src/models/requirement.model';
 import { User } from "../../../src/models/user.model";
 
@@ -15,10 +17,8 @@ import {
     dataList,
     db,
 
-    FAKE_TEXT,
     request
 } from "../commons";
-import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
@@ -36,6 +36,8 @@ describe('1: Probas DATOS API - Requirements (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -43,12 +45,13 @@ describe('1: Probas DATOS API - Requirements (POST)', () => {
 	});
 
 	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
@@ -67,6 +70,7 @@ describe('1: Probas DATOS API - Requirements (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -89,33 +93,10 @@ describe('1: Probas DATOS API - Requirements (POST)', () => {
         expect(message).toBe(i18next.t('REQUIREMENT.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`1.2: Crear Requirement con datos erróneos:`, async() => {
-        const badRequirement = dataList.users[0] as User;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badRequirement);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        // Comprobanse algúns datos obrigatorios
-        expect(data.id).toBeUndefined();
-
-        expect(message).toBe(i18next.t('REQUIREMENT.SERVICE.ERROR.CREATE'));
-    });
-
-    test('1.3: Crear lista de Requirements:', async() => {
+    test('1.2: Crear lista de Requirements:', async() => {
         const requirements = [
-            dataList.requirements[0] as Requirement,
-            dataList.requirements[0] as Requirement,
+            new Requirement(dataList.requirements[0]),
+            new Requirement(dataList.requirements[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -126,7 +107,7 @@ describe('1: Probas DATOS API - Requirements (POST)', () => {
         requirements[1]._id = "616c6b6602067b3bd0d5ffbc";
         requirements[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(requirements);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(requirements);
         const {
             code,
             data,
@@ -137,31 +118,111 @@ describe('1: Probas DATOS API - Requirements (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = requirements.length;
+
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(requirements.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(requirements[0]);
-        expect(data[0].id).not.toBe(requirements[1]);
+        expect(data[0].id).toBe(requirements[0].id);
+        expect(data[0].id).not.toBe(requirements[1].id);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(requirements[1]);
-        expect(data[1].id).not.toBe(requirements[0]);
+        expect(data[1].id).toBe(requirements[1].id);
+        expect(data[1].id).not.toBe(requirements[0].id);
 
-        expect(total).toBe(dataList.requirements.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
         expect(message).toBe(i18next.t('REQUIREMENT.SERVICE.SUCCESS.CREATE_LIST'));
     });
+});
 
-    test('1.4: Crear lista de Requirements algúns con datos erróneos:', async() => {
+describe('2: Probas DATOS API - Requirements ERROS (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "requirements";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.requirements, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear Requirement con datos erróneos:`, async() => {
+        const badRequirement = dataList.users[0] as User;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badRequirement);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('REQUIREMENT.SERVICE.ERROR.CREATE'));
+    });
+
+    test(`2.2: Crear Requirement: <${dataList.requirements[0].id}> QUE XA EXISTE`, async() => {
+        const requirement = dataList.requirements[0] as Requirement;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(requirement);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('REQUIREMENT.NAME'), id: requirement.id }));
+    });
+
+    test('2.3: Crear lista de Requirements algúns con datos erróneos:', async() => {
         const badRequirements = [
-            dataList.requirements[0] as Requirement,
-            dataList.users[0] as User,
+            new Requirement(dataList.requirements[0]),
+            new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -172,7 +233,7 @@ describe('1: Probas DATOS API - Requirements (POST)', () => {
         badRequirements[1]._id = "616c6b6602067b3bd0d5ffbc";
         badRequirements[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badRequirements);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badRequirements);
         const {
             code,
             data,
@@ -183,19 +244,21 @@ describe('1: Probas DATOS API - Requirements (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = badRequirements.length;
+
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badRequirements.length);
 
-        expect(total).not.toBe(badRequirements.length);
+        expect(total).not.toBe(dataLength);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('REQUIREMENT.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('REQUIREMENT.SERVICE.ERROR.CREATE_LIST'));
     });
 });

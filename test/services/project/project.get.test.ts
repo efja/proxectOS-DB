@@ -5,6 +5,8 @@ import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
 
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
+
 import { Project } from '../../../src/models/project.model';
 
 import {
@@ -18,7 +20,6 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
-import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
@@ -69,6 +70,8 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
             error,
         } = response.body
 
+        const dataLength = dataList.projects.length;
+
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
 
@@ -76,10 +79,10 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         expect(code).toBe(HttpStatus.OK);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(dataList.projects.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0].id).toBe(dataList.projects[0].id);
 
-        expect(total).toBe(dataList.projects.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
@@ -107,6 +110,8 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
             error,
         } = response.body
 
+        const dataLength = 1;
+
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
 
@@ -114,10 +119,10 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         expect(code).toBe(HttpStatus.OK);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(dataList.projects.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0].id).toBe(dataList.projects[0].id);
 
-        expect(total).toBe(dataList.projects.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
@@ -253,6 +258,8 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
             error,
         } = response.body
 
+        const dataLength = dataList.projects.length;
+
         expect(error).toBeDefined();
         expect(message).toBeUndefined();
 
@@ -261,7 +268,7 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
         expect(data).toBeNull();
 
         expect(total).toBe(0);
-        expect(total).not.toBe(dataList.projects.length);
+        expect(total).not.toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 

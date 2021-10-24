@@ -15,7 +15,6 @@ import {
     dataList,
     db,
 
-    FAKE_TEXT,
     request
 } from "../commons";
 
@@ -35,6 +34,8 @@ describe('1: Probas DATOS API - Resources (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -42,12 +43,13 @@ describe('1: Probas DATOS API - Resources (POST)', () => {
 	});
 
 	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
@@ -66,6 +68,7 @@ describe('1: Probas DATOS API - Resources (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -84,33 +87,10 @@ describe('1: Probas DATOS API - Resources (POST)', () => {
         expect(message).toBe(i18next.t('RESOURCE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`1.2: Crear Resource con datos erróneos:`, async() => {
-        const badResource = dataList.users[0] as User;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badResource);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        // Comprobanse algúns datos obrigatorios
-        expect(data.id).toBeUndefined();
-
-        expect(message).toBe(i18next.t('RESOURCE.SERVICE.ERROR.CREATE'));
-    });
-
-    test('1.3: Crear lista de Resources:', async() => {
+    test('1.2: Crear lista de Resources:', async() => {
         const resources = [
-            dataList.resources[0] as Resource,
-            dataList.resources[0] as Resource,
+            new Resource(dataList.resources[0]),
+            new Resource(dataList.resources[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -121,7 +101,7 @@ describe('1: Probas DATOS API - Resources (POST)', () => {
         resources[1]._id = "616c6b6602067b3bd0d5ffbc";
         resources[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(resources);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(resources);
         const {
             code,
             data,
@@ -132,31 +112,111 @@ describe('1: Probas DATOS API - Resources (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = resources.length;
+
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(resources.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(resources[0]);
-        expect(data[0].id).not.toBe(resources[1]);
+        expect(data[0].id).toBe(resources[0].id);
+        expect(data[0].id).not.toBe(resources[1].id);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(resources[1]);
-        expect(data[1].id).not.toBe(resources[0]);
+        expect(data[1].id).toBe(resources[1].id);
+        expect(data[1].id).not.toBe(resources[0].id);
 
-        expect(total).toBe(dataList.resources.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
         expect(message).toBe(i18next.t('RESOURCE.SERVICE.SUCCESS.CREATE_LIST'));
     });
+});
 
-    test('1.4: Crear lista de Resources algúns con datos erróneos:', async() => {
+describe('2: Probas DATOS API - Resources ERROS (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "resources";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.resources, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear Resource con datos erróneos:`, async() => {
+        const badResource = dataList.users[0] as User;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badResource);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('RESOURCE.SERVICE.ERROR.CREATE'));
+    });
+
+    test(`2.2: Crear Resource: <${dataList.resources[0].id}> QUE XA EXISTE`, async() => {
+        const resource = dataList.resources[0] as Resource;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(resource);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('RESOURCE.NAME'), id: resource.id }));
+    });
+
+    test('2.3: Crear lista de Resources algúns con datos erróneos:', async() => {
         const badResources = [
-            dataList.resources[0] as Resource,
-            dataList.users[0] as User,
+            new Resource(dataList.resources[0]),
+            new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -167,7 +227,7 @@ describe('1: Probas DATOS API - Resources (POST)', () => {
         badResources[1]._id = "616c6b6602067b3bd0d5ffbc";
         badResources[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badResources);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badResources);
         const {
             code,
             data,
@@ -178,19 +238,21 @@ describe('1: Probas DATOS API - Resources (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = badResources.length;
+
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badResources.length);
 
-        expect(total).not.toBe(badResources.length);
+        expect(total).not.toBe(dataLength);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('RESOURCE.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('RESOURCE.SERVICE.ERROR.CREATE_LIST'));
     });
 });

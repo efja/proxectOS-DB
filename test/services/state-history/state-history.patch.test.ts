@@ -4,6 +4,7 @@
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import * as jsonpatch from 'fast-json-patch';
+import { ObjectId } from "@mikro-orm/mongodb";
 
 import { StateHistory } from '../../../src/models/state-history.model';
 
@@ -45,13 +46,12 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
 
 	afterEach(async () => {
 		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
 	});
 
 	afterAll(async () => {
         await app.stop();
 
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
 		await db.close();
 	});
 
@@ -59,8 +59,8 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
     // ** TESTS
     // ************************************************************************************************
     test(`1.1: Actualizar StateHistory: <${dataList.statesHistory[0].id}>`, async() => {
-        const stateHistory0 = dataList.statesHistory[0] as StateHistory;
-        const stateHistory1 = dataList.statesHistory[0] as StateHistory;
+        const stateHistory0 = new StateHistory(dataList.statesHistory[0]);
+        const stateHistory1 = new StateHistory(dataList.statesHistory[0]);
 
         // Modificase o modelo StateHistory
         stateHistory1.log = stateHistory1.log + FAKE_TEXT;
@@ -68,7 +68,7 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
         // Xerase o objexecto tipo HTTP PATCH
         const objPatch = jsonpatch.compare(stateHistory0, stateHistory1);
 
-        const response = await request.patch(`${API_BASE}/${ENDPOINT}/`).send(objPatch);
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/${stateHistory0.id}`).send(objPatch);
         const {
             code,
             data,
@@ -77,9 +77,10 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
-        expect(response.status).toBe(HttpStatus.OK);
-        expect(code).toBe(HttpStatus.OK);
+        expect(response.status).toBe(HttpStatus.CREATED);
+        expect(code).toBe(HttpStatus.CREATED);
         expect(data).toBeDefined();
 
         // ** Datos cambiados
@@ -104,9 +105,46 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
         expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`1.2: Actualizar StateHistory con datos erróneos:`, async() => {
-        const stateHistory0 = dataList.statesHistory[0] as StateHistory;
-        const stateHistory1 = dataList.statesHistory[0] as StateHistory;
+});
+
+describe('2: Probas DATOS API - StateHistorys ERROS (PATCH)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "statesHistory";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.statesHistory);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Actualizar StateHistory con datos erróneos:`, async() => {
+        const stateHistory0 = new StateHistory(dataList.statesHistory[0]);
+        const stateHistory1 = new StateHistory(dataList.statesHistory[0]);
 
         // Modificase o modelo StateHistory
         stateHistory1.log = stateHistory1.log + FAKE_TEXT;
@@ -116,7 +154,7 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
 
         objPatch[0].path = FAKE_TEXT; // Dato incorrecto
 
-        const response = await request.patch(`${API_BASE}/${ENDPOINT}/`).send(objPatch);
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/${stateHistory0.id}`).send(objPatch);
         const {
             code,
             data,
@@ -125,11 +163,40 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
         } = response.body
 
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.UPDATE'));
+        expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('STATE_HISTORY.NAME'), id: stateHistory0.id }));
+    });
+
+    test(`2.2: Actualizar StateHistory que non existe:`, async() => {
+        const stateHistory0 = new StateHistory(dataList.statesHistory[0]);
+
+        // Modificase o modelo StateHistory
+        stateHistory0.log = stateHistory0.log + FAKE_TEXT;
+
+        do {
+            stateHistory0.id = new ObjectId();
+        } while (stateHistory0.id == dataList.statesHistory[0].id);
+
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${stateHistory0.id}`).send(stateHistory0);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.NOT_FOUND);
+        expect(code).toBe(HttpStatus.NOT_FOUND);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_MALE', { entity: i18next.t('STATE_HISTORY.NAME'), id: stateHistory0.id }));
     });
 });

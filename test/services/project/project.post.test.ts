@@ -4,6 +4,8 @@
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
+
 import { Project } from '../../../src/models/project.model';
 import { User } from "../../../src/models/user.model";
 
@@ -15,10 +17,8 @@ import {
     dataList,
     db,
 
-    FAKE_TEXT,
     request
 } from "../commons";
-import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
@@ -118,6 +118,8 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = projects.length;
+
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
 
@@ -125,7 +127,7 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(projects.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0]).toBeDefined();
         expect(data[0].id).toBe(projects[0].id);
         expect(data[0].id).not.toBe(projects[1].id);
@@ -133,7 +135,7 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         expect(data[1].id).toBe(projects[1].id);
         expect(data[1].id).not.toBe(projects[0].id);
 
-        expect(total).toBe(projects.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
@@ -242,6 +244,8 @@ describe('2: Probas DATOS API - Projects ERROS (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = badProjects.length;
+
         expect(error).toBeDefined();
         expect(message).toBeUndefined();
 
@@ -250,7 +254,7 @@ describe('2: Probas DATOS API - Projects ERROS (POST)', () => {
 
         expect(data).toBeUndefined();
 
-        expect(total).not.toBe(badProjects.length);
+        expect(total).not.toBe(dataLength);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);

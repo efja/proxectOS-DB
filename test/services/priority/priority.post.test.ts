@@ -15,7 +15,6 @@ import {
     dataList,
     db,
 
-    FAKE_TEXT,
     request
 } from "../commons";
 
@@ -35,6 +34,8 @@ describe('1: Probas DATOS API - Priorities (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -42,12 +43,13 @@ describe('1: Probas DATOS API - Priorities (POST)', () => {
 	});
 
 	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
@@ -66,6 +68,7 @@ describe('1: Probas DATOS API - Priorities (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -84,33 +87,10 @@ describe('1: Probas DATOS API - Priorities (POST)', () => {
         expect(message).toBe(i18next.t('PRIORITY.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`1.2: Crear Priority con datos erróneos:`, async() => {
-        const badPriority = dataList.users[0] as User;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badPriority);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        // Comprobanse algúns datos obrigatorios
-        expect(data.id).toBeUndefined();
-
-        expect(message).toBe(i18next.t('PRIORITY.SERVICE.ERROR.CREATE'));
-    });
-
-    test('1.3: Crear lista de Priorities:', async() => {
+    test('1.2: Crear lista de Priorities:', async() => {
         const priorities = [
-            dataList.priorities[0] as Priority,
-            dataList.priorities[0] as Priority,
+            new Priority(dataList.priorities[0]),
+            new Priority(dataList.priorities[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -121,7 +101,7 @@ describe('1: Probas DATOS API - Priorities (POST)', () => {
         priorities[1]._id = "616c6b6602067b3bd0d5ffbc";
         priorities[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(priorities);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(priorities);
         const {
             code,
             data,
@@ -132,31 +112,111 @@ describe('1: Probas DATOS API - Priorities (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = priorities.length;
+
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(priorities.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(priorities[0]);
-        expect(data[0].id).not.toBe(priorities[1]);
+        expect(data[0].id).toBe(priorities[0].id);
+        expect(data[0].id).not.toBe(priorities[1].id);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(priorities[1]);
-        expect(data[1].id).not.toBe(priorities[0]);
+        expect(data[1].id).toBe(priorities[1].id);
+        expect(data[1].id).not.toBe(priorities[0].id);
 
-        expect(total).toBe(dataList.priorities.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
         expect(message).toBe(i18next.t('PRIORITY.SERVICE.SUCCESS.CREATE_LIST'));
     });
+});
 
-    test('1.4: Crear lista de Priorities algúns con datos erróneos:', async() => {
+describe('2: Probas DATOS API - Priorities ERROS (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "priorities";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.priorities, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear Priority con datos erróneos:`, async() => {
+        const badPriority = dataList.users[0] as User;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badPriority);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('PRIORITY.SERVICE.ERROR.CREATE'));
+    });
+
+    test(`2.2: Crear Priority: <${dataList.priorities[0].id}> QUE XA EXISTE`, async() => {
+        const priority = dataList.priorities[0] as Priority;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(priority);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('PRIORITY.NAME'), id: priority.id }));
+    });
+
+    test('2.3: Crear lista de Priorities algúns con datos erróneos:', async() => {
         const badPriorities = [
-            dataList.priorities[0] as Priority,
-            dataList.users[0] as User,
+            new Priority(dataList.priorities[0]),
+            new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -167,7 +227,7 @@ describe('1: Probas DATOS API - Priorities (POST)', () => {
         badPriorities[1]._id = "616c6b6602067b3bd0d5ffbc";
         badPriorities[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badPriorities);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badPriorities);
         const {
             code,
             data,
@@ -178,19 +238,21 @@ describe('1: Probas DATOS API - Priorities (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = dataList.priorities.length;
+
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badPriorities.length);
 
-        expect(total).not.toBe(badPriorities.length);
+        expect(total).not.toBe(dataLength);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('PRIORITY.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('PRIORITY.SERVICE.ERROR.CREATE_LIST'));
     });
 });

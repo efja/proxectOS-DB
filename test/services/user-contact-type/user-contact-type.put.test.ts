@@ -3,6 +3,7 @@
 // ####################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from '@mikro-orm/mongodb';
 
 import { UserContactType } from '../../../src/models/user-contact-type.model';
 
@@ -44,13 +45,12 @@ describe('1: Probas DATOS API - UserContactTypes (PUT)', () => {
 
 	afterEach(async () => {
 		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
 	});
 
 	afterAll(async () => {
         await app.stop();
 
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
 		await db.close();
 	});
 
@@ -58,13 +58,13 @@ describe('1: Probas DATOS API - UserContactTypes (PUT)', () => {
     // ** TESTS
     // ************************************************************************************************
     test(`1.1: Actualizar UserContactType: <${dataList.userContactTypes[0].id}>`, async() => {
-        const userContactType0 = dataList.userContactTypes[0] as UserContactType;
-        const userContactType1 = dataList.userContactTypes[0] as UserContactType;
+        const userContactType0 = new UserContactType(dataList.userContactTypes[0]);
+        const userContactType1 = new UserContactType(dataList.userContactTypes[0]);
 
         // Modificase o modelo UserContactType (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
         userContactType1.description = userContactType1.description + FAKE_TEXT;
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(userContactType1);
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${dataList.userContactTypes[0].id}`).send(userContactType1);
         const {
             code,
             data,
@@ -73,9 +73,10 @@ describe('1: Probas DATOS API - UserContactTypes (PUT)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
-        expect(response.status).toBe(HttpStatus.OK);
-        expect(code).toBe(HttpStatus.OK);
+        expect(response.status).toBe(HttpStatus.CREATED);
+        expect(code).toBe(HttpStatus.CREATED);
         expect(data).toBeDefined();
 
         // ** Datos cambiados
@@ -89,20 +90,56 @@ describe('1: Probas DATOS API - UserContactTypes (PUT)', () => {
         expect(data.id).toBe(userContactType0.id);
         expect(data.id).toBe(userContactType1.id);
 
-
         expect(message).toBe(i18next.t('USER_CONTACT_TYPE.SERVICE.SUCCESS.UPDATE'));
     });
+});
 
-    test(`1.2: Actualizar UserContactType con datos erróneos:`, async() => {
-        const userContactType0 = dataList.userContactTypes[0] as UserContactType;
+describe('1: Probas DATOS API - UserContactTypes ERROS (PUT)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "userContactTypes";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.userContactTypes);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+
+    test(`2.1: Actualizar UserContactType con datos erróneos:`, async() => {
+        const userContactType0 = new UserContactType(dataList.userContactTypes[0]);
 
         // Modificase o modelo UserContactType
         userContactType0.description = userContactType0.description + FAKE_TEXT;
 
         const userContactType1 = userContactType0 as any;
-        userContactType1.startDate = userContactType0.description + FAKE_TEXT; // Dato erróneo
+        userContactType1.createdAt = userContactType0.description + FAKE_TEXT; // Dato erróneo
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(userContactType1);
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${userContactType0.id}`).send(userContactType1);
         const {
             code,
             data,
@@ -111,11 +148,40 @@ describe('1: Probas DATOS API - UserContactTypes (PUT)', () => {
         } = response.body
 
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(message).toBe(i18next.t('USER_CONTACT_TYPE.SERVICE.ERROR.UPDATE'));
+        expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('USER_CONTACT_TYPE.NAME'), id: userContactType0.id }));
+    });
+
+    test(`2.2: Actualizar UserContactType que non existe:`, async() => {
+        const userContactType0 = new UserContactType(dataList.userContactTypes[0]);
+
+        // Modificase o modelo UserContactType
+        userContactType0.description = userContactType0.description + FAKE_TEXT;
+
+        do {
+            userContactType0.id = new ObjectId();
+        } while (userContactType0.id == dataList.userContactTypes[0].id);
+
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${userContactType0.id}`).send(userContactType0);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.NOT_FOUND);
+        expect(code).toBe(HttpStatus.NOT_FOUND);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_MALE', { entity: i18next.t('USER_CONTACT_TYPE.NAME'), id: userContactType0.id }));
     });
 });

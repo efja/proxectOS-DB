@@ -4,6 +4,8 @@
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
+
 import { AssignedStage } from '../../../src/models/assigned-stage.model';
 import { User } from "../../../src/models/user.model";
 
@@ -15,10 +17,8 @@ import {
     dataList,
     db,
 
-    FAKE_TEXT,
     request
 } from "../commons";
-import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
@@ -36,6 +36,8 @@ describe('1: Probas DATOS API - AssignedStages (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -43,12 +45,13 @@ describe('1: Probas DATOS API - AssignedStages (POST)', () => {
 	});
 
 	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
@@ -67,6 +70,7 @@ describe('1: Probas DATOS API - AssignedStages (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -89,33 +93,10 @@ describe('1: Probas DATOS API - AssignedStages (POST)', () => {
         expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`1.2: Crear AssignedStage con datos erróneos:`, async() => {
-        const badAssignedStage = dataList.users[0] as User;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badAssignedStage);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        // Comprobanse algúns datos obrigatorios
-        expect(data.id).toBeUndefined();
-
-        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.ERROR.CREATE'));
-    });
-
-    test('1.3: Crear lista de AssignedStages:', async() => {
+    test('1.2: Crear lista de AssignedStages:', async() => {
         const assignedStages = [
-            dataList.assignedStages[0] as AssignedStage,
-            dataList.assignedStages[0] as AssignedStage,
+            new AssignedStage(dataList.assignedStages[0]),
+            new AssignedStage(dataList.assignedStages[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -126,7 +107,7 @@ describe('1: Probas DATOS API - AssignedStages (POST)', () => {
         assignedStages[1]._id = "616c6b6602067b3bd0d5ffbc";
         assignedStages[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(assignedStages);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(assignedStages);
         const {
             code,
             data,
@@ -137,31 +118,111 @@ describe('1: Probas DATOS API - AssignedStages (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = assignedStages.length;
+
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(assignedStages.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(assignedStages[0]);
-        expect(data[0].id).not.toBe(assignedStages[1]);
+        expect(data[0].id).toBe(assignedStages[0].id);
+        expect(data[0].id).not.toBe(assignedStages[1].id);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(assignedStages[1]);
-        expect(data[1].id).not.toBe(assignedStages[0]);
+        expect(data[1].id).toBe(assignedStages[1].id);
+        expect(data[1].id).not.toBe(assignedStages[0].id);
 
-        expect(total).toBe(dataList.assignedStages.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
         expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.CREATE_LIST'));
     });
+});
 
-    test('1.4: Crear lista de AssignedStages algúns con datos erróneos:', async() => {
+describe('2: Probas DATOS API - AssignedStages ERROS (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "assignedStages";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.assignedStages, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear AssignedStage con datos erróneos:`, async() => {
+        const badAssignedStage = dataList.users[0] as User;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badAssignedStage);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.ERROR.CREATE'));
+    });
+
+    test(`2.2: Crear AssignedStage: <${dataList.assignedStages[0].id}> QUE XA EXISTE`, async() => {
+        const assignedStage = dataList.assignedStages[0] as AssignedStage;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(assignedStage);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: assignedStage.id }));
+    });
+
+    test('2.3: Crear lista de AssignedStages algúns con datos erróneos:', async() => {
         const badAssignedStages = [
-            dataList.assignedStages[0] as AssignedStage,
-            dataList.users[0] as User,
+            new AssignedStage(dataList.assignedStages[0]),
+            new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -172,7 +233,7 @@ describe('1: Probas DATOS API - AssignedStages (POST)', () => {
         badAssignedStages[1]._id = "616c6b6602067b3bd0d5ffbc";
         badAssignedStages[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badAssignedStages);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badAssignedStages);
         const {
             code,
             data,
@@ -183,19 +244,21 @@ describe('1: Probas DATOS API - AssignedStages (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = badAssignedStages.length;
+
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badAssignedStages.length);
 
-        expect(total).not.toBe(badAssignedStages.length);
+        expect(total).not.toBe(dataLength);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.ERROR.CREATE_LIST'));
     });
 });

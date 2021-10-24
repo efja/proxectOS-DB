@@ -4,6 +4,8 @@
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
+
 import { PerformanceApp } from '../../../src/models/performanceapp.model';
 import { User } from "../../../src/models/user.model";
 
@@ -15,10 +17,8 @@ import {
     dataList,
     db,
 
-    FAKE_TEXT,
     request
 } from "../commons";
-import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
@@ -36,6 +36,8 @@ describe('1: Probas DATOS API - PerformanceApps (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -43,12 +45,13 @@ describe('1: Probas DATOS API - PerformanceApps (POST)', () => {
 	});
 
 	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
@@ -67,6 +70,7 @@ describe('1: Probas DATOS API - PerformanceApps (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -89,33 +93,10 @@ describe('1: Probas DATOS API - PerformanceApps (POST)', () => {
         expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`1.2: Crear PerformanceApp con datos erróneos:`, async() => {
-        const badPerformanceApp = dataList.users[0] as User;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badPerformanceApp);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        // Comprobanse algúns datos obrigatorios
-        expect(data.id).toBeUndefined();
-
-        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.CREATE'));
-    });
-
-    test('1.3: Crear lista de PerformanceApps:', async() => {
+    test('1.2: Crear lista de PerformanceApps:', async() => {
         const performanceApps = [
-            dataList.performances[0] as PerformanceApp,
-            dataList.performances[0] as PerformanceApp,
+            new PerformanceApp(dataList.performances[0]),
+            new PerformanceApp(dataList.performances[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -126,7 +107,7 @@ describe('1: Probas DATOS API - PerformanceApps (POST)', () => {
         performanceApps[1]._id = "616c6b6602067b3bd0d5ffbc";
         performanceApps[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(performanceApps);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(performanceApps);
         const {
             code,
             data,
@@ -137,31 +118,111 @@ describe('1: Probas DATOS API - PerformanceApps (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = performanceApps.length;
+
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(performanceApps.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(performanceApps[0]);
-        expect(data[0].id).not.toBe(performanceApps[1]);
+        expect(data[0].id).toBe(performanceApps[0].id);
+        expect(data[0].id).not.toBe(performanceApps[1].id);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(performanceApps[1]);
-        expect(data[1].id).not.toBe(performanceApps[0]);
+        expect(data[1].id).toBe(performanceApps[1].id);
+        expect(data[1].id).not.toBe(performanceApps[0].id);
 
-        expect(total).toBe(dataList.performances.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
         expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.CREATE_LIST'));
     });
+});
 
-    test('1.4: Crear lista de PerformanceApps algúns con datos erróneos:', async() => {
+describe('2: Probas DATOS API - PerformanceApps ERROS (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "performanceApps";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.performances, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear PerformanceApp con datos erróneos:`, async() => {
+        const badPerformanceApp = dataList.users[0] as User;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badPerformanceApp);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.CREATE'));
+    });
+
+    test(`2.2: Crear PerformanceApp: <${dataList.performances[0].id}> QUE XA EXISTE`, async() => {
+        const performanceApp = dataList.performances[0] as PerformanceApp;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(performanceApp);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('PERFORMANCE.NAME'), id: performanceApp.id }));
+    });
+
+    test('2.3: Crear lista de PerformanceApps algúns con datos erróneos:', async() => {
         const badPerformanceApps = [
-            dataList.performances[0] as PerformanceApp,
-            dataList.users[0] as User,
+            new PerformanceApp(dataList.performances[0]),
+            new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -172,7 +233,7 @@ describe('1: Probas DATOS API - PerformanceApps (POST)', () => {
         badPerformanceApps[1]._id = "616c6b6602067b3bd0d5ffbc";
         badPerformanceApps[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badPerformanceApps);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badPerformanceApps);
         const {
             code,
             data,
@@ -183,19 +244,21 @@ describe('1: Probas DATOS API - PerformanceApps (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = badPerformanceApps.length;
+
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badPerformanceApps.length);
 
-        expect(total).not.toBe(badPerformanceApps.length);
+        expect(total).not.toBe(dataLength);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.CREATE_LIST'));
     });
 });

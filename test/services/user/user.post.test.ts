@@ -15,7 +15,6 @@ import {
     dataList,
     db,
 
-    FAKE_TEXT,
     request
 } from "../commons";
 
@@ -35,6 +34,8 @@ describe('1: Probas DATOS API - Users (POST)', () => {
         await db.init();
 		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
+
+        await runApp();
 	});
 
 	beforeEach(async () => {
@@ -42,12 +43,13 @@ describe('1: Probas DATOS API - Users (POST)', () => {
 	});
 
 	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 	});
 
 	afterAll(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+        await app.stop();
+
 		await db.close();
 	});
 
@@ -66,6 +68,7 @@ describe('1: Probas DATOS API - Users (POST)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
@@ -78,39 +81,19 @@ describe('1: Probas DATOS API - Users (POST)', () => {
         expect(data.name).toBeDefined();
         expect(data.name).toBe(user.name);
 
+        expect(data.firstSurname).toBeDefined();
+        expect(data.firstSurname).toBe(user.firstSurname);
+
         expect(data.secondSurname).toBeDefined();
         expect(data.secondSurname).toBe(user.secondSurname);
 
         expect(message).toBe(i18next.t('USER.SERVICE.SUCCESS.CREATE'));
     });
 
-    test(`1.2: Crear User con datos erróneos:`, async() => {
-        const badUser = dataList.users[0] as User;
-
-        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(badUser);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        // Comprobanse algúns datos obrigatorios
-        expect(data.id).toBeUndefined();
-
-        expect(message).toBe(i18next.t('USER.SERVICE.ERROR.CREATE'));
-    });
-
-    test('1.3: Crear lista de Users:', async() => {
+    test('1.2: Crear lista de Users:', async() => {
         const users = [
-            dataList.users[0] as User,
-            dataList.projects[0] as Project,
+            new User(dataList.users[0]),
+            new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -121,7 +104,7 @@ describe('1: Probas DATOS API - Users (POST)', () => {
         users[1]._id = "616c6b6602067b3bd0d5ffbc";
         users[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(users);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(users);
         const {
             code,
             data,
@@ -132,31 +115,111 @@ describe('1: Probas DATOS API - Users (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = users.length;
+
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
         expect(response.status).toBe(HttpStatus.CREATED);
         expect(code).toBe(HttpStatus.CREATED);
 
         expect(data).toBeDefined();
-        expect(data).toHaveLength(users.length);
+        expect(data).toHaveLength(dataLength);
         expect(data[0]).toBeDefined();
-        expect(data[0].id).toBe(users[0]);
-        expect(data[0].id).not.toBe(users[1]);
+        expect(data[0].id).toBe(users[0].id);
+        expect(data[0].id).not.toBe(users[1].id);
         expect(data[1]).toBeDefined();
-        expect(data[1].id).toBe(users[1]);
-        expect(data[1].id).not.toBe(users[0]);
+        expect(data[1].id).toBe(users[1].id);
+        expect(data[1].id).not.toBe(users[0].id);
 
-        expect(total).toBe(dataList.users.length);
+        expect(total).toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
         expect(message).toBe(i18next.t('USER.SERVICE.SUCCESS.CREATE_LIST'));
     });
+});
 
-    test('1.4: Crear lista de Users algúns con datos erróneos:', async() => {
+describe('2: Probas DATOS API - Users ERROS (POST)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "users";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.users, true);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Crear User con datos erróneos:`, async() => {
+        const badUser = dataList.projects[0] as Project;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badUser);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('USER.SERVICE.ERROR.CREATE'));
+    });
+
+    test(`2.2: Crear User: <${dataList.users[0].id}> QUE XA EXISTE`, async() => {
+        const user = dataList.users[0] as User;
+
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(user);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.CONFLICT);
+        expect(code).toBe(HttpStatus.CONFLICT);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('USER.NAME'), id: user.id }));
+    });
+
+    test('2.3: Crear lista de Users algúns con datos erróneos:', async() => {
         const badUsers = [
-            dataList.users[0] as User,
-            dataList.users[0] as User,
+            new User(dataList.users[0]),
+            new Project(dataList.projects[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
@@ -167,7 +230,7 @@ describe('1: Probas DATOS API - Users (POST)', () => {
         badUsers[1]._id = "616c6b6602067b3bd0d5ffbc";
         badUsers[1].id  = "616c6b6602067b3bd0d5ffbc";
 
-        const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badUsers);
+        const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badUsers);
         const {
             code,
             data,
@@ -178,19 +241,21 @@ describe('1: Probas DATOS API - Users (POST)', () => {
             error,
         } = response.body
 
+        const dataLength = badUsers.length;
+
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
 
         expect(data).toBeUndefined();
-        expect(data).not.toHaveLength(badUsers.length);
 
-        expect(total).not.toBe(badUsers.length);
+        expect(total).not.toBe(dataLength);
         expect(total).toBe(0);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('USER.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('USER.SERVICE.ERROR.CREATE_LIST'));
     });
 });

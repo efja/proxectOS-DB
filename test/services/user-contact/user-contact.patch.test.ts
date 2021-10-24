@@ -4,6 +4,7 @@
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import * as jsonpatch from 'fast-json-patch';
+import { ObjectId } from "@mikro-orm/mongodb";
 
 import { UserContact } from '../../../src/models/user-contact.model';
 
@@ -45,13 +46,12 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
 
 	afterEach(async () => {
 		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
 	});
 
 	afterAll(async () => {
         await app.stop();
 
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
 		await db.close();
 	});
 
@@ -59,8 +59,8 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
     // ** TESTS
     // ************************************************************************************************
     test(`1.1: Actualizar UserContact: <${dataList.userContacts[0].id}>`, async() => {
-        const userContact0 = dataList.userContacts[0] as UserContact;
-        const userContact1 = dataList.userContacts[0] as UserContact;
+        const userContact0 = new UserContact(dataList.userContacts[0]);
+        const userContact1 = new UserContact(dataList.userContacts[0]);
 
         // Modificase o modelo UserContact
         userContact1.contact = userContact1.contact + FAKE_TEXT;
@@ -68,7 +68,7 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
         // Xerase o objexecto tipo HTTP PATCH
         const objPatch = jsonpatch.compare(userContact0, userContact1);
 
-        const response = await request.patch(`${API_BASE}/${ENDPOINT}/`).send(objPatch);
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/${userContact0.id}`).send(objPatch);
         const {
             code,
             data,
@@ -77,9 +77,10 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
-        expect(response.status).toBe(HttpStatus.OK);
-        expect(code).toBe(HttpStatus.OK);
+        expect(response.status).toBe(HttpStatus.CREATED);
+        expect(code).toBe(HttpStatus.CREATED);
         expect(data).toBeDefined();
 
         // ** Datos cambiados
@@ -100,9 +101,46 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
         expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.UPDATE'));
     });
 
-    test(`1.2: Actualizar UserContact con datos erróneos:`, async() => {
-        const userContact0 = dataList.userContacts[0] as UserContact;
-        const userContact1 = dataList.userContacts[0] as UserContact;
+});
+
+describe('2: Probas DATOS API - UserContacts ERROS (PATCH)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "userContacts";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.userContacts);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+    test(`2.1: Actualizar UserContact con datos erróneos:`, async() => {
+        const userContact0 = new UserContact(dataList.userContacts[0]);
+        const userContact1 = new UserContact(dataList.userContacts[0]);
 
         // Modificase o modelo UserContact
         userContact1.contact = userContact1.contact + FAKE_TEXT;
@@ -112,7 +150,7 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
 
         objPatch[0].path = FAKE_TEXT; // Dato incorrecto
 
-        const response = await request.patch(`${API_BASE}/${ENDPOINT}/`).send(objPatch);
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/${userContact0.id}`).send(objPatch);
         const {
             code,
             data,
@@ -121,11 +159,40 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
         } = response.body
 
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.ERROR.UPDATE'));
+        expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('USER_CONTACT.NAME'), id: userContact0.id }));
+    });
+
+    test(`2.2: Actualizar UserContact que non existe:`, async() => {
+        const userContact0 = new UserContact(dataList.userContacts[0]);
+
+        // Modificase o modelo UserContact
+        userContact0.contact = userContact0.contact + FAKE_TEXT;
+
+        do {
+            userContact0.id = new ObjectId();
+        } while (userContact0.id == dataList.userContacts[0].id);
+
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${userContact0.id}`).send(userContact0);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.NOT_FOUND);
+        expect(code).toBe(HttpStatus.NOT_FOUND);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_MALE', { entity: i18next.t('USER_CONTACT.NAME'), id: userContact0.id }));
     });
 });

@@ -3,6 +3,9 @@
 // ####################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from '@mikro-orm/mongodb';
+
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 import { Requirement } from '../../../src/models/requirement.model';
 
@@ -17,7 +20,6 @@ import {
     FAKE_TEXT,
     request
 } from "../commons";
-import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 // ####################################################################################################
 // ## TESTS GROUPS
@@ -45,13 +47,12 @@ describe('1: Probas DATOS API - Requirements (PUT)', () => {
 
 	afterEach(async () => {
 		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
 	});
 
 	afterAll(async () => {
         await app.stop();
 
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
 		await db.close();
 	});
 
@@ -59,14 +60,14 @@ describe('1: Probas DATOS API - Requirements (PUT)', () => {
     // ** TESTS
     // ************************************************************************************************
     test(`1.1: Actualizar Requirement: <${dataList.requirements[0].id}>`, async() => {
-        const requirement0 = dataList.requirements[0] as Requirement;
-        const requirement1 = dataList.requirements[0] as Requirement;
+        const requirement0 = new Requirement(dataList.requirements[0]);
+        const requirement1 = new Requirement(dataList.requirements[0]);
 
         // Modificase o modelo Requirement (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
         requirement1.name = requirement1.name + FAKE_TEXT;
         requirement1.description = requirement1.description + FAKE_TEXT;
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(requirement1);
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${dataList.requirements[0].id}`).send(requirement1);
         const {
             code,
             data,
@@ -75,9 +76,10 @@ describe('1: Probas DATOS API - Requirements (PUT)', () => {
         } = response.body
 
         expect(error).toBeUndefined();
+        expect(message).toBeDefined();
 
-        expect(response.status).toBe(HttpStatus.OK);
-        expect(code).toBe(HttpStatus.OK);
+        expect(response.status).toBe(HttpStatus.CREATED);
+        expect(code).toBe(HttpStatus.CREATED);
         expect(data).toBeDefined();
 
         // ** Datos cambiados
@@ -103,17 +105,54 @@ describe('1: Probas DATOS API - Requirements (PUT)', () => {
 
         expect(message).toBe(i18next.t('REQUIREMENT.SERVICE.SUCCESS.UPDATE'));
     });
+});
 
-    test(`1.2: Actualizar Requirement con datos erróneos:`, async() => {
-        const requirement0 = dataList.requirements[0] as Requirement;
+describe('1: Probas DATOS API - Requirements ERROS (PUT)', () => {
+    // ************************************************************************************************
+    // ** ATRIBUTOS
+    // ************************************************************************************************
+    const ENDPOINT = "requirements";
+
+    // ************************************************************************************************
+    // ** TAREFAS PREVIAS E POSTERIORES
+    // ************************************************************************************************
+	beforeAll(async () => {
+        await db.init();
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+
+        await runApp();
+	});
+
+	beforeEach(async () => {
+        await db.inicializeData(dataList.requirements);
+	});
+
+	afterEach(async () => {
+		await db.dropAllData(dataList.allModels);
+		await db.dropCollections();
+	});
+
+	afterAll(async () => {
+        await app.stop();
+
+		await db.close();
+	});
+
+    // ************************************************************************************************
+    // ** TESTS
+    // ************************************************************************************************
+
+    test(`2.1: Actualizar Requirement con datos erróneos:`, async() => {
+        const requirement0 = new Requirement(dataList.requirements[0]);
 
         // Modificase o modelo Requirement
         requirement0.name = requirement0.name + FAKE_TEXT;
 
         const requirement1 = requirement0 as any;
-        requirement1.startDate = requirement0.name + FAKE_TEXT; // Dato erróneo
+        requirement1.createdAt = requirement0.name + FAKE_TEXT; // Dato erróneo
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/`).send(requirement1);
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${requirement0.id}`).send(requirement1);
         const {
             code,
             data,
@@ -122,11 +161,40 @@ describe('1: Probas DATOS API - Requirements (PUT)', () => {
         } = response.body
 
         expect(error).toBeDefined();
+        expect(message).toBeUndefined();
 
         expect(response.status).toBe(HttpStatus.CONFLICT);
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(message).toBe(i18next.t('REQUIREMENT.SERVICE.ERROR.UPDATE'));
+        expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('REQUIREMENT.NAME'), id: requirement0.id }));
+    });
+
+    test(`2.2: Actualizar Requirement que non existe:`, async() => {
+        const requirement0 = new Requirement(dataList.requirements[0]);
+
+        // Modificase o modelo Requirement
+        requirement0.name = requirement0.name + FAKE_TEXT;
+
+        do {
+            requirement0.id = new ObjectId();
+        } while (requirement0.id == dataList.requirements[0].id);
+
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${requirement0.id}`).send(requirement0);
+        const {
+            code,
+            data,
+            message,
+            error,
+        } = response.body
+
+        expect(error).toBeDefined();
+        expect(message).toBeUndefined();
+
+        expect(response.status).toBe(HttpStatus.NOT_FOUND);
+        expect(code).toBe(HttpStatus.NOT_FOUND);
+        expect(data).toBeUndefined();
+
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_MALE', { entity: i18next.t('REQUIREMENT.NAME'), id: requirement0.id }));
     });
 });
