@@ -84,9 +84,9 @@ describe('1: Probas DATOS API - AssignedResources (DELETE)', () => {
         expect(data.amount).toBe(assignedResource.amount);
 
         expect(data.resource).toBeDefined();
-        expect(data.resource).toBe(assignedResource.resource);
+        expect(data.resource).toBe(assignedResource.resource.id);
 
-        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('ASSIGNED_RESOURCE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: dataList.assignedResources[0].id }));
 
         // --------------------------------------------------------------------------------------------
         // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD
@@ -106,7 +106,7 @@ describe('1: Probas DATOS API - AssignedResources (DELETE)', () => {
         expect(codeGet).toBe(HttpStatus.NOT_FOUND);
         expect(dataGet).toBeUndefined();
 
-        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_RESOURCE.NAME') }));
+        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: dataList.assignedResources[0].id }));
     });
 });
 
@@ -160,6 +160,6 @@ describe('2: Probas DATOS API - AssignedResources ERROS (DELETE)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('ASSIGNED_RESOURCE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: `${dataList.assignedResources[0].id}${FAKE_TEXT}` }));
     });
 });

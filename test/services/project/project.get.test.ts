@@ -161,7 +161,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         expect(date2LocaleISO(date2LocaleISO(data.startDate))).toBe(date2LocaleISO(project.startDate));
         expect(date2LocaleISO(date2LocaleISO(data.targetFinishDate))).toBe(date2LocaleISO(project.targetFinishDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('PROJECT.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('PROJECT.NAME'), id: project.id }));
     });
 
     test(`1.4: Consultar Project: <${dataList.projects[0].id}> con parámetros de filtrado`, async() => {
@@ -202,7 +202,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         expect(date2LocaleISO(date2LocaleISO(data.startDate))).toBe(date2LocaleISO(project.startDate));
         expect(date2LocaleISO(date2LocaleISO(data.targetFinishDate))).toBe(date2LocaleISO(project.targetFinishDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('PROJECT.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('PROJECT.NAME'), id: project.id }));
     });
 });
 
@@ -297,7 +297,7 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PROJECT.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PROJECT.NAME'), id: dataList.projects[0].id }));
     });
 
     test(`2.3: Consultar Project inexistente:`, async() => {
@@ -316,6 +316,6 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PROJECT.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PROJECT.NAME'), id: `${dataList.projects[0].id}${FAKE_TEXT}` }));
     });
 });

@@ -153,7 +153,7 @@ describe('1: Probas DATOS API - UserContactTypes (GET)', () => {
         expect(data.description).toBeDefined();
         expect(data.description).toBe(userContactType.description);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('USER_CONTACT_TYPE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('USER_CONTACT_TYPE.NAME'), id: userContactType.id }));
     });
 
     test(`1.4: Consultar UserContactType: <${dataList.userContactTypes[0].id}> con parámetros de filtrado`, async() => {
@@ -190,7 +190,7 @@ describe('1: Probas DATOS API - UserContactTypes (GET)', () => {
         // Comprobanse algúns datos opcionais
         expect(date2LocaleISO(date2LocaleISO(data.createdAt))).toBe(date2LocaleISO(userContactType.createdAt));
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('USER_CONTACT_TYPE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('USER_CONTACT_TYPE.NAME'), id: userContactType.id }));
     });
 });
 
@@ -285,7 +285,7 @@ describe('2: Probas DATOS API - UserContactTypes ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER_CONTACT_TYPE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER_CONTACT_TYPE.NAME'), id: dataList.userContactTypes[0].id }));
     });
 
     test(`2.3: Consultar UserContactType inexistente:`, async() => {
@@ -304,6 +304,6 @@ describe('2: Probas DATOS API - UserContactTypes ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER_CONTACT_TYPE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER_CONTACT_TYPE.NAME'), id: `${dataList.userContactTypes[0].id}${FAKE_TEXT}` }));
     });
 });

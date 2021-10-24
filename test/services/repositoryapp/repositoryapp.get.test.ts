@@ -160,7 +160,7 @@ describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
         // Comprobanse algúns datos opcionais
         expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(repositoryApp.expirationDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('REPOSITORY.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('REPOSITORY.NAME'), id: repositoryApp.id }));
     });
 
     test(`1.4: Consultar RepositoryApp: <${dataList.repositories[0].id}> con parámetros de filtrado`, async() => {
@@ -200,7 +200,7 @@ describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
         // Comprobanse algúns datos opcionais
         expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(repositoryApp.expirationDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('REPOSITORY.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('REPOSITORY.NAME'), id: repositoryApp.id }));
     });
 });
 
@@ -295,7 +295,7 @@ describe('2: Probas DATOS API - RepositoryApps ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('REPOSITORY.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('REPOSITORY.NAME'), id: dataList.repositories[0].id }));
     });
 
     test(`2.3: Consultar RepositoryApp inexistente:`, async() => {
@@ -314,6 +314,6 @@ describe('2: Probas DATOS API - RepositoryApps ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('REPOSITORY.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('REPOSITORY.NAME'), id: `${dataList.repositories[0].id}${FAKE_TEXT}` }));
     });
 });

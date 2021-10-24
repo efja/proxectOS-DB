@@ -158,7 +158,7 @@ describe('1: Probas DATOS API - AssignedStages (GET)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(assignedStage.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(assignedStage.targetFinishDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: assignedStage.id }));
     });
 
     test(`1.4: Consultar AssignedStage: <${dataList.assignedStages[0].id}> con parámetros de filtrado`, async() => {
@@ -196,7 +196,7 @@ describe('1: Probas DATOS API - AssignedStages (GET)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(assignedStage.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(assignedStage.targetFinishDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: dataList.assignedStages[0].id }));
     });
 });
 
@@ -291,7 +291,7 @@ describe('2: Probas DATOS API - AssignedStages ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: `${dataList.assignedStages[0].id}${FAKE_TEXT}` }));
     });
 
     test(`2.3: Consultar AssignedStage inexistente:`, async() => {
@@ -310,6 +310,6 @@ describe('2: Probas DATOS API - AssignedStages ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: `${dataList.assignedStages[0].id}${FAKE_TEXT}` }));
     });
 });

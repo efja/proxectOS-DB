@@ -159,7 +159,7 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
         expect(data.create).toBe(role.create);
         expect(data.delete).toBe(role.delete);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ROLE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ROLE.NAME'), id: role.id }));
     });
 
     test(`1.4: Consultar Role: <${dataList.roles[0].id}> con parámetros de filtrado`, async() => {
@@ -200,7 +200,7 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
         expect(data.create).toBe(role.create);
         expect(data.delete).toBe(role.delete);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ROLE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ROLE.NAME'), id: dataList.roles[0].id }));
     });
 });
 
@@ -295,7 +295,7 @@ describe('2: Probas DATOS API - Roles ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ROLE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ROLE.NAME'), id: `${dataList.roles[0].id}${FAKE_TEXT}` }));
     });
 
     test(`2.3: Consultar Role inexistente:`, async() => {
@@ -314,6 +314,6 @@ describe('2: Probas DATOS API - Roles ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ROLE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ROLE.NAME'), id: `${dataList.roles[0].id}${FAKE_TEXT}` }));
     });
 });

@@ -158,7 +158,7 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
         expect(data.resource).toBeDefined();
         expect(data.resource).toBe(assignedResource.resource);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_RESOURCE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: assignedResource.id }));
     });
 
     test(`1.4: Consultar AssignedResource: <${dataList.assignedResources[0].id}> con parámetros de filtrado`, async() => {
@@ -198,7 +198,7 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
         expect(data.resource).toBeDefined();
         expect(data.resource).toBe(assignedResource.resource);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_RESOURCE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: dataList.assignedResources[0].id }));
     });
 });
 
@@ -293,7 +293,7 @@ describe('2: Probas DATOS API - AssignedResources ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_RESOURCE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: `${dataList.assignedResources[0].id}${FAKE_TEXT}` }));
     });
 
     test(`2.3: Consultar AssignedResource inexistente:`, async() => {
@@ -312,6 +312,6 @@ describe('2: Probas DATOS API - AssignedResources ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_RESOURCE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: `${dataList.assignedResources[0].id}${FAKE_TEXT}` }));
     });
 });

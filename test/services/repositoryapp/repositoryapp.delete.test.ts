@@ -88,7 +88,7 @@ describe('1: Probas DATOS API - RepositoryApps (DELETE)', () => {
         // Comprobanse algúns datos opcionais
         expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(repositoryApp.expirationDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('REPOSITORY.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('REPOSITORY.NAME'), id: dataList.repositories[0].id }));
 
         // --------------------------------------------------------------------------------------------
         // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD
@@ -108,7 +108,7 @@ describe('1: Probas DATOS API - RepositoryApps (DELETE)', () => {
         expect(codeGet).toBe(HttpStatus.NOT_FOUND);
         expect(dataGet).toBeUndefined();
 
-        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('REPOSITORY.NAME') }));
+        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('REPOSITORY.NAME'), id: dataList.repositories[0].id }));
     });
 });
 
@@ -162,6 +162,6 @@ describe('2: Probas DATOS API - RepositoryApps ERROS (DELETE)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('REPOSITORY.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('REPOSITORY.NAME'), id: `${dataList.repositories[0].id}${FAKE_TEXT}` }));
     });
 });

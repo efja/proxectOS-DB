@@ -155,7 +155,7 @@ describe('1: Probas DATOS API - States (GET)', () => {
         expect(data.description).toBeDefined();
         expect(data.description).toBe(state.description);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('STATE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('STATE.NAME'), id: state.id }));
     });
 
     test(`1.4: Consultar State: <${dataList.states[0].id}> con parámetros de filtrado`, async() => {
@@ -192,7 +192,7 @@ describe('1: Probas DATOS API - States (GET)', () => {
         expect(data.description).toBeDefined();
         expect(data.description).toBe(state.description);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('STATE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('STATE.NAME'), id: dataList.states[0].id }));
     });
 });
 
@@ -287,7 +287,7 @@ describe('2: Probas DATOS API - States ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('STATE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('STATE.NAME'), id: `${dataList.states[0].id}${FAKE_TEXT}` }));
     });
 
     test(`2.3: Consultar State inexistente:`, async() => {
@@ -306,6 +306,6 @@ describe('2: Probas DATOS API - States ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('STATE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('STATE.NAME'), id: `${dataList.states[0].id}${FAKE_TEXT}` }));
     });
 });

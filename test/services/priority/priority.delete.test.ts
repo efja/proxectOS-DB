@@ -83,7 +83,7 @@ describe('1: Probas DATOS API - Prioritys (DELETE)', () => {
         expect(data.description).toBeDefined();
         expect(data.description).toBe(priority.description);
 
-        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('PRIORITY.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('PRIORITY.NAME'), id: dataList.priorities[0].id }));
 
         // --------------------------------------------------------------------------------------------
         // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD
@@ -103,7 +103,7 @@ describe('1: Probas DATOS API - Prioritys (DELETE)', () => {
         expect(codeGet).toBe(HttpStatus.NOT_FOUND);
         expect(dataGet).toBeUndefined();
 
-        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PRIORITY.NAME') }));
+        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PRIORITY.NAME'), id: dataList.priorities[0].id }));
     });
 });
 
@@ -157,6 +157,6 @@ describe('2: Probas DATOS API - Prioritys ERROS (DELETE)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('PRIORITY.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('PRIORITY.NAME'), id: `${dataList.priorities[0].id}${FAKE_TEXT}` }));
     });
 });

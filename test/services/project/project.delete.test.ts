@@ -89,7 +89,7 @@ describe('1: Probas DATOS API - Projects (DELETE)', () => {
         expect(date2LocaleISO(date2LocaleISO(data.startDate))).toBe(date2LocaleISO(project.startDate));
         expect(date2LocaleISO(date2LocaleISO(data.targetFinishDate))).toBe(date2LocaleISO(project.targetFinishDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('PROJECT.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('PROJECT.NAME'), id: dataList.projects[0].id }));
 
         // --------------------------------------------------------------------------------------------
         // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD
@@ -109,7 +109,7 @@ describe('1: Probas DATOS API - Projects (DELETE)', () => {
         expect(codeGet).toBe(HttpStatus.NOT_FOUND);
         expect(dataGet).toBeUndefined();
 
-        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PROJECT.NAME') }));
+        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PROJECT.NAME'), id: dataList.projects[0].id }));
     });
 });
 
@@ -163,6 +163,6 @@ describe('2: Probas DATOS API - Projects ERROS (DELETE)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('PROJECT.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('PROJECT.NAME'), id: `${dataList.projects[0].id}${FAKE_TEXT}` }));
     });
 });

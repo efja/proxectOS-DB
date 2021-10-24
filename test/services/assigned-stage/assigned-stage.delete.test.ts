@@ -86,7 +86,7 @@ describe('1: Probas DATOS API - AssignedStages (DELETE)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(assignedStage.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(assignedStage.targetFinishDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: dataList.assignedStages[0].id }));
 
         // --------------------------------------------------------------------------------------------
         // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD
@@ -106,7 +106,7 @@ describe('1: Probas DATOS API - AssignedStages (DELETE)', () => {
         expect(codeGet).toBe(HttpStatus.NOT_FOUND);
         expect(dataGet).toBeUndefined();
 
-        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
+        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: dataList.assignedStages[0].id }));
     });
 });
 
@@ -160,6 +160,6 @@ describe('2: Probas DATOS API - AssignedStages ERROS (DELETE)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: `${dataList.assignedStages[0].id}${FAKE_TEXT}` }));
     });
 });

@@ -83,7 +83,7 @@ describe('1: Probas DATOS API - UserSchedules (DELETE)', () => {
         expect(data.worksWeekends).toBeDefined();
         expect(data.worksWeekends).toBe(userSchedule.worksWeekends);
 
-        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('USER_SCHEDULE.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('USER_SCHEDULE.NAME'), id: dataList.userSchedules[0].id }));
 
         // --------------------------------------------------------------------------------------------
         // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD
@@ -103,7 +103,7 @@ describe('1: Probas DATOS API - UserSchedules (DELETE)', () => {
         expect(codeGet).toBe(HttpStatus.NOT_FOUND);
         expect(dataGet).toBeUndefined();
 
-        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER_SCHEDULE.NAME') }));
+        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER_SCHEDULE.NAME'), id: dataList.userSchedules[0].id }));
     });
 });
 
@@ -157,6 +157,6 @@ describe('2: Probas DATOS API - UserSchedules ERROS (DELETE)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('USER_SCHEDULE.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('USER_SCHEDULE.NAME'), id: `${dataList.userSchedules[0].id}${FAKE_TEXT}` }));
     });
 });

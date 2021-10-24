@@ -158,7 +158,7 @@ describe('1: Probas DATOS API - Users (GET)', () => {
         expect(data.secondSurname).toBeDefined();
         expect(data.secondSurname).toBe(user.secondSurname);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('USER.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('USER.NAME'), id: user.id }));
     });
 
     test(`1.4: Consultar User: <${dataList.users[0].id}> con parámetros de filtrado`, async() => {
@@ -198,7 +198,7 @@ describe('1: Probas DATOS API - Users (GET)', () => {
         expect(data.secondSurname).toBeDefined();
         expect(data.secondSurname).toBe(user.secondSurname);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('USER.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('USER.NAME'), id: user.id }));
     });
 });
 
@@ -293,7 +293,7 @@ describe('2: Probas DATOS API - Users ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER.NAME'), id: dataList.users[0].id }));
     });
 
     test(`2.3: Consultar User inexistente:`, async() => {
@@ -312,6 +312,6 @@ describe('2: Probas DATOS API - Users ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER.NAME'), id: `${dataList.users[0].id}${FAKE_TEXT}` }));
     });
 });

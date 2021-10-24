@@ -86,7 +86,7 @@ describe('1: Probas DATOS API - PerformanceApps (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('.NAME_PLURAL') }));
     });
 
     test('1.2: Consultar tódolos PerformanceApps con parámetros de filtrado:', async() => {
@@ -126,7 +126,7 @@ describe('1: Probas DATOS API - PerformanceApps (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('.NAME_PLURAL') }));
     });
 
     test(`1.3: Consultar PerformanceApp: <${dataList.performances[0].id}>`, async() => {
@@ -161,7 +161,7 @@ describe('1: Probas DATOS API - PerformanceApps (GET)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(performanceApp.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp.targetFinishDate));
 
-        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET'));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('.NAME'), id: performanceApp.id }));
     });
 
     test(`1.4: Consultar PerformanceApp: <${dataList.performances[0].id}> con parámetros de filtrado`, async() => {
@@ -202,7 +202,7 @@ describe('1: Probas DATOS API - PerformanceApps (GET)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(performanceApp.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp.targetFinishDate));
 
-        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET'));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('.NAME'), id: performanceApp.id }));
     });
 });
 
@@ -272,7 +272,7 @@ describe('2: Probas DATOS API - PerformanceApps ERROS (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.NOT_FOUND_LIST'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_LIST', { entity: i18next.t('.NAME_PLURAL') }));
     });
 
     test(`2.2: Consultar PerformanceApp: <${dataList.performances[0].id}> con parámetros de filtrado`, async() => {
@@ -297,7 +297,7 @@ describe('2: Probas DATOS API - PerformanceApps ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.NOT_FOUND'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('.NAME'), id: dataList.performances[0].id }));
     });
 
     test(`2.3: Consultar PerformanceApp inexistente:`, async() => {
@@ -316,6 +316,6 @@ describe('2: Probas DATOS API - PerformanceApps ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.NOT_FOUND'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('.NAME'), id: `${dataList.performances[0].id}${FAKE_TEXT}` }));
     });
 });

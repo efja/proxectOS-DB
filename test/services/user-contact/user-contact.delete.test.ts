@@ -81,7 +81,7 @@ describe('1: Probas DATOS API - UserContacts (DELETE)', () => {
         expect(data.contact).toBe(userContact.contact);
 
         // Comprobanse algúns datos opcionais
-        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('USER_CONTACT.NAME') }));
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('USER_CONTACT.NAME'), id: dataList.userContacts[0].id }));
 
         // --------------------------------------------------------------------------------------------
         // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD
@@ -101,7 +101,7 @@ describe('1: Probas DATOS API - UserContacts (DELETE)', () => {
         expect(codeGet).toBe(HttpStatus.NOT_FOUND);
         expect(dataGet).toBeUndefined();
 
-        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER_CONTACT.NAME') }));
+        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER_CONTACT.NAME'), id: dataList.userContacts[0].id }));
     });
 });
 
@@ -155,6 +155,6 @@ describe('2: Probas DATOS API - UserContacts ERROS (DELETE)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('USER_CONTACT.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('USER_CONTACT.NAME'), id: `${dataList.userContacts[0].id}${FAKE_TEXT}` }));
     });
 });
