@@ -152,7 +152,7 @@ describe('1: Probas DATOS API - AssignedStages (GET)', () => {
         expect(data.id).toBe(assignedStage.id);
 
         expect(data.stage).toBeDefined();
-        expect(data.stage.id).toBe(assignedStage.stage.id);
+        expect(data.stage).toBe(assignedStage.stage.id);
 
         // Comprobanse algúns datos opcionais
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(assignedStage.startDate));
@@ -190,7 +190,7 @@ describe('1: Probas DATOS API - AssignedStages (GET)', () => {
         expect(data.id).toBe(assignedStage.id);
 
         expect(data.stage).toBeDefined();
-        expect(data.stage.id).toBe(assignedStage.stage.id);
+        expect(data.stage).toBe(assignedStage.stage.id);
 
         // Comprobanse algúns datos opcionais
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(assignedStage.startDate));
@@ -291,7 +291,7 @@ describe('2: Probas DATOS API - AssignedStages ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: `${dataList.assignedStages[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: dataList.assignedStages[0].id }));
     });
 
     test(`2.3: Consultar AssignedStage inexistente:`, async() => {

@@ -43,8 +43,8 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
 	});
 
 	afterEach(async () => {
-		await db.dropAllData(dataList.allModels);
-		await db.dropCollections();
+		// await db.dropAllData(dataList.allModels);
+		// await db.dropCollections();
 	});
 
 	afterAll(async () => {
@@ -88,11 +88,12 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
     });
 
     test('1.2: Consultar tódolos AssignedResources con parámetros de filtrado:', async() => {
+        const valueFilter = 26;
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ amount: "ASC" }],
-                unitCost: {'$regex': '26' }
+                unitCost: valueFilter
             },
             { arrayFormat: 'repeat' }
         );
@@ -110,6 +111,8 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
 
         const dataLength = 1;
 
+        const assignedResources: AssignedResource[] = (dataList.assignedResources as AssignedResource[]).filter(item => item.unitCost == valueFilter);
+
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
 
@@ -118,7 +121,7 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.assignedResources[0].id);
+        expect(data[0].id).toBe(assignedResources[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -156,15 +159,17 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
         expect(data.amount).toBe(assignedResource.amount);
 
         expect(data.resource).toBeDefined();
-        expect(data.resource).toBe(assignedResource.resource);
+        expect(data.resource).toBe(assignedResource.resource.id);
 
         expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: assignedResource.id }));
     });
 
     test(`1.4: Consultar AssignedResource: <${dataList.assignedResources[0].id}> con parámetros de filtrado`, async() => {
+        const assignedResource = dataList.assignedResources[0] as AssignedResource;
+
         const queryParameters = qs.stringify(
             {
-                unitCost: {'$regex': '26' }
+                unitCost: assignedResource.unitCost
             }
         );
 
@@ -175,8 +180,6 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
             message,
             error,
         } = response.body
-
-        const assignedResource = dataList.assignedResources[0] as AssignedResource;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -196,7 +199,7 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
         expect(data.amount).toBe(assignedResource.amount);
 
         expect(data.resource).toBeDefined();
-        expect(data.resource).toBe(assignedResource.resource);
+        expect(data.resource).toBe(assignedResource.resource.id);
 
         expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: dataList.assignedResources[0].id }));
     });
@@ -293,7 +296,7 @@ describe('2: Probas DATOS API - AssignedResources ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: `${dataList.assignedResources[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: dataList.assignedResources[0].id }));
     });
 
     test(`2.3: Consultar AssignedResource inexistente:`, async() => {
