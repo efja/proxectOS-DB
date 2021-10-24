@@ -59,7 +59,7 @@ describe('1: Probas para ver se a BD está levantada', () => {
             result = error;
         }
 
-        expect(result).not.toBeNull();
+        expect(result).not.toBeUndefined();
         expect(result.code).toBe(18);
         expect(result.codeName).toBe("AuthenticationFailed");
         expect(result.name).toBe("MongoError");

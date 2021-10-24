@@ -3,9 +3,10 @@
 // ####################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
-import { ObjectId } from '@mikro-orm/mongodb';
 
-import { Resource } from '../../../src/models/resource.model';
+import { date2LocaleISO } from "../../../src/helpers/date.helper";
+
+import { Project } from '../../../src/models/project.model';
 
 import {
     app,
@@ -22,25 +23,24 @@ import {
 // ####################################################################################################
 // ## TESTS GROUPS
 // ####################################################################################################
-describe('1: Probas DATOS API - Resources (PUT)', () => {
+describe('1: Probas DATOS API - Projects (DELETE)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "resources";
+    const ENDPOINT = "projects";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
     // ************************************************************************************************
 	beforeAll(async () => {
         await db.init();
-		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 
         await runApp();
 	});
 
 	beforeEach(async () => {
-        await db.inicializeData(dataList.resources);
+        await db.inicializeData(dataList.projects, true);
 	});
 
 	afterEach(async () => {
@@ -57,67 +57,60 @@ describe('1: Probas DATOS API - Resources (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`1.1: Actualizar Resource: <${dataList.resources[0].id}>`, async() => {
-        const resource0 = new Resource(dataList.resources[0]);
-        const resource1 = new Resource(dataList.resources[0]);
-
-        // Modificase o modelo Resource (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
-        resource1.name = resource1.name + FAKE_TEXT;
-        resource1.description = resource1.description + FAKE_TEXT;
-
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/${dataList.resources[0].id}`).send(resource1);
+    test(`1.1: Borrar Project: <${dataList.projects[0].id}>`, async() => {
+        const response = await request.delete(`${API_BASE}/${ENDPOINT}/${dataList.projects[0].id}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
+
+        const project = dataList.projects[0] as Project;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
 
-        expect(response.status).toBe(HttpStatus.CREATED);
-        expect(code).toBe(HttpStatus.CREATED);
+        expect(response.status).toBe(HttpStatus.OK);
+        expect(code).toBe(HttpStatus.OK);
         expect(data).toBeDefined();
 
-        // ** Datos cambiados
-        expect(data.name).toBeDefined();
-        expect(data.name).not.toBe(resource0.name);
-        expect(data.name).toBe(resource1.name);
-
-        expect(data.description).toBeDefined();
-        expect(data.description).not.toBe(resource0.description);
-        expect(data.description).toBe(resource1.description);
-
-        // ** Datos NON cambiados
         // Comprobanse algúns datos obrigatorios
         expect(data.id).toBeDefined();
-        expect(data.id).toBe(resource0.id);
-        expect(data.id).toBe(resource1.id);
+        expect(data.id).toBe(project.id);
 
-        expect(message).toBe(i18next.t('RESOURCE.SERVICE.SUCCESS.UPDATE'));
+        expect(data.name).toBeDefined();
+        expect(data.name).toBe(project.name);
+
+        expect(data.description).toBeDefined();
+        expect(data.description).toBe(project.description);
+
+        // Comprobanse algúns datos opcionais
+        expect(date2LocaleISO(date2LocaleISO(data.startDate))).toBe(date2LocaleISO(project.startDate));
+        expect(date2LocaleISO(date2LocaleISO(data.targetFinishDate))).toBe(date2LocaleISO(project.targetFinishDate));
+
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('PROJECT.NAME') }));
     });
 });
 
-describe('1: Probas DATOS API - Resources ERROS (PUT)', () => {
+describe('2: Probas DATOS API - Projects ERROS (DELETE)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "resources";
+    const ENDPOINT = "projects";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
     // ************************************************************************************************
 	beforeAll(async () => {
         await db.init();
-		await db.dropAllData(dataList.allModels);
 		await db.dropCollections();
 
         await runApp();
 	});
 
 	beforeEach(async () => {
-        await db.inicializeData(dataList.resources);
+        await db.inicializeData(dataList.projects, true);
 	});
 
 	afterEach(async () => {
@@ -134,45 +127,8 @@ describe('1: Probas DATOS API - Resources ERROS (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-
-    test(`2.1: Actualizar Resource con datos erróneos:`, async() => {
-        const resource0 = new Resource(dataList.resources[0]);
-
-        // Modificase o modelo Resource
-        resource0.name = resource0.name + FAKE_TEXT;
-
-        const resource1 = resource0 as any;
-        resource1.createdAt = resource0.name + FAKE_TEXT; // Dato erróneo
-
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/${resource0.id}`).send(resource1);
-        const {
-            code,
-            data,
-            message,
-            error,
-        } = response.body
-
-        expect(error).toBeDefined();
-        expect(message).toBeUndefined();
-
-        expect(response.status).toBe(HttpStatus.CONFLICT);
-        expect(code).toBe(HttpStatus.CONFLICT);
-        expect(data).toBeUndefined();
-
-        expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('RESOURCE.NAME'), id: resource0.id }));
-    });
-
-    test(`2.2: Actualizar Resource que non existe:`, async() => {
-        const resource0 = new Resource(dataList.resources[0]);
-
-        // Modificase o modelo Resource
-        resource0.name = resource0.name + FAKE_TEXT;
-
-        do {
-            resource0.id = new ObjectId();
-        } while (resource0.id == dataList.resources[0].id);
-
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/${resource0.id}`).send(resource0);
+    test(`2.1: Borrar Project inexistente:`, async() => {
+        const response = await request.delete(`${API_BASE}/${ENDPOINT}/${dataList.projects[0].id}${FAKE_TEXT}`);
         const {
             code,
             data,
@@ -187,6 +143,6 @@ describe('1: Probas DATOS API - Resources ERROS (PUT)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('RESOURCE.NAME'), id: resource0.id }));
+        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('PROJECT.NAME') }));
     });
 });

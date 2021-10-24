@@ -106,7 +106,7 @@ describe('1: Probas DATOS API - Projects (PATCH)', () => {
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(project0.targetFinishDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(project1.targetFinishDate));
 
-        expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('PROJECT.NAME'), id: dataList.projects[0].id }));
     });
 
 });
@@ -201,6 +201,6 @@ describe('2: Probas DATOS API - Projects ERROS (PATCH)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_MALE', { entity: i18next.t('PROJECT.NAME'), id: project0.id }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PROJECT.NAME'), id: project0.id }));
     });
 });

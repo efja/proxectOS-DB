@@ -90,7 +90,7 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(project.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(project.targetFinishDate));
 
-        expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.CREATE'));
+        expect(message).toBe(i18next.t('SUCCESS.CREATE', { entity: i18next.t('PROJECT.NAME') }));
     });
 
     test('1.2: Crear lista de Projects:', async() => {
@@ -139,7 +139,7 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.CREATE_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.CREATE_LIST', { entity: i18next.t('PROJECT.NAME_PLURAL') }));
     });
 });
 
@@ -195,7 +195,7 @@ describe('2: Probas DATOS API - Projects ERROS (POST)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.CREATE'));
+        expect(error).toBe(i18next.t('ERROR.CREATE', { entity: i18next.t('PROJECT.NAME') }));
     });
 
     test(`2.2: Crear Project: <${dataList.projects[0].id}> QUE XA EXISTE`, async() => {
@@ -216,7 +216,7 @@ describe('2: Probas DATOS API - Projects ERROS (POST)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('PROJECT.NAME'), id: project.id }));
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST', { entity: i18next.t('PROJECT.NAME'), id: project.id }));
     });
 
     test('2.3: Crear lista de Projects algúns con datos erróneos:', async() => {
@@ -259,6 +259,6 @@ describe('2: Probas DATOS API - Projects ERROS (POST)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('ERROR.CREATE_LIST', { entity: i18next.t('PROJECT.NAME_PLURAL') }));
     });
 });

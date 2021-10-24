@@ -187,6 +187,6 @@ describe('1: Probas DATOS API - Priorities ERROS (PUT)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_MALE', { entity: i18next.t('PRIORITY.NAME'), id: priority0.id }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PRIORITY.NAME'), id: priority0.id }));
     });
 });

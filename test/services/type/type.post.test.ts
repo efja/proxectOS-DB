@@ -210,7 +210,7 @@ describe('2: Probas DATOS API - Types ERROS (POST)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('TYPE.NAME'), id: type.id }));
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST', { entity: i18next.t('TYPE.NAME'), id: type.id }));
     });
 
     test('2.3: Crear lista de Types algúns con datos erróneos:', async() => {

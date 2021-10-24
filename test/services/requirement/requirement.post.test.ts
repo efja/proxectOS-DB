@@ -216,7 +216,7 @@ describe('2: Probas DATOS API - Requirements ERROS (POST)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('REQUIREMENT.NAME'), id: requirement.id }));
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST', { entity: i18next.t('REQUIREMENT.NAME'), id: requirement.id }));
     });
 
     test('2.3: Crear lista de Requirements algúns con datos erróneos:', async() => {

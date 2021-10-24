@@ -84,7 +84,7 @@ describe('1: Probas DATOS API - States (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.GET_LIST'));
     });
 
     test('1.2: Consultar tódolos States con parámetros de filtrado:', async() => {
@@ -124,7 +124,7 @@ describe('1: Probas DATOS API - States (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.GET_LIST'));
     });
 
     test(`1.3: Consultar State: <${dataList.states[0].id}>`, async() => {
@@ -155,7 +155,7 @@ describe('1: Probas DATOS API - States (GET)', () => {
         expect(data.description).toBeDefined();
         expect(data.description).toBe(state.description);
 
-        expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.GET'));
     });
 
     test(`1.4: Consultar State: <${dataList.states[0].id}> con parámetros de filtrado`, async() => {
@@ -192,7 +192,7 @@ describe('1: Probas DATOS API - States (GET)', () => {
         expect(data.description).toBeDefined();
         expect(data.description).toBe(state.description);
 
-        expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('STATE.SERVICE.SUCCESS.GET'));
     });
 });
 
@@ -255,14 +255,14 @@ describe('2: Probas DATOS API - States ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
         expect(total).toBe(0);
         expect(total).not.toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('STATE.SERVICE.ERROR.GET_ALL'));
+        expect(error).toBe(i18next.t('STATE.SERVICE.ERROR.GET_LIST'));
     });
 
     test(`2.2: Consultar State: <${dataList.states[0].id}> con parámetros de filtrado`, async() => {
@@ -285,9 +285,9 @@ describe('2: Probas DATOS API - States ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('STATE.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('STATE.SERVICE.ERROR.GET'));
     });
 
     test(`2.3: Consultar State inexistente:`, async() => {
@@ -304,8 +304,8 @@ describe('2: Probas DATOS API - States ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('STATE.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('STATE.SERVICE.ERROR.GET'));
     });
 });

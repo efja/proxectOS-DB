@@ -193,6 +193,6 @@ describe('2: Probas DATOS API - UserContacts ERROS (PATCH)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_MALE', { entity: i18next.t('USER_CONTACT.NAME'), id: userContact0.id }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('USER_CONTACT.NAME'), id: userContact0.id }));
     });
 });

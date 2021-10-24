@@ -211,7 +211,7 @@ describe('2: Probas DATOS API - AssignedResources ERROS (POST)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: assignedResource.id }));
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: assignedResource.id }));
     });
 
     test('2.3: Crear lista de AssignedResources algúns con datos erróneos:', async() => {

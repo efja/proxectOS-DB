@@ -210,7 +210,7 @@ describe('2: Probas DATOS API - UserContacts ERROS (POST)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('USER_CONTACT.NAME'), id: userContact.id }));
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST', { entity: i18next.t('USER_CONTACT.NAME'), id: userContact.id }));
     });
 
     test('2.3: Crear lista de UserContacts algúns con datos erróneos:', async() => {

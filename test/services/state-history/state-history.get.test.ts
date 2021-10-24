@@ -84,7 +84,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET_LIST'));
     });
 
     test('1.2: Consultar tódolos StateHistorys con parámetros de filtrado:', async() => {
@@ -124,7 +124,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET_LIST'));
     });
 
     test(`1.3: Consultar StateHistory: <${dataList.statesHistory[0].id}>`, async() => {
@@ -158,7 +158,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
         // Comprobanse algúns datos opcionais
         expect(data.oldState.id).toBe(stateHistory.oldState.id);
 
-        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET'));
     });
 
     test(`1.4: Consultar StateHistory: <${dataList.statesHistory[0].id}> con parámetros de filtrado`, async() => {
@@ -198,7 +198,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
         // Comprobanse algúns datos opcionais
         expect(data.oldState.id).toBe(stateHistory.oldState.id);
 
-        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET'));
     });
 });
 
@@ -261,14 +261,14 @@ describe('2: Probas DATOS API - StateHistorys ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
         expect(total).toBe(0);
         expect(total).not.toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.GET_ALL'));
+        expect(error).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.GET_LIST'));
     });
 
     test(`2.2: Consultar StateHistory: <${dataList.statesHistory[0].id}> con parámetros de filtrado`, async() => {
@@ -291,9 +291,9 @@ describe('2: Probas DATOS API - StateHistorys ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.GET'));
     });
 
     test(`2.3: Consultar StateHistory inexistente:`, async() => {
@@ -310,8 +310,8 @@ describe('2: Probas DATOS API - StateHistorys ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.GET'));
     });
 });

@@ -86,7 +86,7 @@ describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.GET_LIST'));
     });
 
     test('1.2: Consultar tódolos RepositoryApps con parámetros de filtrado:', async() => {
@@ -126,7 +126,7 @@ describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.GET_LIST'));
     });
 
     test(`1.3: Consultar RepositoryApp: <${dataList.repositories[0].id}>`, async() => {
@@ -160,7 +160,7 @@ describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
         // Comprobanse algúns datos opcionais
         expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(repositoryApp.expirationDate));
 
-        expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.GET'));
     });
 
     test(`1.4: Consultar RepositoryApp: <${dataList.repositories[0].id}> con parámetros de filtrado`, async() => {
@@ -200,7 +200,7 @@ describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
         // Comprobanse algúns datos opcionais
         expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(repositoryApp.expirationDate));
 
-        expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.GET'));
     });
 });
 
@@ -263,14 +263,14 @@ describe('2: Probas DATOS API - RepositoryApps ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
         expect(total).toBe(0);
         expect(total).not.toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('REPOSITORY.SERVICE.ERROR.GET_ALL'));
+        expect(error).toBe(i18next.t('REPOSITORY.SERVICE.ERROR.GET_LIST'));
     });
 
     test(`2.2: Consultar RepositoryApp: <${dataList.repositories[0].id}> con parámetros de filtrado`, async() => {
@@ -293,9 +293,9 @@ describe('2: Probas DATOS API - RepositoryApps ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('REPOSITORY.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('REPOSITORY.SERVICE.ERROR.GET'));
     });
 
     test(`2.3: Consultar RepositoryApp inexistente:`, async() => {
@@ -312,8 +312,8 @@ describe('2: Probas DATOS API - RepositoryApps ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('REPOSITORY.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('REPOSITORY.SERVICE.ERROR.GET'));
     });
 });

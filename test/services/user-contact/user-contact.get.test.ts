@@ -84,7 +84,7 @@ describe('1: Probas DATOS API - UserContacts (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.GET_LIST'));
     });
 
     test('1.2: Consultar tódolos UserContacts con parámetros de filtrado:', async() => {
@@ -124,7 +124,7 @@ describe('1: Probas DATOS API - UserContacts (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.GET_LIST'));
     });
 
     test(`1.3: Consultar UserContact: <${dataList.userContacts[0].id}>`, async() => {
@@ -152,7 +152,7 @@ describe('1: Probas DATOS API - UserContacts (GET)', () => {
         expect(data.contact).toBeDefined();
         expect(data.contact).toBe(userContact.contact);
 
-        expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.GET'));
     });
 
     test(`1.4: Consultar UserContact: <${dataList.userContacts[0].id}> con parámetros de filtrado`, async() => {
@@ -186,7 +186,7 @@ describe('1: Probas DATOS API - UserContacts (GET)', () => {
         expect(data.contact).toBeDefined();
         expect(data.contact).toBe(userContact.contact);
 
-        expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.GET'));
     });
 });
 
@@ -249,14 +249,14 @@ describe('2: Probas DATOS API - UserContacts ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
         expect(total).toBe(0);
         expect(total).not.toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('USER_CONTACT.SERVICE.ERROR.GET_ALL'));
+        expect(error).toBe(i18next.t('USER_CONTACT.SERVICE.ERROR.GET_LIST'));
     });
 
     test(`2.2: Consultar UserContact: <${dataList.userContacts[0].id}> con parámetros de filtrado`, async() => {
@@ -279,9 +279,9 @@ describe('2: Probas DATOS API - UserContacts ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('USER_CONTACT.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('USER_CONTACT.SERVICE.ERROR.GET'));
     });
 
     test(`2.3: Consultar UserContact inexistente:`, async() => {
@@ -298,8 +298,8 @@ describe('2: Probas DATOS API - UserContacts ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('USER_CONTACT.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('USER_CONTACT.SERVICE.ERROR.GET'));
     });
 });

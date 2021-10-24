@@ -86,7 +86,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('PROJECT.NAME_PLURAL') }));
     });
 
     test('1.2: Consultar tódolos Projects con parámetros de filtrado:', async() => {
@@ -126,7 +126,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('PROJECT.NAME_PLURAL') }));
     });
 
     test(`1.3: Consultar Project: <${dataList.projects[0].id}>`, async() => {
@@ -161,7 +161,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         expect(date2LocaleISO(date2LocaleISO(data.startDate))).toBe(date2LocaleISO(project.startDate));
         expect(date2LocaleISO(date2LocaleISO(data.targetFinishDate))).toBe(date2LocaleISO(project.targetFinishDate));
 
-        expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('PROJECT.NAME') }));
     });
 
     test(`1.4: Consultar Project: <${dataList.projects[0].id}> con parámetros de filtrado`, async() => {
@@ -202,7 +202,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
         expect(date2LocaleISO(date2LocaleISO(data.startDate))).toBe(date2LocaleISO(project.startDate));
         expect(date2LocaleISO(date2LocaleISO(data.targetFinishDate))).toBe(date2LocaleISO(project.targetFinishDate));
 
-        expect(message).toBe(i18next.t('PROJECT.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('PROJECT.NAME') }));
     });
 });
 
@@ -265,14 +265,14 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
         expect(total).toBe(0);
         expect(total).not.toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.GET_ALL'));
+        expect(error).toBe(i18next.t('ERROR.GET_LIST', { entity: i18next.t('PROJECT.NAME_PLURAL') }));
     });
 
     test(`2.2: Consultar Project: <${dataList.projects[0].id}> con parámetros de filtrado`, async() => {
@@ -295,9 +295,9 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('ERROR.GET', { entity: i18next.t('PROJECT.NAME') }));
     });
 
     test(`2.3: Consultar Project inexistente:`, async() => {
@@ -314,8 +314,8 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('PROJECT.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('ERROR.GET', { entity: i18next.t('PROJECT.NAME') }));
     });
 });

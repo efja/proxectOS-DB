@@ -193,6 +193,6 @@ describe('2: Probas DATOS API - States ERROS (PATCH)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_MALE', { entity: i18next.t('STATE.NAME'), id: state0.id }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('STATE.NAME'), id: state0.id }));
     });
 });

@@ -27,7 +27,7 @@ describe('1: Probas DATOS API - PerformanceApps (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "performanceApps";
+    const ENDPOINT = "performances";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -147,7 +147,7 @@ describe('2: Probas DATOS API - PerformanceApps ERROS (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "performanceApps";
+    const ENDPOINT = "performances";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -216,7 +216,7 @@ describe('2: Probas DATOS API - PerformanceApps ERROS (POST)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST_MALE', { entity: i18next.t('PERFORMANCE.NAME'), id: performanceApp.id }));
+        expect(error).toBe(i18next.t('ERROR.ALREADY_EXIST', { entity: i18next.t('PERFORMANCE.NAME'), id: performanceApp.id }));
     });
 
     test('2.3: Crear lista de PerformanceApps algúns con datos erróneos:', async() => {

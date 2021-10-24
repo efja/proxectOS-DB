@@ -28,7 +28,7 @@ describe('1: Probas DATOS API - CommentApps (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "commentApps";
+    const ENDPOINT = "comments";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -109,7 +109,7 @@ describe('1: Probas DATOS API - CommentApps ERROS (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "commentApps";
+    const ENDPOINT = "comments";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -193,6 +193,6 @@ describe('1: Probas DATOS API - CommentApps ERROS (PUT)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_MALE', { entity: i18next.t('COMMENT.NAME'), id: commentApp0.id }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('COMMENT.NAME'), id: commentApp0.id }));
     });
 });

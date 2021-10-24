@@ -84,7 +84,7 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET_LIST'));
     });
 
     test('1.2: Consultar tódolos AssignedResources con parámetros de filtrado:', async() => {
@@ -124,7 +124,7 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET_LIST'));
     });
 
     test(`1.3: Consultar AssignedResource: <${dataList.assignedResources[0].id}>`, async() => {
@@ -158,7 +158,7 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
         expect(data.resource).toBeDefined();
         expect(data.resource).toBe(assignedResource.resource);
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET'));
     });
 
     test(`1.4: Consultar AssignedResource: <${dataList.assignedResources[0].id}> con parámetros de filtrado`, async() => {
@@ -198,7 +198,7 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
         expect(data.resource).toBeDefined();
         expect(data.resource).toBe(assignedResource.resource);
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.GET'));
     });
 });
 
@@ -261,14 +261,14 @@ describe('2: Probas DATOS API - AssignedResources ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
         expect(total).toBe(0);
         expect(total).not.toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.GET_ALL'));
+        expect(error).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.GET_LIST'));
     });
 
     test(`2.2: Consultar AssignedResource: <${dataList.assignedResources[0].id}> con parámetros de filtrado`, async() => {
@@ -291,9 +291,9 @@ describe('2: Probas DATOS API - AssignedResources ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.GET'));
     });
 
     test(`2.3: Consultar AssignedResource inexistente:`, async() => {
@@ -310,8 +310,8 @@ describe('2: Probas DATOS API - AssignedResources ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.ERROR.GET'));
     });
 });

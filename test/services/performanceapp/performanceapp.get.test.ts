@@ -28,7 +28,7 @@ describe('1: Probas DATOS API - PerformanceApps (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "performanceApps";
+    const ENDPOINT = "performances";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -86,7 +86,7 @@ describe('1: Probas DATOS API - PerformanceApps (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET_LIST'));
     });
 
     test('1.2: Consultar tódolos PerformanceApps con parámetros de filtrado:', async() => {
@@ -126,7 +126,7 @@ describe('1: Probas DATOS API - PerformanceApps (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET_ALL'));
+        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET_LIST'));
     });
 
     test(`1.3: Consultar PerformanceApp: <${dataList.performances[0].id}>`, async() => {
@@ -161,7 +161,7 @@ describe('1: Probas DATOS API - PerformanceApps (GET)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(performanceApp.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp.targetFinishDate));
 
-        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET'));
     });
 
     test(`1.4: Consultar PerformanceApp: <${dataList.performances[0].id}> con parámetros de filtrado`, async() => {
@@ -202,7 +202,7 @@ describe('1: Probas DATOS API - PerformanceApps (GET)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(performanceApp.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp.targetFinishDate));
 
-        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET_SINGLE'));
+        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.GET'));
     });
 });
 
@@ -210,7 +210,7 @@ describe('2: Probas DATOS API - PerformanceApps ERROS (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "performanceApps";
+    const ENDPOINT = "performances";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -265,14 +265,14 @@ describe('2: Probas DATOS API - PerformanceApps ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
         expect(total).toBe(0);
         expect(total).not.toBe(dataLength);
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.GET_ALL'));
+        expect(error).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.GET_LIST'));
     });
 
     test(`2.2: Consultar PerformanceApp: <${dataList.performances[0].id}> con parámetros de filtrado`, async() => {
@@ -295,9 +295,9 @@ describe('2: Probas DATOS API - PerformanceApps ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.GET'));
     });
 
     test(`2.3: Consultar PerformanceApp inexistente:`, async() => {
@@ -314,8 +314,8 @@ describe('2: Probas DATOS API - PerformanceApps ERROS (GET)', () => {
 
         expect(response.status).toBe(HttpStatus.NOT_FOUND);
         expect(code).toBe(HttpStatus.NOT_FOUND);
-        expect(data).toBeNull();
+        expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.GET_SINGLE'));
+        expect(error).toBe(i18next.t('PERFORMANCE.SERVICE.ERROR.GET'));
     });
 });

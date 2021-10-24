@@ -28,7 +28,7 @@ describe('1: Probas DATOS API - PerformanceApps (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "performanceApps";
+    const ENDPOINT = "performances";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -111,7 +111,7 @@ describe('1: Probas DATOS API - PerformanceApps ERROS (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    const ENDPOINT = "performanceApps";
+    const ENDPOINT = "performances";
 
     // ************************************************************************************************
     // ** TAREFAS PREVIAS E POSTERIORES
@@ -195,6 +195,6 @@ describe('1: Probas DATOS API - PerformanceApps ERROS (PUT)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_MALE', { entity: i18next.t('PERFORMANCE.NAME'), id: performanceApp0.id }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PERFORMANCE.NAME'), id: performanceApp0.id }));
     });
 });
