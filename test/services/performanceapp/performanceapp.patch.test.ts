@@ -106,7 +106,7 @@ describe('1: Probas DATOS API - PerformanceApps (PATCH)', () => {
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp0.targetFinishDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp1.targetFinishDate));
 
-        expect(message).toBe(i18next.t('PERFORMANCE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('PERFORMANCE.NAME'), id: dataList.projects[0].id }));
     });
 
 });

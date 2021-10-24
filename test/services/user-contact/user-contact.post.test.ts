@@ -84,7 +84,7 @@ describe('1: Probas DATOS API - UserContacts (POST)', () => {
         expect(data.type.id).toBeDefined();
         expect(data.type.id).toBe(userContact.type.id);
 
-        expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.CREATE'));
+        expect(message).toBe(i18next.t('SUCCESS.CREATE', { entity: i18next.t('USER_CONTACT.NAME') }));
     });
 
     test('1.2: Crear lista de UserContacts:', async() => {
@@ -133,7 +133,7 @@ describe('1: Probas DATOS API - UserContacts (POST)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.CREATE_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.CREATE_LIST', { entity: i18next.t('USER_CONTACT.NAME_PLURAL') }));
     });
 });
 
@@ -189,7 +189,7 @@ describe('2: Probas DATOS API - UserContacts ERROS (POST)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('USER_CONTACT.SERVICE.ERROR.CREATE'));
+        expect(error).toBe(i18next.t('ERROR.CREATE', { entity: i18next.t('USER_CONTACT.NAME') }));
     });
 
     test(`2.2: Crear UserContact: <${dataList.userContacts[0].id}> QUE XA EXISTE`, async() => {
@@ -253,6 +253,6 @@ describe('2: Probas DATOS API - UserContacts ERROS (POST)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('USER_CONTACT.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('ERROR.CREATE_LIST', { entity: i18next.t('USER_CONTACT.NAME_PLURAL') }));
     });
 });

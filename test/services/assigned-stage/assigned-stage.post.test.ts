@@ -90,7 +90,7 @@ describe('1: Probas DATOS API - AssignedStages (POST)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(assignedStage.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(assignedStage.targetFinishDate));
 
-        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.CREATE'));
+        expect(message).toBe(i18next.t('SUCCESS.CREATE', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
     });
 
     test('1.2: Crear lista de AssignedStages:', async() => {
@@ -139,7 +139,7 @@ describe('1: Probas DATOS API - AssignedStages (POST)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.CREATE_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.CREATE_LIST', { entity: i18next.t('ASSIGNED_STAGE.NAME_PLURAL') }));
     });
 });
 
@@ -195,7 +195,7 @@ describe('2: Probas DATOS API - AssignedStages ERROS (POST)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.ERROR.CREATE'));
+        expect(error).toBe(i18next.t('ERROR.CREATE', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
     });
 
     test(`2.2: Crear AssignedStage: <${dataList.assignedStages[0].id}> QUE XA EXISTE`, async() => {
@@ -259,6 +259,6 @@ describe('2: Probas DATOS API - AssignedStages ERROS (POST)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('ERROR.CREATE_LIST', { entity: i18next.t('ASSIGNED_STAGE.NAME_PLURAL') }));
     });
 });

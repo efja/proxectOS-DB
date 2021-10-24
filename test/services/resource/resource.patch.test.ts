@@ -98,7 +98,7 @@ describe('1: Probas DATOS API - Resources (PATCH)', () => {
         expect(data.description).toBe(resource0.description);
         expect(data.description).toBe(resource1.description);
 
-        expect(message).toBe(i18next.t('RESOURCE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('RESOURCE.NAME'), id: dataList.projects[0].id }));
     });
 
 });

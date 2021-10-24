@@ -87,7 +87,7 @@ describe('1: Probas DATOS API - AssignedUsers (POST)', () => {
         // Comprobanse algúns datos opcionais
         expect(date2LocaleISO(data.createdAt)).toBe(date2LocaleISO(assignedUser.createdAt));
 
-        expect(message).toBe(i18next.t('ASSIGNED_USER.SERVICE.SUCCESS.CREATE'));
+        expect(message).toBe(i18next.t('SUCCESS.CREATE', { entity: i18next.t('ASSIGNED_USER.NAME') }));
     });
 
     test('1.2: Crear lista de AssignedUsers:', async() => {
@@ -136,7 +136,7 @@ describe('1: Probas DATOS API - AssignedUsers (POST)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_USER.SERVICE.SUCCESS.CREATE_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.CREATE_LIST', { entity: i18next.t('ASSIGNED_USER.NAME_PLURAL') }));
     });
 });
 
@@ -193,7 +193,7 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (POST)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ASSIGNED_USER.SERVICE.ERROR.CREATE'));
+        expect(error).toBe(i18next.t('ERROR.CREATE', { entity: i18next.t('ASSIGNED_USER.NAME') }));
     });
 
     test(`2.2: Crear AssignedUser: <${dataList.assignedUsers[0].id}> QUE XA EXISTE`, async() => {
@@ -257,6 +257,6 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (POST)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('ASSIGNED_USER.SERVICE.ERROR.CREATE_LIST'));
+        expect(error).toBe(i18next.t('ERROR.CREATE_LIST', { entity: i18next.t('ASSIGNED_USER.NAME_PLURAL') }));
     });
 });

@@ -85,7 +85,7 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_USER.SERVICE.SUCCESS.GET_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('ASSIGNED_USER.NAME_PLURAL') }));
     });
 
     test('1.2: Consultar tódolos AssignedUsers con parámetros de filtrado:', async() => {
@@ -125,7 +125,7 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_USER.SERVICE.SUCCESS.GET_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('ASSIGNED_USER.NAME_PLURAL') }));
     });
 
     test(`1.3: Consultar AssignedUser: <${dataList.assignedUsers[0].id}>`, async() => {
@@ -153,7 +153,7 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
         expect(data.assignedUser).toBeDefined();
         expect(data.assignedUser).toBe(assignedUser.assignedUser);
 
-        expect(message).toBe(i18next.t('ASSIGNED_USER.SERVICE.SUCCESS.GET'));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_USER.NAME') }));
     });
 
     test(`1.4: Consultar AssignedUser: <${dataList.assignedUsers[0].id}> con parámetros de filtrado`, async() => {
@@ -187,7 +187,7 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
         expect(data.assignedUser).toBeDefined();
         expect(data.assignedUser).toBe(assignedUser.assignedUser);
 
-        expect(message).toBe(i18next.t('ASSIGNED_USER.SERVICE.SUCCESS.GET'));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_USER.NAME') }));
     });
 });
 
@@ -258,7 +258,7 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('ASSIGNED_USER.SERVICE.ERROR.GET_LIST'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_LIST', { entity: i18next.t('ASSIGNED_USER.NAME_PLURAL') }));
     });
 
     test(`2.2: Consultar AssignedUser: <${dataList.assignedUsers[0].id}> con parámetros de filtrado`, async() => {
@@ -283,7 +283,7 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ASSIGNED_USER.SERVICE.ERROR.GET'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_USER.NAME') }));
     });
 
     test(`2.3: Consultar AssignedUser inexistente:`, async() => {
@@ -302,6 +302,6 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ASSIGNED_USER.SERVICE.ERROR.GET'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_USER.NAME') }));
     });
 });

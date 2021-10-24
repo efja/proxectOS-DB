@@ -98,7 +98,7 @@ describe('1: Probas DATOS API - UserSchedules (PATCH)', () => {
         expect(data.worksWeekends).toBe(userSchedule0.worksWeekends);
         expect(data.worksWeekends).toBe(userSchedule1.worksWeekends);
 
-        expect(message).toBe(i18next.t('USER_SCHEDULE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER_SCHEDULE.NAME'), id: dataList.projects[0].id }));
     });
 
 });

@@ -104,7 +104,7 @@ describe('1: Probas DATOS API - AssignedStages (PATCH)', () => {
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(assignedStage0.targetFinishDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(assignedStage1.targetFinishDate));
 
-        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ASSIGNED_STAGE.NAME'), id: dataList.projects[0].id }));
     });
 
 });

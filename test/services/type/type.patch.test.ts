@@ -98,7 +98,7 @@ describe('1: Probas DATOS API - Types (PATCH)', () => {
         expect(data.description).toBe(type0.description);
         expect(data.description).toBe(type1.description);
 
-        expect(message).toBe(i18next.t('TYPE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('TYPE.NAME'), id: dataList.projects[0].id }));
     });
 
 });

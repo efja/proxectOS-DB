@@ -95,7 +95,7 @@ describe('1: Probas DATOS API - Resources (PUT)', () => {
         expect(data.id).toBe(resource0.id);
         expect(data.id).toBe(resource1.id);
 
-        expect(message).toBe(i18next.t('RESOURCE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('RESOURCE.NAME'), id: dataList.projects[0].id }));
     });
 });
 

@@ -104,7 +104,7 @@ describe('1: Probas DATOS API - RepositoryApps (PATCH)', () => {
         expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(repositoryApp0.expirationDate));
         expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(repositoryApp1.expirationDate));
 
-        expect(message).toBe(i18next.t('REPOSITORY.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('REPOSITORY.NAME'), id: dataList.projects[0].id }));
     });
 
 });

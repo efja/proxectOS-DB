@@ -94,7 +94,7 @@ describe('1: Probas DATOS API - AssignedUsers (PUT)', () => {
         expect(data.id).toBe(assignedUser0.id);
         expect(data.id).toBe(assignedUser1.id);
 
-        expect(message).toBe(i18next.t('ASSIGNED_USER.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ASSIGNED_USER.NAME'), id: dataList.projects[0].id }));
     });
 });
 

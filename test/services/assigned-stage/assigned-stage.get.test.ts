@@ -86,7 +86,7 @@ describe('1: Probas DATOS API - AssignedStages (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.GET_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('ASSIGNED_STAGE.NAME_PLURAL') }));
     });
 
     test('1.2: Consultar tódolos AssignedStages con parámetros de filtrado:', async() => {
@@ -126,7 +126,7 @@ describe('1: Probas DATOS API - AssignedStages (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.GET_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('ASSIGNED_STAGE.NAME_PLURAL') }));
     });
 
     test(`1.3: Consultar AssignedStage: <${dataList.assignedStages[0].id}>`, async() => {
@@ -158,7 +158,7 @@ describe('1: Probas DATOS API - AssignedStages (GET)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(assignedStage.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(assignedStage.targetFinishDate));
 
-        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.GET'));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
     });
 
     test(`1.4: Consultar AssignedStage: <${dataList.assignedStages[0].id}> con parámetros de filtrado`, async() => {
@@ -196,7 +196,7 @@ describe('1: Probas DATOS API - AssignedStages (GET)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(assignedStage.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(assignedStage.targetFinishDate));
 
-        expect(message).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.SUCCESS.GET'));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
     });
 });
 
@@ -266,7 +266,7 @@ describe('2: Probas DATOS API - AssignedStages ERROS (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.ERROR.GET_LIST'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_LIST', { entity: i18next.t('ASSIGNED_STAGE.NAME_PLURAL') }));
     });
 
     test(`2.2: Consultar AssignedStage: <${dataList.assignedStages[0].id}> con parámetros de filtrado`, async() => {
@@ -291,7 +291,7 @@ describe('2: Probas DATOS API - AssignedStages ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.ERROR.GET'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
     });
 
     test(`2.3: Consultar AssignedStage inexistente:`, async() => {
@@ -310,6 +310,6 @@ describe('2: Probas DATOS API - AssignedStages ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ASSIGNED_STAGE.SERVICE.ERROR.GET'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_STAGE.NAME') }));
     });
 });

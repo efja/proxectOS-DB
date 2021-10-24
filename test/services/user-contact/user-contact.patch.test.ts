@@ -98,7 +98,7 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
         expect(data.type.id).toBe(userContact0.type.id);
         expect(data.type.id).toBe(userContact1.type.id);
 
-        expect(message).toBe(i18next.t('USER_CONTACT.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER_CONTACT.NAME'), id: dataList.projects[0].id }));
     });
 
 });

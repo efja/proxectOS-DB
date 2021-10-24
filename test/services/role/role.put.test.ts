@@ -101,7 +101,7 @@ describe('1: Probas DATOS API - Roles (PUT)', () => {
         expect(data.delete).toBe(role0.delete);
         expect(data.delete).toBe(role1.delete);
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ROLE.NAME'), id: dataList.projects[0].id }));
     });
 });
 
@@ -165,7 +165,7 @@ describe('1: Probas DATOS API - Roles ERROS (PUT)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('PROJECT.NAME'), id: role0.id }));
+        expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('ROLE.NAME'), id: role0.id }));
     });
 
     test(`2.2: Actualizar Role que non existe:`, async() => {
@@ -193,6 +193,6 @@ describe('1: Probas DATOS API - Roles ERROS (PUT)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PROJECT.NAME'), id: role0.id }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ROLE.NAME'), id: role0.id }));
     });
 });

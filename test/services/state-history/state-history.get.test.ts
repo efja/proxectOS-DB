@@ -84,7 +84,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('STATE_HISTORY.NAME_PLURAL') }));
     });
 
     test('1.2: Consultar tódolos StateHistorys con parámetros de filtrado:', async() => {
@@ -124,7 +124,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('STATE_HISTORY.NAME_PLURAL') }));
     });
 
     test(`1.3: Consultar StateHistory: <${dataList.statesHistory[0].id}>`, async() => {
@@ -158,7 +158,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
         // Comprobanse algúns datos opcionais
         expect(data.oldState.id).toBe(stateHistory.oldState.id);
 
-        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET'));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('STATE_HISTORY.NAME') }));
     });
 
     test(`1.4: Consultar StateHistory: <${dataList.statesHistory[0].id}> con parámetros de filtrado`, async() => {
@@ -198,7 +198,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
         // Comprobanse algúns datos opcionais
         expect(data.oldState.id).toBe(stateHistory.oldState.id);
 
-        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.GET'));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('STATE_HISTORY.NAME') }));
     });
 });
 
@@ -268,7 +268,7 @@ describe('2: Probas DATOS API - StateHistorys ERROS (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.GET_LIST'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_LIST', { entity: i18next.t('STATE_HISTORY.NAME_PLURAL') }));
     });
 
     test(`2.2: Consultar StateHistory: <${dataList.statesHistory[0].id}> con parámetros de filtrado`, async() => {
@@ -293,7 +293,7 @@ describe('2: Probas DATOS API - StateHistorys ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.GET'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('STATE_HISTORY.NAME') }));
     });
 
     test(`2.3: Consultar StateHistory inexistente:`, async() => {
@@ -312,6 +312,6 @@ describe('2: Probas DATOS API - StateHistorys ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('STATE_HISTORY.SERVICE.ERROR.GET'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('STATE_HISTORY.NAME') }));
     });
 });

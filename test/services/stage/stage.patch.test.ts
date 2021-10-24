@@ -98,7 +98,7 @@ describe('1: Probas DATOS API - Stages (PATCH)', () => {
         expect(data.description).toBe(stage0.description);
         expect(data.description).toBe(stage1.description);
 
-        expect(message).toBe(i18next.t('STAGE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('STAGE.NAME'), id: dataList.projects[0].id }));
     });
 
 });

@@ -90,6 +90,26 @@ describe('1: Probas DATOS API - Projects (DELETE)', () => {
         expect(date2LocaleISO(date2LocaleISO(data.targetFinishDate))).toBe(date2LocaleISO(project.targetFinishDate));
 
         expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('PROJECT.NAME') }));
+
+        // --------------------------------------------------------------------------------------------
+        // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD
+        // --------------------------------------------------------------------------------------------
+        const responseGet = await request.get(`${API_BASE}/${ENDPOINT}/${data.id}`);
+        const {
+            code    : codeGet,
+            data    : dataGet,
+            message : messageGet,
+            error   : errorGet,
+        } = responseGet.body
+
+        expect(errorGet).toBeDefined();
+        expect(messageGet).toBeUndefined();
+
+        expect(responseGet.status).toBe(HttpStatus.NOT_FOUND);
+        expect(codeGet).toBe(HttpStatus.NOT_FOUND);
+        expect(dataGet).toBeUndefined();
+
+        expect(errorGet).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PROJECT.NAME') }));
     });
 });
 

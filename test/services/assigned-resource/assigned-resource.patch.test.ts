@@ -98,7 +98,7 @@ describe('1: Probas DATOS API - AssignedResources (PATCH)', () => {
         expect(data.unitCost).toBe(assignedResource0.unitCost);
         expect(data.unitCost).toBe(assignedResource1.unitCost);
 
-        expect(message).toBe(i18next.t('ASSIGNED_RESOURCE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: dataList.projects[0].id }));
     });
 
 });

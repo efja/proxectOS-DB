@@ -104,7 +104,7 @@ describe('1: Probas DATOS API - Roles (PATCH)', () => {
         expect(data.delete).toBe(role0.delete);
         expect(data.delete).toBe(role1.delete);
 
-        expect(message).toBe(i18next.t('ROLE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ROLE.NAME'), id: dataList.projects[0].id }));
     });
 
 });

@@ -95,7 +95,7 @@ describe('1: Probas DATOS API - Stages (PUT)', () => {
         expect(data.id).toBe(stage0.id);
         expect(data.id).toBe(stage1.id);
 
-        expect(message).toBe(i18next.t('STAGE.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('STAGE.NAME'), id: dataList.projects[0].id }));
     });
 });
 

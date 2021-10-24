@@ -99,7 +99,7 @@ describe('1: Probas DATOS API - Users (PUT)', () => {
         expect(data.firstSurname).not.toBe(user0.firstSurname);
         expect(data.firstSurname).toBe(user1.firstSurname);
 
-        expect(message).toBe(i18next.t('USER.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER.NAME'), id: dataList.projects[0].id }));
     });
 });
 

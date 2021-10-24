@@ -272,7 +272,7 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('ERROR.GET_LIST', { entity: i18next.t('PROJECT.NAME_PLURAL') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_LIST', { entity: i18next.t('PROJECT.NAME_PLURAL') }));
     });
 
     test(`2.2: Consultar Project: <${dataList.projects[0].id}> con parámetros de filtrado`, async() => {
@@ -297,7 +297,7 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.GET', { entity: i18next.t('PROJECT.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PROJECT.NAME') }));
     });
 
     test(`2.3: Consultar Project inexistente:`, async() => {
@@ -316,6 +316,6 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.GET', { entity: i18next.t('PROJECT.NAME') }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PROJECT.NAME') }));
     });
 });

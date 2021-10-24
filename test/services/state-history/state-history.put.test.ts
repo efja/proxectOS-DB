@@ -99,7 +99,7 @@ describe('1: Probas DATOS API - StateHistorys (PUT)', () => {
         expect(data.oldState.id).toBe(stateHistory0.oldState.id);
         expect(data.oldState.id).toBe(stateHistory1.oldState.id);
 
-        expect(message).toBe(i18next.t('STATE_HISTORY.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('STATE_HISTORY.NAME'), id: dataList.projects[0].id }));
     });
 });
 

@@ -84,7 +84,7 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ROLE.SERVICE.SUCCESS.GET_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('ROLE.NAME_PLURAL') }));
     });
 
     test('1.2: Consultar tódolos Roles con parámetros de filtrado:', async() => {
@@ -124,7 +124,7 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(message).toBe(i18next.t('ROLE.SERVICE.SUCCESS.GET_LIST'));
+        expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('ROLE.NAME_PLURAL') }));
     });
 
     test(`1.3: Consultar Role: <${dataList.roles[0].id}>`, async() => {
@@ -159,7 +159,7 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
         expect(data.create).toBe(role.create);
         expect(data.delete).toBe(role.delete);
 
-        expect(message).toBe(i18next.t('ROLE.SERVICE.SUCCESS.GET'));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ROLE.NAME') }));
     });
 
     test(`1.4: Consultar Role: <${dataList.roles[0].id}> con parámetros de filtrado`, async() => {
@@ -200,7 +200,7 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
         expect(data.create).toBe(role.create);
         expect(data.delete).toBe(role.delete);
 
-        expect(message).toBe(i18next.t('ROLE.SERVICE.SUCCESS.GET'));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ROLE.NAME') }));
     });
 });
 
@@ -270,7 +270,7 @@ describe('2: Probas DATOS API - Roles ERROS (GET)', () => {
         expect(from).toBe(0);
         expect(limit).toBe(0);
 
-        expect(error).toBe(i18next.t('ROLE.SERVICE.ERROR.GET_LIST'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND_LIST', { entity: i18next.t('ROLE.NAME_PLURAL') }));
     });
 
     test(`2.2: Consultar Role: <${dataList.roles[0].id}> con parámetros de filtrado`, async() => {
@@ -295,7 +295,7 @@ describe('2: Probas DATOS API - Roles ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ROLE.SERVICE.ERROR.GET'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ROLE.NAME') }));
     });
 
     test(`2.3: Consultar Role inexistente:`, async() => {
@@ -314,6 +314,6 @@ describe('2: Probas DATOS API - Roles ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ROLE.SERVICE.ERROR.GET'));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ROLE.NAME') }));
     });
 });
