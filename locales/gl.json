@@ -3,408 +3,96 @@
 	"COMMON": {
 		"CREATED_DATE": "Data de creación"
 	},
-	"ERROR": {
-		"BAD_REQUEST": "Petición errónea para {{entity}}",
-		"CONFLICT": "Producíuse un conflito coa operación de {{entity}} coa ID {{id}}",
-		"NOT_FOUND_MALE": "Non se atopou ningún {{entity}} coa ID {{id}} na base de datos",
-		"NOT_FOUND_FEMALE": "Non se atopou ningunha {{entity}} coa ID {{id}} na base de datos",
-		"ALREADY_EXIST_MALE": "O {{entity}} coa ID {{id}} xa existe na base de datos",
-		"ALREADY_EXIST_FEMALE": "A {{entity}} co aID {{id}} xa existe na base de datos"
+	"SUCCESS": {
+		"CREATE": "Entidade {{entity}} creada con éxito",
+		"CREATE_LIST": "Entidades {{entity}} creadas con éxito",
+		"DELETE": "Entidade {{entity}} eliminada correctamente",
+		"GET": "Entidade {{entity}} obtida con éxito",
+		"GET_LIST": "Tódolas entidades {{entity}} recuperáronse correctamente",
+		"UPDATE": "Entidade {{entity}} coa ID {{id}} actualizada con éxito"
 	},
+	"ERROR": {
+		"ALREADY_EXIST": "A entidade {{entity}} coa ID {{id}} xa existe na base de datos",
+		"BAD_REQUEST": "Petición errónea para a entidade{{entity}}",
+		"CONFLICT": "Producíuse un conflito coa operación da entidade {{entity}} coa ID {{id}}",
+		"CREATE": "Non se puido crear a entidade {{entity}}",
+		"CREATE_LIST": "Non se puideron crear as entidades {{entity}}",
+		"DELETE": "Non se puido eliminar a entidade {{entity}} coa ID {{id}}",
+		"NOT_FOUND": "Non se atopou ningunha entidade {{entity}} coa ID {{id}} na base de datos",
+		"NOT_FOUND_LIST": "Non se atopou ningunha entidade {{entity}}",
+		"UPDATE": "Non se puido actualizar a entidade {{entity}} coa ID {{id}}"
+	},
+
 	"ASSIGNED_RESOURCE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Recursos Asignados recuperáronse correctamente",
-				"GET_SINGLE": "Recurso Asignado obtido con éxito",
-				"CREATE": "Recurso Asignado creado con éxito",
-				"CREATE_LIST": "Recursos Asignados creados con éxito",
-				"UPDATE": "Recurso Asignado actualizado con éxito",
-				"DELETE": "Recurso Asignado eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Recurso Asignado",
-				"GET_SINGLE": "O Recurso Asignado non se puido obter",
-				"CREATE": "Non se puido crear o Recurso Asignado",
-				"CREATE_LIST": "Non se puideron crear os Recursos Asignados",
-				"UPDATE": "Non se puido actualizar o Recurso Asignado",
-				"DELETE": "Non se puido eliminar o Recurso Asignado"
-			}
-		}
+		"NAME": "Recurso Asignado",
+		"NAME_PLURAL": "Recursos Asignados"
 	},
 	"ASSIGNED_STAGE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolas Etapas Asignadas recuperáronse correctamente",
-				"GET_SINGLE": "Etapa Asignada obtida con éxito",
-				"CREATE": "Etapa Asignada creada con éxito",
-				"CREATE_LIST": "Etapas Asignadas creadas con éxito",
-				"UPDATE": "Etapa Asignada actualizada con éxito",
-				"DELETE": "Etapa Asignada eliminada correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningunha Etapa Asignada",
-				"GET_SINGLE": "A Etapa Asignadanon se puido obter",
-				"CREATE": "Non se puido crear a Etapa Asignada",
-				"CREATE_LIST": "Non se puideron crear as Etapas Asignadas",
-				"UPDATE": "Non se puido actualizar a Etapa Asignada",
-				"DELETE": "Non se puido eliminar a Etapa Asignada"
-			}
-		}
+		"NAME": "Etapa Asignada",
+		"NAME_PLURAL": "Etapas Asignadas"
 	},
 	"ASSIGNED_USER": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Usuarios Asignados recuperáronse correctamente",
-				"GET_SINGLE": "Usuario Asignado obtido con éxito",
-				"CREATE": "Usuario Asignado creado con éxito",
-				"CREATE_LIST": "Usuarios Asignados creados con éxito",
-				"UPDATE": "Usuario Asignado actualizado con éxito",
-				"DELETE": "Usuario Asignado eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Usuario Asignado",
-				"GET_SINGLE": "O Usuario Asignado non se puido obter",
-				"CREATE": "Non se puido crear o Usuario Asignado",
-				"CREATE_LIST": "Non se puideron crear os Usuarios Asignados",
-				"UPDATE": "Non se puido actualizar o Usuario Asignado",
-				"DELETE": "Non se puido eliminar o Usuario Asignado"
-			}
-		}
+		"NAME": "Usuario Asignado",
+		"NAME_PLURAL": "Usuarios Asignados"
 	},
 	"COMMENT": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Comentarios recuperáronse correctamente",
-				"GET_SINGLE": "Comentario obtido con éxito",
-				"CREATE": "Comentario creado con éxito",
-				"CREATE_LIST": "Comentarios creados con éxito",
-				"UPDATE": "Comentario actualizado con éxito",
-				"DELETE": "Comentario eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Comentario",
-				"GET_SINGLE": "O Comentario non se puido obter",
-				"CREATE": "Non se puido crear o Comentario",
-				"CREATE_LIST": "Non se puideron crear os Comentarios",
-				"UPDATE": "Non se puido actualizar o Comentario",
-				"DELETE": "Non se puido eliminar o Comentario"
-			}
-		}
+		"NAME": "Comentario",
+		"NAME_PLURAL": "Comentarios"
 	},
 	"PERFORMANCE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolas Actuacións recuperáronse correctamente",
-				"GET_SINGLE": "Actuación obtida con éxito",
-				"CREATE": "Actuación creada con éxito",
-				"CREATE_LIST": "Actuacións creadas con éxito",
-				"UPDATE": "Actuación actualizada con éxito",
-				"DELETE": "Actuación eliminada correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningunha Actuación",
-				"GET_SINGLE": "A Actuación non se puido obter",
-				"CREATE": "Non se puido crear a Actuación",
-				"CREATE_LIST": "Non se puideron crear as Actuacións",
-				"UPDATE": "Non se puido actualizar a Actuación",
-				"DELETE": "Non se puido eliminar a Actuación"
-			}
-		}
+		"NAME": "Actuación",
+		"NAME_PLURAL": "Actuacións"
 	},
 	"PRIORITY": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolas Prioridades recuperáronse correctamente",
-				"GET_SINGLE": "Prioridade obtida con éxito",
-				"CREATE": "Prioridade creada con éxito",
-				"CREATE_LIST": "Prioridades creadas con éxito",
-				"UPDATE": "Prioridade actualizada con éxito",
-				"DELETE": "Prioridade eliminada correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningunha Prioridade",
-				"GET_SINGLE": "A Prioridade non se puido obter",
-				"CREATE": "Non se puido crear a Prioridade",
-				"CREATE_LIST": "Non se puideron crear as Prioridades",
-				"UPDATE": "Non se puido actualizar a Prioridade",
-				"DELETE": "Non se puido eliminar a Prioridade"
-			}
-		}
+		"NAME": "Prioridade",
+		"NAME_PLURAL": "Prioridades"
 	},
 	"PROJECT": {
 		"NAME": "Proxecto",
-		"NAME_PLURAL": "Proxectos",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Proxectos recuperáronse correctamente",
-				"GET_SINGLE": "Proxecto obtido con éxito",
-				"CREATE": "Proxecto creado con éxito",
-				"CREATE_LIST": "Proxectos creados con éxito",
-				"UPDATE": "Proxecto actualizado con éxito",
-				"DELETE": "Proxecto eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Proxecto",
-				"GET_SINGLE": "O Proxecto non se puido obter",
-				"CREATE": "Non se puido crear o Proxecto",
-				"CREATE_LIST": "Non se puideron crear os Proxectos",
-				"UPDATE": "Non se puido actualizar o Proxecto",
-				"DELETE": "Non se puido eliminar o Proxecto"
-			}
-		}
+		"NAME_PLURAL": "Proxectos"
 	},
 	"REQUIREMENT": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Requerimentos recuperáronse correctamente",
-				"GET_SINGLE": "Requerimento obtido con éxito",
-				"CREATE": "Requerimento creado con éxito",
-				"CREATE_LIST": "Requerimentos creados con éxito",
-				"UPDATE": "Requerimento actualizado con éxito",
-				"DELETE": "Requerimento eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Requerimento",
-				"GET_SINGLE": "O Requerimento non se puido obter",
-				"CREATE": "Non se puido crear o Requerimento",
-				"CREATE_LIST": "Non se puideron crear os Requerimentos",
-				"UPDATE": "Non se puido actualizar o Requerimento",
-				"DELETE": "Non se puido eliminar o Requerimento"
-			}
-		}
+		"NAME": "Requerimento",
+		"NAME_PLURAL": "Requerimentos"
 	},
 	"RESOURCE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Recursos recuperáronse correctamente",
-				"GET_SINGLE": "Recurso obtido con éxito",
-				"CREATE": "Recurso creado con éxito",
-				"CREATE_LIST": "Recursos creados con éxito",
-				"UPDATE": "Recurso actualizado con éxito",
-				"DELETE": "Recurso eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Recurso",
-				"GET_SINGLE": "O Recurso non se puido obter",
-				"CREATE": "Non se puido crear o Recurso",
-				"CREATE_LIST": "Non se puideron crear os Recursos",
-				"UPDATE": "Non se puido actualizar o Recurso",
-				"DELETE": "Non se puido eliminar o Recurso"
-			}
-		}
+		"NAME": "Recurso",
+		"NAME_PLURAL": "Recursos"
 	},
 	"STAGE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolas Etapas recuperáronse correctamente",
-				"GET_SINGLE": "Etapa obtida con éxito",
-				"CREATE": "Etapa creada con éxito",
-				"CREATE_LIST": "Etapas creadas con éxito",
-				"UPDATE": "Etapa actualizada con éxito",
-				"DELETE": "Etapa eliminada correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningunha Etapa",
-				"GET_SINGLE": "A Etapa non se puido obter",
-				"CREATE": "Non se puido crear a Etapa",
-				"CREATE_LIST": "Non se puideron crear as Etapas",
-				"UPDATE": "Non se puido actualizar a Etapa",
-				"DELETE": "Non se puido eliminar a Etapa"
-			}
-		}
+		"NAME": "Etapa",
+		"NAME_PLURAL": "Etapas"
 	},
 	"STATE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Estados recuperáronse correctamente",
-				"GET_SINGLE": "Estado obtido con éxito",
-				"CREATE": "Estado creado con éxito",
-				"CREATE_LIST": "Estados creados con éxito",
-				"UPDATE": "Estado actualizado con éxito",
-				"DELETE": "Estado eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Estado",
-				"GET_SINGLE": "O Estado non se puido obter",
-				"CREATE": "Non se puido crear o Estado",
-				"CREATE_LIST": "Non se puideron crear os Estados",
-				"UPDATE": "Non se puido actualizar o Estado",
-				"DELETE": "Non se puido eliminar o Estado"
-			}
-		}
+		"NAME": "Estado",
+		"NAME_PLURAL": "Estados"
 	},
 	"STATE_HISTORY": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Históricos de Estados recuperáronse correctamente",
-				"GET_SINGLE": "Histórico de Estado obtido con éxito",
-				"CREATE": "Histórico de Estado creado con éxito",
-				"CREATE_LIST": "Históricos de Estados creados con éxito",
-				"UPDATE": "Histórico de Estado actualizado con éxito",
-				"DELETE": "Histórico de Estado eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Histórico de Estado",
-				"GET_SINGLE": "O Histórico de Estado non se puido obter",
-				"CREATE": "Non se puido crear o Histórico de Estado",
-				"CREATE_LIST": "Non se puideron crear os Históricos de Estados",
-				"UPDATE": "Non se puido actualizar o Histórico de Estado",
-				"DELETE": "Non se puido eliminar o Histórico de Estado"
-			}
-		}
+		"NAME": "Histórico de Estado",
+		"NAME_PLURAL": "Históricos de Estado"
 	},
 	"TYPE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Tipos recuperáronse correctamente",
-				"GET_SINGLE": "Tipo obtido con éxito",
-				"CREATE": "Tipo creado con éxito",
-				"CREATE_LIST": "Tipos creados con éxito",
-				"UPDATE": "Tipo actualizado con éxito",
-				"DELETE": "Tipo eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Tipo",
-				"GET_SINGLE": "O Tipo non se puido obter",
-				"CREATE": "Non se puido crear o Tipo",
-				"CREATE_LIST": "Non se puideron crear os Tipos",
-				"UPDATE": "Non se puido actualizar o Tipo",
-				"DELETE": "Non se puido eliminar o Tipo"
-			}
-		}
+		"NAME": "Tipo",
+		"NAME_PLURAL": "Tipos"
 	},
 	"USER": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Usuarios recuperáronse correctamente",
-				"GET_SINGLE": "Usuario obtido con éxito",
-				"CREATE": "Usuario creado con éxito",
-				"CREATE_LIST": "Usuarios creados con éxito",
-				"UPDATE": "Usuario actualizado con éxito",
-				"DELETE": "Usuario eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Usuario",
-				"GET_SINGLE": "O Usuario non se puido obter",
-				"CREATE": "Non se puido crear o Usuario",
-				"CREATE_LIST": "Non se puideron crear os Usuarios",
-				"UPDATE": "Non se puido actualizar o Usuario",
-				"DELETE": "Non se puido eliminar o Usuario"
-			}
-		}
+		"NAME": "Usuario",
+		"NAME_PLURAL": "Usuarios"
 	},
 	"USER_CONTACT": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Contactos de Usuarios recuperáronse correctamente",
-				"GET_SINGLE": "Contacto de Usuario obtido con éxito",
-				"CREATE": "Contacto de Usuario creado con éxito",
-				"CREATE_LIST": "Contactos de Usuarios creados con éxito",
-				"UPDATE": "Contacto de Usuario actualizado con éxito",
-				"DELETE": "Contacto de Usuario eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Contacto de Usuario",
-				"GET_SINGLE": "O Contacto de Usuario non se puido obter",
-				"CREATE": "Non se puido crear o Contacto de Usuario",
-				"CREATE_LIST": "Non se puideron crear os Contactos de Usuarios",
-				"UPDATE": "Non se puido actualizar o Contacto de Usuario",
-				"DELETE": "Non se puido eliminar o Contacto de Usuario"
-			}
-		}
+		"NAME": "Contacto de Usuario",
+		"NAME_PLURAL": "Contactos de Usuario"
 	},
 	"USER_CONTACT_TYPE": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Tipos Contacto de Usuario recuperáronse correctamente",
-				"GET_SINGLE": "Tipo Contacto de Usuario obtido con éxito",
-				"CREATE": "Tipo Contacto de Usuario creado con éxito",
-				"CREATE_LIST": "Tipos Contacto de Usuario creados con éxito",
-				"UPDATE": "Tipo Contacto de Usuario actualizado con éxito",
-				"DELETE": "Tipo Contacto de Usuario eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Tipo Contacto de Usuario",
-				"GET_SINGLE": "O Tipo Contacto de Usuario non se puido obter",
-				"CREATE": "Non se puido crear o Tipo Contacto de Usuario",
-				"CREATE_LIST": "Non se puideron crear os Tipos Contacto de Usuario",
-				"UPDATE": "Non se puido actualizar o Tipo Contacto de Usuario",
-				"DELETE": "Non se puido eliminar o Tipo Contacto de Usuario"
-			}
-		}
+		"NAME": "Tipo Contacto",
+		"NAME_PLURAL": "Tipos Contacto"
 	},
 	"USER_GROUP": {
-		"NAME": "",
-		"NAME_PLURAL": "",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Grupos de Usuarios recuperáronse correctamente",
-				"GET_SINGLE": "Grupo de Usuario obtido con éxito",
-				"CREATE": "Grupos de Usuarios creado con éxito",
-				"CREATE_LIST": "Grupo de Usuarios creados con éxito",
-				"UPDATE": "Grupo de Usuario actualizado con éxito",
-				"DELETE": "Grupo de Usuario eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Grupo de Usuario",
-				"GET_SINGLE": "O Grupo de Usuario non se puido obter",
-				"CREATE": "Non se puido crear o Grupo de Usuario",
-				"CREATE_LIST": "Non se puideron crear os Grupos de Usuarios",
-				"UPDATE": "Non se puido actualizar o Grupo de Usuario",
-				"DELETE": "Non se puido eliminar o Grupo de Usuario"
-			}
-		}
+		"NAME": "Grupo de Usuario",
+		"NAME_PLURAL": "Grupos de Usuario"
 	},
 	"USER_SCHEDULE": {
 		"NAME": "Calendario de Usuario",
-		"NAME_PLURAL": "Calendarios de Usuario",
-		"SERVICE": {
-			"SUCCESS": {
-				"GET_ALL": "Tódolos Calendarios de Usuario recuperáronse correctamente",
-				"GET_SINGLE": "Calendario de Usuario obtido con éxito",
-				"CREATE": "Calendario de Usuario creado con éxito",
-				"CREATE_LIST": "Calendarios de Usuario creados con éxito",
-				"UPDATE": "Calendario de Usuario actualizado con éxito",
-				"DELETE": "Calendario de Usuario eliminado correctamente"
-			},
-			"ERROR": {
-				"GET_ALL": "Non se atopou ningún Calendario de Usuario",
-				"GET_SINGLE": "O Calendario de Usuario non se puido obter",
-				"CREATE": "Non se puido crear o Calendario de Usuario",
-				"CREATE_LIST": "Non se puideron crear os Calendarios de Usuario",
-				"UPDATE": "Non se puido actualizar o Calendario de Usuario",
-				"DELETE": "Non se puido eliminar o Calendario de Usuario"
-			}
-		}
+		"NAME_PLURAL": "Calendarios de Usuario"
 	}
 }
