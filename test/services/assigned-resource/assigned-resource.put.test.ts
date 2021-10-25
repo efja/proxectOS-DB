@@ -96,10 +96,10 @@ describe('1: Probas DATOS API - AssignedResources (PUT)', () => {
         expect(data.id).toBe(assignedResource1.id);
 
         // Comprobanse algúns datos opcionais
-        expect(data.startDate).toBe(assignedResource0.amount);
-        expect(data.startDate).toBe(assignedResource1.amount);
+        expect(data.amount).toBe(assignedResource0.amount);
+        expect(data.amount).toBe(assignedResource1.amount);
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: assignedResource1.id }));
     });
 });
 
