@@ -11,7 +11,7 @@ export class AssignedResourceRoutes {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private assignedResourceController :AssignedResourceController = new AssignedResourceController();
+  private assignedResourceController : AssignedResourceController = new AssignedResourceController();
   private router = Router();
 
   // ************************************************************************************************

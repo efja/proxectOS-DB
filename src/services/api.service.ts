@@ -14,6 +14,7 @@ import queryType from 'query-types';
 import { routes } from '../routes';
 
 import { DBConnection } from '../config/config-db';
+import { RequestContext } from '@mikro-orm/core';
 
 // ####################################################################################################
 // ## CONSTANTES DO ENTORNO
@@ -139,6 +140,12 @@ export class App {
     public async setDbOptionsFromEnv() {
         this.db = new DBConnection();
 
+        await this.db.init();
+
+        this.app.use((req, res, next) => {
+            RequestContext.create(this.db.orm.em, next);
+        });
+
         return this;
     }
 
@@ -170,6 +177,12 @@ export class App {
             user,
             password
           );
+
+        await this.db.init();
+
+        this.app.use((req, res, next) => {
+            RequestContext.create(this.db.orm.em, next);
+        });
 
         return this;
     }

@@ -2,16 +2,16 @@
 // ## IMPORTACIÓNS
 // ####################################################################################################
 import { Router, IRouter } from 'express';
-import { ProjectController } from '../controllers/project.controller';
+import { AssignedStageController } from '../controllers/assigned-stage.controller';
 
 // ####################################################################################################
-// ## CLASE ProjectRoutes
+// ## CLASE AssignedStageRoutes
 // ####################################################################################################
-export class ProjectRoutes {
+export class AssignedStageRoutes {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private projectController : ProjectController = new ProjectController();
+  private assignedStageController : AssignedStageController = new AssignedStageController();
   private router = Router();
 
   // ************************************************************************************************
@@ -26,21 +26,21 @@ export class ProjectRoutes {
   // ************************************************************************************************
   private routes = () => {
     // POST
-    this.router.post('', this.projectController.create);
-    this.router.post('/Multiple', this.projectController.createList);
+    this.router.post('', this.assignedStageController.create);
+    this.router.post('/Multiple', this.assignedStageController.createList);
 
     // GET
-    this.router.get('', this.projectController.getAll);
-    this.router.get('/:id', this.projectController.get);
+    this.router.get('', this.assignedStageController.getAll);
+    this.router.get('/:id', this.assignedStageController.get);
 
     // PUT
-    this.router.put('/:id', this.projectController.update);
+    this.router.put('/:id', this.assignedStageController.update);
 
     // PATCH
-    this.router.patch('/:id', this.projectController.modify);
+    this.router.patch('/:id', this.assignedStageController.modify);
 
     // DELETE
-    this.router.delete('/:id', this.projectController.delete);
+    this.router.delete('/:id', this.assignedStageController.delete);
   };
 
   // ************************************************************************************************

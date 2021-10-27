@@ -8,18 +8,18 @@ import { req, res, next } from 'express';
 import qs from 'qs';
 
 import { ResponseData } from '../interfaces/response-data.interface';
-import { AssignedResourceService } from '../services/assigned-resource.service';
-import { AssignedResource } from '../models/assigned-resource.model';
+import { AssignedStageService } from '../services/assigned-stage.service';
+import { AssignedStage } from '../models/assigned-stage.model';
 
 // ####################################################################################################
-// ## CLASE AssignedResourceController
+// ## CLASE AssignedStageController
 // ####################################################################################################
-export class AssignedResourceController {
+export class AssignedStageController {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private TRANSLATION_NAME_MODEL : string = 'ASSIGNED_RESOURCE';
-  public assignedResourceService : AssignedResourceService = new AssignedResourceService();
+  private TRANSLATION_NAME_MODEL : string = 'ASSIGNED_STAGE';
+  public assignedStageService : AssignedStageService = new AssignedStageService();
 
   // ************************************************************************************************
   // ** CONSTRUTOR
@@ -46,12 +46,12 @@ export class AssignedResourceController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const assignedResource: AssignedResource = new AssignedResource(req.body);
+      const assignedStage: AssignedStage = new AssignedStage(req.body);
 
       let data;
 
-      if (this.hasMinimumAttributes(assignedResource)) {
-        data = await this.assignedResourceService.create(assignedResource);
+      if (this.hasMinimumAttributes(assignedStage)) {
+        data = await this.assignedStageService.create(assignedStage);
       }
 
       if (
@@ -63,7 +63,7 @@ export class AssignedResourceController {
         message = req.t('SUCCESS.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
       } else if (data == HttpStatus.CONFLICT) {
         data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: assignedResource.id });
+        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: assignedStage.id });
       } else {
         data = undefined;
         error = req.t('ERROR.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
@@ -99,25 +99,25 @@ export class AssignedResourceController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const assignedResources: AssignedResource[] = req.body;
+      const assignedStages: AssignedStage[] = req.body;
 
       let data;
       let continueProcess: boolean = true;
 
-      for (let i = 0; i < assignedResources.length; i++) {
-        let item = assignedResources[i];
+      for (let i = 0; i < assignedStages.length; i++) {
+        let item = assignedStages[i];
 
         if (this.hasMinimumAttributes(item)) {
           // Crease un proxecto novo para asegurar que vai a ser do tipo correcto
-          assignedResources[i] = new AssignedResource(item);
+          assignedStages[i] = new AssignedStage(item);
         } else {
           continueProcess = false;
           break;
         }
       }
 
-      if (continueProcess && assignedResources && assignedResources.length > 0) {
-        data = await this.assignedResourceService.createList(assignedResources);
+      if (continueProcess && assignedStages && assignedStages.length > 0) {
+        data = await this.assignedStageService.createList(assignedStages);
       }
 
       if (
@@ -180,7 +180,7 @@ export class AssignedResourceController {
 
       const queryParams = qs.parse(query);
 
-      let data = await this.assignedResourceService.getAll(queryParams, orderBy, limit, offset);
+      let data = await this.assignedStageService.getAll(queryParams, orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -230,7 +230,7 @@ export class AssignedResourceController {
       const { id } = req.params;
       const queryParams = qs.parse(req.query);
 
-      let data = await this.assignedResourceService.get(id, queryParams);
+      let data = await this.assignedStageService.get(id, queryParams);
 
       if (
         data != undefined &&
@@ -278,12 +278,12 @@ export class AssignedResourceController {
       let code = HttpStatus.NOT_FOUND;
 
       const { id } = req.params;
-      const assignedResource: AssignedResource = new AssignedResource(req.body);
+      const assignedStage: AssignedStage = new AssignedStage(req.body);
 
       let data;
 
-      if (this.hasMinimumAttributes(assignedResource)) {
-        data = await this.assignedResourceService.update(id, assignedResource);
+      if (this.hasMinimumAttributes(assignedStage)) {
+        data = await this.assignedStageService.update(id, assignedStage);
       }
 
       if (
@@ -346,7 +346,7 @@ export class AssignedResourceController {
 
       if (objPatch.length > 0) {
 
-        data = await this.assignedResourceService.modify(id, objPatch);
+        data = await this.assignedStageService.modify(id, objPatch);
 
         if (
           data != undefined &&
@@ -404,7 +404,7 @@ export class AssignedResourceController {
 
       const { id } = req.params;
 
-      let data = await this.assignedResourceService.delete(id);
+      let data = await this.assignedStageService.delete(id);
 
       if (
         data != undefined &&
@@ -440,15 +440,15 @@ export class AssignedResourceController {
   // ** UTILIDADES
   // ************************************************************************************************
   /**
-   * Comproba se o AssignedResource pasado ten os atributos mínimos que o modelo necesita.
+   * Comproba se o AssignedStage pasado ten os atributos mínimos que o modelo necesita.
    *
-   * @param item AssignedResource que se vai a avaliar
+   * @param item AssignedStage que se vai a avaliar
    * @returns Boolean
    */
-  private hasMinimumAttributes = (item: AssignedResource): Boolean => {
+  private hasMinimumAttributes = (item: AssignedStage): Boolean => {
     let result = false;
 
-    if (item && item.description && item.amount && item.unitCost) {
+    if (item && item.stage && item.currentState && item.startDate) {
       result = true;
     }
 

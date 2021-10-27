@@ -2,16 +2,17 @@
 // ## IMPORTACIÓNS
 // ####################################################################################################
 import { Router, IRouter } from 'express';
-import { ProjectController } from '../controllers/project.controller';
+
+import { AssignedUserController } from '../controllers/assigned-user.controller';
 
 // ####################################################################################################
-// ## CLASE ProjectRoutes
+// ## CLASE AssignedUserRoutes
 // ####################################################################################################
-export class ProjectRoutes {
+export class AssignedUserRoutes {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private projectController : ProjectController = new ProjectController();
+  private assignedUserController : AssignedUserController = new AssignedUserController();
   private router = Router();
 
   // ************************************************************************************************
@@ -26,21 +27,21 @@ export class ProjectRoutes {
   // ************************************************************************************************
   private routes = () => {
     // POST
-    this.router.post('', this.projectController.create);
-    this.router.post('/Multiple', this.projectController.createList);
+    this.router.post('', this.assignedUserController.create);
+    this.router.post('/Multiple', this.assignedUserController.createList);
 
     // GET
-    this.router.get('', this.projectController.getAll);
-    this.router.get('/:id', this.projectController.get);
+    this.router.get('', this.assignedUserController.getAll);
+    this.router.get('/:id', this.assignedUserController.get);
 
     // PUT
-    this.router.put('/:id', this.projectController.update);
+    this.router.put('/:id', this.assignedUserController.update);
 
     // PATCH
-    this.router.patch('/:id', this.projectController.modify);
+    this.router.patch('/:id', this.assignedUserController.modify);
 
     // DELETE
-    this.router.delete('/:id', this.projectController.delete);
+    this.router.delete('/:id', this.assignedUserController.delete);
   };
 
   // ************************************************************************************************
