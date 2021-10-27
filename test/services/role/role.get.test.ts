@@ -92,7 +92,7 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$regex': 'lectura' }
+                name: {'$re': 'lectura' }
             },
             { arrayFormat: 'repeat' }
         );
@@ -165,7 +165,7 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
     test(`1.4: Consultar Role: <${dataList.roles[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': 'lectura' }
+                name: {'$re': 'lectura' }
             }
         );
 
@@ -241,7 +241,7 @@ describe('2: Probas DATOS API - Roles ERROS (GET)', () => {
     test('2.1: Consultar tódolos Roles con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -276,7 +276,7 @@ describe('2: Probas DATOS API - Roles ERROS (GET)', () => {
     test(`2.2: Consultar Role: <${dataList.roles[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 

@@ -90,11 +90,12 @@ describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
     });
 
     test('1.2: Consultar tódolos RepositoryApps con parámetros de filtrado:', async() => {
+        const valueFilter = 'ProxectOS_';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$regex': 'ProxectOS-' }
+                name: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -110,7 +111,9 @@ describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 3;
+        const repositories: RepositoryApp[] = (dataList.repositories as RepositoryApp[]).filter(item => item.name.includes(valueFilter));
+
+        const dataLength = repositories.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -120,7 +123,7 @@ describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.repositories[0].id);
+        expect(data[0].id).toBe(repositories[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -164,21 +167,21 @@ describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
     });
 
     test(`1.4: Consultar RepositoryApp: <${dataList.repositories[0].id}> con parámetros de filtrado`, async() => {
+        const repositoryApp = dataList.repositories[0] as RepositoryApp;
+
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': 'ProxectOS-' }
+                name: {'$re': repositoryApp.name }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.repositories[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${repositoryApp.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const repositoryApp = dataList.repositories[0] as RepositoryApp;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -241,7 +244,7 @@ describe('2: Probas DATOS API - RepositoryApps ERROS (GET)', () => {
     test('2.1: Consultar tódolos RepositoryApps con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -276,7 +279,7 @@ describe('2: Probas DATOS API - RepositoryApps ERROS (GET)', () => {
     test(`2.2: Consultar RepositoryApp: <${dataList.repositories[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 

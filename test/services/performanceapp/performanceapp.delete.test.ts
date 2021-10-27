@@ -89,7 +89,7 @@ describe('1: Probas DATOS API - PerformanceApps (DELETE)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(performanceApp.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp.targetFinishDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('PERFORMANCE.NAME'), id: dataList.performances[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('PERFORMANCE.NAME'), id: performanceApp.id }));
 
         // --------------------------------------------------------------------------------------------
         // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD

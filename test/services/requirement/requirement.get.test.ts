@@ -94,7 +94,7 @@ describe('1: Probas DATOS API - Requirements (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$regex': 'magnam' }
+                name: {'$re': 'magnam' }
             },
             { arrayFormat: 'repeat' }
         );
@@ -167,7 +167,7 @@ describe('1: Probas DATOS API - Requirements (GET)', () => {
     test(`1.4: Consultar Requirement: <${dataList.requirements[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': 'magnam' }
+                name: {'$re': 'magnam' }
             }
         );
 
@@ -243,7 +243,7 @@ describe('2: Probas DATOS API - Requirements ERROS (GET)', () => {
     test('2.1: Consultar tódolos Requirements con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -278,7 +278,7 @@ describe('2: Probas DATOS API - Requirements ERROS (GET)', () => {
     test(`2.2: Consultar Requirement: <${dataList.requirements[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 

@@ -92,7 +92,7 @@ describe('1: Probas DATOS API - Resources (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$regex': 'Hora' }
+                name: {'$re': 'Hora' }
             },
             { arrayFormat: 'repeat' }
         );
@@ -161,7 +161,7 @@ describe('1: Probas DATOS API - Resources (GET)', () => {
     test(`1.4: Consultar Resource: <${dataList.resources[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': 'Hora' }
+                name: {'$re': 'Hora' }
             }
         );
 
@@ -233,7 +233,7 @@ describe('2: Probas DATOS API - Resources ERROS (GET)', () => {
     test('2.1: Consultar tódolos Resources con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -268,7 +268,7 @@ describe('2: Probas DATOS API - Resources ERROS (GET)', () => {
     test(`2.2: Consultar Resource: <${dataList.resources[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 

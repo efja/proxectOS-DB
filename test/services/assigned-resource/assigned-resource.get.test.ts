@@ -173,7 +173,7 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedResources[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${assignedResource.id}?${queryParameters}`);
         const {
             code,
             data,
@@ -242,7 +242,7 @@ describe('2: Probas DATOS API - AssignedResources ERROS (GET)', () => {
     test('2.1: Consultar tódolos AssignedResources con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -277,7 +277,7 @@ describe('2: Probas DATOS API - AssignedResources ERROS (GET)', () => {
     test(`2.2: Consultar AssignedResource: <${dataList.assignedResources[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 

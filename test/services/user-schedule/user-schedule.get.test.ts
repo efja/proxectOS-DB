@@ -92,7 +92,7 @@ describe('1: Probas DATOS API - UserSchedules (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ description: "ASC" }],
-                description: {'$regex': 'Calendario' }
+                description: {'$re': 'Calendario' }
             },
             { arrayFormat: 'repeat' }
         );
@@ -161,7 +161,7 @@ describe('1: Probas DATOS API - UserSchedules (GET)', () => {
     test(`1.4: Consultar UserSchedule: <${dataList.userSchedules[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                description: {'$regex': 'Calendario' }
+                description: {'$re': 'Calendario' }
             }
         );
 
@@ -233,7 +233,7 @@ describe('2: Probas DATOS API - UserSchedules ERROS (GET)', () => {
     test('2.1: Consultar tódolos UserSchedules con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                description: {'$regex': FAKE_TEXT }
+                description: {'$re': FAKE_TEXT }
             }
         );
 
@@ -268,7 +268,7 @@ describe('2: Probas DATOS API - UserSchedules ERROS (GET)', () => {
     test(`2.2: Consultar UserSchedule: <${dataList.userSchedules[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                description: {'$regex': FAKE_TEXT }
+                description: {'$re': FAKE_TEXT }
             }
         );
 

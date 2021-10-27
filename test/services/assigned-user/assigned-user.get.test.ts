@@ -96,7 +96,7 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ assignedUser: "ASC" }],
-                assignedUser: {'$regex': assignedUser.assignedUser }
+                assignedUser: {'$re': assignedUser.assignedUser }
             },
             { arrayFormat: 'repeat' }
         );
@@ -166,7 +166,7 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
 
         const queryParameters = qs.stringify(
             {
-                assignedUser: {'$regex': assignedUser.assignedUser }
+                assignedUser: {'$re': assignedUser.assignedUser }
             }
         );
 
@@ -234,7 +234,7 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (GET)', () => {
     test('2.1: Consultar tódolos AssignedUsers con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                assignedUser: {'$regex': FAKE_TEXT }
+                assignedUser: {'$re': FAKE_TEXT }
             }
         );
 
@@ -269,7 +269,7 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (GET)', () => {
     test(`2.2: Consultar AssignedUser: <${dataList.assignedUsers[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                assignedUser: {'$regex': FAKE_TEXT }
+                assignedUser: {'$re': FAKE_TEXT }
             }
         );
 

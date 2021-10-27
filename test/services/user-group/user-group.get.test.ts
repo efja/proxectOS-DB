@@ -92,7 +92,7 @@ describe('1: Probas DATOS API - UserGroups (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$regex': 'Administradores' }
+                name: {'$re': 'Administradores' }
             },
             { arrayFormat: 'repeat' }
         );
@@ -161,7 +161,7 @@ describe('1: Probas DATOS API - UserGroups (GET)', () => {
     test(`1.4: Consultar UserGroup: <${dataList.userGroups[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': 'Administradores' }
+                name: {'$re': 'Administradores' }
             }
         );
 
@@ -233,7 +233,7 @@ describe('2: Probas DATOS API - UserGroups ERROS (GET)', () => {
     test('2.1: Consultar tódolos UserGroups con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -268,7 +268,7 @@ describe('2: Probas DATOS API - UserGroups ERROS (GET)', () => {
     test(`2.2: Consultar UserGroup: <${dataList.userGroups[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 

@@ -92,7 +92,7 @@ describe('1: Probas DATOS API - Types (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$regex': 'Dependencia' }
+                name: {'$re': 'Dependencia' }
             },
             { arrayFormat: 'repeat' }
         );
@@ -161,7 +161,7 @@ describe('1: Probas DATOS API - Types (GET)', () => {
     test(`1.4: Consultar Type: <${dataList.types[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': 'Dependencia' }
+                name: {'$re': 'Dependencia' }
             }
         );
 
@@ -233,7 +233,7 @@ describe('2: Probas DATOS API - Types ERROS (GET)', () => {
     test('2.1: Consultar tódolos Types con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -268,7 +268,7 @@ describe('2: Probas DATOS API - Types ERROS (GET)', () => {
     test(`2.2: Consultar Type: <${dataList.types[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 

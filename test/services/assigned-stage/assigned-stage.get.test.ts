@@ -94,7 +94,7 @@ describe('1: Probas DATOS API - AssignedStages (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ stage: "ASC" }],
-                stage: {'$regex': '616b561b41663da69a3fc807' }
+                stage: {'$re': '616b561b41663da69a3fc807' }
             },
             { arrayFormat: 'repeat' }
         );
@@ -164,7 +164,7 @@ describe('1: Probas DATOS API - AssignedStages (GET)', () => {
     test(`1.4: Consultar AssignedStage: <${dataList.assignedStages[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                stage: {'$regex': '616b561b41663da69a3fc807' }
+                stage: {'$re': '616b561b41663da69a3fc807' }
             }
         );
 
@@ -237,7 +237,7 @@ describe('2: Probas DATOS API - AssignedStages ERROS (GET)', () => {
     test('2.1: Consultar tódolos AssignedStages con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -272,7 +272,7 @@ describe('2: Probas DATOS API - AssignedStages ERROS (GET)', () => {
     test(`2.2: Consultar AssignedStage: <${dataList.assignedStages[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 

@@ -92,7 +92,7 @@ describe('1: Probas DATOS API - Users (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                login: {'$regex': 'martacr' }
+                login: {'$re': 'martacr' }
             },
             { arrayFormat: 'repeat' }
         );
@@ -164,7 +164,7 @@ describe('1: Probas DATOS API - Users (GET)', () => {
     test(`1.4: Consultar User: <${dataList.users[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                login: {'$regex': 'martacr' }
+                login: {'$re': 'martacr' }
             }
         );
 
@@ -239,7 +239,7 @@ describe('2: Probas DATOS API - Users ERROS (GET)', () => {
     test('2.1: Consultar tódolos Users con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -274,7 +274,7 @@ describe('2: Probas DATOS API - Users ERROS (GET)', () => {
     test(`2.2: Consultar User: <${dataList.users[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 

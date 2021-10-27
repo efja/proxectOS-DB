@@ -88,7 +88,7 @@ describe('1: Probas DATOS API - CommentApps (DELETE)', () => {
         // Comprobanse algúns datos opcionais
         expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(commentApp.expirationDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('COMMENT.NAME'), id: dataList.comments[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('COMMENT.NAME'), id: commentApp.id }));
 
         // --------------------------------------------------------------------------------------------
         // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD

@@ -6,7 +6,7 @@
         "updatedAt"             : "2020-10-16T11:02:43.000+02:00",
 
         "expirationDate"        : null,
-        "name"                  : "Proxecto fin de ciclo DAW (ProxectOS)",
+        "name"                  : "Proxecto fin de ciclo DAW ProxectOS",
         "description"           : "",
         "uri"                   : "https://gitlab.iessanclemente.net/dawm/a18franciscogc.git",
         "createdBy"             : "616b4b58eb372265b9c3101d",
@@ -23,7 +23,7 @@
         "updatedAt"             : "2020-10-16T11:02:43.000+02:00",
 
         "expirationDate"        : null,
-        "name"                  : "Proxecto fin de ciclo DAW (ProxectOS-API)",
+        "name"                  : "Proxecto fin de ciclo DAW ProxectOS_API",
         "description"           : "",
         "uri"                   : "https://gitlab.iessanclemente.net/a18franciscogc/proxectos-api.git",
         "createdBy"             : "616b4b58eb372265b9c3101d",
@@ -40,7 +40,7 @@
         "updatedAt"             : "2020-10-16T11:02:43.000+02:00",
 
         "expirationDate"        : null,
-        "name"                  : "Proxecto fin de ciclo DAW (ProxectOS-DB)",
+        "name"                  : "Proxecto fin de ciclo DAW ProxectOS_DB",
         "description"           : "",
         "uri"                   : "https://gitlab.iessanclemente.net/a18franciscogc/proxectos-db.git",
         "createdBy"             : "616b4b58eb372265b9c3101d",
@@ -57,7 +57,7 @@
         "updatedAt"             : "2020-10-16T11:02:43.000+02:00",
 
         "expirationDate"        : "2021-11-30T14:56:00.000+01:00",
-        "name"                  : "Proxecto fin de ciclo DAW (ProxectOS-UI)",
+        "name"                  : "Proxecto fin de ciclo DAW ProxectOS_UI",
         "description"           : "",
         "uri"                   : "https://gitlab.iessanclemente.net/a18franciscogc/proxectos-ui.git",
         "createdBy"             : "616b4b58eb372265b9c3101d",

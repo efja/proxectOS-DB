@@ -66,6 +66,7 @@ describe('1: Probas DATOS API - RepositoryApps (PATCH)', () => {
 
         // Modificase o modelo RepositoryApp
         repositoryApp1.name = repositoryApp1.name + FAKE_TEXT;
+        repositoryApp1.description = repositoryApp1.description + FAKE_TEXT;
 
         // Xerase o objexecto tipo HTTP PATCH
         const objPatch = jsonpatch.compare(repositoryApp0, repositoryApp1);
@@ -104,7 +105,7 @@ describe('1: Probas DATOS API - RepositoryApps (PATCH)', () => {
         expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(repositoryApp0.expirationDate));
         expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(repositoryApp1.expirationDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('REPOSITORY.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('REPOSITORY.NAME'), id: dataList.repositories[0].id }));
     });
 
 });

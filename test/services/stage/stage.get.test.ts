@@ -92,7 +92,7 @@ describe('1: Probas DATOS API - Stages (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$regex': 'Desenvolvemento' }
+                name: {'$re': 'Desenvolvemento' }
             },
             { arrayFormat: 'repeat' }
         );
@@ -161,7 +161,7 @@ describe('1: Probas DATOS API - Stages (GET)', () => {
     test(`1.4: Consultar Stage: <${dataList.stages[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': 'Desenvolvemento' }
+                name: {'$re': 'Desenvolvemento' }
             }
         );
 
@@ -233,7 +233,7 @@ describe('2: Probas DATOS API - Stages ERROS (GET)', () => {
     test('2.1: Consultar tódolos Stages con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -268,7 +268,7 @@ describe('2: Probas DATOS API - Stages ERROS (GET)', () => {
     test(`2.2: Consultar Stage: <${dataList.stages[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 

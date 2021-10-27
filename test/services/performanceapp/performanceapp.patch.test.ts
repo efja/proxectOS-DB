@@ -70,7 +70,7 @@ describe('1: Probas DATOS API - PerformanceApps (PATCH)', () => {
         // Xerase o objexecto tipo HTTP PATCH
         const objPatch = jsonpatch.compare(performanceApp0, performanceApp1);
 
-        const response = await request.patch(`${API_BASE}/${ENDPOINT}/${performanceApp0.id}`).send(objPatch);
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/${performanceApp1.id}`).send(objPatch);
         const {
             code,
             data,
@@ -106,7 +106,7 @@ describe('1: Probas DATOS API - PerformanceApps (PATCH)', () => {
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp0.targetFinishDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp1.targetFinishDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('PERFORMANCE.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('PERFORMANCE.NAME'), id: performanceApp1.id }));
     });
 
 });

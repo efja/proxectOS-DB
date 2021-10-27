@@ -95,7 +95,7 @@ describe('1: Probas DATOS API - CommentApps (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                title: {'$regex': valueFilter }
+                title: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -170,7 +170,7 @@ describe('1: Probas DATOS API - CommentApps (GET)', () => {
         const commentApp = dataList.comments[0] as CommentApp;
         const queryParameters = qs.stringify(
             {
-                title: {'$regex': commentApp.title }
+                title: {'$re': commentApp.title }
             }
         );
 
@@ -243,7 +243,7 @@ describe('2: Probas DATOS API - CommentApps ERROS (GET)', () => {
     test('2.1: Consultar tódolos CommentApps con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -278,7 +278,7 @@ describe('2: Probas DATOS API - CommentApps ERROS (GET)', () => {
     test(`2.2: Consultar CommentApp: <${dataList.comments[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 

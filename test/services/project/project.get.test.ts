@@ -90,11 +90,12 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
     });
 
     test('1.2: Consultar tódolos Projects con parámetros de filtrado:', async() => {
+        const valueFilter = 'Test';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$regex': 'Test' }
+                name: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -110,7 +111,9 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
+        const projects: Project[] = (dataList.projects as Project[]).filter(item => item.name.includes(valueFilter));
+
+        const dataLength = projects.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -120,7 +123,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.projects[0].id);
+        expect(data[0].id).toBe(projects[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -165,21 +168,21 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
     });
 
     test(`1.4: Consultar Project: <${dataList.projects[0].id}> con parámetros de filtrado`, async() => {
+        const project = dataList.projects[0] as Project;
+
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': 'Test' }
+                name: {'$re': project.name }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.projects[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${project.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const project = dataList.projects[0] as Project;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -243,7 +246,7 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
     test('2.1: Consultar tódolos Projects con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -278,7 +281,7 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
     test(`2.2: Consultar Project: <${dataList.projects[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -289,6 +292,8 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
             message,
             error,
         } = response.body
+
+        console.log('data :>> ', data);
 
         expect(error).toBeDefined();
         expect(message).toBeUndefined();
@@ -308,6 +313,8 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
             message,
             error,
         } = response.body
+
+        console.log('data :>> ', data);
 
         expect(error).toBeDefined();
         expect(message).toBeUndefined();

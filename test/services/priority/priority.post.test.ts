@@ -5,7 +5,6 @@ import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
 import { Priority } from '../../../src/models/priority.model';
-import { User } from "../../../src/models/user.model";
 
 import {
     app,
@@ -17,6 +16,7 @@ import {
 
     request
 } from "../commons";
+import { CommentApp } from "../../../src/models/commentapp.model";
 
 // ####################################################################################################
 // ## TESTS GROUPS
@@ -172,7 +172,7 @@ describe('2: Probas DATOS API - Priorities ERROS (POST)', () => {
     // ** TESTS
     // ************************************************************************************************
     test(`2.1: Crear Priority con datos erróneos:`, async() => {
-        const badPriority = dataList.users[0] as User;
+        const badPriority = dataList.comments[0] as CommentApp;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badPriority);
         const {
@@ -216,7 +216,7 @@ describe('2: Probas DATOS API - Priorities ERROS (POST)', () => {
     test('2.3: Crear lista de Priorities algúns con datos erróneos:', async() => {
         const badPriorities = [
             new Priority(dataList.priorities[0]),
-            new User(dataList.users[0]),
+            new CommentApp(dataList.comments[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos

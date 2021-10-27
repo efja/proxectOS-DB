@@ -88,11 +88,13 @@ describe('1: Probas DATOS API - Priorities (GET)', () => {
     });
 
     test('1.2: Consultar tódolas Priorities con parámetros de filtrado:', async() => {
+        const valueFilter = 'Med';
+
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$regex': 'Med' }
+                name: { '$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -108,7 +110,9 @@ describe('1: Probas DATOS API - Priorities (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
+        const priorities: Priority[] = (dataList.priorities as Priority[]).filter(item => item.name.includes(valueFilter));
+
+        const dataLength = priorities.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -118,7 +122,7 @@ describe('1: Probas DATOS API - Priorities (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.priorities[0].id);
+        expect(data[0].id).toBe(priorities[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -159,21 +163,21 @@ describe('1: Probas DATOS API - Priorities (GET)', () => {
     });
 
     test(`1.4: Consultar Priority: <${dataList.priorities[0].id}> con parámetros de filtrado`, async() => {
+        const priority = dataList.priorities[0] as Priority;
+
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': 'Med' }
+                name: {'$re': priority.name }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.priorities[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${priority.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const priority = dataList.priorities[0] as Priority;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -192,7 +196,7 @@ describe('1: Probas DATOS API - Priorities (GET)', () => {
         expect(data.description).toBeDefined();
         expect(data.description).toBe(priority.description);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('PRIORITY.NAME'), id: dataList.priorities[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('PRIORITY.NAME'), id: priority.id }));
     });
 });
 
@@ -233,7 +237,7 @@ describe('2: Probas DATOS API - Priorities ERROS (GET)', () => {
     test('2.1: Consultar tódolas Priorities con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -268,7 +272,7 @@ describe('2: Probas DATOS API - Priorities ERROS (GET)', () => {
     test(`2.2: Consultar Priority: <${dataList.priorities[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$regex': FAKE_TEXT }
+                name: {'$re': FAKE_TEXT }
             }
         );
 
@@ -287,7 +291,7 @@ describe('2: Probas DATOS API - Priorities ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PRIORITY.NAME'), id: `${dataList.priorities[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('PRIORITY.NAME'), id: `${dataList.priorities[0].id}` }));
     });
 
     test(`2.3: Consultar Priority inexistente:`, async() => {

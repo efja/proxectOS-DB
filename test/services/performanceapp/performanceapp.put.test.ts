@@ -103,7 +103,7 @@ describe('1: Probas DATOS API - PerformanceApps (PUT)', () => {
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp0.targetFinishDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(performanceApp1.targetFinishDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('PERFORMANCE.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('PERFORMANCE.NAME'), id: dataList.performances[0].id }));
     });
 });
 

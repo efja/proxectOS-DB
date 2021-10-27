@@ -92,7 +92,7 @@ describe('1: Probas DATOS API - UserContacts (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ contact: "ASC" }],
-                contact: {'$regex': 'Marianna' }
+                contact: {'$re': 'Marianna' }
             },
             { arrayFormat: 'repeat' }
         );
@@ -158,7 +158,7 @@ describe('1: Probas DATOS API - UserContacts (GET)', () => {
     test(`1.4: Consultar UserContact: <${dataList.userContacts[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                contact: {'$regex': 'Marianna' }
+                contact: {'$re': 'Marianna' }
             }
         );
 
@@ -227,7 +227,7 @@ describe('2: Probas DATOS API - UserContacts ERROS (GET)', () => {
     test('2.1: Consultar tódolos UserContacts con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                contact: {'$regex': FAKE_TEXT }
+                contact: {'$re': FAKE_TEXT }
             }
         );
 
@@ -262,7 +262,7 @@ describe('2: Probas DATOS API - UserContacts ERROS (GET)', () => {
     test(`2.2: Consultar UserContact: <${dataList.userContacts[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                contact: {'$regex': FAKE_TEXT }
+                contact: {'$re': FAKE_TEXT }
             }
         );
 

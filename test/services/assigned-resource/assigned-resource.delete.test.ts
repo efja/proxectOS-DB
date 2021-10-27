@@ -86,7 +86,7 @@ describe('1: Probas DATOS API - AssignedResources (DELETE)', () => {
         expect(data.resource).toBeDefined();
         expect(data.resource).toBe(assignedResource.resource.id);
 
-        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: dataList.assignedResources[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: assignedResource.id }));
 
         // --------------------------------------------------------------------------------------------
         // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD

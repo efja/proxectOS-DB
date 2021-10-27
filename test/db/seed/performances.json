@@ -13,11 +13,6 @@
         "name"                      : "aut aut ratione",
         "description"               : "Illo fugit ut error vel rerum quo laboriosam. Qui nihil exercitationem enim esse exercitationem iusto debitis ut dolore. Pariatur itaque aperiam aut alias id magni fugiat enim. Fugiat quia cum dignissimos possimus illum.",
 
-        "totalEstimatedHours"       : 0,
-        "totalHoursConsumed"        : 0,
-        "totalEstimatedResources"   : 0,
-        "totalResourcesConsumed"    : 0,
-
         "performances"              : [],
         "assignedStages"            : [],
         "priority"                  : "616b54dd3f87b251f1f7cfce",
@@ -28,9 +23,6 @@
         "assignedUsers"             : [],
 
         "visibleToUserGroups"       : [],
-
-        "estimatedHours"            : [],
-        "hoursConsumed"             : [],
 
         "estimatedResources"        : [],
         "resourcesConsumed"         : [],
@@ -51,11 +43,6 @@
         "name"                      : "vel dolor itaque",
         "description"               : "Quo nisi vel ducimus necessitatibus occaecati. Eos vel quasi vero. Quia et laboriosam sequi. Possimus perferendis quo. Cumque ipsam eos adipisci unde blanditiis.",
 
-        "totalEstimatedHours"       : 0,
-        "totalHoursConsumed"        : 0,
-        "totalEstimatedResources"   : 0,
-        "totalResourcesConsumed"    : 0,
-
         "performances"              : [],
         "assignedStages"            : [],
         "priority"                  : "616b55248eaad55a06c73607",
@@ -66,9 +53,6 @@
         "assignedUsers"             : [],
 
         "visibleToUserGroups"       : [],
-
-        "estimatedHours"            : [],
-        "hoursConsumed"             : [],
 
         "estimatedResources"        : [],
         "resourcesConsumed"         : [],

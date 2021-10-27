@@ -80,7 +80,7 @@ describe('1: Probas DATOS API - AssignedUsers (DELETE)', () => {
         expect(data.assignedUser).toBeDefined();
         expect(data.assignedUser).toBe(assignedUser.assignedUser.id);
 
-        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('ASSIGNED_USER.NAME'), id: dataList.assignedUsers[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('ASSIGNED_USER.NAME'), id: assignedUser.id }));
 
         // --------------------------------------------------------------------------------------------
         // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD

@@ -98,7 +98,7 @@ describe('1: Probas DATOS API - Priorities (PATCH)', () => {
         expect(data.description).toBe(priority0.description);
         expect(data.description).toBe(priority1.description);
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('PRIORITY.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('PRIORITY.NAME'), id: dataList.priorities[0].id }));
     });
 
 });

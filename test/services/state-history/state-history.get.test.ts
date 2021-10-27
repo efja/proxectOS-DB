@@ -92,7 +92,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ log: "ASC" }],
-                log: {'$regex': 'Traballando' }
+                log: {'$re': 'Traballando' }
             },
             { arrayFormat: 'repeat' }
         );
@@ -164,7 +164,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
     test(`1.4: Consultar StateHistory: <${dataList.statesHistory[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                log: {'$regex': 'Traballando' }
+                log: {'$re': 'Traballando' }
             }
         );
 
@@ -239,7 +239,7 @@ describe('2: Probas DATOS API - StateHistorys ERROS (GET)', () => {
     test('2.1: Consultar tódolos StateHistorys con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                log: {'$regex': FAKE_TEXT }
+                log: {'$re': FAKE_TEXT }
             }
         );
 
@@ -274,7 +274,7 @@ describe('2: Probas DATOS API - StateHistorys ERROS (GET)', () => {
     test(`2.2: Consultar StateHistory: <${dataList.statesHistory[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                log: {'$regex': FAKE_TEXT }
+                log: {'$re': FAKE_TEXT }
             }
         );
 
