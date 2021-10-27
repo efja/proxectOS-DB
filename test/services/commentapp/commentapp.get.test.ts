@@ -90,11 +90,12 @@ describe('1: Probas DATOS API - CommentApps (GET)', () => {
     });
 
     test('1.2: Consultar tódolos CommentApps con parámetros de filtrado:', async() => {
+        const valueFilter = 'voluptatem';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                title: {'$regex': 'voluptatem' }
+                title: {'$regex': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -110,7 +111,9 @@ describe('1: Probas DATOS API - CommentApps (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
+        const comments: CommentApp[] = (dataList.comments as CommentApp[]).filter(item => item.title.includes(valueFilter));
+
+        const dataLength = comments.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -120,7 +123,7 @@ describe('1: Probas DATOS API - CommentApps (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.comments[0].id);
+        expect(data[0].id).toBe(comments[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -130,15 +133,15 @@ describe('1: Probas DATOS API - CommentApps (GET)', () => {
     });
 
     test(`1.3: Consultar CommentApp: <${dataList.comments[0].id}>`, async() => {
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.comments[0].id}`);
+        const commentApp = dataList.comments[0] as CommentApp;
+
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${commentApp.id}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const commentApp = dataList.comments[0] as CommentApp;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -164,21 +167,20 @@ describe('1: Probas DATOS API - CommentApps (GET)', () => {
     });
 
     test(`1.4: Consultar CommentApp: <${dataList.comments[0].id}> con parámetros de filtrado`, async() => {
+        const commentApp = dataList.comments[0] as CommentApp;
         const queryParameters = qs.stringify(
             {
-                title: {'$regex': 'voluptatem' }
+                title: {'$regex': commentApp.title }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.comments[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${commentApp.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const commentApp = dataList.comments[0] as CommentApp;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -295,7 +297,7 @@ describe('2: Probas DATOS API - CommentApps ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('COMMENT.NAME'), id: `${dataList.comments[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('COMMENT.NAME'), id: `${dataList.comments[0].id}` }));
     });
 
     test(`2.3: Consultar CommentApp inexistente:`, async() => {

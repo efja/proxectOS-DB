@@ -101,7 +101,7 @@ describe('1: Probas DATOS API - CommentApps (PUT)', () => {
         expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(commentApp0.expirationDate));
         expect(date2LocaleISO(data.expirationDate)).toBe(date2LocaleISO(commentApp1.expirationDate));
 
-        expect(message).toBe(i18next.t('COMMENT.SERVICE.SUCCESS.UPDATE'));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('COMMENT.NAME'), id: commentApp1.id }));
     });
 });
 
