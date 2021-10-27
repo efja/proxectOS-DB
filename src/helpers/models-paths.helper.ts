@@ -1,0 +1,23 @@
+export const MODELS_PATHS = new Array();
+    // TODO: automatizar a lectura do directorio
+    MODELS_PATHS["AssignedResource"]    = "assigned-resource.model";
+    MODELS_PATHS["AssignedStage"]       = "assigned-stage.model";
+    MODELS_PATHS["AssignedUser"]        = "assigned-user.model";
+    MODELS_PATHS["CommentApp"]          = "commentapp.model";
+    MODELS_PATHS["CustomBaseEntity"]    = "custom-base-entity.model";
+    MODELS_PATHS["PerformanceApp"]      = "performanceapp.model";
+    MODELS_PATHS["Priority"]            = "priority.model";
+    MODELS_PATHS["Project"]             = "project.model";
+    MODELS_PATHS["RepositoryApp"]       = "repositoryapp.model";
+    MODELS_PATHS["Requirement"]         = "requirement.model";
+    MODELS_PATHS["Resource"]            = "resource.model";
+    MODELS_PATHS["Role"]                = "role.model";
+    MODELS_PATHS["Stage"]               = "stage.model";
+    MODELS_PATHS["StateHistory"]        = "state-history.model";
+    MODELS_PATHS["State"]               = "state.model";
+    MODELS_PATHS["Type"]                = "type.model";
+    MODELS_PATHS["UserContactType"]     = "user-contact-type.model";
+    MODELS_PATHS["UserContact"]         = "user-contact.model";
+    MODELS_PATHS["UserGroup"]           = "user-group.model";
+    MODELS_PATHS["UserSchedule"]        = "user-schedule.model";
+    MODELS_PATHS["User"]                = "user.model";

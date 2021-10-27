@@ -2,18 +2,19 @@
 // ## IMPORTACIÓNS
 // ####################################################################################################
 import HttpStatus from 'http-status-codes';
-import { QueryOrder, wrap } from '@mikro-orm/core';
+import { QueryOrder, Reference, wrap, Utils } from '@mikro-orm/core';
 import { Operation } from 'fast-json-patch';
 import * as jsonpatch from 'fast-json-patch';
 
 import { DBConnection } from '../config/config-db';
-import { Project } from '../models/project.model';
+import { AssignedUser } from '../models/assigned-user.model';
+import { User } from '../models/user.model';
 import { getEntityForUpdate } from '../helpers/entity-construct.helper';
 
 // ####################################################################################################
-// ## CLASE ProjectService
+// ## CLASE AssignedUserService
 // ####################################################################################################
-export class ProjectService {
+export class AssignedUserService {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
@@ -34,7 +35,7 @@ export class ProjectService {
     this.db = new DBConnection();
 
     await this.db.init();
-    this.respository = this.db.getRepository(Project);
+    this.respository = this.db.getRepository(AssignedUser);
   }
 
   // ************************************************************************************************
@@ -43,20 +44,20 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- POST
   // ------------------------------------------------------------------------------------------------
-  public async create(project: Project): Promise<any> {
+  public async create(assignedUser: AssignedUser): Promise<any> {
     let result : any = HttpStatus.CONFLICT;
 
     try {
       let temp = null;
 
       // Comprobase que non exista a entidade na BD
-      if (project.id != null) {
-        temp = await this.respository.findOne(project.id);
+      if (assignedUser.id != null) {
+        temp = await this.respository.findOne(assignedUser.id);
       }
 
       if (temp == null) {
-        temp = new Project();
-        wrap(temp).assign(project, { em: this.db.orm.em });
+        temp = new AssignedUser();
+        wrap(temp).assign(assignedUser, { em: this.db.orm.em });
 
         await this.respository.persist(temp).flush();
 
@@ -68,32 +69,32 @@ export class ProjectService {
     return result;
   }
 
-  public async createList(projects: Project[]): Promise<any> {
+  public async createList(assignedUsers: AssignedUser[]): Promise<any> {
     let result : any = HttpStatus.CONFLICT;
 
     try {
       let temp = null;
-      let projectIds = null;
+      let assignedUserIds = null;
 
       // Búscase se os obxectos pasados teñen definido o ID
-      for (let project of projects) {
-        if (project.id != null) {
-          if (projectIds == null) {
-            projectIds = [];
+      for (let assignedUser of assignedUsers) {
+        if (assignedUser.id != null) {
+          if (assignedUserIds == null) {
+            assignedUserIds = [];
           }
 
-          projectIds.push(project.id);
+          assignedUserIds.push(assignedUser.id);
         }
       }
 
       // Comprobase que non existan as entidades na BD
-      if (projectIds != null) {
-        temp = await this.respository.find(projectIds);
+      if (assignedUserIds != null) {
+        temp = await this.respository.find(assignedUserIds);
       }
 
       if (temp == null || temp.length == 0) {
-        await this.respository.persistAndFlush(projects);
-        result = projects;
+        await this.respository.persistAndFlush(assignedUsers);
+        result = assignedUsers;
       }
     } catch (error) {
       result = null;
@@ -148,7 +149,7 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- PUT
   // ------------------------------------------------------------------------------------------------
-  public async update(id: string, project: Project): Promise<any> {
+  public async update(id: string, assignedUser: AssignedUser): Promise<any> {
     let result : any = HttpStatus.NOT_FOUND;
 
     try {
@@ -161,14 +162,14 @@ export class ProjectService {
 
       if (temp != null) {
         try {
-          let updateData = await getEntityForUpdate(project, 'Project');
+          let updateData = await getEntityForUpdate(assignedUser, 'AssignedUser');
 
           if (updateData != null) {
             // Gárdanse os cambios na entidade
-            wrap(temp).assign(updateData, { em: this.db.orm.em });
+            temp.assign(updateData, { em: this.db.orm.em });
 
             // Actualizase a informanción na BD
-            await this.respository.flush();
+            await this.respository.flush(temp);
 
             result = temp;
           }

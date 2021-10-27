@@ -7,13 +7,13 @@ import { Operation } from 'fast-json-patch';
 import * as jsonpatch from 'fast-json-patch';
 
 import { DBConnection } from '../config/config-db';
-import { Project } from '../models/project.model';
+import { AssignedStage } from '../models/assigned-stage.model';
 import { getEntityForUpdate } from '../helpers/entity-construct.helper';
 
 // ####################################################################################################
-// ## CLASE ProjectService
+// ## CLASE AssignedStageService
 // ####################################################################################################
-export class ProjectService {
+export class AssignedStageService {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
@@ -34,7 +34,7 @@ export class ProjectService {
     this.db = new DBConnection();
 
     await this.db.init();
-    this.respository = this.db.getRepository(Project);
+    this.respository = this.db.getRepository(AssignedStage);
   }
 
   // ************************************************************************************************
@@ -43,20 +43,20 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- POST
   // ------------------------------------------------------------------------------------------------
-  public async create(project: Project): Promise<any> {
+  public async create(assignedStage: AssignedStage): Promise<any> {
     let result : any = HttpStatus.CONFLICT;
 
     try {
       let temp = null;
 
       // Comprobase que non exista a entidade na BD
-      if (project.id != null) {
-        temp = await this.respository.findOne(project.id);
+      if (assignedStage.id != null) {
+        temp = await this.respository.findOne(assignedStage.id);
       }
 
       if (temp == null) {
-        temp = new Project();
-        wrap(temp).assign(project, { em: this.db.orm.em });
+        temp = new AssignedStage();
+        wrap(temp).assign(assignedStage, { em: this.db.orm.em });
 
         await this.respository.persist(temp).flush();
 
@@ -68,32 +68,32 @@ export class ProjectService {
     return result;
   }
 
-  public async createList(projects: Project[]): Promise<any> {
+  public async createList(assignedStages: AssignedStage[]): Promise<any> {
     let result : any = HttpStatus.CONFLICT;
 
     try {
       let temp = null;
-      let projectIds = null;
+      let assignedStageIds = null;
 
       // Búscase se os obxectos pasados teñen definido o ID
-      for (let project of projects) {
-        if (project.id != null) {
-          if (projectIds == null) {
-            projectIds = [];
+      for (let assignedStage of assignedStages) {
+        if (assignedStage.id != null) {
+          if (assignedStageIds == null) {
+            assignedStageIds = [];
           }
 
-          projectIds.push(project.id);
+          assignedStageIds.push(assignedStage.id);
         }
       }
 
       // Comprobase que non existan as entidades na BD
-      if (projectIds != null) {
-        temp = await this.respository.find(projectIds);
+      if (assignedStageIds != null) {
+        temp = await this.respository.find(assignedStageIds);
       }
 
       if (temp == null || temp.length == 0) {
-        await this.respository.persistAndFlush(projects);
-        result = projects;
+        await this.respository.persistAndFlush(assignedStages);
+        result = assignedStages;
       }
     } catch (error) {
       result = null;
@@ -148,7 +148,7 @@ export class ProjectService {
   // ------------------------------------------------------------------------------------------------
   // -- PUT
   // ------------------------------------------------------------------------------------------------
-  public async update(id: string, project: Project): Promise<any> {
+  public async update(id: string, assignedStage: AssignedStage): Promise<any> {
     let result : any = HttpStatus.NOT_FOUND;
 
     try {
@@ -161,11 +161,11 @@ export class ProjectService {
 
       if (temp != null) {
         try {
-          let updateData = await getEntityForUpdate(project, 'Project');
+          let updateData = await getEntityForUpdate(assignedStage, 'AssignedStage');
 
           if (updateData != null) {
             // Gárdanse os cambios na entidade
-            wrap(temp).assign(updateData, { em: this.db.orm.em });
+            wrap(temp).assign(assignedStage, { em: this.db.orm.em });
 
             // Actualizase a informanción na BD
             await this.respository.flush();

@@ -8,18 +8,18 @@ import { req, res, next } from 'express';
 import qs from 'qs';
 
 import { ResponseData } from '../interfaces/response-data.interface';
-import { AssignedResourceService } from '../services/assigned-resource.service';
-import { AssignedResource } from '../models/assigned-resource.model';
+import { AssignedUserService } from '../services/assigned-user.service';
+import { AssignedUser } from '../models/assigned-user.model';
 
 // ####################################################################################################
-// ## CLASE AssignedResourceController
+// ## CLASE AssignedUserController
 // ####################################################################################################
-export class AssignedResourceController {
+export class AssignedUserController {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private TRANSLATION_NAME_MODEL : string = 'ASSIGNED_RESOURCE';
-  public assignedResourceService : AssignedResourceService = new AssignedResourceService();
+  private TRANSLATION_NAME_MODEL : string = 'ASSIGNED_USER';
+  public assignedUserService : AssignedUserService = new AssignedUserService();
 
   // ************************************************************************************************
   // ** CONSTRUTOR
@@ -46,12 +46,12 @@ export class AssignedResourceController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const assignedResource: AssignedResource = new AssignedResource(req.body);
+      const assignedUser: AssignedUser = new AssignedUser(req.body);
 
       let data;
 
-      if (this.hasMinimumAttributes(assignedResource)) {
-        data = await this.assignedResourceService.create(assignedResource);
+      if (this.hasMinimumAttributes(assignedUser)) {
+        data = await this.assignedUserService.create(assignedUser);
       }
 
       if (
@@ -63,7 +63,7 @@ export class AssignedResourceController {
         message = req.t('SUCCESS.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
       } else if (data == HttpStatus.CONFLICT) {
         data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: assignedResource.id });
+        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: assignedUser.id });
       } else {
         data = undefined;
         error = req.t('ERROR.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
@@ -99,25 +99,25 @@ export class AssignedResourceController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const assignedResources: AssignedResource[] = req.body;
+      const assignedUsers: AssignedUser[] = req.body;
 
       let data;
       let continueProcess: boolean = true;
 
-      for (let i = 0; i < assignedResources.length; i++) {
-        let item = assignedResources[i];
+      for (let i = 0; i < assignedUsers.length; i++) {
+        let item = assignedUsers[i];
 
         if (this.hasMinimumAttributes(item)) {
           // Crease un proxecto novo para asegurar que vai a ser do tipo correcto
-          assignedResources[i] = new AssignedResource(item);
+          assignedUsers[i] = new AssignedUser(item);
         } else {
           continueProcess = false;
           break;
         }
       }
 
-      if (continueProcess && assignedResources && assignedResources.length > 0) {
-        data = await this.assignedResourceService.createList(assignedResources);
+      if (continueProcess && assignedUsers && assignedUsers.length > 0) {
+        data = await this.assignedUserService.createList(assignedUsers);
       }
 
       if (
@@ -180,7 +180,7 @@ export class AssignedResourceController {
 
       const queryParams = qs.parse(query);
 
-      let data = await this.assignedResourceService.getAll(queryParams, orderBy, limit, offset);
+      let data = await this.assignedUserService.getAll(queryParams, orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -230,7 +230,7 @@ export class AssignedResourceController {
       const { id } = req.params;
       const queryParams = qs.parse(req.query);
 
-      let data = await this.assignedResourceService.get(id, queryParams);
+      let data = await this.assignedUserService.get(id, queryParams);
 
       if (
         data != undefined &&
@@ -278,12 +278,12 @@ export class AssignedResourceController {
       let code = HttpStatus.NOT_FOUND;
 
       const { id } = req.params;
-      const assignedResource: AssignedResource = new AssignedResource(req.body);
+      const assignedUser: AssignedUser = new AssignedUser(req.body);
 
       let data;
 
-      if (this.hasMinimumAttributes(assignedResource)) {
-        data = await this.assignedResourceService.update(id, assignedResource);
+      if (this.hasMinimumAttributes(assignedUser)) {
+        data = await this.assignedUserService.update(id, assignedUser);
       }
 
       if (
@@ -346,7 +346,7 @@ export class AssignedResourceController {
 
       if (objPatch.length > 0) {
 
-        data = await this.assignedResourceService.modify(id, objPatch);
+        data = await this.assignedUserService.modify(id, objPatch);
 
         if (
           data != undefined &&
@@ -404,7 +404,7 @@ export class AssignedResourceController {
 
       const { id } = req.params;
 
-      let data = await this.assignedResourceService.delete(id);
+      let data = await this.assignedUserService.delete(id);
 
       if (
         data != undefined &&
@@ -440,15 +440,15 @@ export class AssignedResourceController {
   // ** UTILIDADES
   // ************************************************************************************************
   /**
-   * Comproba se o AssignedResource pasado ten os atributos mínimos que o modelo necesita.
+   * Comproba se o AssignedUser pasado ten os atributos mínimos que o modelo necesita.
    *
-   * @param item AssignedResource que se vai a avaliar
+   * @param item AssignedUser que se vai a avaliar
    * @returns Boolean
    */
-  private hasMinimumAttributes = (item: AssignedResource): Boolean => {
+  private hasMinimumAttributes = (item: AssignedUser): Boolean => {
     let result = false;
 
-    if (item && item.description && item.amount && item.unitCost) {
+    if (item && item.assignedUser) {
       result = true;
     }
 

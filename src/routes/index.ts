@@ -4,6 +4,8 @@
 import { IRouter, Router } from 'express';
 
 import { AssignedResourceRoutes } from './assigned-resource.route';
+import { AssignedStageRoutes } from './assigned-stage.route';
+import { AssignedUserRoutes } from './assigned-user.route';
 import { ProjectRoutes } from './project.route';
 
 // ####################################################################################################
@@ -31,10 +33,10 @@ const router = Router();
   router.use('/assignedResources', new AssignedResourceRoutes().getRoutes());
 
   // AssignedStage
-  router.use('/assignedStages', new ProjectRoutes().getRoutes());
+  router.use('/assignedStages', new AssignedStageRoutes().getRoutes());
 
   // AssignedUser
-  router.use('/assignedUsers', new ProjectRoutes().getRoutes());
+  router.use('/assignedUsers', new AssignedUserRoutes().getRoutes());
 
   // CommentApp
   router.use('/comments', new ProjectRoutes().getRoutes());

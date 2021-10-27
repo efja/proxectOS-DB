@@ -18,6 +18,7 @@ export class ProjectController {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
+  private TRANSLATION_NAME_MODEL : string = 'PROJECT';
   public projectService : ProjectService = new ProjectService();
 
   // ************************************************************************************************
@@ -49,7 +50,7 @@ export class ProjectController {
 
       let data;
 
-      if (project && project.name && project.description) {
+      if (this.hasMinimumAttributes(project)) {
         data = await this.projectService.create(project);
       }
 
@@ -59,13 +60,13 @@ export class ProjectController {
         data != HttpStatus.CONFLICT
       ) {
         code = HttpStatus.CREATED;
-        message = req.t('SUCCESS.CREATE', { entity: req.t('PROJECT.NAME') });
+        message = req.t('SUCCESS.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
       } else if (data == HttpStatus.CONFLICT) {
         data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t('PROJECT.NAME'), id: project.id });
+        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: project.id });
       } else {
         data = undefined;
-        error = req.t('ERROR.CREATE', { entity: req.t('PROJECT.NAME') });
+        error = req.t('ERROR.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
       }
 
       const responseData : ResponseData = {
@@ -106,7 +107,7 @@ export class ProjectController {
       for (let i = 0; i < projects.length; i++) {
         let item = projects[i];
 
-        if (item && item.name && item.description) {
+        if (this.hasMinimumAttributes(item)) {
           // Crease un proxecto novo para asegurar que vai a ser do tipo correcto
           projects[i] = new Project(item);
         } else {
@@ -125,13 +126,13 @@ export class ProjectController {
         data != HttpStatus.CONFLICT
       ) {
         code = HttpStatus.CREATED;
-        message = req.t('SUCCESS.CREATE_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
+        message = req.t('SUCCESS.CREATE_LIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME_PLURAL`) });
       } else if (data == HttpStatus.CONFLICT) {
         data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
+        error = req.t('ERROR.ALREADY_EXIST_LIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME_PLURAL`) });
       } else {
         data = undefined;
-        error = req.t('ERROR.CREATE_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
+        error = req.t('ERROR.CREATE_LIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME_PLURAL`) });
       }
 
       const responseData : ResponseData = {
@@ -187,10 +188,10 @@ export class ProjectController {
         data != HttpStatus.NOT_FOUND
       ) {
         code = HttpStatus.OK;
-        message = req.t('SUCCESS.GET_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
+        message = req.t('SUCCESS.GET_LIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME_PLURAL`) });
       } else {
         data = undefined;
-        error = req.t('ERROR.NOT_FOUND_LIST', { entity: req.t('PROJECT.NAME_PLURAL') });
+        error = req.t('ERROR.NOT_FOUND_LIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME_PLURAL`) });
       }
 
       const responseData : ResponseData = {
@@ -237,10 +238,10 @@ export class ProjectController {
         data != HttpStatus.NOT_FOUND
       ) {
         code = HttpStatus.OK;
-        message = req.t('SUCCESS.GET', { entity: req.t('PROJECT.NAME') });
+        message = req.t('SUCCESS.GET', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
       } else {
         data = undefined;
-        error = req.t('ERROR.NOT_FOUND', { entity: req.t('PROJECT.NAME'), id: id });
+        error = req.t('ERROR.NOT_FOUND', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
       }
 
       const responseData : ResponseData = {
@@ -281,7 +282,7 @@ export class ProjectController {
 
       let data;
 
-      if (project && project.name && project.description) {
+      if (this.hasMinimumAttributes(project)) {
         data = await this.projectService.update(id, project);
       }
 
@@ -292,14 +293,14 @@ export class ProjectController {
         data != HttpStatus.CONFLICT
       ) {
         code = HttpStatus.CREATED;
-        message = req.t('SUCCESS.UPDATE', { entity: req.t('PROJECT.NAME'), id: id });
+        message = req.t('SUCCESS.UPDATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
       } else if (data == HttpStatus.CONFLICT) {
         code = HttpStatus.CONFLICT;
         data = undefined;
-        error = req.t('ERROR.CONFLICT', { entity: req.t('PROJECT.NAME'), id: id });
+        error = req.t('ERROR.CONFLICT', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
       } else {
         data = undefined;
-        error = req.t('ERROR.NOT_FOUND', { entity: req.t('PROJECT.NAME'), id: id });
+        error = req.t('ERROR.NOT_FOUND', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
       }
 
       const responseData : ResponseData = {
@@ -354,18 +355,18 @@ export class ProjectController {
           data != HttpStatus.CONFLICT
         ) {
           code = HttpStatus.CREATED;
-          message = req.t('SUCCESS.UPDATE', { entity: req.t('PROJECT.NAME'), id: id });
+          message = req.t('SUCCESS.UPDATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
         } else if (data == HttpStatus.CONFLICT) {
           code = HttpStatus.CONFLICT;
           data = undefined;
-          error = req.t('ERROR.CONFLICT', { entity: req.t('PROJECT.NAME'), id: id });
+          error = req.t('ERROR.CONFLICT', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
         } else {
           data = undefined;
-          error = req.t('ERROR.NOT_FOUND', { entity: req.t('PROJECT.NAME'), id: id });
+          error = req.t('ERROR.NOT_FOUND', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
         }
       } else {
         code = HttpStatus.BAD_REQUEST;
-        error = req.t('ERROR.BAD_REQUEST', { entity: req.t('PROJECT.NAME') });
+        error = req.t('ERROR.BAD_REQUEST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
       }
 
       const responseData : ResponseData = {
@@ -412,14 +413,14 @@ export class ProjectController {
         data != HttpStatus.NOT_FOUND
       ) {
         code = HttpStatus.OK;
-        message = req.t('SUCCESS.DELETE', { entity: req.t('PROJECT.NAME'), id: id });
+        message = req.t('SUCCESS.DELETE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
       } else if (data == HttpStatus.CONFLICT) {
         code = HttpStatus.CONFLICT;
         data = undefined;
-        error = req.t('ERROR.CONFLICT', { entity: req.t('PROJECT.NAME'), id: id });
+        error = req.t('ERROR.CONFLICT', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
       } else {
         data = undefined;
-        error = req.t('ERROR.DELETE', { entity: req.t('PROJECT.NAME'), id: id });
+        error = req.t('ERROR.DELETE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
       }
 
       const responseData : ResponseData = {
@@ -434,4 +435,23 @@ export class ProjectController {
       next(error);
     }
   };
+
+  // ************************************************************************************************
+  // ** UTILIDADES
+  // ************************************************************************************************
+  /**
+   * Comproba se o Project pasado ten os atributos mínimos que o modelo necesita.
+   *
+   * @param item Project que se vai a avaliar
+   * @returns Boolean
+   */
+  private hasMinimumAttributes = (item: Project): Boolean => {
+    let result = false;
+
+    if (item && item.name && item.description) {
+      result = true;
+    }
+
+    return result;
+  }
 }

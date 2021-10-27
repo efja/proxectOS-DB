@@ -8,6 +8,7 @@ import * as jsonpatch from 'fast-json-patch';
 
 import { DBConnection } from '../config/config-db';
 import { AssignedResource } from '../models/assigned-resource.model';
+import { getEntityForUpdate } from '../helpers/entity-construct.helper';
 
 // ####################################################################################################
 // ## CLASE AssignedResourceService
@@ -160,13 +161,17 @@ export class AssignedResourceService {
 
       if (temp != null) {
         try {
-          // Gárdanse os cambios na entidade
-          wrap(temp).assign(assignedResource, { em: this.db.orm.em });
+          let updateData = await getEntityForUpdate(assignedResource, 'AssignedResource');
 
-          // Actualizase a informanción na BD
-          await this.respository.flush();
+          if (updateData != null) {
+            // Gárdanse os cambios na entidade
+            wrap(temp).assign(assignedResource, { em: this.db.orm.em });
 
-          result = temp;
+            // Actualizase a informanción na BD
+            await this.respository.flush();
+
+            result = temp;
+          }
         } catch (error) {
           result = HttpStatus.CONFLICT;
         }
