@@ -64,10 +64,11 @@ describe('1: Probas DATOS API - AssignedUsers (PATCH)', () => {
         const assignedUser0 = new AssignedUser(dataList.assignedUsers[0]);
         const assignedUser1 = new AssignedUser(dataList.assignedUsers[0]);
 
+        const assignedUser0assignedUserId = assignedUser0.assignedUser.id;
         // Modificase o modelo AssignedUser
-        assignedUser0.assignedUser = dataList.users[0].id != assignedUser0.assignedUser.id
-            ? dataList.users[0] as User
-            : dataList.users[1] as User;
+        assignedUser1.assignedUser = dataList.users[0]._id != assignedUser1.assignedUser._id
+            ? (dataList.users[0] as User)._id
+            : (dataList.users[1] as User)._id;
 
         // Xerase o objexecto tipo HTTP PATCH
         const objPatch = jsonpatch.compare(assignedUser0, assignedUser1);
@@ -89,7 +90,7 @@ describe('1: Probas DATOS API - AssignedUsers (PATCH)', () => {
 
         // ** Datos cambiados
         expect(data.assignedUser).toBeDefined();
-        expect(data.assignedUser).not.toBe(assignedUser0.assignedUser);
+        expect(data.assignedUser).not.toBe(assignedUser0assignedUserId);
         expect(data.assignedUser).toBe(assignedUser1.assignedUser);
 
         // ** Datos NON cambiados
@@ -98,7 +99,7 @@ describe('1: Probas DATOS API - AssignedUsers (PATCH)', () => {
         expect(data.id).toBe(assignedUser0.id);
         expect(data.id).toBe(assignedUser1.id);
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ASSIGNED_USER.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ASSIGNED_USER.NAME'), id: assignedUser1.id }));
     });
 
 });

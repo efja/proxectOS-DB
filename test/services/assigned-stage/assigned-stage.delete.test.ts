@@ -80,7 +80,7 @@ describe('1: Probas DATOS API - AssignedStages (DELETE)', () => {
         expect(data.id).toBe(assignedStage.id);
 
         expect(data.stage).toBeDefined();
-        expect(data.stage.id).toBe(assignedStage.stage.id);
+        expect(data.stage).toBe(assignedStage.stage.id);
 
         // Comprobanse algúns datos opcionais
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(assignedStage.startDate));

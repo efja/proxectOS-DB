@@ -63,10 +63,12 @@ describe('1: Probas DATOS API - AssignedUsers (PUT)', () => {
         const assignedUser0 = new AssignedUser(dataList.assignedUsers[0]);
         const assignedUser1 = new AssignedUser(dataList.assignedUsers[0]);
 
+        const assignedUser0assignedUserId = assignedUser0.assignedUser.id;
+
         // Modificase o modelo AssignedUser (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
-        assignedUser1.assignedUser = dataList.users[0].id != assignedUser1.assignedUser.id
-            ? dataList.users[0] as User
-            : dataList.users[1] as User;
+        assignedUser1.assignedUser = dataList.users[0]._id != assignedUser1.assignedUser._id
+            ? (dataList.users[0] as User)._id
+            : (dataList.users[1] as User)._id;
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${dataList.assignedUsers[0].id}`).send(assignedUser1);
         const {
@@ -85,7 +87,7 @@ describe('1: Probas DATOS API - AssignedUsers (PUT)', () => {
 
         // ** Datos cambiados
         expect(data.assignedUser).toBeDefined();
-        expect(data.assignedUser).not.toBe(assignedUser0.assignedUser);
+        expect(data.assignedUser).not.toBe(assignedUser0assignedUserId);
         expect(data.assignedUser).toBe(assignedUser1.assignedUser);
 
         // ** Datos NON cambiados
@@ -94,7 +96,7 @@ describe('1: Probas DATOS API - AssignedUsers (PUT)', () => {
         expect(data.id).toBe(assignedUser0.id);
         expect(data.id).toBe(assignedUser1.id);
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ASSIGNED_USER.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ASSIGNED_USER.NAME'), id: assignedUser1.id }));
     });
 });
 

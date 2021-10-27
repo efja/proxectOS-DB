@@ -42,7 +42,6 @@ describe('1: Probas DATOS API - AssignedUsers (POST)', () => {
 
 	beforeEach(async () => {
         await db.createCollections();
-        await db.inicializeData(dataList.users);
 	});
 
 	afterEach(async () => {
@@ -82,7 +81,7 @@ describe('1: Probas DATOS API - AssignedUsers (POST)', () => {
         expect(data.id).toBe(assignedUser.id);
 
         expect(data.assignedUser).toBeDefined();
-        expect(data.assignedUser).toBe(assignedUser.assignedUser);
+        expect(data.assignedUser).toBe(assignedUser.assignedUser.id);
 
         // Comprobanse algúns datos opcionais
         expect(date2LocaleISO(data.createdAt)).toBe(date2LocaleISO(assignedUser.createdAt));

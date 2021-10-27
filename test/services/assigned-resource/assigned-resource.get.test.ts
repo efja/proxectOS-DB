@@ -109,9 +109,9 @@ describe('1: Probas DATOS API - AssignedResources (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
-
         const assignedResources: AssignedResource[] = (dataList.assignedResources as AssignedResource[]).filter(item => item.unitCost == valueFilter);
+
+        const dataLength = assignedResources.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();

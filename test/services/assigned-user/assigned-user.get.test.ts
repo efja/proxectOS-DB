@@ -6,6 +6,7 @@ import HttpStatus from 'http-status-codes';
 import qs from 'qs';
 
 import { AssignedUser } from '../../../src/models/assigned-user.model';
+import { ObjectId } from '@mikro-orm/mongodb';
 
 import {
     app,
@@ -89,11 +90,13 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
     });
 
     test('1.2: Consultar tódolos AssignedUsers con parámetros de filtrado:', async() => {
+        const assignedUser = dataList.assignedUsers[0] as AssignedUser;
+
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ assignedUser: "ASC" }],
-                assignedUser: {'$regex': '616b4dbb9f7ee9e407c28a1b' }
+                assignedUser: {'$regex': assignedUser.assignedUser }
             },
             { arrayFormat: 'repeat' }
         );
@@ -109,7 +112,9 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
+        const assignedUsers: AssignedUser[] = (dataList.assignedUsers as AssignedUser[]).filter(item => item.assignedUser == assignedUser.assignedUser);
+
+        const dataLength = assignedUsers.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -119,7 +124,7 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.assignedUsers[0].id);
+        expect(data[0].id).toBe(assignedUsers[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -151,15 +156,17 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
         expect(data.id).toBe(assignedUser.id);
 
         expect(data.assignedUser).toBeDefined();
-        expect(data.assignedUser).toBe(assignedUser.assignedUser);
+        expect(data.assignedUser).toBe(assignedUser.assignedUser.id);
 
         expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_USER.NAME'), id: assignedUser.id }));
     });
 
     test(`1.4: Consultar AssignedUser: <${dataList.assignedUsers[0].id}> con parámetros de filtrado`, async() => {
+        const assignedUser = dataList.assignedUsers[0] as AssignedUser;
+
         const queryParameters = qs.stringify(
             {
-                assignedUser: {'$regex': '616b4dbb9f7ee9e407c28a1b' }
+                assignedUser: {'$regex': assignedUser.assignedUser }
             }
         );
 
@@ -170,8 +177,6 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
             message,
             error,
         } = response.body
-
-        const assignedUser = dataList.assignedUsers[0] as AssignedUser;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -185,7 +190,7 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
         expect(data.id).toBe(assignedUser.id);
 
         expect(data.assignedUser).toBeDefined();
-        expect(data.assignedUser).toBe(assignedUser.assignedUser);
+        expect(data.assignedUser).toBe(assignedUser.assignedUser.id);
 
         expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ASSIGNED_USER.NAME'), id: dataList.assignedUsers[0].id }));
     });
@@ -283,7 +288,7 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_USER.NAME'), id: `${dataList.assignedUsers[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_USER.NAME'), id: `${dataList.assignedUsers[0].id}` }));
     });
 
     test(`2.3: Consultar AssignedUser inexistente:`, async() => {
