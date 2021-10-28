@@ -3,16 +3,16 @@
 // ####################################################################################################
 import { Router, IRouter } from 'express';
 
-import { RepositoryAppController } from '../controllers/repositoryapp.controller';
+import { UserScheduleController } from '../controllers/user-schedule.controller';
 
 // ####################################################################################################
-// ## CLASE RepositoryAppRoutes
+// ## CLASE UserScheduleRoutes
 // ####################################################################################################
-export class RepositoryAppRoutes {
+export class UserScheduleRoutes {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private repositoryAppController : RepositoryAppController = new RepositoryAppController();
+  private userScheduleController : UserScheduleController = new UserScheduleController();
   private router = Router();
 
   // ************************************************************************************************
@@ -27,21 +27,21 @@ export class RepositoryAppRoutes {
   // ************************************************************************************************
   private routes = () => {
     // POST
-    this.router.post('', this.repositoryAppController.create);
-    this.router.post('/Multiple', this.repositoryAppController.createList);
+    this.router.post('', this.userScheduleController.create);
+    this.router.post('/Multiple', this.userScheduleController.createList);
 
     // GET
-    this.router.get('', this.repositoryAppController.getAll);
-    this.router.get('/:id', this.repositoryAppController.get);
+    this.router.get('', this.userScheduleController.getAll);
+    this.router.get('/:id', this.userScheduleController.get);
 
     // PUT
-    this.router.put('/:id', this.repositoryAppController.update);
+    this.router.put('/:id', this.userScheduleController.update);
 
     // PATCH
-    this.router.patch('/:id', this.repositoryAppController.modify);
+    this.router.patch('/:id', this.userScheduleController.modify);
 
     // DELETE
-    this.router.delete('/:id', this.repositoryAppController.delete);
+    this.router.delete('/:id', this.userScheduleController.delete);
   };
 
   // ************************************************************************************************

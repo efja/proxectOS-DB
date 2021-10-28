@@ -448,7 +448,10 @@ export class PriorityController {
   private hasMinimumAttributes = (item: Priority): Boolean => {
     let result = false;
 
-    if (item && item.name) {
+    if (
+      item &&
+      item.name
+    ) {
       result = true;
     }
 

@@ -3,16 +3,16 @@
 // ####################################################################################################
 import { Router, IRouter } from 'express';
 
-import { RepositoryAppController } from '../controllers/repositoryapp.controller';
+import { StageController } from '../controllers/stage.controller';
 
 // ####################################################################################################
-// ## CLASE RepositoryAppRoutes
+// ## CLASE StageRoutes
 // ####################################################################################################
-export class RepositoryAppRoutes {
+export class StageRoutes {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private repositoryAppController : RepositoryAppController = new RepositoryAppController();
+  private stageController : StageController = new StageController();
   private router = Router();
 
   // ************************************************************************************************
@@ -27,21 +27,21 @@ export class RepositoryAppRoutes {
   // ************************************************************************************************
   private routes = () => {
     // POST
-    this.router.post('', this.repositoryAppController.create);
-    this.router.post('/Multiple', this.repositoryAppController.createList);
+    this.router.post('', this.stageController.create);
+    this.router.post('/Multiple', this.stageController.createList);
 
     // GET
-    this.router.get('', this.repositoryAppController.getAll);
-    this.router.get('/:id', this.repositoryAppController.get);
+    this.router.get('', this.stageController.getAll);
+    this.router.get('/:id', this.stageController.get);
 
     // PUT
-    this.router.put('/:id', this.repositoryAppController.update);
+    this.router.put('/:id', this.stageController.update);
 
     // PATCH
-    this.router.patch('/:id', this.repositoryAppController.modify);
+    this.router.patch('/:id', this.stageController.modify);
 
     // DELETE
-    this.router.delete('/:id', this.repositoryAppController.delete);
+    this.router.delete('/:id', this.stageController.delete);
   };
 
   // ************************************************************************************************

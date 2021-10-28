@@ -19,7 +19,7 @@ export class RepositoryAppController {
   // ** ATRIBUTOS
   // ************************************************************************************************
   private TRANSLATION_NAME_MODEL : string = 'REPOSITORY';
-  public priorityService : RepositoryAppService = new RepositoryAppService();
+  public repositoryAppService : RepositoryAppService = new RepositoryAppService();
 
   // ************************************************************************************************
   // ** CONSTRUTOR
@@ -46,12 +46,12 @@ export class RepositoryAppController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const priority: RepositoryApp = new RepositoryApp(req.body);
+      const repositoryApp: RepositoryApp = new RepositoryApp(req.body);
 
       let data;
 
-      if (this.hasMinimumAttributes(priority)) {
-        data = await this.priorityService.create(priority);
+      if (this.hasMinimumAttributes(repositoryApp)) {
+        data = await this.repositoryAppService.create(repositoryApp);
       }
 
       if (
@@ -63,7 +63,7 @@ export class RepositoryAppController {
         message = req.t('SUCCESS.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
       } else if (data == HttpStatus.CONFLICT) {
         data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: priority.id });
+        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: repositoryApp.id });
       } else {
         data = undefined;
         error = req.t('ERROR.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
@@ -99,25 +99,25 @@ export class RepositoryAppController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const prioritys: RepositoryApp[] = req.body;
+      const repositoryApps: RepositoryApp[] = req.body;
 
       let data;
       let continueProcess: boolean = true;
 
-      for (let i = 0; i < prioritys.length; i++) {
-        let item = prioritys[i];
+      for (let i = 0; i < repositoryApps.length; i++) {
+        let item = repositoryApps[i];
 
         if (this.hasMinimumAttributes(item)) {
           // Crease un proxecto novo para asegurar que vai a ser do tipo correcto
-          prioritys[i] = new RepositoryApp(item);
+          repositoryApps[i] = new RepositoryApp(item);
         } else {
           continueProcess = false;
           break;
         }
       }
 
-      if (continueProcess && prioritys && prioritys.length > 0) {
-        data = await this.priorityService.createList(prioritys);
+      if (continueProcess && repositoryApps && repositoryApps.length > 0) {
+        data = await this.repositoryAppService.createList(repositoryApps);
       }
 
       if (
@@ -180,7 +180,7 @@ export class RepositoryAppController {
 
       const queryParams = qs.parse(query);
 
-      let data = await this.priorityService.getAll(queryParams, orderBy, limit, offset);
+      let data = await this.repositoryAppService.getAll(queryParams, orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -230,7 +230,7 @@ export class RepositoryAppController {
       const { id } = req.params;
       const queryParams = qs.parse(req.query);
 
-      let data = await this.priorityService.get(id, queryParams);
+      let data = await this.repositoryAppService.get(id, queryParams);
 
       if (
         data != undefined &&
@@ -278,12 +278,12 @@ export class RepositoryAppController {
       let code = HttpStatus.NOT_FOUND;
 
       const { id } = req.params;
-      const priority: RepositoryApp = new RepositoryApp(req.body);
+      const repositoryApp: RepositoryApp = new RepositoryApp(req.body);
 
       let data;
 
-      if (this.hasMinimumAttributes(priority)) {
-        data = await this.priorityService.update(id, priority);
+      if (this.hasMinimumAttributes(repositoryApp)) {
+        data = await this.repositoryAppService.update(id, repositoryApp);
       }
 
       if (
@@ -346,7 +346,7 @@ export class RepositoryAppController {
 
       if (objPatch.length > 0) {
 
-        data = await this.priorityService.modify(id, objPatch);
+        data = await this.repositoryAppService.modify(id, objPatch);
 
         if (
           data != undefined &&
@@ -404,7 +404,7 @@ export class RepositoryAppController {
 
       const { id } = req.params;
 
-      let data = await this.priorityService.delete(id);
+      let data = await this.repositoryAppService.delete(id);
 
       if (
         data != undefined &&
@@ -448,7 +448,11 @@ export class RepositoryAppController {
   private hasMinimumAttributes = (item: RepositoryApp): Boolean => {
     let result = false;
 
-    if (item && item.name && item.uri) {
+    if (
+      item &&
+      item.name &&
+      item.uri
+    ) {
       result = true;
     }
 

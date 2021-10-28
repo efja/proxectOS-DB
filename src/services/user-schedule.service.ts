@@ -9,12 +9,12 @@ import * as jsonpatch from 'fast-json-patch';
 import { getEntityForUpdate } from '../helpers/entity-construct.helper';
 
 import { DBConnection } from '../config/config-db';
-import { RepositoryApp } from '../models/repositoryapp.model';
+import { UserSchedule } from '../models/user-schedule.model';
 
 // ####################################################################################################
-// ## CLASE RepositoryAppService
+// ## CLASE UserScheduleService
 // ####################################################################################################
-export class RepositoryAppService {
+export class UserScheduleService {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
@@ -35,7 +35,7 @@ export class RepositoryAppService {
     this.db = new DBConnection();
 
     await this.db.init();
-    this.respository = this.db.getRepository(RepositoryApp);
+    this.respository = this.db.getRepository(UserSchedule);
   }
 
   // ************************************************************************************************
@@ -44,20 +44,20 @@ export class RepositoryAppService {
   // ------------------------------------------------------------------------------------------------
   // -- POST
   // ------------------------------------------------------------------------------------------------
-  public async create(repositoryApp: RepositoryApp): Promise<any> {
+  public async create(userSchedule: UserSchedule): Promise<any> {
     let result : any = HttpStatus.CONFLICT;
 
     try {
       let temp = null;
 
       // Comprobase que non exista a entidade na BD
-      if (repositoryApp.id != null) {
-        temp = await this.respository.findOne(repositoryApp.id);
+      if (userSchedule.id != null) {
+        temp = await this.respository.findOne(userSchedule.id);
       }
 
       if (temp == null) {
-        temp = new RepositoryApp();
-        temp.assign(repositoryApp, { em: this.db.orm.em });
+        temp = new UserSchedule();
+        temp.assign(userSchedule, { em: this.db.orm.em });
 
         await this.respository.persist(temp).flush();
 
@@ -69,32 +69,32 @@ export class RepositoryAppService {
     return result;
   }
 
-  public async createList(repositoryApps: RepositoryApp[]): Promise<any> {
+  public async createList(userSchedules: UserSchedule[]): Promise<any> {
     let result : any = HttpStatus.CONFLICT;
 
     try {
       let temp = null;
-      let repositoryAppIds = null;
+      let userScheduleIds = null;
 
       // Búscase se os obxectos pasados teñen definido o ID
-      for (let repositoryApp of repositoryApps) {
-        if (repositoryApp.id != null) {
-          if (repositoryAppIds == null) {
-            repositoryAppIds = [];
+      for (let userSchedule of userSchedules) {
+        if (userSchedule.id != null) {
+          if (userScheduleIds == null) {
+            userScheduleIds = [];
           }
 
-          repositoryAppIds.push(repositoryApp.id);
+          userScheduleIds.push(userSchedule.id);
         }
       }
 
       // Comprobase que non existan as entidades na BD
-      if (repositoryAppIds != null) {
-        temp = await this.respository.find(repositoryAppIds);
+      if (userScheduleIds != null) {
+        temp = await this.respository.find(userScheduleIds);
       }
 
       if (temp == null || temp.length == 0) {
-        await this.respository.persistAndFlush(repositoryApps);
-        result = repositoryApps;
+        await this.respository.persistAndFlush(userSchedules);
+        result = userSchedules;
       }
     } catch (error) {
       result = null;
@@ -150,7 +150,7 @@ export class RepositoryAppService {
   // ------------------------------------------------------------------------------------------------
   // -- PUT
   // ------------------------------------------------------------------------------------------------
-  public async update(id: string, repositoryApp: RepositoryApp): Promise<any> {
+  public async update(id: string, userSchedule: UserSchedule): Promise<any> {
     let result : any = HttpStatus.NOT_FOUND;
 
     try {
@@ -163,7 +163,7 @@ export class RepositoryAppService {
 
       if (temp != null) {
         try {
-          let updateData = await getEntityForUpdate(repositoryApp, 'RepositoryApp');
+          let updateData = await getEntityForUpdate(userSchedule, 'UserSchedule');
 
           if (updateData != null) {
             // Gárdanse os cambios na entidade

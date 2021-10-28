@@ -6,8 +6,23 @@ import { IRouter, Router } from 'express';
 import { AssignedResourceRoutes } from './assigned-resource.route';
 import { AssignedStageRoutes } from './assigned-stage.route';
 import { AssignedUserRoutes } from './assigned-user.route';
+import { CommentAppRoutes } from './commentapp.route';
+import { PerformanceAppRoutes } from './performanceapp.route';
+import { PriorityRoutes } from './priority.route';
 import { ProjectRoutes } from './project.route';
 import { RepositoryAppRoutes } from './repositoryapp.route';
+import { RequirementRoutes } from './requirement.route';
+import { ResourceRoutes } from './resource.route';
+import { RoleRoutes } from './role.route';
+import { StageRoutes } from './stage.route';
+import { StateHistoryRoutes } from './state-history.route';
+import { StateRoutes } from './state.route';
+import { TypeRoutes } from './type.route';
+import { UserContactRoutes } from './user-contact.route';
+import { UserContactTypeRoutes } from './user-contact-type.route';
+import { UserGroupRoutes } from './user-group.route';
+import { UserRoutes } from './user.route';
+import { UserScheduleRoutes } from './user-schedule.route';
 
 // ####################################################################################################
 // ## CONSTANTES
@@ -40,13 +55,13 @@ const router = Router();
   router.use('/assignedUsers', new AssignedUserRoutes().getRoutes());
 
   // CommentApp
-  router.use('/comments', new ProjectRoutes().getRoutes());
+  router.use('/comments', new CommentAppRoutes().getRoutes());
 
   // PerformanceApp
-  router.use('/performances', new ProjectRoutes().getRoutes());
+  router.use('/performances', new PerformanceAppRoutes().getRoutes());
 
   // Priority
-  router.use('/priorities', new ProjectRoutes().getRoutes());
+  router.use('/priorities', new PriorityRoutes().getRoutes());
 
   // Project
   router.use('/projects', new ProjectRoutes().getRoutes());
@@ -55,37 +70,40 @@ const router = Router();
   router.use('/repositories', new RepositoryAppRoutes().getRoutes());
 
   // Requirement
-  router.use('/requirements', new ProjectRoutes().getRoutes());
+  router.use('/requirements', new RequirementRoutes().getRoutes());
 
   // Resource
-  router.use('/resources', new ProjectRoutes().getRoutes());
+  router.use('/resources', new ResourceRoutes().getRoutes());
 
   // Role
-  router.use('/roles', new ProjectRoutes().getRoutes());
+  router.use('/roles', new RoleRoutes().getRoutes());
 
   // Stage
-  router.use('/stages', new ProjectRoutes().getRoutes());
+  router.use('/stages', new StageRoutes().getRoutes());
 
   // State
-  router.use('/states', new ProjectRoutes().getRoutes());
+  router.use('/states', new StateRoutes().getRoutes());
 
   // StateHistory
-  router.use('/statesHistory', new ProjectRoutes().getRoutes());
+  router.use('/statesHistory', new StateHistoryRoutes().getRoutes());
 
-  // Type
-  router.use('/types', new ProjectRoutes().getRoutes());
+  // type
+  router.use('/types', new TypeRoutes().getRoutes());
 
   // User
-  router.use('/users', new ProjectRoutes().getRoutes());
+  router.use('/users', new UserRoutes().getRoutes());
 
   // UserContact
-  router.use('/userContacts', new ProjectRoutes().getRoutes());
+  router.use('/userContacts', new UserContactRoutes().getRoutes());
+
+  // UserContactType
+  router.use('/userContactTypes', new UserContactTypeRoutes().getRoutes());
 
   // UserGroup
-  router.use('/userGroups', new ProjectRoutes().getRoutes());
+  router.use('/userGroups', new UserGroupRoutes().getRoutes());
 
   // UserSchedule
-  router.use('/userSchedules', new ProjectRoutes().getRoutes());
+  router.use('/userSchedules', new UserScheduleRoutes().getRoutes());
 
   return router;
 };

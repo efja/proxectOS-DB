@@ -448,7 +448,10 @@ export class AssignedUserController {
   private hasMinimumAttributes = (item: AssignedUser): Boolean => {
     let result = false;
 
-    if (item && item.assignedUser) {
+    if (
+      item &&
+      item.assignedUser
+    ) {
       result = true;
     }
 

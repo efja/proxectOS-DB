@@ -3,16 +3,16 @@
 // ####################################################################################################
 import { Router, IRouter } from 'express';
 
-import { RepositoryAppController } from '../controllers/repositoryapp.controller';
+import { UserContactTypeController } from '../controllers/user-contact-type.controller';
 
 // ####################################################################################################
-// ## CLASE RepositoryAppRoutes
+// ## CLASE UserContactTypeRoutes
 // ####################################################################################################
-export class RepositoryAppRoutes {
+export class UserContactTypeRoutes {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private repositoryAppController : RepositoryAppController = new RepositoryAppController();
+  private userContactTypeController : UserContactTypeController = new UserContactTypeController();
   private router = Router();
 
   // ************************************************************************************************
@@ -27,21 +27,21 @@ export class RepositoryAppRoutes {
   // ************************************************************************************************
   private routes = () => {
     // POST
-    this.router.post('', this.repositoryAppController.create);
-    this.router.post('/Multiple', this.repositoryAppController.createList);
+    this.router.post('', this.userContactTypeController.create);
+    this.router.post('/Multiple', this.userContactTypeController.createList);
 
     // GET
-    this.router.get('', this.repositoryAppController.getAll);
-    this.router.get('/:id', this.repositoryAppController.get);
+    this.router.get('', this.userContactTypeController.getAll);
+    this.router.get('/:id', this.userContactTypeController.get);
 
     // PUT
-    this.router.put('/:id', this.repositoryAppController.update);
+    this.router.put('/:id', this.userContactTypeController.update);
 
     // PATCH
-    this.router.patch('/:id', this.repositoryAppController.modify);
+    this.router.patch('/:id', this.userContactTypeController.modify);
 
     // DELETE
-    this.router.delete('/:id', this.repositoryAppController.delete);
+    this.router.delete('/:id', this.userContactTypeController.delete);
   };
 
   // ************************************************************************************************

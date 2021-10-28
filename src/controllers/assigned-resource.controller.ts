@@ -448,7 +448,12 @@ export class AssignedResourceController {
   private hasMinimumAttributes = (item: AssignedResource): Boolean => {
     let result = false;
 
-    if (item && item.description && item.amount && item.unitCost) {
+    if (
+      item &&
+      item.description &&
+      item.amount &&
+      item.unitCost
+    ) {
       result = true;
     }
 

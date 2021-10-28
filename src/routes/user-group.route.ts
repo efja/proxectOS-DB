@@ -3,16 +3,16 @@
 // ####################################################################################################
 import { Router, IRouter } from 'express';
 
-import { RepositoryAppController } from '../controllers/repositoryapp.controller';
+import { UserGroupController } from '../controllers/user-group.controller';
 
 // ####################################################################################################
-// ## CLASE RepositoryAppRoutes
+// ## CLASE UserGroupRoutes
 // ####################################################################################################
-export class RepositoryAppRoutes {
+export class UserGroupRoutes {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private repositoryAppController : RepositoryAppController = new RepositoryAppController();
+  private userGroupController : UserGroupController = new UserGroupController();
   private router = Router();
 
   // ************************************************************************************************
@@ -27,21 +27,21 @@ export class RepositoryAppRoutes {
   // ************************************************************************************************
   private routes = () => {
     // POST
-    this.router.post('', this.repositoryAppController.create);
-    this.router.post('/Multiple', this.repositoryAppController.createList);
+    this.router.post('', this.userGroupController.create);
+    this.router.post('/Multiple', this.userGroupController.createList);
 
     // GET
-    this.router.get('', this.repositoryAppController.getAll);
-    this.router.get('/:id', this.repositoryAppController.get);
+    this.router.get('', this.userGroupController.getAll);
+    this.router.get('/:id', this.userGroupController.get);
 
     // PUT
-    this.router.put('/:id', this.repositoryAppController.update);
+    this.router.put('/:id', this.userGroupController.update);
 
     // PATCH
-    this.router.patch('/:id', this.repositoryAppController.modify);
+    this.router.patch('/:id', this.userGroupController.modify);
 
     // DELETE
-    this.router.delete('/:id', this.repositoryAppController.delete);
+    this.router.delete('/:id', this.userGroupController.delete);
   };
 
   // ************************************************************************************************
