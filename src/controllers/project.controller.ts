@@ -448,7 +448,11 @@ export class ProjectController {
   private hasMinimumAttributes = (item: Project): Boolean => {
     let result = false;
 
-    if (item && item.name && item.description) {
+    if (
+      item &&
+      item.name &&
+      item.description
+    ) {
       result = true;
     }
 

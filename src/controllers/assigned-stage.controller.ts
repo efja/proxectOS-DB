@@ -448,7 +448,12 @@ export class AssignedStageController {
   private hasMinimumAttributes = (item: AssignedStage): Boolean => {
     let result = false;
 
-    if (item && item.stage && item.currentState && item.startDate) {
+    if (
+      item &&
+      item.stage &&
+      item.currentState &&
+      item.startDate
+    ) {
       result = true;
     }
 

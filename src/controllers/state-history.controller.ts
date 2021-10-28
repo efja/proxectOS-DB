@@ -8,18 +8,18 @@ import { req, res, next } from 'express';
 import qs from 'qs';
 
 import { ResponseData } from '../interfaces/response-data.interface';
-import { PerformanceAppService } from '../services/performanceapp.service';
-import { PerformanceApp } from '../models/performanceapp.model';
+import { StateHistoryService } from '../services/state-history.service';
+import { StateHistory } from '../models/state-history.model';
 
 // ####################################################################################################
-// ## CLASE PerformanceAppController
+// ## CLASE StateHistoryController
 // ####################################################################################################
-export class PerformanceAppController {
+export class StateHistoryController {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private TRANSLATION_NAME_MODEL : string = 'PERFORMANCE';
-  public performanceAppService : PerformanceAppService = new PerformanceAppService();
+  private TRANSLATION_NAME_MODEL : string = 'STATE_HISTORY';
+  public stateHistoryService : StateHistoryService = new StateHistoryService();
 
   // ************************************************************************************************
   // ** CONSTRUTOR
@@ -46,12 +46,12 @@ export class PerformanceAppController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const performanceApp: PerformanceApp = new PerformanceApp(req.body);
+      const stateHistory: StateHistory = new StateHistory(req.body);
 
       let data;
 
-      if (this.hasMinimumAttributes(performanceApp)) {
-        data = await this.performanceAppService.create(performanceApp);
+      if (this.hasMinimumAttributes(stateHistory)) {
+        data = await this.stateHistoryService.create(stateHistory);
       }
 
       if (
@@ -63,7 +63,7 @@ export class PerformanceAppController {
         message = req.t('SUCCESS.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
       } else if (data == HttpStatus.CONFLICT) {
         data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: performanceApp.id });
+        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: stateHistory.id });
       } else {
         data = undefined;
         error = req.t('ERROR.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
@@ -99,25 +99,25 @@ export class PerformanceAppController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const performanceApps: PerformanceApp[] = req.body;
+      const stateHistorys: StateHistory[] = req.body;
 
       let data;
       let continueProcess: boolean = true;
 
-      for (let i = 0; i < performanceApps.length; i++) {
-        let item = performanceApps[i];
+      for (let i = 0; i < stateHistorys.length; i++) {
+        let item = stateHistorys[i];
 
         if (this.hasMinimumAttributes(item)) {
           // Crease un proxecto novo para asegurar que vai a ser do tipo correcto
-          performanceApps[i] = new PerformanceApp(item);
+          stateHistorys[i] = new StateHistory(item);
         } else {
           continueProcess = false;
           break;
         }
       }
 
-      if (continueProcess && performanceApps && performanceApps.length > 0) {
-        data = await this.performanceAppService.createList(performanceApps);
+      if (continueProcess && stateHistorys && stateHistorys.length > 0) {
+        data = await this.stateHistoryService.createList(stateHistorys);
       }
 
       if (
@@ -180,7 +180,7 @@ export class PerformanceAppController {
 
       const queryParams = qs.parse(query);
 
-      let data = await this.performanceAppService.getAll(queryParams, orderBy, limit, offset);
+      let data = await this.stateHistoryService.getAll(queryParams, orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -230,7 +230,7 @@ export class PerformanceAppController {
       const { id } = req.params;
       const queryParams = qs.parse(req.query);
 
-      let data = await this.performanceAppService.get(id, queryParams);
+      let data = await this.stateHistoryService.get(id, queryParams);
 
       if (
         data != undefined &&
@@ -278,12 +278,12 @@ export class PerformanceAppController {
       let code = HttpStatus.NOT_FOUND;
 
       const { id } = req.params;
-      const performanceApp: PerformanceApp = new PerformanceApp(req.body);
+      const stateHistory: StateHistory = new StateHistory(req.body);
 
       let data;
 
-      if (this.hasMinimumAttributes(performanceApp)) {
-        data = await this.performanceAppService.update(id, performanceApp);
+      if (this.hasMinimumAttributes(stateHistory)) {
+        data = await this.stateHistoryService.update(id, stateHistory);
       }
 
       if (
@@ -346,7 +346,7 @@ export class PerformanceAppController {
 
       if (objPatch.length > 0) {
 
-        data = await this.performanceAppService.modify(id, objPatch);
+        data = await this.stateHistoryService.modify(id, objPatch);
 
         if (
           data != undefined &&
@@ -404,7 +404,7 @@ export class PerformanceAppController {
 
       const { id } = req.params;
 
-      let data = await this.performanceAppService.delete(id);
+      let data = await this.stateHistoryService.delete(id);
 
       if (
         data != undefined &&
@@ -440,18 +440,18 @@ export class PerformanceAppController {
   // ** UTILIDADES
   // ************************************************************************************************
   /**
-   * Comproba se o PerformanceApp pasado ten os atributos mínimos que o modelo necesita.
+   * Comproba se o StateHistory pasado ten os atributos mínimos que o modelo necesita.
    *
-   * @param item PerformanceApp que se vai a avaliar
+   * @param item StateHistory que se vai a avaliar
    * @returns Boolean
    */
-  private hasMinimumAttributes = (item: PerformanceApp): Boolean => {
+  private hasMinimumAttributes = (item: StateHistory): Boolean => {
     let result = false;
 
     if (
       item &&
-      item.name &&
-      item.type
+      item.log &&
+      item.newState
     ) {
       result = true;
     }

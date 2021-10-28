@@ -8,18 +8,18 @@ import { req, res, next } from 'express';
 import qs from 'qs';
 
 import { ResponseData } from '../interfaces/response-data.interface';
-import { PerformanceAppService } from '../services/performanceapp.service';
-import { PerformanceApp } from '../models/performanceapp.model';
+import { RoleService } from '../services/role.service';
+import { Role } from '../models/role.model';
 
 // ####################################################################################################
-// ## CLASE PerformanceAppController
+// ## CLASE RoleController
 // ####################################################################################################
-export class PerformanceAppController {
+export class RoleController {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private TRANSLATION_NAME_MODEL : string = 'PERFORMANCE';
-  public performanceAppService : PerformanceAppService = new PerformanceAppService();
+  private TRANSLATION_NAME_MODEL : string = 'ROLE';
+  public roleService : RoleService = new RoleService();
 
   // ************************************************************************************************
   // ** CONSTRUTOR
@@ -46,12 +46,12 @@ export class PerformanceAppController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const performanceApp: PerformanceApp = new PerformanceApp(req.body);
+      const role: Role = new Role(req.body);
 
       let data;
 
-      if (this.hasMinimumAttributes(performanceApp)) {
-        data = await this.performanceAppService.create(performanceApp);
+      if (this.hasMinimumAttributes(role)) {
+        data = await this.roleService.create(role);
       }
 
       if (
@@ -63,7 +63,7 @@ export class PerformanceAppController {
         message = req.t('SUCCESS.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
       } else if (data == HttpStatus.CONFLICT) {
         data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: performanceApp.id });
+        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: role.id });
       } else {
         data = undefined;
         error = req.t('ERROR.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
@@ -99,25 +99,25 @@ export class PerformanceAppController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const performanceApps: PerformanceApp[] = req.body;
+      const roles: Role[] = req.body;
 
       let data;
       let continueProcess: boolean = true;
 
-      for (let i = 0; i < performanceApps.length; i++) {
-        let item = performanceApps[i];
+      for (let i = 0; i < roles.length; i++) {
+        let item = roles[i];
 
         if (this.hasMinimumAttributes(item)) {
           // Crease un proxecto novo para asegurar que vai a ser do tipo correcto
-          performanceApps[i] = new PerformanceApp(item);
+          roles[i] = new Role(item);
         } else {
           continueProcess = false;
           break;
         }
       }
 
-      if (continueProcess && performanceApps && performanceApps.length > 0) {
-        data = await this.performanceAppService.createList(performanceApps);
+      if (continueProcess && roles && roles.length > 0) {
+        data = await this.roleService.createList(roles);
       }
 
       if (
@@ -180,7 +180,7 @@ export class PerformanceAppController {
 
       const queryParams = qs.parse(query);
 
-      let data = await this.performanceAppService.getAll(queryParams, orderBy, limit, offset);
+      let data = await this.roleService.getAll(queryParams, orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -230,7 +230,7 @@ export class PerformanceAppController {
       const { id } = req.params;
       const queryParams = qs.parse(req.query);
 
-      let data = await this.performanceAppService.get(id, queryParams);
+      let data = await this.roleService.get(id, queryParams);
 
       if (
         data != undefined &&
@@ -278,12 +278,12 @@ export class PerformanceAppController {
       let code = HttpStatus.NOT_FOUND;
 
       const { id } = req.params;
-      const performanceApp: PerformanceApp = new PerformanceApp(req.body);
+      const role: Role = new Role(req.body);
 
       let data;
 
-      if (this.hasMinimumAttributes(performanceApp)) {
-        data = await this.performanceAppService.update(id, performanceApp);
+      if (this.hasMinimumAttributes(role)) {
+        data = await this.roleService.update(id, role);
       }
 
       if (
@@ -346,7 +346,7 @@ export class PerformanceAppController {
 
       if (objPatch.length > 0) {
 
-        data = await this.performanceAppService.modify(id, objPatch);
+        data = await this.roleService.modify(id, objPatch);
 
         if (
           data != undefined &&
@@ -404,7 +404,7 @@ export class PerformanceAppController {
 
       const { id } = req.params;
 
-      let data = await this.performanceAppService.delete(id);
+      let data = await this.roleService.delete(id);
 
       if (
         data != undefined &&
@@ -440,18 +440,21 @@ export class PerformanceAppController {
   // ** UTILIDADES
   // ************************************************************************************************
   /**
-   * Comproba se o PerformanceApp pasado ten os atributos mínimos que o modelo necesita.
+   * Comproba se o Role pasado ten os atributos mínimos que o modelo necesita.
    *
-   * @param item PerformanceApp que se vai a avaliar
+   * @param item Role que se vai a avaliar
    * @returns Boolean
    */
-  private hasMinimumAttributes = (item: PerformanceApp): Boolean => {
+  private hasMinimumAttributes = (item: Role): Boolean => {
     let result = false;
 
     if (
       item &&
       item.name &&
-      item.type
+      item.create &&
+      item.delete &&
+      item.read &&
+      item.update
     ) {
       result = true;
     }

@@ -448,7 +448,11 @@ export class CommentAppController {
   private hasMinimumAttributes = (item: CommentApp): Boolean => {
     let result = false;
 
-    if (item && item.title && item.message) {
+    if (
+      item &&
+      item.title &&
+      item.message
+    ) {
       result = true;
     }
 

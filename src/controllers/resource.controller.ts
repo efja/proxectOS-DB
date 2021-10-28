@@ -8,18 +8,18 @@ import { req, res, next } from 'express';
 import qs from 'qs';
 
 import { ResponseData } from '../interfaces/response-data.interface';
-import { PerformanceAppService } from '../services/performanceapp.service';
-import { PerformanceApp } from '../models/performanceapp.model';
+import { ResourceService } from '../services/resource.service';
+import { Resource } from '../models/resource.model';
 
 // ####################################################################################################
-// ## CLASE PerformanceAppController
+// ## CLASE ResourceController
 // ####################################################################################################
-export class PerformanceAppController {
+export class ResourceController {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private TRANSLATION_NAME_MODEL : string = 'PERFORMANCE';
-  public performanceAppService : PerformanceAppService = new PerformanceAppService();
+  private TRANSLATION_NAME_MODEL : string = 'RESOURCE';
+  public resourceService : ResourceService = new ResourceService();
 
   // ************************************************************************************************
   // ** CONSTRUTOR
@@ -46,12 +46,12 @@ export class PerformanceAppController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const performanceApp: PerformanceApp = new PerformanceApp(req.body);
+      const resource: Resource = new Resource(req.body);
 
       let data;
 
-      if (this.hasMinimumAttributes(performanceApp)) {
-        data = await this.performanceAppService.create(performanceApp);
+      if (this.hasMinimumAttributes(resource)) {
+        data = await this.resourceService.create(resource);
       }
 
       if (
@@ -63,7 +63,7 @@ export class PerformanceAppController {
         message = req.t('SUCCESS.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
       } else if (data == HttpStatus.CONFLICT) {
         data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: performanceApp.id });
+        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: resource.id });
       } else {
         data = undefined;
         error = req.t('ERROR.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
@@ -99,25 +99,25 @@ export class PerformanceAppController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const performanceApps: PerformanceApp[] = req.body;
+      const resources: Resource[] = req.body;
 
       let data;
       let continueProcess: boolean = true;
 
-      for (let i = 0; i < performanceApps.length; i++) {
-        let item = performanceApps[i];
+      for (let i = 0; i < resources.length; i++) {
+        let item = resources[i];
 
         if (this.hasMinimumAttributes(item)) {
           // Crease un proxecto novo para asegurar que vai a ser do tipo correcto
-          performanceApps[i] = new PerformanceApp(item);
+          resources[i] = new Resource(item);
         } else {
           continueProcess = false;
           break;
         }
       }
 
-      if (continueProcess && performanceApps && performanceApps.length > 0) {
-        data = await this.performanceAppService.createList(performanceApps);
+      if (continueProcess && resources && resources.length > 0) {
+        data = await this.resourceService.createList(resources);
       }
 
       if (
@@ -180,7 +180,7 @@ export class PerformanceAppController {
 
       const queryParams = qs.parse(query);
 
-      let data = await this.performanceAppService.getAll(queryParams, orderBy, limit, offset);
+      let data = await this.resourceService.getAll(queryParams, orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -230,7 +230,7 @@ export class PerformanceAppController {
       const { id } = req.params;
       const queryParams = qs.parse(req.query);
 
-      let data = await this.performanceAppService.get(id, queryParams);
+      let data = await this.resourceService.get(id, queryParams);
 
       if (
         data != undefined &&
@@ -278,12 +278,12 @@ export class PerformanceAppController {
       let code = HttpStatus.NOT_FOUND;
 
       const { id } = req.params;
-      const performanceApp: PerformanceApp = new PerformanceApp(req.body);
+      const resource: Resource = new Resource(req.body);
 
       let data;
 
-      if (this.hasMinimumAttributes(performanceApp)) {
-        data = await this.performanceAppService.update(id, performanceApp);
+      if (this.hasMinimumAttributes(resource)) {
+        data = await this.resourceService.update(id, resource);
       }
 
       if (
@@ -346,7 +346,7 @@ export class PerformanceAppController {
 
       if (objPatch.length > 0) {
 
-        data = await this.performanceAppService.modify(id, objPatch);
+        data = await this.resourceService.modify(id, objPatch);
 
         if (
           data != undefined &&
@@ -404,7 +404,7 @@ export class PerformanceAppController {
 
       const { id } = req.params;
 
-      let data = await this.performanceAppService.delete(id);
+      let data = await this.resourceService.delete(id);
 
       if (
         data != undefined &&
@@ -440,18 +440,20 @@ export class PerformanceAppController {
   // ** UTILIDADES
   // ************************************************************************************************
   /**
-   * Comproba se o PerformanceApp pasado ten os atributos mínimos que o modelo necesita.
+   * Comproba se o Resource pasado ten os atributos mínimos que o modelo necesita.
    *
-   * @param item PerformanceApp que se vai a avaliar
+   * @param item Resource que se vai a avaliar
    * @returns Boolean
    */
-  private hasMinimumAttributes = (item: PerformanceApp): Boolean => {
+  private hasMinimumAttributes = (item: Resource): Boolean => {
     let result = false;
 
     if (
       item &&
       item.name &&
-      item.type
+      item.description &&
+      item.scale &&
+      item.unitCost
     ) {
       result = true;
     }
