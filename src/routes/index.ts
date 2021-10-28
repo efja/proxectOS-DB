@@ -7,6 +7,7 @@ import { AssignedResourceRoutes } from './assigned-resource.route';
 import { AssignedStageRoutes } from './assigned-stage.route';
 import { AssignedUserRoutes } from './assigned-user.route';
 import { ProjectRoutes } from './project.route';
+import { RepositoryAppRoutes } from './repositoryapp.route';
 
 // ####################################################################################################
 // ## CONSTANTES
@@ -51,7 +52,7 @@ const router = Router();
   router.use('/projects', new ProjectRoutes().getRoutes());
 
   // RepositoryApp
-  router.use('/repositories', new ProjectRoutes().getRoutes());
+  router.use('/repositories', new RepositoryAppRoutes().getRoutes());
 
   // Requirement
   router.use('/requirements', new ProjectRoutes().getRoutes());
