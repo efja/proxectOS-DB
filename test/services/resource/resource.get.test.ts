@@ -88,11 +88,12 @@ describe('1: Probas DATOS API - Resources (GET)', () => {
     });
 
     test('1.2: Consultar tódolos Resources con parámetros de filtrado:', async() => {
+        const valueFilter = 'Hora';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$re': 'Hora' }
+                name: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -108,7 +109,9 @@ describe('1: Probas DATOS API - Resources (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 7;
+        const resources: Resource[] = (dataList.resources as Resource[]).filter(item => item.name.includes(valueFilter));
+
+        const dataLength = resources.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -118,7 +121,7 @@ describe('1: Probas DATOS API - Resources (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.resources[0].id);
+        expect(data[0].id).toBe(resources[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -159,21 +162,21 @@ describe('1: Probas DATOS API - Resources (GET)', () => {
     });
 
     test(`1.4: Consultar Resource: <${dataList.resources[0].id}> con parámetros de filtrado`, async() => {
+        const resource = dataList.resources[0] as Resource;
+
         const queryParameters = qs.stringify(
             {
-                name: {'$re': 'Hora' }
+                name: {'$re': resource.name }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.resources[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${resource.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const resource = dataList.resources[0] as Resource;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -192,7 +195,7 @@ describe('1: Probas DATOS API - Resources (GET)', () => {
         expect(data.description).toBeDefined();
         expect(data.description).toBe(resource.description);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('RESOURCE.NAME'), id: dataList.resources[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('RESOURCE.NAME'), id: resource.id }));
     });
 });
 
@@ -287,7 +290,7 @@ describe('2: Probas DATOS API - Resources ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('RESOURCE.NAME'), id: `${dataList.resources[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('RESOURCE.NAME'), id: `${dataList.resources[0].id}` }));
     });
 
     test(`2.3: Consultar Resource inexistente:`, async() => {

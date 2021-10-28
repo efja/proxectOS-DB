@@ -81,8 +81,8 @@ describe('1: Probas DATOS API - UserContacts (POST)', () => {
         expect(data.contact).toBeDefined();
         expect(data.contact).toBe(userContact.contact);
 
-        expect(data.type.id).toBeDefined();
-        expect(data.type.id).toBe(userContact.type.id);
+        expect(data.type).toBeDefined();
+        expect(data.type).toBe(userContact.type.id);
 
         expect(message).toBe(i18next.t('SUCCESS.CREATE', { entity: i18next.t('USER_CONTACT.NAME') }));
     });

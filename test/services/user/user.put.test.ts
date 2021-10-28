@@ -65,7 +65,7 @@ describe('1: Probas DATOS API - Users (PUT)', () => {
         user1.name = user1.name + FAKE_TEXT;
         user1.secondSurname = user1.secondSurname + FAKE_TEXT;
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/${dataList.users[0].id}`).send(user1);
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${user1.id}`).send(user1);
         const {
             code,
             data,
@@ -96,14 +96,13 @@ describe('1: Probas DATOS API - Users (PUT)', () => {
         expect(data.id).toBe(user1.id);
 
         expect(data.firstSurname).toBeDefined();
-        expect(data.firstSurname).not.toBe(user0.firstSurname);
         expect(data.firstSurname).toBe(user1.firstSurname);
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER.NAME'), id: user1.id }));
     });
 });
 
-describe('1: Probas DATOS API - Users ERROS (PUT)', () => {
+describe('2: Probas DATOS API - Users ERROS (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************

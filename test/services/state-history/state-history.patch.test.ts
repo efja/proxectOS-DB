@@ -7,6 +7,7 @@ import * as jsonpatch from 'fast-json-patch';
 import { ObjectId } from "@mikro-orm/mongodb";
 
 import { StateHistory } from '../../../src/models/state-history.model';
+import { State } from "../../../src/models/state.model";
 
 import {
     app,
@@ -62,8 +63,15 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
         const stateHistory0 = new StateHistory(dataList.statesHistory[0]);
         const stateHistory1 = new StateHistory(dataList.statesHistory[0]);
 
-        // Modificase o modelo StateHistory
-        stateHistory1.log = stateHistory1.log + FAKE_TEXT;
+        const stateHistory0newStateId = stateHistory0.newState.id;
+
+        // Modificase o modelo StateHistory (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
+        stateHistory0.log = stateHistory0.log + FAKE_TEXT;
+
+        // Modificase o modelo AssignedUser (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
+        stateHistory1.newState = dataList.users[0]._id != stateHistory1.newState._id
+            ? (dataList.states[0] as State)._id
+            : (dataList.states[1] as State)._id;
 
         // Xerase o objexecto tipo HTTP PATCH
         const objPatch = jsonpatch.compare(stateHistory0, stateHistory1);
@@ -94,15 +102,11 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
         expect(data.id).toBe(stateHistory0.id);
         expect(data.id).toBe(stateHistory1.id);
 
-        expect(data.newState.id).toBeDefined();
-        expect(data.newState.id).toBe(stateHistory0.newState.id);
-        expect(data.newState.id).toBe(stateHistory1.newState.id);
+        expect(data.newState).toBeDefined();
+        expect(data.newState).not.toBe(stateHistory0newStateId);
+        expect(data.newState).toBe(stateHistory1.newState);
 
-        // Comprobanse algúns datos opcionais
-        expect(data.oldState.id).toBe(stateHistory0.oldState.id);
-        expect(data.oldState.id).toBe(stateHistory1.oldState.id);
-
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('STATE_HISTORY.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('STATE_HISTORY.NAME'), id: stateHistory1.id }));
     });
 
 });

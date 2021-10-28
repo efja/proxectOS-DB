@@ -88,11 +88,12 @@ describe('1: Probas DATOS API - Stages (GET)', () => {
     });
 
     test('1.2: Consultar tódolos Stages con parámetros de filtrado:', async() => {
+        const valueFilter = 'Desenvolvemento';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$re': 'Desenvolvemento' }
+                name: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -108,7 +109,9 @@ describe('1: Probas DATOS API - Stages (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
+        const stages: Stage[] = (dataList.stages as Stage[]).filter(item => item.name.includes(valueFilter));
+
+        const dataLength = stages.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -118,7 +121,7 @@ describe('1: Probas DATOS API - Stages (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.stages[0].id);
+        expect(data[0].id).toBe(stages[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -159,21 +162,21 @@ describe('1: Probas DATOS API - Stages (GET)', () => {
     });
 
     test(`1.4: Consultar Stage: <${dataList.stages[0].id}> con parámetros de filtrado`, async() => {
+        const stage = dataList.stages[0] as Stage;
+
         const queryParameters = qs.stringify(
             {
-                name: {'$re': 'Desenvolvemento' }
+                name: {'$re': stage.name }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.stages[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${stage.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const stage = dataList.stages[0] as Stage;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -192,7 +195,7 @@ describe('1: Probas DATOS API - Stages (GET)', () => {
         expect(data.description).toBeDefined();
         expect(data.description).toBe(stage.description);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('STAGE.NAME'), id: dataList.stages[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('STAGE.NAME'), id: stage.id }));
     });
 });
 
@@ -287,7 +290,7 @@ describe('2: Probas DATOS API - Stages ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('STAGE.NAME'), id: `${dataList.stages[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('STAGE.NAME'), id: `${dataList.stages[0].id}` }));
     });
 
     test(`2.3: Consultar Stage inexistente:`, async() => {

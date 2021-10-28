@@ -7,6 +7,7 @@ import * as jsonpatch from 'fast-json-patch';
 import { ObjectId } from "@mikro-orm/mongodb";
 
 import { UserContact } from '../../../src/models/user-contact.model';
+import { UserContactType } from '../../../src/models/user-contact-type.model';
 
 import {
     app,
@@ -62,8 +63,15 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
         const userContact0 = new UserContact(dataList.userContacts[0]);
         const userContact1 = new UserContact(dataList.userContacts[0]);
 
+        const userContact0TypeId = userContact0.type.id;
+
         // Modificase o modelo UserContact
+
         userContact1.contact = userContact1.contact + FAKE_TEXT;
+
+        userContact1.type = dataList.users[0]._id != userContact1.type._id
+            ? (dataList.types[0] as UserContactType)._id
+            : (dataList.types[1] as UserContactType)._id;
 
         // Xerase o objexecto tipo HTTP PATCH
         const objPatch = jsonpatch.compare(userContact0, userContact1);
@@ -88,17 +96,17 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
         expect(data.contact).not.toBe(userContact0.contact);
         expect(data.contact).toBe(userContact1.contact);
 
+        expect(data.type).toBeDefined();
+        expect(data.type).not.toBe(userContact0TypeId);
+        expect(data.type).toBe(userContact1.type);
+
         // ** Datos NON cambiados
         // Comprobanse algúns datos obrigatorios
         expect(data.id).toBeDefined();
         expect(data.id).toBe(userContact0.id);
         expect(data.id).toBe(userContact1.id);
 
-        expect(data.type.id).toBeDefined();
-        expect(data.type.id).toBe(userContact0.type.id);
-        expect(data.type.id).toBe(userContact1.type.id);
-
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER_CONTACT.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER_CONTACT.NAME'), id: userContact1.id }));
     });
 
 });

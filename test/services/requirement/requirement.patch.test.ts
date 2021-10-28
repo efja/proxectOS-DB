@@ -106,7 +106,7 @@ describe('1: Probas DATOS API - Requirements (PATCH)', () => {
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(requirement0.targetFinishDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(requirement1.targetFinishDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('REQUIREMENT.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('REQUIREMENT.NAME'), id: requirement1.id }));
     });
 
 });

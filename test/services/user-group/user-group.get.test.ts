@@ -88,11 +88,12 @@ describe('1: Probas DATOS API - UserGroups (GET)', () => {
     });
 
     test('1.2: Consultar tódolos UserGroups con parámetros de filtrado:', async() => {
+        const valueFilter = 'Administradores';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$re': 'Administradores' }
+                name: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -108,7 +109,9 @@ describe('1: Probas DATOS API - UserGroups (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 2;
+        const userGroups: UserGroup[] = (dataList.userGroups as UserGroup[]).filter(item => item.name.includes(valueFilter));
+
+        const dataLength = userGroups.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -118,7 +121,7 @@ describe('1: Probas DATOS API - UserGroups (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.userGroups[0].id);
+        expect(data[0].id).toBe(userGroups[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -159,21 +162,21 @@ describe('1: Probas DATOS API - UserGroups (GET)', () => {
     });
 
     test(`1.4: Consultar UserGroup: <${dataList.userGroups[0].id}> con parámetros de filtrado`, async() => {
+        const userGroup = dataList.userGroups[0] as UserGroup;
+
         const queryParameters = qs.stringify(
             {
-                name: {'$re': 'Administradores' }
+                name: {'$re': userGroup.name }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.userGroups[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${userGroup.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const userGroup = dataList.userGroups[0] as UserGroup;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();

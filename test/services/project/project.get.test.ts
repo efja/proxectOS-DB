@@ -293,8 +293,6 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
             error,
         } = response.body
 
-        console.log('data :>> ', data);
-
         expect(error).toBeDefined();
         expect(message).toBeUndefined();
 
@@ -313,8 +311,6 @@ describe('2: Probas DATOS API - Projects ERROS (GET)', () => {
             message,
             error,
         } = response.body
-
-        console.log('data :>> ', data);
 
         expect(error).toBeDefined();
         expect(message).toBeUndefined();

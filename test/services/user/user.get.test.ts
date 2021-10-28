@@ -88,11 +88,12 @@ describe('1: Probas DATOS API - Users (GET)', () => {
     });
 
     test('1.2: Consultar tódolos Users con parámetros de filtrado:', async() => {
+        const valueFilter = 'martacr';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                login: {'$re': 'martacr' }
+                login: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -108,7 +109,9 @@ describe('1: Probas DATOS API - Users (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
+        const users: User[] = (dataList.users as User[]).filter(item => item.login.includes(valueFilter));
+
+        const dataLength = users.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -118,7 +121,7 @@ describe('1: Probas DATOS API - Users (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.users[0].id);
+        expect(data[0].id).toBe(users[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -162,21 +165,21 @@ describe('1: Probas DATOS API - Users (GET)', () => {
     });
 
     test(`1.4: Consultar User: <${dataList.users[0].id}> con parámetros de filtrado`, async() => {
+        const user = dataList.users[0] as User;
+
         const queryParameters = qs.stringify(
             {
-                login: {'$re': 'martacr' }
+                login: {'$re': user.login }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.users[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${user.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const user = dataList.users[0] as User;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();

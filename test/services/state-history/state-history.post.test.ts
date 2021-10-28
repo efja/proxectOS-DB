@@ -81,11 +81,8 @@ describe('1: Probas DATOS API - StateHistorys (POST)', () => {
         expect(data.log).toBeDefined();
         expect(data.log).toBe(stateHistory.log);
 
-        expect(data.newState.id).toBeDefined();
-        expect(data.newState.id).toBe(stateHistory.newState.id);
-
-        // Comprobanse algúns datos opcionais
-        expect(data.oldState.id).toBe(stateHistory.oldState.id);
+        expect(data.newState).toBeDefined();
+        expect(data.newState).toBe(stateHistory.newState.id);
 
         expect(message).toBe(i18next.t('SUCCESS.CREATE', { entity: i18next.t('STATE_HISTORY.NAME') }));
     });

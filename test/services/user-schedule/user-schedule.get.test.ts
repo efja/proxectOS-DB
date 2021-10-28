@@ -88,11 +88,12 @@ describe('1: Probas DATOS API - UserSchedules (GET)', () => {
     });
 
     test('1.2: Consultar tódolos UserSchedules con parámetros de filtrado:', async() => {
+        const valueFilter = 'Calendario';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ description: "ASC" }],
-                description: {'$re': 'Calendario' }
+                description: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -108,7 +109,9 @@ describe('1: Probas DATOS API - UserSchedules (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 2;
+        const userSchedules: UserSchedule[] = (dataList.userSchedules as UserSchedule[]).filter(item => item.description.includes(valueFilter));
+
+        const dataLength = userSchedules.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -118,7 +121,7 @@ describe('1: Probas DATOS API - UserSchedules (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.userSchedules[0].id);
+        expect(data[0].id).toBe(userSchedules[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -159,21 +162,21 @@ describe('1: Probas DATOS API - UserSchedules (GET)', () => {
     });
 
     test(`1.4: Consultar UserSchedule: <${dataList.userSchedules[0].id}> con parámetros de filtrado`, async() => {
+        const userSchedule = dataList.userSchedules[0] as UserSchedule;
+
         const queryParameters = qs.stringify(
             {
-                description: {'$re': 'Calendario' }
+                description: {'$re': userSchedule.description }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.userSchedules[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${userSchedule.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const userSchedule = dataList.userSchedules[0] as UserSchedule;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();

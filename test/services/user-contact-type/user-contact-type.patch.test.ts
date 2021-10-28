@@ -84,8 +84,8 @@ describe('1: Probas DATOS API - UserContactTypes (PATCH)', () => {
         expect(data).toBeDefined();
 
         // ** Datos cambiados
-        expect(data.name).toBeDefined();
-        expect(data.description).toBe(userContactType0.description);
+        expect(data.description).toBeDefined();
+        expect(data.description).not.toBe(userContactType0.description);
         expect(data.description).toBe(userContactType1.description);
 
         // ** Datos NON cambiados
@@ -94,7 +94,7 @@ describe('1: Probas DATOS API - UserContactTypes (PATCH)', () => {
         expect(data.id).toBe(userContactType0.id);
         expect(data.id).toBe(userContactType1.id);
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER_CONTACT_TYPE.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER_CONTACT_TYPE.NAME'), id: userContactType1.id }));
     });
 
 });

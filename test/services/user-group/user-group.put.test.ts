@@ -94,7 +94,7 @@ describe('1: Probas DATOS API - UserGroups (PUT)', () => {
         expect(data.description).toBe(userGroup0.description);
         expect(data.description).toBe(userGroup1.description);
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER_GROUP.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER_GROUP.NAME'), id: userGroup1.id }));
     });
 });
 

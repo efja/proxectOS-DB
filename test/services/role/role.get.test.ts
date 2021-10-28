@@ -88,11 +88,12 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
     });
 
     test('1.2: Consultar tódolos Roles con parámetros de filtrado:', async() => {
+        const valueFilter = 'lectura';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$re': 'lectura' }
+                name: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -108,7 +109,9 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
+        const roles: Role[] = (dataList.roles as Role[]).filter(item => item.name.includes(valueFilter));
+
+        const dataLength = roles.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -118,7 +121,7 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.roles[0].id);
+        expect(data[0].id).toBe(roles[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -163,21 +166,21 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
     });
 
     test(`1.4: Consultar Role: <${dataList.roles[0].id}> con parámetros de filtrado`, async() => {
+        const role = dataList.roles[0] as Role;
+
         const queryParameters = qs.stringify(
             {
-                name: {'$re': 'lectura' }
+                name: {'$re': role.name }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.roles[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${role.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const role = dataList.roles[0] as Role;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -200,7 +203,7 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
         expect(data.create).toBe(role.create);
         expect(data.delete).toBe(role.delete);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ROLE.NAME'), id: dataList.roles[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('ROLE.NAME'), id: role.id }));
     });
 });
 
@@ -295,7 +298,7 @@ describe('2: Probas DATOS API - Roles ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ROLE.NAME'), id: `${dataList.roles[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ROLE.NAME'), id: `${dataList.roles[0].id}` }));
     });
 
     test(`2.3: Consultar Role inexistente:`, async() => {

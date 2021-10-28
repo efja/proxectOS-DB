@@ -98,7 +98,7 @@ describe('1: Probas DATOS API - Users (PATCH)', () => {
         expect(data.secondSurname).toBe(user0.secondSurname);
         expect(data.secondSurname).toBe(user1.secondSurname);
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('USER.NAME'), id: user1.id }));
     });
 
 });

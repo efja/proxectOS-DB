@@ -88,11 +88,12 @@ describe('1: Probas DATOS API - States (GET)', () => {
     });
 
     test('1.2: Consultar tódolos States con parámetros de filtrado:', async() => {
+        const valueFilter = 'Descartada';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$re': 'Descartada' }
+                name: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -108,7 +109,9 @@ describe('1: Probas DATOS API - States (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
+        const states: State[] = (dataList.states as State[]).filter(item => item.name.includes(valueFilter));
+
+        const dataLength = states.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -118,7 +121,7 @@ describe('1: Probas DATOS API - States (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.states[0].id);
+        expect(data[0].id).toBe(states[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -159,21 +162,21 @@ describe('1: Probas DATOS API - States (GET)', () => {
     });
 
     test(`1.4: Consultar State: <${dataList.states[0].id}> con parámetros de filtrado`, async() => {
+        const state = dataList.states[0] as State;
+
         const queryParameters = qs.stringify(
             {
-                name: {'$re': 'Descartada' }
+                name: {'$re': state.name }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.states[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${state.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const state = dataList.states[0] as State;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -192,7 +195,7 @@ describe('1: Probas DATOS API - States (GET)', () => {
         expect(data.description).toBeDefined();
         expect(data.description).toBe(state.description);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('STATE.NAME'), id: dataList.states[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('STATE.NAME'), id: state.id }));
     });
 });
 
@@ -287,7 +290,7 @@ describe('2: Probas DATOS API - States ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('STATE.NAME'), id: `${dataList.states[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('STATE.NAME'), id: `${dataList.states[0].id}` }));
     });
 
     test(`2.3: Consultar State inexistente:`, async() => {

@@ -80,13 +80,10 @@ describe('1: Probas DATOS API - StateHistorys (DELETE)', () => {
         expect(data.log).toBeDefined();
         expect(data.log).toBe(stateHistory.log);
 
-        expect(data.newState.id).toBeDefined();
-        expect(data.newState.id).toBe(stateHistory.newState.id);
+        expect(data.newState).toBeDefined();
+        expect(data.newState).toBe(stateHistory.newState.id);
 
-        // Comprobanse algúns datos opcionais
-        expect(data.oldState.id).toBe(stateHistory.oldState.id);
-
-        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('STATE_HISTORY.NAME'), id: dataList.statesHistory[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('STATE_HISTORY.NAME'), id: stateHistory.id }));
 
         // --------------------------------------------------------------------------------------------
         // -- COMPROBASE QUE A ENTIDADE XA NON EXISTE NA BD

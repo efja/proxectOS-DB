@@ -88,11 +88,12 @@ describe('1: Probas DATOS API - Types (GET)', () => {
     });
 
     test('1.2: Consultar tódolos Types con parámetros de filtrado:', async() => {
+        const valueFilter = 'Dependencia';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$re': 'Dependencia' }
+                name: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -108,7 +109,9 @@ describe('1: Probas DATOS API - Types (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 2;
+        const types: Type[] = (dataList.types as Type[]).filter(item => item.name.includes(valueFilter));
+
+        const dataLength = types.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -118,7 +121,7 @@ describe('1: Probas DATOS API - Types (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.types[0].id);
+        expect(data[0].id).toBe(types[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -159,21 +162,21 @@ describe('1: Probas DATOS API - Types (GET)', () => {
     });
 
     test(`1.4: Consultar Type: <${dataList.types[0].id}> con parámetros de filtrado`, async() => {
+        const type = dataList.types[0] as Type;
+
         const queryParameters = qs.stringify(
             {
-                name: {'$re': 'Dependencia' }
+                name: {'$re': type.name }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.types[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${type.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const type = dataList.types[0] as Type;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -192,7 +195,7 @@ describe('1: Probas DATOS API - Types (GET)', () => {
         expect(data.description).toBeDefined();
         expect(data.description).toBe(type.description);
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('TYPE.NAME'), id: dataList.types[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('TYPE.NAME'), id: type.id }));
     });
 });
 
@@ -287,7 +290,7 @@ describe('2: Probas DATOS API - Types ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('TYPE.NAME'), id: `${dataList.types[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('TYPE.NAME'), id: `${dataList.types[0].id}` }));
     });
 
     test(`2.3: Consultar Type inexistente:`, async() => {

@@ -95,7 +95,7 @@ describe('1: Probas DATOS API - Types (PUT)', () => {
         expect(data.id).toBe(type0.id);
         expect(data.id).toBe(type1.id);
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('TYPE.NAME'), id: dataList.projects[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('TYPE.NAME'), id: type1.id }));
     });
 });
 

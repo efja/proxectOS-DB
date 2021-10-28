@@ -89,11 +89,12 @@ describe('1: Probas DATOS API - UserContactTypes (GET)', () => {
     });
 
     test('1.2: Consultar tódolos UserContactTypes con parámetros de filtrado:', async() => {
+        const valueFilter = 'Teléfono';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ description: "ASC" }],
-                description: {'$re': 'Teléfono' }
+                description: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -109,7 +110,9 @@ describe('1: Probas DATOS API - UserContactTypes (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
+        const userContactTypes: UserContactType[] = (dataList.userContactTypes as UserContactType[]).filter(item => item.description.includes(valueFilter));
+
+        const dataLength = userContactTypes.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -119,7 +122,7 @@ describe('1: Probas DATOS API - UserContactTypes (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.userContactTypes[0].id);
+        expect(data[0].id).toBe(userContactTypes[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -157,21 +160,21 @@ describe('1: Probas DATOS API - UserContactTypes (GET)', () => {
     });
 
     test(`1.4: Consultar UserContactType: <${dataList.userContactTypes[0].id}> con parámetros de filtrado`, async() => {
+        const userContactType = dataList.userContactTypes[0] as UserContactType;
+
         const queryParameters = qs.stringify(
             {
-                description: {'$re': 'Teléfono' }
+                description: {'$re': userContactType.description }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.userContactTypes[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${userContactType.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const userContactType = dataList.userContactTypes[0] as UserContactType;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();

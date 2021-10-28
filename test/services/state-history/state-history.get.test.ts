@@ -88,11 +88,12 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
     });
 
     test('1.2: Consultar tódolos StateHistorys con parámetros de filtrado:', async() => {
+        const valueFilter = 'Traballando';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ log: "ASC" }],
-                log: {'$re': 'Traballando' }
+                log: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -108,7 +109,9 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
+        const statesHistory: StateHistory[] = (dataList.statesHistory as StateHistory[]).filter(item => item.log.includes(valueFilter));
+
+        const dataLength = statesHistory.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -118,7 +121,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.statesHistory[0].id);
+        expect(data[0].id).toBe(statesHistory[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -152,31 +155,28 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
         expect(data.log).toBeDefined();
         expect(data.log).toBe(stateHistory.log);
 
-        expect(data.newState.id).toBeDefined();
-        expect(data.newState.id).toBe(stateHistory.newState.id);
-
-        // Comprobanse algúns datos opcionais
-        expect(data.oldState.id).toBe(stateHistory.oldState.id);
+        expect(data.newState).toBeDefined();
+        expect(data.newState).toBe(stateHistory.newState.id);
 
         expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('STATE_HISTORY.NAME'), id: stateHistory.id }));
     });
 
     test(`1.4: Consultar StateHistory: <${dataList.statesHistory[0].id}> con parámetros de filtrado`, async() => {
+        const stateHistory = dataList.statesHistory[0] as StateHistory;
+
         const queryParameters = qs.stringify(
             {
-                log: {'$re': 'Traballando' }
+                log: {'$re': stateHistory.log }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.statesHistory[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${stateHistory.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const stateHistory = dataList.statesHistory[0] as StateHistory;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -192,11 +192,8 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
         expect(data.log).toBeDefined();
         expect(data.log).toBe(stateHistory.log);
 
-        expect(data.newState.id).toBeDefined();
-        expect(data.newState.id).toBe(stateHistory.newState.id);
-
-        // Comprobanse algúns datos opcionais
-        expect(data.oldState.id).toBe(stateHistory.oldState.id);
+        expect(data.newState).toBeDefined();
+        expect(data.newState).toBe(stateHistory.newState.id);
 
         expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('STATE_HISTORY.NAME'), id: stateHistory.id }));
     });

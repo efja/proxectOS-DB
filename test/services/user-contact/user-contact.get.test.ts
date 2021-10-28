@@ -88,11 +88,12 @@ describe('1: Probas DATOS API - UserContacts (GET)', () => {
     });
 
     test('1.2: Consultar tódolos UserContacts con parámetros de filtrado:', async() => {
+        const valueFilter = 'Marianna';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ contact: "ASC" }],
-                contact: {'$re': 'Marianna' }
+                contact: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -108,7 +109,9 @@ describe('1: Probas DATOS API - UserContacts (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
+        const userContacts: UserContact[] = (dataList.userContacts as UserContact[]).filter(item => item.contact.includes(valueFilter));
+
+        const dataLength = userContacts.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -118,7 +121,7 @@ describe('1: Probas DATOS API - UserContacts (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.userContacts[0].id);
+        expect(data[0].id).toBe(userContacts[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -156,21 +159,21 @@ describe('1: Probas DATOS API - UserContacts (GET)', () => {
     });
 
     test(`1.4: Consultar UserContact: <${dataList.userContacts[0].id}> con parámetros de filtrado`, async() => {
+        const userContact = dataList.userContacts[0] as UserContact;
+
         const queryParameters = qs.stringify(
             {
-                contact: {'$re': 'Marianna' }
+                contact: {'$re': userContact.contact }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.userContacts[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${userContact.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const userContact = dataList.userContacts[0] as UserContact;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();

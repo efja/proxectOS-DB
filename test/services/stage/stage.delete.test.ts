@@ -83,8 +83,6 @@ describe('1: Probas DATOS API - Stages (DELETE)', () => {
         expect(data.description).toBeDefined();
         expect(data.description).toBe(stage.description);
 
-        expect(message).toBe(i18next.t('STAGE.SERVICE.SUCCESS.GET'));
-
         expect(message).toBe(i18next.t('SUCCESS.DELETE', { entity: i18next.t('STAGE.NAME'), id: dataList.stages[0].id }));
 
         // --------------------------------------------------------------------------------------------

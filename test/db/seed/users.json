@@ -18,8 +18,6 @@
         "flexibleSchedule"  : false,
         "vacantions"        : [],
 
-        "userSchedule"      : null,
-
         "contacts"          : [],
 
         "defaultUserGroups" : []

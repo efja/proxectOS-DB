@@ -90,11 +90,12 @@ describe('1: Probas DATOS API - Requirements (GET)', () => {
     });
 
     test('1.2: Consultar tódolos Requirements con parámetros de filtrado:', async() => {
+        const valueFilter = 'magnam';
         const queryParameters = qs.stringify(
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$re': 'magnam' }
+                name: {'$re': valueFilter }
             },
             { arrayFormat: 'repeat' }
         );
@@ -110,7 +111,9 @@ describe('1: Probas DATOS API - Requirements (GET)', () => {
             error,
         } = response.body
 
-        const dataLength = 1;
+        const requirements: Requirement[] = (dataList.requirements as Requirement[]).filter(item => item.name.includes(valueFilter));
+
+        const dataLength = requirements.length;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -120,7 +123,7 @@ describe('1: Probas DATOS API - Requirements (GET)', () => {
 
         expect(data).toBeDefined();
         expect(data).toHaveLength(dataLength);
-        expect(data[0].id).toBe(dataList.requirements[0].id);
+        expect(data[0].id).toBe(requirements[0].id);
 
         expect(total).toBe(dataLength);
         expect(from).toBe(0);
@@ -165,21 +168,21 @@ describe('1: Probas DATOS API - Requirements (GET)', () => {
     });
 
     test(`1.4: Consultar Requirement: <${dataList.requirements[0].id}> con parámetros de filtrado`, async() => {
+        const requirement = dataList.requirements[0] as Requirement;
+
         const queryParameters = qs.stringify(
             {
-                name: {'$re': 'magnam' }
+                name: {'$re': requirement.name }
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.requirements[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${requirement.id}?${queryParameters}`);
         const {
             code,
             data,
             message,
             error,
         } = response.body
-
-        const requirement = dataList.requirements[0] as Requirement;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -202,7 +205,7 @@ describe('1: Probas DATOS API - Requirements (GET)', () => {
         expect(date2LocaleISO(data.startDate)).toBe(date2LocaleISO(requirement.startDate));
         expect(date2LocaleISO(data.targetFinishDate)).toBe(date2LocaleISO(requirement.targetFinishDate));
 
-        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('REQUIREMENT.NAME'), id: dataList.requirements[0].id }));
+        expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('REQUIREMENT.NAME'), id: requirement.id }));
     });
 });
 
@@ -297,7 +300,7 @@ describe('2: Probas DATOS API - Requirements ERROS (GET)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('REQUIREMENT.NAME'), id: `${dataList.requirements[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('REQUIREMENT.NAME'), id: `${dataList.requirements[0].id}` }));
     });
 
     test(`2.3: Consultar Requirement inexistente:`, async() => {
