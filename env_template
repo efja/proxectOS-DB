@@ -1,4 +1,4 @@
-APP_NAME=ProxectOS
+APP_NAME=ProxectOS-DB
 APP_DESCRIPTION=ProxectOS_API_PERSISTENCIA
 
 APP_HOST=http://localhost
