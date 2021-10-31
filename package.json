@@ -13,7 +13,7 @@
     "predev": "npm run mongo-stop; npm run mongo-start",
     "postdev": "npm run mongo-stop",
     "mongo-start": "docker-compose up -d",
-    "mongo-stop": "docker rm -f proxectos-db",
+    "mongo-stop": "docker-compose down",
     "mongo-enter": "docker exec -ti proxectos-db mongo",
     "test": "NODE_ENV=test jest --coverage --detectOpenHandles",
     "test:watch": "npm run test -- --watch",
@@ -21,7 +21,7 @@
     "pretest": "npm run test:mongo-stop; npm run test:mongo-start",
     "posttest": "npm run test:mongo-stop",
     "test:mongo-start": "docker-compose -f docker-compose-test.yaml up -d",
-    "test:mongo-stop": "docker rm -f proxectos-db-test"
+    "test:mongo-stop": "docker-compose -f docker-compose-test.yaml down"
   },
   "author": "Fco. Javier González Campos",
   "license": "GPL-3.0-or-later",
