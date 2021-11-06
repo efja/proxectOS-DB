@@ -95,7 +95,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$re': valueFilter }
+                name: valueFilter
             },
             { arrayFormat: 'repeat' }
         );
@@ -172,7 +172,7 @@ describe('1: Probas DATOS API - Projects (GET)', () => {
 
         const queryParameters = qs.stringify(
             {
-                name: {'$re': project.name }
+                name: project.name
             }
         );
 
