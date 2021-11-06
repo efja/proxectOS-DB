@@ -46,7 +46,8 @@
     "moment": "^2.29.1",
     "qs": "^6.7.0",
     "query-types": "^0.1.4",
-    "tsc": "^2.0.3"
+    "tsc": "^2.0.3",
+    "types-json": "^1.2.2"
   },
   "devDependencies": {
     "@types/jest": "^27.0.1",

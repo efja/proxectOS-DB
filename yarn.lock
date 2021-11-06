@@ -5227,6 +5227,11 @@
   dependencies:
     "is-typedarray" "^1.0.0"
 
+"types-json@^1.2.2":
+  "integrity" "sha512-VfVLISHypS7ayIHvhacOESOTib4Sm4mAhnsgR8fzQdGp89YoBwMqvGmqENjtYehUQzgclT+7NafpEXkK/MHKwA=="
+  "resolved" "https://registry.npmjs.org/types-json/-/types-json-1.2.2.tgz"
+  "version" "1.2.2"
+
 "typescript@*", "typescript@^4.0.2", "typescript@>=2.7", "typescript@>=3.8 <5.0":
   "integrity" "sha512-4xfscpisVgqqDfPaJo5vkd+Qd/ItkoagnHpufr+i2QCHBsNYp+G7UAoyFl8aPtx879u38wPV65rZ8qbGZijalA=="
   "resolved" "https://registry.npmjs.org/typescript/-/typescript-4.4.3.tgz"
