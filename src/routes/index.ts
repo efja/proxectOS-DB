@@ -7,7 +7,6 @@ import { AssignedResourceRoutes } from './assigned-resource.route';
 import { AssignedStageRoutes } from './assigned-stage.route';
 import { AssignedUserRoutes } from './assigned-user.route';
 import { CommentAppRoutes } from './commentapp.route';
-import { PerformanceAppRoutes } from './performanceapp.route';
 import { PriorityRoutes } from './priority.route';
 import { ProjectRoutes } from './project.route';
 import { RepositoryAppRoutes } from './repositoryapp.route';
@@ -56,9 +55,6 @@ const router = Router();
 
   // CommentApp
   router.use('/comments', new CommentAppRoutes().getRoutes());
-
-  // PerformanceApp
-  router.use('/performances', new PerformanceAppRoutes().getRoutes());
 
   // Priority
   router.use('/priorities', new PriorityRoutes().getRoutes());
