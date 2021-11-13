@@ -1,28 +1,32 @@
 [
     {
-        "_id"               : "",
-        "id"                : "",
-        "createdAt"         : "",
-        "updatedAt"         : "",
+        "_id"                   : "",
+        "id"                    : "",
+        "createdAt"             : "",
+        "updatedAt"             : "",
 
-        "startDate"         : "",
-        "finishDate"        : "",
-        "targetStartDate"   : "",
-        "targetFinishDate"  : "",
+        "startDate"             : "",
+        "finishDate"            : "",
+        "targetStartDate"       : "",
+        "targetFinishDate"      : "",
 
-        "name"              : "",
-        "description"       : "",
+        "name"                  : "",
+        "description"           : "",
 
-        "assignedStages"    : [],
-        "priority"          : {},
-        "type"              : {},
+        "dependencies"          : [],
 
-        "createdBy"         : {},
+        "adminUsers"            : [],
+        "assignedUsers"         : "",
+        "createdBy"             : "",
+        "visibleToUserGroups"   : "",
 
-        "adminUsers"        : [],
+        "estimatedResources"    : "",
+        "resourcesConsumed"     : "",
+        "repositories"          : "",
 
-        "performances"      : [],
-        "repositories"      : [],
-        "comments"          : []
+        "assignedStages"        : "",
+        "comments"              : "",
+        "priority"              : "",
+        "type"                  : ""
     }
 ]

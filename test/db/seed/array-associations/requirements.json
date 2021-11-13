@@ -6,7 +6,7 @@
             "616b524d366c2aa993b56590"
         ],
 
-        "performances"      : [
+        "dependencies"      : [
             "616b54c49d9c094a09963e20"
         ]
     },
@@ -17,7 +17,7 @@
             "616b524d366c2aa993b56590"
         ],
 
-        "performances"      : [
+        "dependencies"      : [
             "616b54ed1c52323aeb4429b0"
         ]
     }

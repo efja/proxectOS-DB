@@ -25,7 +25,6 @@ import { AssignedUser } from '../../src/models/assigned-user.model';
 import { AssignedResource } from '../../src/models/assigned-resource.model';
 import { AssignedStage } from '../../src/models/assigned-stage.model';
 import { RepositoryApp } from '../../src/models/repositoryapp.model';
-import { PerformanceApp } from '../../src/models/performanceapp.model';
 import { Requirement } from '../../src/models/requirement.model';
 import { StateHistory } from '../../src/models/state-history.model';
 import { Project } from '../../src/models/project.model';
@@ -54,7 +53,6 @@ const assignedUsersJson     = require('./seed/assigned-users.json');
 const assignedResourcesJson = require('./seed/assigned-resources.json');
 const assignedStagesJson    = require('./seed/assigned-stages.json');
 const repositoriesJson      = require('./seed/repositories.json');
-const performancesJson      = require('./seed/performances.json');
 const requirementsJson      = require('./seed/requirements.json');
 const statesHistoryJson     = require('./seed/state-history.json');
 const projectsJson          = require('./seed/projects.json');
@@ -67,7 +65,6 @@ const projectsJson          = require('./seed/projects.json');
 // const associationsAssignedUsersJson     = require('./seed/array-associations/assigned-users.json');
 // const associationsAssignedStagesJson    = require('./seed/array-associations/assigned-stages.json');
 // const associationsRepositoriesJson      = require('./seed/array-associations/repositories.json');
-// const associationsPerformancesJson      = require('./seed/array-associations/performances.json');
 // const associationsRequirementsJson      = require('./seed/array-associations/requirements.json');
 // const associationsStateHistoryJson      = require('./seed/array-associations/state-history.json');
 // const associationsProjectsJson          = require('./seed/array-associations/projects.json');
@@ -101,7 +98,6 @@ export class ObjectFactory {
     assignedResources   : CustomBaseEntity[] = [];
     assignedStages      : CustomBaseEntity[] = [];
     repositories        : CustomBaseEntity[] = [];
-    performances        : CustomBaseEntity[] = [];
     requirements        : CustomBaseEntity[] = [];
     statesHistory       : CustomBaseEntity[] = [];
     projects            : CustomBaseEntity[] = [];
@@ -134,7 +130,6 @@ export class ObjectFactory {
         this.assignedResources   =  this.parseDataList2AnyEntityList(assignedResourcesJson, "AssignedResource");
         this.assignedStages      =  this.parseDataList2AnyEntityList(assignedStagesJson, "AssignedStage");
         this.repositories        =  this.parseDataList2AnyEntityList(repositoriesJson, "RepositoryApp");
-        this.performances        =  this.parseDataList2AnyEntityList(performancesJson, "PerformanceApp");
         this.requirements        =  this.parseDataList2AnyEntityList(requirementsJson, "Requirement");
         this.statesHistory       =  this.parseDataList2AnyEntityList(statesHistoryJson, "StateHistory");
         this.projects            =  this.parseDataList2AnyEntityList(projectsJson, "Project");
@@ -179,7 +174,6 @@ export class ObjectFactory {
         result.push(...this.assignedResources);
         result.push(...this.assignedStages);
         result.push(...this.repositories);
-        result.push(...this.performances);
         result.push(...this.requirements);
         result.push(...this.statesHistory);
         result.push(...this.projects);
@@ -262,9 +256,6 @@ export class ObjectFactory {
                 break;
             case "RepositoryApp":
                 obj = new RepositoryApp(args);
-                break;
-            case "PerformanceApp":
-                obj = new PerformanceApp(args);
                 break;
             case "Requirement":
                 obj = new Requirement(args);

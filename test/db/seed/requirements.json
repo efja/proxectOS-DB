@@ -1,52 +1,152 @@
 [
     {
-        "_id"               : "616b5398fe14967a5820e0fc",
-        "id"                : "616b5398fe14967a5820e0fc",
-        "createdAt"         : "2021-02-08T00:02:46.000+01:00",
-        "updatedAt"         : "2021-07-02T13:26:50.000+02:00",
+        "_id"                   : "616b5398fe14967a5820e0fc",
+        "id"                    : "616b5398fe14967a5820e0fc",
+        "createdAt"             : "2021-02-08T00:02:46.000+01:00",
+        "updatedAt"             : "2021-07-02T13:26:50.000+02:00",
 
-        "startDate"         : "2021-01-02T09:31:30.000+01:00",
-        "finishDate"        : "2021-07-02T13:26:50.000+02:00",
-        "targetStartDate"   : "2021-02-01T08:00:00.000+01:00",
-        "targetFinishDate"  : "2021-07-02T15:00:00.000+02:00",
+        "startDate"             : "2021-01-02T09:31:30.000+01:00",
+        "finishDate"            : "2021-07-02T13:26:50.000+02:00",
+        "targetStartDate"       : "2021-02-01T08:00:00.000+01:00",
+        "targetFinishDate"      : "2021-07-02T15:00:00.000+02:00",
 
-        "name"              : "quo magnam itaque",
-        "description"       : "Corrupti ut quia molestiae natus dolorem ut. Aspernatur repudiandae non et consectetur aliquid impedit. Voluptates quam inventore aspernatur. Architecto natus sunt quia doloribus est aut. Ut maiores qui molestias aut accusantium iste cumque asperiores. Quisquam optio magnam distinctio.",
+        "name"                  : "quo magnam itaque",
+        "description"           : "Corrupti ut quia molestiae natus dolorem ut. Aspernatur repudiandae non et consectetur aliquid impedit. Voluptates quam inventore aspernatur. Architecto natus sunt quia doloribus est aut. Ut maiores qui molestias aut accusantium iste cumque asperiores. Quisquam optio magnam distinctio.",
 
-        "priority"          : "616b53b04be617848ac51d42",
-        "type"              : "616b4cb3661a771102c3fc94",
+        "dependencies"          : [],
 
-        "createdBy"         : "616b4df3a2facc1a9c4145a1",
+        "adminUsers"            : [],
+        "assignedUsers"         : "",
+        "createdBy"             : "616b4df3a2facc1a9c4145a1",
+        "visibleToUserGroups"   : "",
 
-        "adminUsers"        : [],
+        "estimatedResources"    : "",
+        "resourcesConsumed"     : "",
+        "repositories"          : "",
 
-        "performances"      : [],
-        "repositories"      : [],
-        "comments"          : []
+        "assignedStages"        : "",
+        "comments"              : "",
+        "priority"              : "616b53b04be617848ac51d42",
+        "type"                  : "616b4cb3661a771102c3fc94"
     },
     {
-        "_id"               : "616b53c2f6b1ac380d5e7f66",
-        "id"                : "616b53c2f6b1ac380d5e7f66",
-        "createdAt"         : "2021-02-08T00:02:46.000+01:00",
-        "updatedAt"         : "2021-02-08T00:02:46.000+01:00",
+        "_id"                   : "616b53c2f6b1ac380d5e7f66",
+        "id"                    : "616b53c2f6b1ac380d5e7f66",
+        "createdAt"             : "2021-02-08T00:02:46.000+01:00",
+        "updatedAt"             : "2021-02-08T00:02:46.000+01:00",
 
-        "startDate"         : "2021-01-02T03:24:37.000+01:00",
-        "finishDate"        : null,
-        "targetStartDate"   : "2021-01-02T03:24:37.000+01:00",
-        "targetFinishDate"  : "2022-01-03T04:26:16.000+01:00",
+        "startDate"             : "2021-01-02T03:24:37.000+01:00",
+        "finishDate"            : null,
+        "targetStartDate"       : "2021-01-02T03:24:37.000+01:00",
+        "targetFinishDate"      : "2022-01-03T04:26:16.000+01:00",
 
-        "name"              : "et dolores rerum",
-        "description"       : "Nihil voluptatem maiores veritatis velit perspiciatis aliquid eius beatae a. Autem dolor quo natus harum est quam natus iure. Eligendi sunt aut delectus magni et modi laborum dolore. Minus veniam eveniet laborum esse et.",
+        "name"                  : "et dolores rerum",
+        "description"           : "Nihil voluptatem maiores veritatis velit perspiciatis aliquid eius beatae a. Autem dolor quo natus harum est quam natus iure. Eligendi sunt aut delectus magni et modi laborum dolore. Minus veniam eveniet laborum esse et.",
 
-        "priority"          : "616b54dd3f87b251f1f7cfce",
-        "type"              : "616b4cb3661a771102c3fc94",
+        "dependencies"          : [],
 
-        "createdBy"         : "616b4df3a2facc1a9c4145a1",
+        "adminUsers"            : [],
+        "assignedUsers"         : "",
+        "createdBy"             : "616b4df3a2facc1a9c4145a1",
+        "visibleToUserGroups"   : "",
 
-        "adminUsers"        : [],
+        "estimatedResources"    : "",
+        "resourcesConsumed"     : "",
+        "repositories"          : "",
 
-        "performances"      : [],
-        "repositories"      : [],
-        "comments"          : []
+        "assignedStages"        : "",
+        "comments"              : "",
+        "priority"              : "616b54dd3f87b251f1f7cfce",
+        "type"                  : "616b4cb3661a771102c3fc94"
+    },
+    {
+        "_id"                   : "616b54c49d9c094a09963e20",
+        "id"                    : "616b54c49d9c094a09963e20",
+        "createdAt"             : "2021-10-14T11:08:59.000+02:00",
+        "updatedAt"             : "2021-07-02T13:26:50.000+02:00",
+
+        "startDate"             : "2021-01-02T09:31:30.000+01:00",
+        "finishDate"            : "2021-07-02T13:26:50.000+02:00",
+        "targetStartDate"       : "2021-02-01T08:00:00.000+01:00",
+        "targetFinishDate"      : "2021-07-02T15:00:00.000+02:00",
+
+        "name"                  : "aut aut ratione",
+        "description"           : "Illo fugit ut error vel rerum quo laboriosam. Qui nihil exercitationem enim esse exercitationem iusto debitis ut dolore. Pariatur itaque aperiam aut alias id magni fugiat enim. Fugiat quia cum dignissimos possimus illum.",
+
+        "dependencies"          : [],
+
+        "adminUsers"            : [],
+        "assignedUsers"         : "",
+        "createdBy"             : "616b4df3a2facc1a9c4145a1",
+        "visibleToUserGroups"   : "",
+
+        "estimatedResources"    : "",
+        "resourcesConsumed"     : "",
+        "repositories"          : "",
+
+        "assignedStages"        : "",
+        "comments"              : "",
+        "priority"              : "616b54dd3f87b251f1f7cfce",
+        "type"                  : "616b53b04be617848ac51d42"
+    },
+    {
+        "_id"                   : "616b54ed1c52323aeb4429b0",
+        "id"                    : "616b54ed1c52323aeb4429b0",
+        "createdAt"             : "2021-10-14T11:08:59.000+02:00",
+        "updatedAt"             : "2021-10-14T11:08:59.000+02:00",
+
+        "startDate"             : "2021-01-02T03:24:37.000+01:00",
+        "finishDate"            : null,
+        "targetStartDate"       : "2021-01-02T03:24:37.000+01:00",
+        "targetFinishDate"      : "2022-01-03T04:26:16.000+01:00",
+
+        "name"                  : "vel dolor itaque",
+        "description"           : "Quo nisi vel ducimus necessitatibus occaecati. Eos vel quasi vero. Quia et laboriosam sequi. Possimus perferendis quo. Cumque ipsam eos adipisci unde blanditiis.",
+
+        "dependencies"          : [],
+
+        "adminUsers"            : [],
+        "assignedUsers"         : "",
+        "createdBy"             : "616b4df3a2facc1a9c4145a1",
+        "visibleToUserGroups"   : "",
+
+        "estimatedResources"    : "",
+        "resourcesConsumed"     : "",
+        "repositories"          : "",
+
+        "assignedStages"        : "",
+        "comments"              : "",
+        "priority"              : "616b55248eaad55a06c73607",
+        "type"                  : "616b4cb3661a771102c3fc94"
+    },
+    {
+        "_id"                   : "616b58efd04d339fdd236c16",
+        "id"                    : "616b58efd04d339fdd236c16",
+        "createdAt"             : "2021-10-14T11:08:59.000+02:00",
+        "updatedAt"             : "2021-10-14T11:08:59.000+02:00",
+
+        "startDate"             : "2021-03-02T03:24:37.000+01:00",
+        "finishDate"            : "2021-03-02T03:24:37.000+01:00",
+        "targetStartDate"       : null,
+        "targetFinishDate"      : null,
+
+        "name"                  : "beatae voluptas architecto",
+        "description"           : "Cumque omnis voluptates mollitia. Provident recusandae repellat nisi. Sed incidunt sit ab veniam quia est magnam. Et est dicta officiis accusamus quasi hic eveniet nisi odit.",
+
+        "dependencies"          : [],
+
+        "adminUsers"            : [],
+        "assignedUsers"         : "",
+        "createdBy"             : "616b4df3a2facc1a9c4145a1",
+        "visibleToUserGroups"   : "",
+
+        "estimatedResources"    : "",
+        "resourcesConsumed"     : "",
+        "repositories"          : "",
+
+        "assignedStages"        : "",
+        "comments"              : "",
+        "priority"              : "616b54dd3f87b251f1f7cfce",
+        "type"                  : "616b4c4284bceba467c30f97"
     }
 ]

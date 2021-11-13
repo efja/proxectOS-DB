@@ -20,13 +20,16 @@ import ast
 command_pre_tests   = [['clear'], ['npm', 'cache', 'clean', '--force']]
 command_tests       = ['npm', 'run', 'test', '--']
 
-test_dir    = 'test/services/'
-file_name   = './tests.log'
+separator = '-' * 80
 
-suites      = { "passed": [], "total": [] }
-tests       = { "passed": [], "total": [] }
-snapshots   = []
-times       = { "total": [], "estimated": [] }
+test_dir            = 'test/services/'
+file_name           = './tests.log'
+
+suites              = { "passed": [], "total": [] }
+tests               = { "passed": [], "total": [] }
+tests_collection    = []
+snapshots           = []
+times               = { "total": [], "estimated": [] }
 
 ######################################################################################################
 ## FUNCIÓNS FICHEIROS
@@ -93,46 +96,73 @@ def test():
     test_names = pathlib.Path(test_dir)
 
     for subdir in test_names.iterdir():
-        for test in subdir.iterdir():
-            temp_command = command_tests + [test.name, '--forceExit']
-            proc = subprocess.run(
-                temp_command,
-                capture_output=True,
-                encoding='UTF-8'
-            )
+        if (subdir.is_dir()):
+            for test in subdir.iterdir():
+                if ("test" in test.name):
+                    run_test(test.name)
+        else:
+            if ("test" in subdir.name):
+                run_test(subdir.name)
 
-            # Actualízase o resumo dos tests
-            sum_resume(proc.stderr)
+def run_test(test_name):
+    """Executa o test co nome pasado como parámetro e crea os resumos para o log.
 
-            # Preparase a información a gardar
-            data = build_report('Inicanado tests de:', test.name, proc.stdout, proc.stderr)
+    :param test_name : nome do test a pasar
+    """
+    temp_command = command_tests + [test_name, '--forceExit']
+    proc = subprocess.run(
+        temp_command,
+        capture_output=True,
+        encoding='UTF-8'
+    )
 
-            # Imprimese por pantalla o resultado
-            print(data)
+    # Actualízase o resumo dos tests
+    sum_resume(proc.stderr)
 
-            # Gárdase a información no ficheiro de log
-            save_file(data)
-            contar += 1
+    # Preparase a información a gardar
+    data = build_report('Inicanado tests de:', test_name, proc.stdout, proc.stderr)
+
+    # Imprimese por pantalla o resultado
+    print(data)
+
+    # Gárdase a información no ficheiro de log
+    save_file(data)
 
 def build_resume():
     """Xera o resumo dos tests.
 
     :return : string
     """
-    result = ''
-    result += 'Test Suites  : {0:>10} passed, {1:>4} passed\n'.format(sum(suites["passed"]), sum(suites["total"]))
-    result += 'Tests        : {0:>10} passed, {1:>4} passed\n'.format(sum(tests["passed"]), sum(tests["total"]))
+    sum_suits_passed = sum(suites["passed"])
+    sum_suits_total = sum(suites["total"])
+    sum_tests_passed = sum(suites["passed"])
+    sum_tests_total = sum(suites["total"])
+
+    result_test = sum_suits_passed == sum_suits_total and sum_tests_passed == sum_tests_total
+
+    result = 'RESULT  : {0}\n'.format(("All passed", "Some failed")[result_test])
+    result += 'Test Suites  : {0:>10} passed, {1:>4} passed\n'.format(sum_suits_passed, sum_suits_total)
+    result += 'Tests        : {0:>10} passed, {1:>4} passed\n'.format(sum_tests_passed, sum_tests_total)
     result += 'Snapshots    : {0:>10} total\n'.format(sum(snapshots))
-    result += 'Time         : {0:>10} s, estimated {1} s\n'.format(sum(times["total"]), sum(times["estimated"]))
+    result += 'Time         : {0:>10} s, estimated {1} s\n'.format(round(sum(times["total"]), 4), round(sum(times["estimated"]), 4))
+
+    result += '\n{0}\n'.format(separator)
+
+    for test in tests_collection:
+        result += test
 
     return result
 
 def build_report(title_report, name, info, resume):
     """Xera o resumo dos tests.
 
-    :return : string
+    :param title_report : título do informe
+    :param name         : nome da colección de tests
+    :param info         : información da cobertura dos tests
+    :param resume       : resumo dos tests
+
+    :return             : string
     """
-    separator = '-' * 80
     title = '{0} {1}'.format(title_report, name)
 
     result = '{0}'.format(separator)
@@ -149,11 +179,21 @@ def build_report(title_report, name, info, resume):
 ## UTILIDADES
 ######################################################################################################
 def sum_resume(resume):
-    """Acumula os datos do resumo pasado nas variables globais."""
+    """Acumula os datos do resumo pasado nas variables globais.
+
+    :param name     : nome do ficheiro dos test
+    """
     global suites
     global tests
+    global tests_collection
     global snapshots
     global times
+
+    # Colle a lista de tests feitos
+    ini = resume.find('test/services/')
+    ini = resume.rfind('\n', 0, ini)
+    fin = resume.find('Test Suites:')
+    tests_collection.append(resume[ini:fin - 1]) # o -1 é para quitar o último salto de liña
 
     suites_text     = re.findall('Test Suites:(.*?)\n', resume)
     tests_text      = re.findall('Tests:(.*?)\n', resume)
@@ -185,9 +225,11 @@ def sum_resume(resume):
             times["estimated"].append(temp[1])
 
 def extract_numbers_2_list(text):
-    """Saca os números dun texto a unha lista de números.
+    """Saca os números dun texto cara unha colección de números.
 
-    :return : lista de números
+    :param text : texto co que operar
+
+    :return     : colección de números
     """
     temp = re.findall(r'(\d+(?:\.\d+)?)', text)
 
@@ -196,7 +238,9 @@ def extract_numbers_2_list(text):
 def str_list_2_number(str_array):
     """Parsea un string cun número a un tipo numérico
 
-    :return : lista de números
+    :param str_array    : colección para convertir
+
+    :return             : colección de números
     """
 
     return [ast.literal_eval(s) for s in str_array]
@@ -208,6 +252,7 @@ def main():
     """Función principal."""
     global suites
     global tests
+    global tests_collection
     global snapshots
     global times
 
