@@ -40,10 +40,6 @@
 		"NAME": "Comment",
 		"NAME_PLURAL": "Comments"
 	},
-	"PERFORMANCE": {
-		"NAME": "Performance",
-		"NAME_PLURAL": "Performances"
-	},
 	"PRIORITY": {
 		"NAME": "Priority",
 		"NAME_PLURAL": "Priorities"

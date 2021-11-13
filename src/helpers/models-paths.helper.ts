@@ -5,7 +5,6 @@ export const MODELS_PATHS = new Array();
     MODELS_PATHS["AssignedUser"]        = "assigned-user.model";
     MODELS_PATHS["CommentApp"]          = "commentapp.model";
     MODELS_PATHS["CustomBaseEntity"]    = "custom-base-entity.model";
-    MODELS_PATHS["PerformanceApp"]      = "performanceapp.model";
     MODELS_PATHS["Priority"]            = "priority.model";
     MODELS_PATHS["Project"]             = "project.model";
     MODELS_PATHS["RepositoryApp"]       = "repositoryapp.model";
