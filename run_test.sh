@@ -24,4 +24,5 @@
 #########################################################################################################
 
 
-clear && npm cache clean --force && npm run test:watch -- $@
+clear && npm cache clean --force && npm run test:clear
+npm run test:watch -- $@

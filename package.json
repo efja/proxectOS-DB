@@ -16,6 +16,7 @@
     "mongo-stop": "docker-compose down",
     "mongo-enter": "docker exec -ti proxectos-db mongo",
     "test": "NODE_ENV=test jest --coverage --detectOpenHandles",
+    "test:clear": "NODE_ENV=test jest --clearCache",
     "test:watch": "npm run test -- --watch",
     "test:simple": "NODE_ENV=test jest --detectOpenHandles",
     "pretest": "npm run test:mongo-stop; npm run test:mongo-start",
