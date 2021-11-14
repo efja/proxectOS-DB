@@ -5,11 +5,11 @@
 import HttpStatus from 'http-status-codes';
 import { Operation } from 'fast-json-patch';
 import { req, res, next } from 'express';
-import qs from 'qs';
 
 import { ResponseData } from '../interfaces/response-data.interface';
 import { AssignedUserService } from '../services/assigned-user.service';
 import { AssignedUser } from '../models/assigned-user.model';
+import { APIFilter } from '../helpers/uri-filter.helper';
 
 // ####################################################################################################
 // ## CLASE AssignedUserController
@@ -178,9 +178,9 @@ export class AssignedUserController {
         ...query
       } = req.query
 
-      const queryParams = qs.parse(query);
+      const queryParams = new APIFilter(query);
 
-      let data = await this.assignedUserService.getAll(queryParams, orderBy, limit, offset);
+      let data = await this.assignedUserService.getAll(queryParams.getQueryObj(), orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -228,9 +228,9 @@ export class AssignedUserController {
       let error;
 
       const { id } = req.params;
-      const queryParams = qs.parse(req.query);
+      const queryParams = new APIFilter(req.query);
 
-      let data = await this.assignedUserService.get(id, queryParams);
+      let data = await this.assignedUserService.get(id, queryParams.getQueryObj());
 
       if (
         data != undefined &&

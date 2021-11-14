@@ -5,7 +5,6 @@
 import HttpStatus from 'http-status-codes';
 import { Operation } from 'fast-json-patch';
 import { req, res, next } from 'express';
-import qs from 'qs';
 
 import { ResponseData } from '../interfaces/response-data.interface';
 import { ProjectService } from '../services/project.service';

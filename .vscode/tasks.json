@@ -6,7 +6,7 @@
 			"script": "dev",
 			"problemMatcher": [],
 			"label": "npm: dev",
-			"detail": "ts-node-dev --respawn --watch ./locales --transpile-only ./src/index.ts"
+			"detail": "NODE_ENV=development ts-node-dev --respawn --watch ./locales --transpile-only ./src/index.ts"
 		}
 	]
 }
