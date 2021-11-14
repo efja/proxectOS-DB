@@ -5,11 +5,11 @@
 import HttpStatus from 'http-status-codes';
 import { Operation } from 'fast-json-patch';
 import { req, res, next } from 'express';
-import qs from 'qs';
 
 import { ResponseData } from '../interfaces/response-data.interface';
 import { StateService } from '../services/state.service';
 import { State } from '../models/state.model';
+import { APIFilter } from '../helpers/uri-filter.helper';
 
 // ####################################################################################################
 // ## CLASE StateController
@@ -178,9 +178,9 @@ export class StateController {
         ...query
       } = req.query
 
-      const queryParams = qs.parse(query);
+      const queryParams = new APIFilter(query);
 
-      let data = await this.stateService.getAll(queryParams, orderBy, limit, offset);
+      let data = await this.stateService.getAll(queryParams.getQueryObj(), orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -228,9 +228,9 @@ export class StateController {
       let error;
 
       const { id } = req.params;
-      const queryParams = qs.parse(req.query);
+      const queryParams = new APIFilter(req.query);
 
-      let data = await this.stateService.get(id, queryParams);
+      let data = await this.stateService.get(id, queryParams.getQueryObj());
 
       if (
         data != undefined &&

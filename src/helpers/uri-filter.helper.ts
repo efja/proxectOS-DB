@@ -67,7 +67,8 @@ export class APIFilter {
 
                     if (date.isValid()) {
                         this.dateFilters.push(
-                            { [paramKey] : date.toISOString() }
+                            // Para buscar dentro do mesmo día poñemos un rango de búsqueda entre a primeira hora e a última do mesmo
+                            { [paramKey] : { '$gte' : date.startOf('day').toISOString(), '$lt': date.endOf('day').toISOString() } }
                         );
                     } else {
                         this.stringFilters.push(

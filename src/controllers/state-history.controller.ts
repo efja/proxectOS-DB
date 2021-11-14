@@ -5,11 +5,11 @@
 import HttpStatus from 'http-status-codes';
 import { Operation } from 'fast-json-patch';
 import { req, res, next } from 'express';
-import qs from 'qs';
 
 import { ResponseData } from '../interfaces/response-data.interface';
 import { StateHistoryService } from '../services/state-history.service';
 import { StateHistory } from '../models/state-history.model';
+import { APIFilter } from '../helpers/uri-filter.helper';
 
 // ####################################################################################################
 // ## CLASE StateHistoryController
@@ -178,9 +178,9 @@ export class StateHistoryController {
         ...query
       } = req.query
 
-      const queryParams = qs.parse(query);
+      const queryParams = new APIFilter(query);
 
-      let data = await this.stateHistoryService.getAll(queryParams, orderBy, limit, offset);
+      let data = await this.stateHistoryService.getAll(queryParams.getQueryObj(), orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -228,9 +228,9 @@ export class StateHistoryController {
       let error;
 
       const { id } = req.params;
-      const queryParams = qs.parse(req.query);
+      const queryParams = new APIFilter(req.query);
 
-      let data = await this.stateHistoryService.get(id, queryParams);
+      let data = await this.stateHistoryService.get(id, queryParams.getQueryObj());
 
       if (
         data != undefined &&

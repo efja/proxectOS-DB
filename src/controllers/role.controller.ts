@@ -5,11 +5,11 @@
 import HttpStatus from 'http-status-codes';
 import { Operation } from 'fast-json-patch';
 import { req, res, next } from 'express';
-import qs from 'qs';
 
 import { ResponseData } from '../interfaces/response-data.interface';
 import { RoleService } from '../services/role.service';
 import { Role } from '../models/role.model';
+import { APIFilter } from '../helpers/uri-filter.helper';
 
 // ####################################################################################################
 // ## CLASE RoleController
@@ -178,9 +178,9 @@ export class RoleController {
         ...query
       } = req.query
 
-      const queryParams = qs.parse(query);
+      const queryParams = new APIFilter(query);
 
-      let data = await this.roleService.getAll(queryParams, orderBy, limit, offset);
+      let data = await this.roleService.getAll(queryParams.getQueryObj(), orderBy, limit, offset);
 
       if (
         data != undefined &&
@@ -228,9 +228,9 @@ export class RoleController {
       let error;
 
       const { id } = req.params;
-      const queryParams = qs.parse(req.query);
+      const queryParams = new APIFilter(req.query);
 
-      let data = await this.roleService.get(id, queryParams);
+      let data = await this.roleService.get(id, queryParams.getQueryObj());
 
       if (
         data != undefined &&
