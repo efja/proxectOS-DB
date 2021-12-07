@@ -1,8 +1,12 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import qs from 'qs';
 import moment from 'moment';
+// import { ObjectId } from '@mikro-orm/mongodb';
+import { Types } from 'mongoose';
+// const ObjectId = require('mongoose').Types.ObjectId;
+
 import {
     isJSONValue,
     isJSONObject,
@@ -17,9 +21,9 @@ import {
     JSONArray
   } from "types-json";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## CLASE AssignedResource
-// ####################################################################################################
+// ##################################################################################################
 export class APIFilter {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -29,6 +33,7 @@ export class APIFilter {
     public numberFilters    : any[] = [];
     public orderByFilters   : any[] = [];
     public stringFilters    : any[] = [];
+    public objectIdFilters  : any[] = [];
 
     // Relacións
 
@@ -52,7 +57,7 @@ export class APIFilter {
             let paramValue = filters[paramKey];
 
             if (paramKey.toLowerCase() === 'sort' || paramKey.toLowerCase() === 'orderby') {
-                this.orderByFilters =  paramValue.split(',');
+                this.orderByFilters = paramValue.split(',');
             } else {
                 if (isBoolean(paramValue)) {
                     this.booleanFilters.push(
@@ -71,9 +76,23 @@ export class APIFilter {
                             { [paramKey] : { '$gte' : date.startOf('day').toISOString(), '$lt': date.endOf('day').toISOString() } }
                         );
                     } else {
-                        this.stringFilters.push(
-                            { [paramKey] : { '$re': paramValue } } // o valor $re é para que as búsquedas non se fagan literalmente senón como un 'inclúe'
-                        );
+                        if(Types.ObjectId.isValid(paramValue)) {
+                            try {
+                                if((String)(new Types.ObjectId(paramValue)) === paramValue) {
+                                    this.objectIdFilters.push(
+                                        { [paramKey] : new Types.ObjectId(paramValue) }
+                                    );
+                                }
+                            } catch (error) {
+                                this.stringFilters.push(
+                                    { [paramKey] : { '$re': paramValue } } // o valor $re é para que as búsquedas non se fagan literalmente senón como un 'inclúe'
+                                );
+                            }
+                        } else {
+                            this.stringFilters.push(
+                                { [paramKey] : { '$re': paramValue } } // o valor $re é para que as búsquedas non se fagan literalmente senón como un 'inclúe'
+                            );
+                        }
                     }
                 }
             }
@@ -98,6 +117,7 @@ export class APIFilter {
         this.getObjectKeyValue(this.numberFilters, result);
         this.getObjectKeyValue(this.dateFilters, result);
         this.getObjectKeyValue(this.stringFilters, result);
+        this.getObjectKeyValue(this.objectIdFilters, result);
 
         return result;
     }

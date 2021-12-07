@@ -1,25 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import HttpStatus from 'http-status-codes';
 import { Operation } from 'fast-json-patch';
 import { req, res, next } from 'express';
 
 import { ResponseData } from '../interfaces/response-data.interface';
-import { TypeService } from '../services/type.service';
-import { Type } from '../models/type.model';
+import { TypeAppService } from '../services/typeapp.service';
+import { TypeApp } from '../models/typeapp.model';
 import { APIFilter } from '../helpers/uri-filter.helper';
 
-// ####################################################################################################
-// ## CLASE TypeController
-// ####################################################################################################
-export class TypeController {
+// ##################################################################################################
+// ## CLASE TypeAppController
+// ##################################################################################################
+export class TypeAppController {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
   private TRANSLATION_NAME_MODEL : string = 'TYPE';
-  public typeService : TypeService = new TypeService();
+  public typeService : TypeAppService = new TypeAppService();
 
   // ************************************************************************************************
   // ** CONSTRUTOR
@@ -46,7 +46,7 @@ export class TypeController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const type: Type = new Type(req.body);
+      const type: TypeApp = new TypeApp(req.body);
 
       let data;
 
@@ -99,7 +99,7 @@ export class TypeController {
       let error;
       let code = HttpStatus.CONFLICT;
 
-      const types: Type[] = req.body;
+      const types: TypeApp[] = req.body;
 
       let data;
       let continueProcess: boolean = true;
@@ -109,7 +109,7 @@ export class TypeController {
 
         if (this.hasMinimumAttributes(item)) {
           // Crease un proxecto novo para asegurar que vai a ser do tipo correcto
-          types[i] = new Type(item);
+          types[i] = new TypeApp(item);
         } else {
           continueProcess = false;
           break;
@@ -278,7 +278,7 @@ export class TypeController {
       let code = HttpStatus.NOT_FOUND;
 
       const { id } = req.params;
-      const type: Type = new Type(req.body);
+      const type: TypeApp = new TypeApp(req.body);
 
       let data;
 
@@ -440,12 +440,12 @@ export class TypeController {
   // ** UTILIDADES
   // ************************************************************************************************
   /**
-   * Comproba se o Type pasado ten os atributos mínimos que o modelo necesita.
+   * Comproba se o TypeApp pasado ten os atributos mínimos que o modelo necesita.
    *
-   * @param item Type que se vai a avaliar
+   * @param item TypeApp que se vai a avaliar
    * @returns Boolean
    */
-  private hasMinimumAttributes = (item: Type): Boolean => {
+  private hasMinimumAttributes = (item: TypeApp): Boolean => {
     let result = false;
 
     if (
