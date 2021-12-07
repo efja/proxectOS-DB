@@ -1,30 +1,34 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import HttpStatus from 'http-status-codes';
-import { QueryOrder, wrap } from '@mikro-orm/core';
 import { Operation } from 'fast-json-patch';
 import * as jsonpatch from 'fast-json-patch';
 
-import { getEntityForUpdate } from '../helpers/entity-construct.helper';
+import { ObjectId } from '@mikro-orm/mongodb';
+import { QueryOrder } from '@mikro-orm/core';
 
 import { DBConnection } from '../config/config-db';
-import { Type } from '../models/type.model';
+import { getEntityForUpdate } from '../helpers/entity-construct.helper';
 
-// ####################################################################################################
-// ## CLASE TypeService
-// ####################################################################################################
-export class TypeService {
+// ##################################################################################################
+// ## CLASE BaseService
+// ##################################################################################################
+export abstract class BaseService<T> {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  private db          : DBConnection;
-  private respository : any;
+  protected db          : DBConnection;
+  protected respository : any;
+  protected entityName  : any;
+  protected includes    : string[] = [];
 
   // ************************************************************************************************
   // ** CONSTRUTOR
   // ************************************************************************************************
-  constructor() {
+  constructor(entityName) {
+    this.entityName = entityName;
+
     this.createDbConnection();
   }
 
@@ -35,7 +39,7 @@ export class TypeService {
     this.db = new DBConnection();
 
     await this.db.init();
-    this.respository = this.db.getRepository(Type);
+    this.respository = this.db.getRepository(this.entityName);
   }
 
   // ************************************************************************************************
@@ -44,20 +48,25 @@ export class TypeService {
   // ------------------------------------------------------------------------------------------------
   // -- POST
   // ------------------------------------------------------------------------------------------------
-  public async create(type: Type): Promise<any> {
+  public async create(obj: T): Promise<any> {
     let result : any = HttpStatus.CONFLICT;
 
     try {
       let temp = null;
 
       // Comprobase que non exista a entidade na BD
-      if (type.id != null) {
-        temp = await this.respository.findOne(type.id);
+      if (obj["id"] != null) {
+        temp = await this.respository.findOne(obj["id"]);
       }
 
       if (temp == null) {
-        temp = new Type();
-        temp.assign(type, { em: this.db.orm.em });
+        temp = new this.entityName();
+
+        if (obj["id"]){
+          obj["_id"] = new ObjectId(obj["id"]);
+        }
+
+        temp.assign(obj, { em: this.db.orm.em });
 
         await this.respository.persist(temp).flush();
 
@@ -69,32 +78,33 @@ export class TypeService {
     return result;
   }
 
-  public async createList(types: Type[]): Promise<any> {
+  public async createList(obj: T[]): Promise<any> {
     let result : any = HttpStatus.CONFLICT;
 
     try {
       let temp = null;
-      let typeIds = null;
+      let itemIds = null;
 
       // Búscase se os obxectos pasados teñen definido o ID
-      for (let type of types) {
-        if (type.id != null) {
-          if (typeIds == null) {
-            typeIds = [];
+      for (let item of obj) {
+        if (item["id"] != null) {
+          if (itemIds == null) {
+            itemIds = [];
           }
 
-          typeIds.push(type.id);
+          item["_id"] = new ObjectId(item["id"]);
+          itemIds.push(item["id"]);
         }
       }
 
       // Comprobase que non existan as entidades na BD
-      if (typeIds != null) {
-        temp = await this.respository.find(typeIds);
+      if (itemIds != null) {
+        temp = await this.respository.find(itemIds);
       }
 
       if (temp == null || temp.length == 0) {
-        await this.respository.persistAndFlush(types);
-        result = types;
+        await this.respository.persistAndFlush(obj);
+        result = obj;
       }
     } catch (error) {
       result = null;
@@ -136,7 +146,6 @@ export class TypeService {
 
     try {
       result = await this.respository.findOne({ id, ...filters });
-
     } catch (error) {
       result = null;
     }
@@ -150,7 +159,7 @@ export class TypeService {
   // ------------------------------------------------------------------------------------------------
   // -- PUT
   // ------------------------------------------------------------------------------------------------
-  public async update(id: string, type: Type): Promise<any> {
+  public async update(id: string, obj: T): Promise<any> {
     let result : any = HttpStatus.NOT_FOUND;
 
     try {
@@ -158,18 +167,21 @@ export class TypeService {
 
       // Comprobase que non exista a entidade na BD
       if (id != null) {
-        temp = await this.respository.findOne(id);
+        temp = await this.findOne(id);
       }
 
       if (temp != null) {
         try {
-          let updateData = await getEntityForUpdate(type, 'Type');
+          obj["_id"] = new ObjectId(obj["_id"]);
+
+          let updateData = await getEntityForUpdate(obj, this.entityName.name);
 
           if (updateData != null) {
             // Gárdanse os cambios na entidade
-            temp.assign(updateData, { em: this.db.orm.em });
+            temp.assign(updateData, { em: this.db.orm.em }, [this.entityName.name]);
 
             // Actualizase a informanción na BD
+            this.db.orm.em.nativeUpdate(this.entityName, {id}, temp);
             await this.respository.flush(temp);
 
             result = temp;
@@ -258,4 +270,17 @@ export class TypeService {
 
     return result;
   }
+
+  // ************************************************************************************************
+  // ** UTILIDADES
+  // ************************************************************************************************
+  findOne(id) {
+    return this.respository.findOne(id, this.includes);
+  }
+
+  findOneFilters(id, filters) {
+    return this.respository.findOne({ id, ...filters });
+  }
 }
+
+// https://stackoverflow.com/a/59292958

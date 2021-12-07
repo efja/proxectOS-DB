@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import { Collection, Entity, Property, ManyToOne, ManyToMany } from '@mikro-orm/core';
 
 import { CustomBaseEntity } from "./custom-base-entity.model";
@@ -9,15 +9,15 @@ import { AssignedUser } from './assigned-user.model';
 import { CommentApp } from './commentapp.model';
 import { Priority } from "./priority.model";
 import { RepositoryApp } from "./repositoryapp.model";
-import { Type } from "./type.model";
+import { TypeApp } from "./typeapp.model";
 import { User } from "./user.model";
 import { UserGroup } from './user-group.model';
 import { AssignedResource } from './assigned-resource.model';
 import { AssignedStage } from './assigned-stage.model';
 
-// ####################################################################################################
+// ##################################################################################################
 // ## CLASE Requirement
-// ####################################################################################################
+// ##################################################################################################
 @Entity()
 export class Requirement extends CustomBaseEntity {
     // ************************************************************************************************
@@ -75,7 +75,7 @@ export class Requirement extends CustomBaseEntity {
     public priority             : Priority;
 
     @ManyToOne()
-    public type                 : Type;
+    public type                 : TypeApp;
 
     // ************************************************************************************************
     // ** CONSTRUTOR

@@ -2,12 +2,12 @@
 // ## IMPORTACIÓNS
 // ##################################################################################################
 import { BaseService } from './base.service';
-import { UserSchedule } from '../models/user-schedule.model';
+import { TypeApp } from '../models/typeapp.model';
 
 // ##################################################################################################
-// ## CLASE UserScheduleService
+// ## CLASE TypeAppService
 // ##################################################################################################
-export class UserScheduleService extends BaseService<UserSchedule> {
+export class TypeAppService extends BaseService<TypeApp> {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
@@ -16,7 +16,7 @@ export class UserScheduleService extends BaseService<UserSchedule> {
   // ** CONSTRUTOR
   // ************************************************************************************************
   constructor() {
-    super(UserSchedule)
+    super(TypeApp)
   }
 
   // ************************************************************************************************
