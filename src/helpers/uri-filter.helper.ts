@@ -68,7 +68,7 @@ export class APIFilter {
                         { [paramKey] : Number(paramValue) }
                     );
                 } else {
-                    let date = moment(paramValue)
+                    let date = moment(paramValue, true); // Modo estricto
 
                     if (date.isValid()) {
                         this.dateFilters.push(
