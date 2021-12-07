@@ -1,12 +1,12 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import { CustomBaseEntity } from '../../src/models/custom-base-entity.model';
 
 // MODELOS SEN DEPENDENCIAS
 import { Priority } from '../../src/models/priority.model';
 import { Role } from '../../src/models/role.model';
-import { Type } from '../../src/models/type.model';
+import { TypeApp } from '../../src/models/typeapp.model';
 import { UserContactType } from '../../src/models/user-contact-type.model';
 import { UserSchedule } from '../../src/models/user-schedule.model';
 import { Stage } from '../../src/models/stage.model';
@@ -16,7 +16,6 @@ import { State } from '../../src/models/state.model';
 import { Resource } from '../../src/models/resource.model';
 import { UserContact } from '../../src/models/user-contact.model';
 import { UserGroup } from '../../src/models/user-group.model';
-
 
 // MODELOS CON VARIAS DEPENDENCIAS
 import { User } from '../../src/models/user.model';
@@ -29,9 +28,9 @@ import { Requirement } from '../../src/models/requirement.model';
 import { StateHistory } from '../../src/models/state-history.model';
 import { Project } from '../../src/models/project.model';
 
-// ####################################################################################################
+// ##################################################################################################
 // ## CONSTANTES
-// ####################################################################################################
+// ##################################################################################################
 // MODELOS SEN DEPENDENCIAS
 const prioritiesJson        = require('./seed/priorities.json');
 const rolesJson             = require('./seed/roles.json');
@@ -69,9 +68,9 @@ const projectsJson          = require('./seed/projects.json');
 // const associationsStateHistoryJson      = require('./seed/array-associations/state-history.json');
 // const associationsProjectsJson          = require('./seed/array-associations/projects.json');
 
-// ####################################################################################################
+// ##################################################################################################
 // ## UTILIDADES
-// ####################################################################################################
+// ##################################################################################################
 
 export class ObjectFactory {
     // ************************************************************************************************
@@ -112,7 +111,7 @@ export class ObjectFactory {
         // MODELOS SEN DEPENDENCIAS
         this.priorities          =  this.parseDataList2AnyEntityList(prioritiesJson, "Priority");
         this.roles               =  this.parseDataList2AnyEntityList(rolesJson, "Role");
-        this.types               =  this.parseDataList2AnyEntityList(typesJson, "Type");
+        this.types               =  this.parseDataList2AnyEntityList(typesJson, "TypeApp");
         this.userContactTypes    =  this.parseDataList2AnyEntityList(userContactTypesJson, "UserContactType");
         this.userSchedules       =  this.parseDataList2AnyEntityList(userSchedulesJson, "UserSchedule");
         this.stages              =  this.parseDataList2AnyEntityList(stagesJson, "Stage");
@@ -210,8 +209,8 @@ export class ObjectFactory {
             case "Role":
                 obj = new Role(args);
                 break;
-            case "Type":
-                obj = new Type(args);
+            case "TypeApp":
+                obj = new TypeApp(args);
                 break;
             case "UserContactType":
                 obj = new UserContactType(args);

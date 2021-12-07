@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
@@ -19,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - UserContacts (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -93,7 +93,7 @@ describe('1: Probas DATOS API - UserContacts (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ contact: "ASC" }],
-                contact: {'$re': valueFilter }
+                contact: valueFilter
             },
             { arrayFormat: 'repeat' }
         );
@@ -163,7 +163,7 @@ describe('1: Probas DATOS API - UserContacts (GET)', () => {
 
         const queryParameters = qs.stringify(
             {
-                contact: {'$re': userContact.contact }
+                contact: userContact.contact
             }
         );
 
@@ -230,7 +230,7 @@ describe('2: Probas DATOS API - UserContacts ERROS (GET)', () => {
     test('2.1: Consultar tódolos UserContacts con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                contact: {'$re': FAKE_TEXT }
+                contact: FAKE_TEXT
             }
         );
 
@@ -265,7 +265,7 @@ describe('2: Probas DATOS API - UserContacts ERROS (GET)', () => {
     test(`2.2: Consultar UserContact: <${dataList.userContacts[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                contact: {'$re': FAKE_TEXT }
+                contact: FAKE_TEXT
             }
         );
 

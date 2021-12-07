@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import { ObjectId } from '@mikro-orm/mongodb';
@@ -20,9 +20,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - StateHistorys (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -69,9 +69,8 @@ describe('1: Probas DATOS API - StateHistorys (PUT)', () => {
 
         // Modificase o modelo AssignedUser (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
         stateHistory1.newState = dataList.users[0]._id != stateHistory1.newState._id
-            ? (dataList.states[0] as State)._id
-            : (dataList.states[1] as State)._id;
-
+            ? new State(dataList.users[0])
+            : new State(dataList.users[1]);
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${dataList.statesHistory[0].id}`).send(stateHistory1);
         const {
@@ -95,7 +94,7 @@ describe('1: Probas DATOS API - StateHistorys (PUT)', () => {
 
         expect(data.newState).toBeDefined();
         expect(data.newState).not.toBe(stateHistory0newStateId);
-        expect(data.newState).toBe(stateHistory1.newState);
+        expect(data.newState).toBe(stateHistory1.newState.id);
 
         // ** Datos NON cambiados
         // Comprobanse algúns datos obrigatorios
@@ -177,8 +176,8 @@ describe('1: Probas DATOS API - StateHistorys ERROS (PUT)', () => {
         stateHistory0.log = stateHistory0.log + FAKE_TEXT;
 
         do {
-            stateHistory0.id = new ObjectId();
-        } while (stateHistory0.id == dataList.statesHistory[0].id);
+            stateHistory0._id = new ObjectId();
+        } while (stateHistory0._id == dataList.statesHistory[0]._id);
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${stateHistory0.id}`).send(stateHistory0);
         const {

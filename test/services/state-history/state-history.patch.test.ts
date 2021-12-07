@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import * as jsonpatch from 'fast-json-patch';
@@ -21,9 +21,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -64,14 +64,13 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
         const stateHistory1 = new StateHistory(dataList.statesHistory[0]);
 
         const stateHistory0newStateId = stateHistory0.newState.id;
-
         // Modificase o modelo StateHistory (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
         stateHistory0.log = stateHistory0.log + FAKE_TEXT;
 
         // Modificase o modelo AssignedUser (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
         stateHistory1.newState = dataList.users[0]._id != stateHistory1.newState._id
-            ? (dataList.states[0] as State)._id
-            : (dataList.states[1] as State)._id;
+            ? new State(dataList.states[0])
+            : new State(dataList.states[1]);
 
         // Xerase o objexecto tipo HTTP PATCH
         const objPatch = jsonpatch.compare(stateHistory0, stateHistory1);
@@ -104,7 +103,7 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
 
         expect(data.newState).toBeDefined();
         expect(data.newState).not.toBe(stateHistory0newStateId);
-        expect(data.newState).toBe(stateHistory1.newState);
+        expect(data.newState).toBe(stateHistory1.newState.id);
 
         expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('STATE_HISTORY.NAME'), id: stateHistory1.id }));
     });
@@ -183,8 +182,8 @@ describe('2: Probas DATOS API - StateHistorys ERROS (PATCH)', () => {
         stateHistory0.log = stateHistory0.log + FAKE_TEXT;
 
         do {
-            stateHistory0.id = new ObjectId();
-        } while (stateHistory0.id == dataList.statesHistory[0].id);
+            stateHistory0._id = new ObjectId();
+        } while (stateHistory0._id == dataList.statesHistory[0]._id);
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${stateHistory0.id}`).send(stateHistory0);
         const {

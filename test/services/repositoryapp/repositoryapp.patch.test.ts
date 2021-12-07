@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import * as jsonpatch from 'fast-json-patch';
@@ -22,9 +22,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - RepositoryApps (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -182,8 +182,8 @@ describe('2: Probas DATOS API - RepositoryApps ERROS (PATCH)', () => {
         repositoryApp0.name = repositoryApp0.name + FAKE_TEXT;
 
         do {
-            repositoryApp0.id = new ObjectId();
-        } while (repositoryApp0.id == dataList.repositories[0].id);
+            repositoryApp0._id = new ObjectId();
+        } while (repositoryApp0._id == dataList.repositories[0]._id);
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${repositoryApp0.id}`).send(repositoryApp0);
         const {

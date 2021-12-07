@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
@@ -8,6 +8,7 @@ import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 import { CommentApp } from '../../../src/models/commentapp.model';
 import { User } from "../../../src/models/user.model";
+import { ObjectId } from '@mikro-orm/mongodb';
 
 import {
     app,
@@ -20,9 +21,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - CommentApps (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -99,11 +100,11 @@ describe('1: Probas DATOS API - CommentApps (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        commentApps[0]._id = "616c6b4c9c7900e7011c9615";
+        commentApps[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         commentApps[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        commentApps[1]._id = "616c6b6602067b3bd0d5ffbc";
+        commentApps[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         commentApps[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(commentApps);
@@ -225,11 +226,11 @@ describe('2: Probas DATOS API - CommentApps ERROS (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badCommentApps[0]._id = "616c6b4c9c7900e7011c9615";
+        badCommentApps[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         badCommentApps[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badCommentApps[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badCommentApps[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         badCommentApps[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badCommentApps);

@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
@@ -19,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Users (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -93,7 +93,7 @@ describe('1: Probas DATOS API - Users (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                login: {'$re': valueFilter }
+                login: valueFilter
             },
             { arrayFormat: 'repeat' }
         );
@@ -169,7 +169,7 @@ describe('1: Probas DATOS API - Users (GET)', () => {
 
         const queryParameters = qs.stringify(
             {
-                login: {'$re': user.login }
+                login: user.login
             }
         );
 
@@ -242,7 +242,7 @@ describe('2: Probas DATOS API - Users ERROS (GET)', () => {
     test('2.1: Consultar tódolos Users con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 
@@ -277,7 +277,7 @@ describe('2: Probas DATOS API - Users ERROS (GET)', () => {
     test(`2.2: Consultar User: <${dataList.users[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 

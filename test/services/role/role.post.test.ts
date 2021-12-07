@@ -1,8 +1,9 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from "@mikro-orm/mongodb";
 
 import { Role } from '../../../src/models/role.model';
 import { User } from "../../../src/models/user.model";
@@ -18,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Roles (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -98,11 +99,11 @@ describe('1: Probas DATOS API - Roles (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        roles[0]._id = "616c6b4c9c7900e7011c9615";
+        roles[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         roles[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        roles[1]._id = "616c6b6602067b3bd0d5ffbc";
+        roles[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         roles[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(roles);
@@ -224,11 +225,11 @@ describe('2: Probas DATOS API - Roles ERROS (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badRoles[0]._id = "616c6b4c9c7900e7011c9615";
+        badRoles[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         badRoles[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badRoles[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badRoles[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         badRoles[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badRoles);

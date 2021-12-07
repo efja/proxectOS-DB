@@ -1,8 +1,9 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from "@mikro-orm/mongodb";
 
 import { Resource } from '../../../src/models/resource.model';
 import { User } from "../../../src/models/user.model";
@@ -18,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Resources (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -94,11 +95,11 @@ describe('1: Probas DATOS API - Resources (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        resources[0]._id = "616c6b4c9c7900e7011c9615";
+        resources[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         resources[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        resources[1]._id = "616c6b6602067b3bd0d5ffbc";
+        resources[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         resources[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(resources);
@@ -220,11 +221,11 @@ describe('2: Probas DATOS API - Resources ERROS (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badResources[0]._id = "616c6b4c9c7900e7011c9615";
+        badResources[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         badResources[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badResources[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badResources[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         badResources[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badResources);

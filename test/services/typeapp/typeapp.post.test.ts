@@ -1,10 +1,11 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from '@mikro-orm/mongodb';
 
-import { Type } from '../../../src/models/type.model';
+import { TypeApp } from '../../../src/models/typeapp.model';
 import { User } from "../../../src/models/user.model";
 
 import {
@@ -18,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Types (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -56,8 +57,8 @@ describe('1: Probas DATOS API - Types (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`1.1: Crear Type: <${dataList.types[0].id}>`, async() => {
-        const type = dataList.types[0] as Type;
+    test(`1.1: Crear TypeApp: <${dataList.types[0].id}>`, async() => {
+        const type = dataList.types[0] as TypeApp;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(type);
         const {
@@ -89,16 +90,16 @@ describe('1: Probas DATOS API - Types (POST)', () => {
 
     test('1.2: Crear lista de Types:', async() => {
         const types = [
-            new Type(dataList.types[0]),
-            new Type(dataList.types[0]),
+            new TypeApp(dataList.types[0]),
+            new TypeApp(dataList.types[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        types[0]._id = "616c6b4c9c7900e7011c9615";
+        types[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         types[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        types[1]._id = "616c6b6602067b3bd0d5ffbc";
+        types[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         types[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(types);
@@ -171,7 +172,7 @@ describe('2: Probas DATOS API - Types ERROS (POST)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`2.1: Crear Type con datos erróneos:`, async() => {
+    test(`2.1: Crear TypeApp con datos erróneos:`, async() => {
         const badType = dataList.users[0] as User;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}`).send(badType);
@@ -192,8 +193,8 @@ describe('2: Probas DATOS API - Types ERROS (POST)', () => {
         expect(error).toBe(i18next.t('ERROR.CREATE', { entity: i18next.t('TYPE.NAME') }));
     });
 
-    test(`2.2: Crear Type: <${dataList.types[0].id}> QUE XA EXISTE`, async() => {
-        const type = dataList.types[0] as Type;
+    test(`2.2: Crear TypeApp: <${dataList.types[0].id}> QUE XA EXISTE`, async() => {
+        const type = dataList.types[0] as TypeApp;
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/`).send(type);
         const {
@@ -215,16 +216,16 @@ describe('2: Probas DATOS API - Types ERROS (POST)', () => {
 
     test('2.3: Crear lista de Types algúns con datos erróneos:', async() => {
         const badTypes = [
-            new Type(dataList.types[0]),
+            new TypeApp(dataList.types[0]),
             new User(dataList.users[0]),
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badTypes[0]._id = "616c6b4c9c7900e7011c9615";
+        badTypes[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         badTypes[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badTypes[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badTypes[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         badTypes[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badTypes);

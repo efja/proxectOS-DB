@@ -1,17 +1,17 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import { MikroORM, Options } from '@mikro-orm/core';
 import { Configuration } from '@mikro-orm/core';
 import { MongoHighlighter } from '@mikro-orm/mongo-highlighter';
-import { MongoDriver } from '@mikro-orm/mongodb';
+import { MongoDriver, ObjectId } from '@mikro-orm/mongodb';
 import { CustomBaseEntity } from '../../src/models/custom-base-entity.model';
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 
 
-// ####################################################################################################
+// ##################################################################################################
 // ## CLASE Priority
-// ####################################################################################################
+// ##################################################################################################
 export class DBTestConnection {
   // ************************************************************************************************
   // ** ATRIBUTOS
@@ -157,6 +157,14 @@ export class DBTestConnection {
       await this.createCollections();
 
       try {
+        for (let obj of listObj) {
+          if (obj.id != null) {
+            if (obj.id){
+              obj._id = new ObjectId(obj.id);
+            }
+          }
+        }
+
         await this.orm.em.persistAndFlush(listObj);
       } catch (error) {
         console.log('error persistAndFlush:>> ', error);

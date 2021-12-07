@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
@@ -21,9 +21,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - CommentApps (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -95,7 +95,7 @@ describe('1: Probas DATOS API - CommentApps (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                title: {'$re': valueFilter }
+                title: valueFilter
             },
             { arrayFormat: 'repeat' }
         );
@@ -170,7 +170,7 @@ describe('1: Probas DATOS API - CommentApps (GET)', () => {
         const commentApp = dataList.comments[0] as CommentApp;
         const queryParameters = qs.stringify(
             {
-                title: {'$re': commentApp.title }
+                title: commentApp.title
             }
         );
 
@@ -243,7 +243,7 @@ describe('2: Probas DATOS API - CommentApps ERROS (GET)', () => {
     test('2.1: Consultar tódolos CommentApps con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 
@@ -278,7 +278,7 @@ describe('2: Probas DATOS API - CommentApps ERROS (GET)', () => {
     test(`2.2: Consultar CommentApp: <${dataList.comments[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 

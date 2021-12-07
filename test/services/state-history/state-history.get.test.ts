@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
@@ -19,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - StateHistorys (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -93,7 +93,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ log: "ASC" }],
-                log: {'$re': valueFilter }
+                log: valueFilter
             },
             { arrayFormat: 'repeat' }
         );
@@ -166,7 +166,7 @@ describe('1: Probas DATOS API - StateHistorys (GET)', () => {
 
         const queryParameters = qs.stringify(
             {
-                log: {'$re': stateHistory.log }
+                log: stateHistory.log
             }
         );
 
@@ -236,7 +236,7 @@ describe('2: Probas DATOS API - StateHistorys ERROS (GET)', () => {
     test('2.1: Consultar tódolos StateHistorys con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                log: {'$re': FAKE_TEXT }
+                log: FAKE_TEXT
             }
         );
 
@@ -271,7 +271,7 @@ describe('2: Probas DATOS API - StateHistorys ERROS (GET)', () => {
     test(`2.2: Consultar StateHistory: <${dataList.statesHistory[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                log: {'$re': FAKE_TEXT }
+                log: FAKE_TEXT
             }
         );
 

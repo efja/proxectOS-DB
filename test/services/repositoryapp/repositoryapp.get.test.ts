@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
@@ -21,9 +21,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -95,7 +95,7 @@ describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$re': valueFilter }
+                name: valueFilter
             },
             { arrayFormat: 'repeat' }
         );
@@ -171,7 +171,7 @@ describe('1: Probas DATOS API - RepositoryApps (GET)', () => {
 
         const queryParameters = qs.stringify(
             {
-                name: {'$re': repositoryApp.name }
+                name: repositoryApp.name
             }
         );
 
@@ -244,7 +244,7 @@ describe('2: Probas DATOS API - RepositoryApps ERROS (GET)', () => {
     test('2.1: Consultar tódolos RepositoryApps con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 
@@ -279,7 +279,7 @@ describe('2: Probas DATOS API - RepositoryApps ERROS (GET)', () => {
     test(`2.2: Consultar RepositoryApp: <${dataList.repositories[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 

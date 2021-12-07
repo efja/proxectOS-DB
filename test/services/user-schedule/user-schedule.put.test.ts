@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import { ObjectId } from '@mikro-orm/mongodb';
@@ -19,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - UserSchedules (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -168,8 +168,8 @@ describe('1: Probas DATOS API - UserSchedules ERROS (PUT)', () => {
         userSchedule0.description = userSchedule0.description + FAKE_TEXT;
 
         do {
-            userSchedule0.id = new ObjectId();
-        } while (userSchedule0.id == dataList.userSchedules[0].id);
+            userSchedule0._id = new ObjectId();
+        } while (userSchedule0._id == dataList.userSchedules[0]._id);
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${userSchedule0.id}`).send(userSchedule0);
         const {

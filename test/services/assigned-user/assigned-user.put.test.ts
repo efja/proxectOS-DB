@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import { ObjectId } from '@mikro-orm/mongodb';
@@ -20,9 +20,11 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+import { createAssignedUser } from "../../db/transform-data.helper";
+
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - AssignedUsers (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -60,17 +62,20 @@ describe('1: Probas DATOS API - AssignedUsers (PUT)', () => {
     // ** TESTS
     // ************************************************************************************************
     test(`1.1: Actualizar AssignedUser: <${dataList.assignedUsers[0].id}>`, async() => {
-        const assignedUser0 = new AssignedUser(dataList.assignedUsers[0]);
-        const assignedUser1 = new AssignedUser(dataList.assignedUsers[0]);
+        const assignedUser = createAssignedUser(dataList.assignedUsers[0], db);
 
-        const assignedUser0assignedUserId = assignedUser0.assignedUser.id;
+        const assignedUseraId = assignedUser.id;
+        const assignedUserassignedUserId = assignedUser.assignedUser.id;
+        const repo = db.orm.em.getRepository(User);
 
         // Modificase o modelo AssignedUser (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
-        assignedUser1.assignedUser = dataList.users[0]._id != assignedUser1.assignedUser._id
-            ? (dataList.users[0] as User)._id
-            : (dataList.users[1] as User)._id;
+        if (assignedUser.assignedUser.id != dataList.users[0].id) {
+            assignedUser.assignedUser = repo.getReference(dataList.users[0].id, true);
+        } else {
+            assignedUser.assignedUser = repo.getReference(dataList.users[1].id, true);
+        }
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/${dataList.assignedUsers[0].id}`).send(assignedUser1);
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${dataList.assignedUsers[0].id}`).send(assignedUser);
         const {
             code,
             data,
@@ -87,16 +92,16 @@ describe('1: Probas DATOS API - AssignedUsers (PUT)', () => {
 
         // ** Datos cambiados
         expect(data.assignedUser).toBeDefined();
-        expect(data.assignedUser).not.toBe(assignedUser0assignedUserId);
-        expect(data.assignedUser).toBe(assignedUser1.assignedUser);
+        expect(data.assignedUser).not.toBe(assignedUserassignedUserId);
+        expect(data.assignedUser).toBe(assignedUser.assignedUser.id);
 
         // ** Datos NON cambiados
         // Comprobanse algúns datos obrigatorios
         expect(data.id).toBeDefined();
-        expect(data.id).toBe(assignedUser0.id);
-        expect(data.id).toBe(assignedUser1.id);
+        expect(data.id).toBe(assignedUseraId);
+        expect(data.id).toBe(assignedUser.id);
 
-        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ASSIGNED_USER.NAME'), id: assignedUser1.id }));
+        expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('ASSIGNED_USER.NAME'), id: assignedUser.id }));
     });
 });
 
@@ -138,17 +143,17 @@ describe('1: Probas DATOS API - AssignedUsers ERROS (PUT)', () => {
     // ************************************************************************************************
 
     test(`2.1: Actualizar AssignedUser con datos erróneos:`, async() => {
-        const assignedUser0 = new AssignedUser(dataList.assignedUsers[0]);
+        const assignedUser = createAssignedUser(dataList.assignedUsers[0], db);
 
         // Modificase o modelo AssignedUser
-        assignedUser0.assignedUser = dataList.users[0].id != assignedUser0.assignedUser.id
+        assignedUser.assignedUser = dataList.users[0].id != assignedUser.assignedUser.id
             ? dataList.users[0] as User
             : dataList.users[1] as User;
 
-        const assignedUser1 = assignedUser0 as any;
+        const assignedUser1 = assignedUser as any;
         assignedUser1.createdAt = FAKE_TEXT; // Dato erróneo
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/${assignedUser0.id}`).send(assignedUser1);
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${assignedUser.id}`).send(assignedUser1);
         const {
             code,
             data,
@@ -163,22 +168,22 @@ describe('1: Probas DATOS API - AssignedUsers ERROS (PUT)', () => {
         expect(code).toBe(HttpStatus.CONFLICT);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('ASSIGNED_USER.NAME'), id: assignedUser0.id }));
+        expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('ASSIGNED_USER.NAME'), id: assignedUser.id }));
     });
 
     test(`2.2: Actualizar AssignedUser que non existe:`, async() => {
-        const assignedUser0 = new AssignedUser(dataList.assignedUsers[0]);
+        const assignedUser = new AssignedUser(dataList.assignedUsers[0]);
 
         // Modificase o modelo AssignedUser
-        assignedUser0.assignedUser = dataList.users[0].id != assignedUser0.assignedUser.id
+        assignedUser.assignedUser = dataList.users[0].id != assignedUser.assignedUser.id
             ? dataList.users[0] as User
             : dataList.users[1] as User;
 
         do {
-            assignedUser0.id = new ObjectId();
-        } while (assignedUser0.id == dataList.assignedUsers[0].id);
+            assignedUser._id = new ObjectId();
+        } while (assignedUser._id == dataList.assignedUsers[0]._id);
 
-        const response = await request.put(`${API_BASE}/${ENDPOINT}/${assignedUser0.id}`).send(assignedUser0);
+        const response = await request.put(`${API_BASE}/${ENDPOINT}/${assignedUser.id}`).send(assignedUser);
         const {
             code,
             data,
@@ -193,6 +198,6 @@ describe('1: Probas DATOS API - AssignedUsers ERROS (PUT)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_USER.NAME'), id: assignedUser0.id }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_USER.NAME'), id: assignedUser.id }));
     });
 });

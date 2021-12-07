@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
@@ -19,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - AssignedResources (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -242,7 +242,7 @@ describe('2: Probas DATOS API - AssignedResources ERROS (GET)', () => {
     test('2.1: Consultar tódolos AssignedResources con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 
@@ -277,7 +277,7 @@ describe('2: Probas DATOS API - AssignedResources ERROS (GET)', () => {
     test(`2.2: Consultar AssignedResource: <${dataList.assignedResources[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 

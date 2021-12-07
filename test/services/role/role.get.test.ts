@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
@@ -19,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Roles (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -93,7 +93,7 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$re': valueFilter }
+                name: valueFilter
             },
             { arrayFormat: 'repeat' }
         );
@@ -170,7 +170,7 @@ describe('1: Probas DATOS API - Roles (GET)', () => {
 
         const queryParameters = qs.stringify(
             {
-                name: {'$re': role.name }
+                name: role.name
             }
         );
 
@@ -244,7 +244,7 @@ describe('2: Probas DATOS API - Roles ERROS (GET)', () => {
     test('2.1: Consultar tódolos Roles con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 
@@ -279,7 +279,7 @@ describe('2: Probas DATOS API - Roles ERROS (GET)', () => {
     test(`2.2: Consultar Role: <${dataList.roles[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 

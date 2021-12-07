@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
@@ -19,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Resources (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -93,7 +93,7 @@ describe('1: Probas DATOS API - Resources (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$re': valueFilter }
+                name: valueFilter
             },
             { arrayFormat: 'repeat' }
         );
@@ -166,7 +166,7 @@ describe('1: Probas DATOS API - Resources (GET)', () => {
 
         const queryParameters = qs.stringify(
             {
-                name: {'$re': resource.name }
+                name: resource.name
             }
         );
 
@@ -236,7 +236,7 @@ describe('2: Probas DATOS API - Resources ERROS (GET)', () => {
     test('2.1: Consultar tódolos Resources con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 
@@ -271,7 +271,7 @@ describe('2: Probas DATOS API - Resources ERROS (GET)', () => {
     test(`2.2: Consultar Resource: <${dataList.resources[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 

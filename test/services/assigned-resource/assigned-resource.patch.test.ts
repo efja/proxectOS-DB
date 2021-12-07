@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import * as jsonpatch from 'fast-json-patch';
@@ -20,9 +20,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - AssignedResources (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -175,8 +175,8 @@ describe('2: Probas DATOS API - AssignedResources ERROS (PATCH)', () => {
         assignedResource0.description = assignedResource0.description + FAKE_TEXT;
 
         do {
-            assignedResource0.id = new ObjectId();
-        } while (assignedResource0.id == dataList.assignedResources[0].id);
+            assignedResource0._id = new ObjectId();
+        } while (assignedResource0._id == dataList.assignedResources[0]._id);
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${assignedResource0.id}`).send(assignedResource0);
         const {

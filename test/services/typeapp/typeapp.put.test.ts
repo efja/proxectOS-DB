@@ -1,11 +1,11 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import { ObjectId } from '@mikro-orm/mongodb';
 
-import { Type } from '../../../src/models/type.model';
+import { TypeApp } from '../../../src/models/typeapp.model';
 
 import {
     app,
@@ -19,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Types (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -57,11 +57,11 @@ describe('1: Probas DATOS API - Types (PUT)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`1.1: Actualizar Type: <${dataList.types[0].id}>`, async() => {
-        const type0 = new Type(dataList.types[0]);
-        const type1 = new Type(dataList.types[0]);
+    test(`1.1: Actualizar TypeApp: <${dataList.types[0].id}>`, async() => {
+        const type0 = new TypeApp(dataList.types[0]);
+        const type1 = new TypeApp(dataList.types[0]);
 
-        // Modificase o modelo Type (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
+        // Modificase o modelo TypeApp (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
         type1.name = type1.name + FAKE_TEXT;
         type1.description = type1.description + FAKE_TEXT;
 
@@ -135,10 +135,10 @@ describe('1: Probas DATOS API - Types ERROS (PUT)', () => {
     // ** TESTS
     // ************************************************************************************************
 
-    test(`2.1: Actualizar Type con datos erróneos:`, async() => {
-        const type0 = new Type(dataList.types[0]);
+    test(`2.1: Actualizar TypeApp con datos erróneos:`, async() => {
+        const type0 = new TypeApp(dataList.types[0]);
 
-        // Modificase o modelo Type
+        // Modificase o modelo TypeApp
         type0.name = type0.name + FAKE_TEXT;
 
         const type1 = type0 as any;
@@ -162,15 +162,15 @@ describe('1: Probas DATOS API - Types ERROS (PUT)', () => {
         expect(error).toBe(i18next.t('ERROR.CONFLICT', { entity: i18next.t('TYPE.NAME'), id: type0.id }));
     });
 
-    test(`2.2: Actualizar Type que non existe:`, async() => {
-        const type0 = new Type(dataList.types[0]);
+    test(`2.2: Actualizar TypeApp que non existe:`, async() => {
+        const type0 = new TypeApp(dataList.types[0]);
 
-        // Modificase o modelo Type
+        // Modificase o modelo TypeApp
         type0.name = type0.name + FAKE_TEXT;
 
         do {
-            type0.id = new ObjectId();
-        } while (type0.id == dataList.types[0].id);
+            type0._id = new ObjectId();
+        } while (type0._id == dataList.types[0]._id);
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${type0.id}`).send(type0);
         const {

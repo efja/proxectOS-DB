@@ -1,8 +1,9 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from "@mikro-orm/mongodb";
 
 import { Priority } from '../../../src/models/priority.model';
 
@@ -18,9 +19,9 @@ import {
 } from "../commons";
 import { CommentApp } from "../../../src/models/commentapp.model";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Priorities (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -94,11 +95,11 @@ describe('1: Probas DATOS API - Priorities (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        priorities[0]._id = "616c6b4c9c7900e7011c9615";
+        priorities[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         priorities[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        priorities[1]._id = "616c6b6602067b3bd0d5ffbc";
+        priorities[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         priorities[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(priorities);
@@ -220,11 +221,11 @@ describe('2: Probas DATOS API - Priorities ERROS (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badPriorities[0]._id = "616c6b4c9c7900e7011c9615";
+        badPriorities[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         badPriorities[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badPriorities[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badPriorities[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         badPriorities[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badPriorities);

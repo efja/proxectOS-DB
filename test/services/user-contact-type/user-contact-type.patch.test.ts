@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import * as jsonpatch from 'fast-json-patch';
@@ -20,9 +20,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - UserContactTypes (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -171,8 +171,8 @@ describe('2: Probas DATOS API - UserContactTypes ERROS (PATCH)', () => {
         userContactType0.description = userContactType0.description + FAKE_TEXT;
 
         do {
-            userContactType0.id = new ObjectId();
-        } while (userContactType0.id == dataList.userContactTypes[0].id);
+            userContactType0._id = new ObjectId();
+        } while (userContactType0._id == dataList.userContactTypes[0]._id);
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${userContactType0.id}`).send(userContactType0);
         const {

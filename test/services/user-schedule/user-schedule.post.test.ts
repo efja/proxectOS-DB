@@ -1,8 +1,9 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from "@mikro-orm/mongodb";
 
 import { UserSchedule } from '../../../src/models/user-schedule.model';
 import { User } from "../../../src/models/user.model";
@@ -18,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - UserSchedules (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -94,11 +95,11 @@ describe('1: Probas DATOS API - UserSchedules (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        userSchedules[0]._id = "616c6b4c9c7900e7011c9615";
+        userSchedules[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         userSchedules[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        userSchedules[1]._id = "616c6b6602067b3bd0d5ffbc";
+        userSchedules[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         userSchedules[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(userSchedules);
@@ -220,11 +221,11 @@ describe('2: Probas DATOS API - UserSchedules ERROS (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badUserSchedules[0]._id = "616c6b4c9c7900e7011c9615";
+        badUserSchedules[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         badUserSchedules[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badUserSchedules[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badUserSchedules[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         badUserSchedules[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badUserSchedules);

@@ -1,8 +1,9 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from "@mikro-orm/mongodb";
 
 import { Stage } from '../../../src/models/stage.model';
 import { User } from "../../../src/models/user.model";
@@ -18,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Stages (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -94,11 +95,11 @@ describe('1: Probas DATOS API - Stages (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        stages[0]._id = "616c6b4c9c7900e7011c9615";
+        stages[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         stages[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        stages[1]._id = "616c6b6602067b3bd0d5ffbc";
+        stages[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         stages[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(stages);
@@ -220,11 +221,11 @@ describe('2: Probas DATOS API - Stages ERROS (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badStages[0]._id = "616c6b4c9c7900e7011c9615";
+        badStages[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         badStages[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badStages[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badStages[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         badStages[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badStages);

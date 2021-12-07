@@ -1,11 +1,11 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
 
-import { Type } from '../../../src/models/type.model';
+import { TypeApp } from '../../../src/models/typeapp.model';
 
 import {
     app,
@@ -19,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Types (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -93,7 +93,7 @@ describe('1: Probas DATOS API - Types (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: {'$re': valueFilter }
+                name: valueFilter
             },
             { arrayFormat: 'repeat' }
         );
@@ -109,7 +109,7 @@ describe('1: Probas DATOS API - Types (GET)', () => {
             error,
         } = response.body
 
-        const types: Type[] = (dataList.types as Type[]).filter(item => item.name.includes(valueFilter));
+        const types: TypeApp[] = (dataList.types as TypeApp[]).filter(item => item.name.includes(valueFilter));
 
         const dataLength = types.length;
 
@@ -130,7 +130,7 @@ describe('1: Probas DATOS API - Types (GET)', () => {
         expect(message).toBe(i18next.t('SUCCESS.GET_LIST', { entity: i18next.t('TYPE.NAME_PLURAL') }));
     });
 
-    test(`1.3: Consultar Type: <${dataList.types[0].id}>`, async() => {
+    test(`1.3: Consultar TypeApp: <${dataList.types[0].id}>`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.types[0].id}`);
         const {
             code,
@@ -139,7 +139,7 @@ describe('1: Probas DATOS API - Types (GET)', () => {
             error,
         } = response.body
 
-        const type = dataList.types[0] as Type;
+        const type = dataList.types[0] as TypeApp;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -161,12 +161,12 @@ describe('1: Probas DATOS API - Types (GET)', () => {
         expect(message).toBe(i18next.t('SUCCESS.GET', { entity: i18next.t('TYPE.NAME'), id: type.id }));
     });
 
-    test(`1.4: Consultar Type: <${dataList.types[0].id}> con parámetros de filtrado`, async() => {
-        const type = dataList.types[0] as Type;
+    test(`1.4: Consultar TypeApp: <${dataList.types[0].id}> con parámetros de filtrado`, async() => {
+        const type = dataList.types[0] as TypeApp;
 
         const queryParameters = qs.stringify(
             {
-                name: {'$re': type.name }
+                name: type.name
             }
         );
 
@@ -236,7 +236,7 @@ describe('2: Probas DATOS API - Types ERROS (GET)', () => {
     test('2.1: Consultar tódolos Types con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 
@@ -268,10 +268,10 @@ describe('2: Probas DATOS API - Types ERROS (GET)', () => {
         expect(error).toBe(i18next.t('ERROR.NOT_FOUND_LIST', { entity: i18next.t('TYPE.NAME_PLURAL') }));
     });
 
-    test(`2.2: Consultar Type: <${dataList.types[0].id}> con parámetros de filtrado`, async() => {
+    test(`2.2: Consultar TypeApp: <${dataList.types[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 
@@ -293,7 +293,7 @@ describe('2: Probas DATOS API - Types ERROS (GET)', () => {
         expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('TYPE.NAME'), id: `${dataList.types[0].id}` }));
     });
 
-    test(`2.3: Consultar Type inexistente:`, async() => {
+    test(`2.3: Consultar TypeApp inexistente:`, async() => {
         const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.types[0].id}${FAKE_TEXT}`);
         const {
             code,

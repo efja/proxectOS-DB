@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import { ObjectId } from '@mikro-orm/mongodb';
@@ -20,9 +20,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - UserContacts (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -69,8 +69,8 @@ describe('1: Probas DATOS API - UserContacts (PUT)', () => {
 
         // Modificase o modelo AssignedUser (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
         userContact1.type = dataList.users[0]._id != userContact1.type._id
-            ? (dataList.types[0] as UserContactType)._id
-            : (dataList.types[1] as UserContactType)._id;
+            ? new UserContactType(dataList.users[0])
+            : new UserContactType(dataList.users[1]);
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${dataList.userContacts[0].id}`).send(userContact1);
         const {
@@ -94,7 +94,7 @@ describe('1: Probas DATOS API - UserContacts (PUT)', () => {
 
         expect(data.type).toBeDefined();
         expect(data.type).not.toBe(userContact0TypeId);
-        expect(data.type).toBe(userContact1.type);
+        expect(data.type).toBe(userContact1.type.id);
 
         // ** Datos NON cambiados
         // Comprobanse algúns datos obrigatorios
@@ -176,8 +176,8 @@ describe('1: Probas DATOS API - UserContacts ERROS (PUT)', () => {
         userContact0.contact = userContact0.contact + FAKE_TEXT;
 
         do {
-            userContact0.id = new ObjectId();
-        } while (userContact0.id == dataList.userContacts[0].id);
+            userContact0._id = new ObjectId();
+        } while (userContact0._id == dataList.userContacts[0]._id);
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${userContact0.id}`).send(userContact0);
         const {

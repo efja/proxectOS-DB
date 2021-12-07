@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
@@ -8,6 +8,7 @@ import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
 import { AssignedUser } from '../../../src/models/assigned-user.model';
 import { User } from "../../../src/models/user.model";
+import { ObjectId } from '@mikro-orm/mongodb';
 
 import {
     app,
@@ -20,9 +21,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - AssignedUsers (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -96,11 +97,11 @@ describe('1: Probas DATOS API - AssignedUsers (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        assignedUsers[0]._id = "616c6b4c9c7900e7011c9615";
+        assignedUsers[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         assignedUsers[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        assignedUsers[1]._id = "616c6b6602067b3bd0d5ffbc";
+        assignedUsers[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         assignedUsers[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(assignedUsers);
@@ -156,7 +157,8 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (POST)', () => {
 	});
 
 	beforeEach(async () => {
-        await db.inicializeData(dataList.assignedUsers, true);
+        await db.createCollections();
+        await db.inicializeData(dataList.assignedUsers);
         await db.inicializeData(dataList.users);
 	});
 
@@ -223,11 +225,11 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badAssignedUsers[0]._id = "616c6b4c9c7900e7011c9615";
+        badAssignedUsers[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         badAssignedUsers[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badAssignedUsers[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badAssignedUsers[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         badAssignedUsers[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badAssignedUsers);

@@ -1,8 +1,9 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from "@mikro-orm/mongodb";
 
 import { State } from '../../../src/models/state.model';
 import { User } from "../../../src/models/user.model";
@@ -18,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - States (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -94,11 +95,11 @@ describe('1: Probas DATOS API - States (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        states[0]._id = "616c6b4c9c7900e7011c9615";
+        states[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         states[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        states[1]._id = "616c6b6602067b3bd0d5ffbc";
+        states[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         states[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(states);
@@ -220,11 +221,11 @@ describe('2: Probas DATOS API - States ERROS (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badStates[0]._id = "616c6b4c9c7900e7011c9615";
+        badStates[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         badStates[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badStates[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badStates[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         badStates[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badStates);

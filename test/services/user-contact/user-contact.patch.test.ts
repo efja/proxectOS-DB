@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import * as jsonpatch from 'fast-json-patch';
@@ -21,9 +21,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -65,13 +65,11 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
 
         const userContact0TypeId = userContact0.type.id;
 
-        // Modificase o modelo UserContact
-
+        // Modificase o modelo AssignedUser
         userContact1.contact = userContact1.contact + FAKE_TEXT;
-
         userContact1.type = dataList.users[0]._id != userContact1.type._id
-            ? (dataList.types[0] as UserContactType)._id
-            : (dataList.types[1] as UserContactType)._id;
+            ? new UserContactType(dataList.users[0])
+            : new UserContactType(dataList.users[1]);
 
         // Xerase o objexecto tipo HTTP PATCH
         const objPatch = jsonpatch.compare(userContact0, userContact1);
@@ -98,7 +96,7 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
 
         expect(data.type).toBeDefined();
         expect(data.type).not.toBe(userContact0TypeId);
-        expect(data.type).toBe(userContact1.type);
+        expect(data.type).toBe(userContact1.type.id);
 
         // ** Datos NON cambiados
         // Comprobanse algúns datos obrigatorios
@@ -183,8 +181,8 @@ describe('2: Probas DATOS API - UserContacts ERROS (PATCH)', () => {
         userContact0.contact = userContact0.contact + FAKE_TEXT;
 
         do {
-            userContact0.id = new ObjectId();
-        } while (userContact0.id == dataList.userContacts[0].id);
+            userContact0._id = new ObjectId();
+        } while (userContact0._id == dataList.userContacts[0]._id);
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${userContact0.id}`).send(userContact0);
         const {

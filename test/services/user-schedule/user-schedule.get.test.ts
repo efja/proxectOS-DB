@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
@@ -19,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - UserSchedules (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -93,7 +93,7 @@ describe('1: Probas DATOS API - UserSchedules (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ description: "ASC" }],
-                description: {'$re': valueFilter }
+                description: valueFilter
             },
             { arrayFormat: 'repeat' }
         );
@@ -166,7 +166,7 @@ describe('1: Probas DATOS API - UserSchedules (GET)', () => {
 
         const queryParameters = qs.stringify(
             {
-                description: {'$re': userSchedule.description }
+                description: userSchedule.description
             }
         );
 
@@ -236,7 +236,7 @@ describe('2: Probas DATOS API - UserSchedules ERROS (GET)', () => {
     test('2.1: Consultar tódolos UserSchedules con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                description: {'$re': FAKE_TEXT }
+                description: FAKE_TEXT
             }
         );
 
@@ -271,7 +271,7 @@ describe('2: Probas DATOS API - UserSchedules ERROS (GET)', () => {
     test(`2.2: Consultar UserSchedule: <${dataList.userSchedules[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                description: {'$re': FAKE_TEXT }
+                description: FAKE_TEXT
             }
         );
 

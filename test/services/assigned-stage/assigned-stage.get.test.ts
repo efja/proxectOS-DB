@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
@@ -21,9 +21,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - AssignedStages (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -94,7 +94,7 @@ describe('1: Probas DATOS API - AssignedStages (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ stage: "ASC" }],
-                stage: {'$re': '616b561b41663da69a3fc807' }
+                stage: '616b561b41663da69a3fc807'
             },
             { arrayFormat: 'repeat' }
         );
@@ -164,7 +164,7 @@ describe('1: Probas DATOS API - AssignedStages (GET)', () => {
     test(`1.4: Consultar AssignedStage: <${dataList.assignedStages[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                stage: {'$re': '616b561b41663da69a3fc807' }
+                stage: '616b561b41663da69a3fc807'
             }
         );
 
@@ -237,7 +237,7 @@ describe('2: Probas DATOS API - AssignedStages ERROS (GET)', () => {
     test('2.1: Consultar tódolos AssignedStages con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 
@@ -272,7 +272,7 @@ describe('2: Probas DATOS API - AssignedStages ERROS (GET)', () => {
     test(`2.2: Consultar AssignedStage: <${dataList.assignedStages[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 

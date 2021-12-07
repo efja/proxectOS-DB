@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import { ObjectId } from '@mikro-orm/mongodb';
@@ -22,9 +22,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - AssignedStages (PUT)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -184,8 +184,8 @@ describe('1: Probas DATOS API - AssignedStages ERROS (PUT)', () => {
         assignedStage0.finishDate = newFinishDate;
 
         do {
-            assignedStage0.id = new ObjectId();
-        } while (assignedStage0.id == dataList.assignedStages[0].id);
+            assignedStage0._id = new ObjectId();
+        } while (assignedStage0._id == dataList.assignedStages[0]._id);
 
         const response = await request.put(`${API_BASE}/${ENDPOINT}/${assignedStage0.id}`).send(assignedStage0);
         const {

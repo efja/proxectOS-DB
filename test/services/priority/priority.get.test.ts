@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
@@ -19,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Priorities (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -94,7 +94,7 @@ describe('1: Probas DATOS API - Priorities (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ name: "ASC" }],
-                name: { '$re': valueFilter }
+                name: valueFilter
             },
             { arrayFormat: 'repeat' }
         );
@@ -167,7 +167,7 @@ describe('1: Probas DATOS API - Priorities (GET)', () => {
 
         const queryParameters = qs.stringify(
             {
-                name: {'$re': priority.name }
+                name: priority.name
             }
         );
 
@@ -237,7 +237,7 @@ describe('2: Probas DATOS API - Priorities ERROS (GET)', () => {
     test('2.1: Consultar tódolas Priorities con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 
@@ -272,7 +272,7 @@ describe('2: Probas DATOS API - Priorities ERROS (GET)', () => {
     test(`2.2: Consultar Priority: <${dataList.priorities[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                name: {'$re': FAKE_TEXT }
+                name: FAKE_TEXT
             }
         );
 

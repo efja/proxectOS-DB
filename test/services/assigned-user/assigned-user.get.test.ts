@@ -1,6 +1,6 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 import qs from 'qs';
@@ -20,9 +20,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -96,7 +96,7 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
             {
                 limit: 0,
                 orderBy: [{ assignedUser: "ASC" }],
-                assignedUser: {'$re': assignedUser.assignedUser }
+                assignedUser: assignedUser.assignedUser.id
             },
             { arrayFormat: 'repeat' }
         );
@@ -166,11 +166,11 @@ describe('1: Probas DATOS API - AssignedUsers (GET)', () => {
 
         const queryParameters = qs.stringify(
             {
-                assignedUser: {'$re': assignedUser.assignedUser }
+                assignedUser: assignedUser.assignedUser.id
             }
         );
 
-        const response = await request.get(`${API_BASE}/${ENDPOINT}/${dataList.assignedUsers[0].id}?${queryParameters}`);
+        const response = await request.get(`${API_BASE}/${ENDPOINT}/${assignedUser.id}?${queryParameters}`);
         const {
             code,
             data,
@@ -234,7 +234,7 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (GET)', () => {
     test('2.1: Consultar tódolos AssignedUsers con parámetros de filtrado :', async() => {
         const queryParameters = qs.stringify(
             {
-                assignedUser: {'$re': FAKE_TEXT }
+                assignedUser: FAKE_TEXT
             }
         );
 
@@ -269,7 +269,7 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (GET)', () => {
     test(`2.2: Consultar AssignedUser: <${dataList.assignedUsers[0].id}> con parámetros de filtrado`, async() => {
         const queryParameters = qs.stringify(
             {
-                assignedUser: {'$re': FAKE_TEXT }
+                assignedUser: FAKE_TEXT
             }
         );
 

@@ -1,10 +1,10 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
 
-import { Type } from '../../../src/models/type.model';
+import { TypeApp } from '../../../src/models/typeapp.model';
 
 import {
     app,
@@ -18,9 +18,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Types (DELETE)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -55,7 +55,7 @@ describe('1: Probas DATOS API - Types (DELETE)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`1.1: Borrar Type: <${dataList.types[0].id}>`, async() => {
+    test(`1.1: Borrar TypeApp: <${dataList.types[0].id}>`, async() => {
         const response = await request.delete(`${API_BASE}/${ENDPOINT}/${dataList.types[0].id}`);
         const {
             code,
@@ -64,7 +64,7 @@ describe('1: Probas DATOS API - Types (DELETE)', () => {
             error,
         } = response.body
 
-        const type = dataList.types[0] as Type;
+        const type = dataList.types[0] as TypeApp;
 
         expect(error).toBeUndefined();
         expect(message).toBeDefined();
@@ -141,7 +141,7 @@ describe('2: Probas DATOS API - Types ERROS (DELETE)', () => {
     // ************************************************************************************************
     // ** TESTS
     // ************************************************************************************************
-    test(`2.1: Borrar Type inexistente:`, async() => {
+    test(`2.1: Borrar TypeApp inexistente:`, async() => {
         const response = await request.delete(`${API_BASE}/${ENDPOINT}/${dataList.types[0].id}${FAKE_TEXT}`);
         const {
             code,

@@ -1,8 +1,9 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from "@mikro-orm/mongodb";
 
 import { UserGroup } from '../../../src/models/user-group.model';
 import { CommentApp } from '../../../src/models/commentapp.model';
@@ -18,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - UserGroups (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -94,11 +95,11 @@ describe('1: Probas DATOS API - UserGroups (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        userGroups[0]._id = "616c6b4c9c7900e7011c9615";
+        userGroups[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         userGroups[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        userGroups[1]._id = "616c6b6602067b3bd0d5ffbc";
+        userGroups[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         userGroups[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(userGroups);
@@ -220,11 +221,11 @@ describe('2: Probas DATOS API - UserGroups ERROS (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badUserGroups[0]._id = "616c6b4c9c7900e7011c9615";
+        badUserGroups[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         badUserGroups[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badUserGroups[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badUserGroups[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         badUserGroups[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badUserGroups);

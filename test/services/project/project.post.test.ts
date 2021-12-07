@@ -1,8 +1,9 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from "@mikro-orm/mongodb";
 
 import { date2LocaleISO } from "../../../src/helpers/date.helper";
 
@@ -20,9 +21,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Projects (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -100,11 +101,11 @@ describe('1: Probas DATOS API - Projects (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        projects[0]._id = "616c6b4c9c7900e7011c9615";
+        projects[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         projects[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        projects[1]._id = "616c6b6602067b3bd0d5ffbc";
+        projects[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         projects[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(projects);
@@ -226,11 +227,11 @@ describe('2: Probas DATOS API - Projects ERROS (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badProjects[0]._id = "616c6b4c9c7900e7011c9615";
+        badProjects[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         badProjects[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badProjects[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badProjects[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         badProjects[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badProjects);

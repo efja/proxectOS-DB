@@ -1,8 +1,9 @@
-// ####################################################################################################
+// ##################################################################################################
 // ## IMPORTACIÓNS
-// ####################################################################################################
+// ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
+import { ObjectId } from "@mikro-orm/mongodb";
 
 import { Project } from '../../../src/models/project.model';
 import { User } from '../../../src/models/user.model';
@@ -18,9 +19,9 @@ import {
     request
 } from "../commons";
 
-// ####################################################################################################
+// ##################################################################################################
 // ## TESTS GROUPS
-// ####################################################################################################
+// ##################################################################################################
 describe('1: Probas DATOS API - Users (POST)', () => {
     // ************************************************************************************************
     // ** ATRIBUTOS
@@ -97,11 +98,11 @@ describe('1: Probas DATOS API - Users (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        users[0]._id = "616c6b4c9c7900e7011c9615";
+        users[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         users[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        users[1]._id = "616c6b6602067b3bd0d5ffbc";
+        users[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         users[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(users);
@@ -223,11 +224,11 @@ describe('2: Probas DATOS API - Users ERROS (POST)', () => {
         ];
 
         // Se cambian los identificadores para evitar conflictos
-        badUsers[0]._id = "616c6b4c9c7900e7011c9615";
+        badUsers[0]._id = new ObjectId("616c6b4c9c7900e7011c9615");
         badUsers[0].id  = "616c6b4c9c7900e7011c9615";
 
         // Se cambian los identificadores para evitar conflictos
-        badUsers[1]._id = "616c6b6602067b3bd0d5ffbc";
+        badUsers[1]._id = new ObjectId("616c6b6602067b3bd0d5ffbc");
         badUsers[1].id  = "616c6b6602067b3bd0d5ffbc";
 
         const response = await request.post(`${API_BASE}/${ENDPOINT}/Multiple`).send(badUsers);

@@ -204,13 +204,15 @@ def sum_resume(resume):
         temp = extract_numbers_2_list(item)
 
         suites["passed"].append(temp[0])
-        suites["total"].append(temp[1])
+        if (len(temp) == 2):
+            suites["total"].append(temp[1])
 
     for item in tests_text:
         temp = extract_numbers_2_list(item)
 
         tests["passed"].append(temp[0])
-        tests["total"].append(temp[1])
+        if (len(temp) == 2):
+            tests["total"].append(temp[1])
 
     for item in snapshots_text:
         temp = extract_numbers_2_list(item)
