@@ -282,5 +282,3 @@ export abstract class BaseService<T> {
     return this.respository.findOne({ id, ...filters });
   }
 }
-
-// https://stackoverflow.com/a/59292958
