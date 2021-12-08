@@ -160,6 +160,6 @@ describe('2: Probas DATOS API - AssignedResources ERROS (DELETE)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: `${dataList.assignedResources[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('ASSIGNED_RESOURCE.NAME'), id: `${dataList.assignedResources[0].id}${FAKE_TEXT}` }));
     });
 });

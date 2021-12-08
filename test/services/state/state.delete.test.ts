@@ -157,6 +157,6 @@ describe('2: Probas DATOS API - States ERROS (DELETE)', () => {
         expect(code).toBe(HttpStatus.NOT_FOUND);
         expect(data).toBeUndefined();
 
-        expect(error).toBe(i18next.t('ERROR.DELETE', { entity: i18next.t('STATE.NAME'), id: `${dataList.states[0].id}${FAKE_TEXT}` }));
+        expect(error).toBe(i18next.t('ERROR.NOT_FOUND', { entity: i18next.t('STATE.NAME'), id: `${dataList.states[0].id}${FAKE_TEXT}` }));
     });
 });
