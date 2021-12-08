@@ -1,6 +1,6 @@
 {
   "name": "proxectos-db",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ProxectOS API DB",
   "main": "build/index.ts",
   "directories": {

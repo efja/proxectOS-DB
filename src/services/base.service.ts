@@ -177,6 +177,8 @@ export abstract class BaseService<T> {
           let updateData = await getEntityForUpdate(obj, this.entityName.name);
 
           if (updateData != null) {
+            delete updateData["_id"]; // Eliminase para evitar conflictos
+
             // Gárdanse os cambios na entidade
             temp.assign(updateData, { em: this.db.orm.em }, [this.entityName.name]);
 
