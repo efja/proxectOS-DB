@@ -35,6 +35,8 @@ export class APIFilter {
     public stringFilters    : any[] = [];
     public objectIdFilters  : any[] = [];
 
+    public stringSensitive  : boolean = false;
+
     // Relacións
 
     // ************************************************************************************************
@@ -84,19 +86,25 @@ export class APIFilter {
                                     );
                                 }
                             } catch (error) {
-                                this.stringFilters.push(
-                                    { [paramKey] : { '$re': paramValue } } // o valor $re é para que as búsquedas non se fagan literalmente senón como un 'inclúe'
-                                );
+                                this.stringFilters.push(this.getStringFilter(paramKey, paramValue));
                             }
                         } else {
-                            this.stringFilters.push(
-                                { [paramKey] : { '$re': paramValue } } // o valor $re é para que as búsquedas non se fagan literalmente senón como un 'inclúe'
-                            );
+                            this.stringFilters.push(this.getStringFilter(paramKey, paramValue));
                         }
                     }
                 }
             }
         }
+    }
+
+    private getStringFilter(key: string, filter: string, stringSensitive: boolean = this.stringSensitive): Object {
+        let options : string = "g";
+
+        if (!stringSensitive) {
+            options += "i";
+        }
+
+        return { [key] : { '$re': new RegExp(filter, options) } }
     }
 
     private getObjectKeyValue(list: any[], result : Object) {
