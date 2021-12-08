@@ -59,7 +59,7 @@ export abstract class BaseController<T> {
         }
       }
 
-      const responseData : ResponseData = this.checkResponse(response, 'CREATE');
+      const responseData : ResponseData = this.processResponse(req, response, 'CREATE');
 
       res.status(responseData.code).json(responseData);
     } catch (error) {
@@ -104,7 +104,7 @@ export abstract class BaseController<T> {
         }
       }
 
-      const responseData : ResponseData = this.checkResponse(response, 'CREATE_LIST');
+      const responseData : ResponseData = this.processResponse(req, response, 'CREATE_LIST');
 
       res.status(responseData.code).json(responseData);
     } catch (error) {
@@ -139,7 +139,7 @@ export abstract class BaseController<T> {
 
       let response = await this.service.getAll(queryParams.getQueryObj(), orderBy, limit, offset);
 
-      const responseData : ResponseData = this.checkResponse(response, 'GET');
+      const responseData : ResponseData = this.processResponse(req, response, 'GET_LIST');
 
       res.status(responseData.code).json(responseData);
     } catch (error) {
@@ -165,7 +165,7 @@ export abstract class BaseController<T> {
 
       let response = await this.service.get(id, queryParams.getQueryObj());
 
-      const responseData : ResponseData = this.checkResponse(response, 'GET', id);
+      const responseData : ResponseData = this.processResponse(req, response, 'GET');
 
       res.status(responseData.code).json(responseData);
     } catch (error) {
@@ -199,7 +199,7 @@ export abstract class BaseController<T> {
         response = await this.service.update(id, obj);
       }
 
-      const responseData : ResponseData = this.checkResponse(response, 'UPDATE', id);
+      const responseData : ResponseData = this.processResponse(req, response, 'UPDATE');
 
       res.status(responseData.code).json(responseData);
     } catch (error) {
@@ -235,7 +235,7 @@ export abstract class BaseController<T> {
         response = await this.service.modify(id, objPatch);
       }
 
-      const responseData : ResponseData = this.checkResponse(response, 'UPDATE', id);
+      const responseData : ResponseData = this.processResponse(req, response, 'UPDATE');
 
       res.status(responseData.code).json(responseData);
     } catch (error) {
@@ -263,7 +263,7 @@ export abstract class BaseController<T> {
 
       let response = await this.service.delete(id);
 
-      const responseData : ResponseData = this.checkResponse(response, 'DELETE', id);
+      const responseData : ResponseData = this.processResponse(req, response, 'DELETE');
 
       res.status(responseData.code).json(responseData);
     } catch (error) {
@@ -277,54 +277,78 @@ export abstract class BaseController<T> {
   /**
    * Procesa a resposta HTTP da conexión coa BD.
    *
+   * @param req request do método HTTP
    * @param response resposta do método HTTP
    * @param method metótodo para o cal procesar a resposta
-   * @param id identificador da BD da entidade
    * @returns ResponseData
    */
-  protected checkResponse(response, method: string, id = null): ResponseData {
-    let code= HttpStatus.BAD_REQUEST;
-    let data;
-    let message;
-    let error = req.t('ERROR.BAD_REQUEST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
+  protected processResponse(req, response: ResponseData, method: string): ResponseData {
+    method = method.toUpperCase();
+
+    let isPlural = method.includes('LIST');
+    let isError  = false;
+    let plural = (isPlural)
+      ? '_PLURAL'
+      : '';
+    let id = (response && response.data && response.data.id)
+      ? response.data.id
+      : undefined;
 
     if (
-      response != undefined &&
-      response != null &&
-      response != HttpStatus.BAD_REQUEST &&
-      response != HttpStatus.CONFLICT &&
-      response != HttpStatus.NOT_FOUND
+      !response ||
+      (
+        response.code != HttpStatus.OK &&
+        response.code != HttpStatus.CREATED
+      )
     ) {
-      code = HttpStatus.OK;
-      data = response;
-      message = req.t(`SUCCESS.${method.toUpperCase()}`, { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-    } else if (response == HttpStatus.BAD_REQUEST) {
-      code = response;
-      error = req.t('ERROR.BAD_REQUEST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-    } else if (response == HttpStatus.CONFLICT) {
-      let errorMsg = 'ERROR.CONFLICT';
-      code = response;
-
-      if (method.toUpperCase() == 'CREATE') {
-        errorMsg = 'ERROR.ALREADY_EXIST';
-      } else if (method.toUpperCase() == 'CREATE_LIST') {
-        errorMsg = 'ERROR.ALREADY_EXIST_LIST';
-      }
-      error = req.t(errorMsg, { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-    } else if (response == HttpStatus.NOT_FOUND) {
-      code = response;
-      error = req.t('ERROR.NOT_FOUND', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-    } else {
-      code = response;
-      error = req.t(`ERROR.${method.toUpperCase()}`, { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
+      isError = true;
     }
 
-    const responseData : ResponseData = {
+    let code = (response && response.code)
+      ? response.code
+      : HttpStatus.CONFLICT;
+    let data = (response)
+      ? response.data
+      : undefined;
+    let message = (!isError && response)
+      ? response.message
+      : undefined;
+    let error = (isError && response)
+      ? response.error
+      : `ERROR.${method}`;
+
+    if (message) {
+      message = req.t(message, { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME${plural}`), id: id });
+    }
+
+    if (error) {
+      error = req.t(error, { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME${plural}`), id: id });
+    }
+
+    const responseData: ResponseData = {
       code,
-      data,
-      message,
-      error,
+      data    : (!isError)
+        ? data
+        : undefined,
+      message : (!isError)
+        ? message
+        : undefined,
+      error   : (isError)
+        ? error
+        : undefined,
     };
+
+    if (isPlural) {
+      responseData.total = (response)
+        ? response.total
+        : 0;
+      responseData.from = (response)
+        ? response.from
+        : 0;
+      responseData.limit = (response)
+        ? response.limit
+        : 0;
+    }
 
     return responseData;
   }
