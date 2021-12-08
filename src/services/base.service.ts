@@ -10,6 +10,7 @@ import { QueryOrder } from '@mikro-orm/core';
 
 import { DBConnection } from '../config/config-db';
 import { getEntityForUpdate } from '../helpers/entity-construct.helper';
+import { ResponseData, ResultQuery } from '../interfaces/response-data.interface';
 
 // ##################################################################################################
 // ## CLASE BaseService
@@ -18,10 +19,10 @@ export abstract class BaseService<T> {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  protected db          : DBConnection;
-  protected respository : any;
-  protected entityName  : any;
-  protected includes    : string[] = [];
+  protected db: DBConnection;
+  protected respository: any;
+  protected entityName: any;
+  protected includes: string[] = [];
 
   // ************************************************************************************************
   // ** CONSTRUTOR
@@ -48,8 +49,11 @@ export abstract class BaseService<T> {
   // ------------------------------------------------------------------------------------------------
   // -- POST
   // ------------------------------------------------------------------------------------------------
-  public async create(obj: T): Promise<any> {
-    let result : any = HttpStatus.CONFLICT;
+  public async create(obj: T): Promise<ResponseData> {
+    let result: ResultQuery = {
+      code: HttpStatus.CONFLICT,
+      data: null,
+    };
 
     try {
       let temp = null;
@@ -62,7 +66,7 @@ export abstract class BaseService<T> {
       if (temp == null) {
         temp = new this.entityName();
 
-        if (obj["id"]){
+        if (obj["id"]) {
           obj["_id"] = new ObjectId(obj["id"]);
         }
 
@@ -70,16 +74,24 @@ export abstract class BaseService<T> {
 
         await this.respository.persist(temp).flush();
 
-        result = temp;
+        result.code = HttpStatus.CREATED;
       }
+
+      result.data = temp;
     } catch (error) {
       result = null;
     }
-    return result;
+
+    return this.processResponse(result, 'CREATE');
   }
 
-  public async createList(obj: T[]): Promise<any> {
-    let result : any = HttpStatus.CONFLICT;
+  public async createList(obj: T[]): Promise<ResponseData> {
+    let result: ResultQuery = {
+      code: HttpStatus.CONFLICT,
+      data: null,
+      from: 0,
+      limit: 0,
+    };
 
     try {
       let temp = null;
@@ -100,17 +112,20 @@ export abstract class BaseService<T> {
       // Comprobase que non existan as entidades na BD
       if (itemIds != null) {
         temp = await this.respository.find(itemIds);
+        result.data = temp;
       }
 
       if (temp == null || temp.length == 0) {
         await this.respository.persistAndFlush(obj);
-        result = obj;
+
+        result.code = HttpStatus.CREATED;
+        result.data = obj;
       }
     } catch (error) {
       result = null;
     }
 
-    return result;
+    return this.processResponse(result, 'CREATE_LIST');
   }
 
   // ************************************************************************************************
@@ -124,33 +139,48 @@ export abstract class BaseService<T> {
     orderBy = { name: QueryOrder.ASC },
     limit: number = 0,
     offset: number = 0
-  ): Promise<any> {
-    let result : any = HttpStatus.NOT_FOUND;
+  ): Promise<ResponseData> {
+    let result: ResultQuery = {
+      code: HttpStatus.NOT_FOUND,
+      data: null,
+      from: offset,
+      limit: limit,
+    };
 
     try {
-      result = await this.respository.find(filters, orderBy, limit, offset);
+      result.data = await this.respository.find(filters, orderBy, limit, offset);
 
-      if (result.length == 0) {
-        result = HttpStatus.NOT_FOUND;
+      if (result.data && result.data.length > 0) {
+        result.code = HttpStatus.OK;
       }
-
     } catch (error) {
-      result = null;
+      result.code = HttpStatus.NOT_FOUND;
     }
 
-    return result;
+    return this.processResponse(result, 'GET_LIST');
   }
 
   public async get(id: string, filters?: any): Promise<any> {
-    let result : any = HttpStatus.NOT_FOUND;
+    let result =
+    {
+      code: HttpStatus.NOT_FOUND,
+      data: null,
+    };
 
     try {
-      result = await this.respository.findOne({ id, ...filters });
+      result.data = await this.respository.findOne({ id, ...filters });
+
+      if (result.data) {
+        result.code = HttpStatus.OK;
+      } else {
+        result.data = { id };
+      }
     } catch (error) {
-      result = null;
+      result.code = HttpStatus.NOT_FOUND;
+      result.data = { id };
     }
 
-    return result;
+    return this.processResponse(result, 'GET');
   }
 
   // ************************************************************************************************
@@ -159,8 +189,11 @@ export abstract class BaseService<T> {
   // ------------------------------------------------------------------------------------------------
   // -- PUT
   // ------------------------------------------------------------------------------------------------
-  public async update(id: string, obj: T): Promise<any> {
-    let result : any = HttpStatus.NOT_FOUND;
+  public async update(id: string, obj: T): Promise<ResponseData> {
+    let result: ResultQuery = {
+      code: HttpStatus.NOT_FOUND,
+      data: null,
+    };
 
     try {
       let temp = null;
@@ -177,31 +210,41 @@ export abstract class BaseService<T> {
           let updateData = await getEntityForUpdate(obj, this.entityName.name);
 
           if (updateData != null) {
+            delete updateData["_id"]; // Eliminase para evitar conflictos
+
             // Gárdanse os cambios na entidade
             temp.assign(updateData, { em: this.db.orm.em }, [this.entityName.name]);
 
             // Actualizase a informanción na BD
-            this.db.orm.em.nativeUpdate(this.entityName, {id}, temp);
+            this.db.orm.em.nativeUpdate(this.entityName, { id }, temp);
             await this.respository.flush(temp);
 
-            result = temp;
+            result.code = HttpStatus.CREATED;
+            result.data = temp;
           }
         } catch (error) {
-          result = HttpStatus.CONFLICT;
+          result.code = HttpStatus.CONFLICT;
         }
       }
     } catch (error) {
       result = null;
     }
 
-    return result;
+    if (result && !result.data) {
+      result.data = { id };
+    }
+
+    return this.processResponse(result, 'UPDATE');
   }
 
   // ------------------------------------------------------------------------------------------------
   // -- PATCH
   // ------------------------------------------------------------------------------------------------
-  public async modify(id: string, objPatch: Operation[]): Promise<any> {
-    let result : any = HttpStatus.NOT_FOUND;
+  public async modify(id: string, objPatch: Operation[]): Promise<ResponseData> {
+    let result: ResultQuery = {
+      code: HttpStatus.NOT_FOUND,
+      data: null,
+    };
 
     try {
       let temp = null;
@@ -224,17 +267,21 @@ export abstract class BaseService<T> {
             // Persístese a información na base de datos
             result = await this.update(id, temp);
           } else {
-            result = HttpStatus.CONFLICT;
+            result.code = HttpStatus.CONFLICT;
           }
         } catch (error) {
-          result = HttpStatus.CONFLICT;
+          result.code = HttpStatus.CONFLICT;
         }
       }
     } catch (error) {
       result = null;
     }
 
-    return result;
+    if (result && !result.data) {
+      result.data = { id };
+    }
+
+    return this.processResponse(result, 'UPDATE');
   }
 
   // ************************************************************************************************
@@ -243,8 +290,11 @@ export abstract class BaseService<T> {
   // ------------------------------------------------------------------------------------------------
   // -- DELETE
   // ------------------------------------------------------------------------------------------------
-  public async delete(id: string): Promise<any> {
-    let result : any = HttpStatus.NOT_FOUND;
+  public async delete(id: string): Promise<ResponseData> {
+    let result: ResultQuery = {
+      code: HttpStatus.NOT_FOUND,
+      data: null,
+    };
 
     try {
       let temp = null;
@@ -259,21 +309,87 @@ export abstract class BaseService<T> {
           // Borrase a informanción na BD
           await this.respository.remove(temp).flush();;
 
-          result = temp;
+          result.code = HttpStatus.OK;
+          result.data = temp;
         } catch (error) {
-          result = HttpStatus.CONFLICT;
+          result.code = HttpStatus.CONFLICT;
         }
       }
     } catch (error) {
       result = null;
     }
 
-    return result;
+    if (result && !result.data) {
+      result.data = { id };
+    }
+
+    return this.processResponse(result, 'DELETE');
   }
 
   // ************************************************************************************************
   // ** UTILIDADES
   // ************************************************************************************************
+  /**
+   * Procesa a resposta HTTP da conexión coa BD.
+   *
+   * @param response resposta do método HTTP
+   * @param method metótodo para o cal procesar a resposta
+   * @returns ResponseData
+   */
+  protected processResponse(response: ResultQuery, method: string): ResponseData {
+    method = method.toUpperCase();
+
+    let code = response.code;
+    let data = response.data;
+    let message;
+    let error = `ERROR.${method}`;
+    let isPlural = method.includes('LIST');
+
+    if (response) {
+      switch (code) {
+        case HttpStatus.CREATED:
+        case HttpStatus.OK:
+          error = undefined;
+          message = `SUCCESS.${method}`;
+          break;
+        case HttpStatus.BAD_REQUEST:
+          error = 'ERROR.BAD_REQUEST';
+          break;
+        case HttpStatus.CONFLICT:
+          error = 'ERROR.CONFLICT';
+
+          if (method.includes('CREATE')) {
+            error = (isPlural)
+              ? 'ERROR.ALREADY_EXIST_LIST'
+              : 'ERROR.ALREADY_EXIST';
+          }
+          break;
+        case HttpStatus.NOT_FOUND:
+          error = (isPlural)
+            ? 'ERROR.NOT_FOUND_LIST'
+            : 'ERROR.NOT_FOUND';
+          break;
+      }
+    }
+
+    const responseData: ResponseData = {
+      code,
+      data,
+      message,
+      error,
+    };
+
+    if (isPlural) {
+      responseData.total = (data && data.length)
+        ? data.length
+        : 0;
+      responseData.from = response.from;
+      responseData.limit = response.limit;
+    }
+
+    return responseData;
+  }
+
   findOne(id) {
     return this.respository.findOne(id, this.includes);
   }

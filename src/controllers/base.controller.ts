@@ -49,41 +49,19 @@ export abstract class BaseController<T> {
     next  : next
   ): Promise<any> => {
     try {
-      let message;
-      let error;
-      let code = HttpStatus.CONFLICT;
+      let response;
 
-      const obj: T = this.getNewEntity(req.body);
+      if (Object.keys(req.body).length > 0) {
+        const obj: T = req.body;
 
-      let data;
-
-      if (this.hasMinimumAttributes(obj)) {
-        data = await this.service.create(obj);
+        if (this.hasMinimumAttributes(obj)) {
+          response = await this.service.create(obj);
+        }
       }
 
-      if (
-        data != undefined &&
-        data != null &&
-        data != HttpStatus.CONFLICT
-      ) {
-        code = HttpStatus.CREATED;
-        message = req.t('SUCCESS.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
-      } else if (data == HttpStatus.CONFLICT) {
-        data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: obj["id"] });
-      } else {
-        data = undefined;
-        error = req.t('ERROR.CREATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
-      }
+      const responseData : ResponseData = this.processResponse(req, response, 'CREATE');
 
-      const responseData : ResponseData = {
-        code,
-        data,
-        message,
-        error,
-      };
-
-      res.status(code).json(responseData);
+      res.status(responseData.code).json(responseData);
     } catch (error) {
       next(error);
     }
@@ -102,57 +80,33 @@ export abstract class BaseController<T> {
     next  : next
   ): Promise<any> => {
     try {
-      let message;
-      let error;
-      let code = HttpStatus.CONFLICT;
+      let response;
 
-      const objs: T[] = req.body;
+      if (Object.keys(req.body).length > 0) {
+        const objs: T[] = req.body;
 
-      let data;
-      let continueProcess: boolean = true;
+        let continueProcess: boolean = true;
 
-      for (let i = 0; i < objs.length; i++) {
-        let item = objs[i];
+        for (let i = 0; i < objs.length; i++) {
+          let item = objs[i];
 
-        if (this.hasMinimumAttributes(item)) {
-          // Crease un proxecto novo para asegurar que vai a ser do tipo correcto
-          objs[i] = this.getNewEntity(item);
-        } else {
-          continueProcess = false;
-          break;
+          if (this.hasMinimumAttributes(item)) {
+            // Crease un proxecto novo para asegurar que vai a ser do tipo correcto
+            objs[i] = this.getNewEntity(item);
+          } else {
+            continueProcess = false;
+            break;
+          }
+        }
+
+        if (continueProcess && objs && objs.length > 0) {
+          response = await this.service.createList(objs);
         }
       }
 
-      if (continueProcess && objs && objs.length > 0) {
-        data = await this.service.createList(objs);
-      }
+      const responseData : ResponseData = this.processResponse(req, response, 'CREATE_LIST');
 
-      if (
-        data != undefined &&
-        data != null &&
-        data != HttpStatus.CONFLICT
-      ) {
-        code = HttpStatus.CREATED;
-        message = req.t('SUCCESS.CREATE_LIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME_PLURAL`) });
-      } else if (data == HttpStatus.CONFLICT) {
-        data = undefined;
-        error = req.t('ERROR.ALREADY_EXIST_LIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME_PLURAL`) });
-      } else {
-        data = undefined;
-        error = req.t('ERROR.CREATE_LIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME_PLURAL`) });
-      }
-
-      const responseData : ResponseData = {
-        code    : code,
-        data    : data,
-        total   : (data && data.length) ? data.length : 0,
-        from    : 0,
-        limit   : 0,
-        message : message,
-        error   : error,
-      };
-
-      res.status(code).json(responseData);
+      res.status(responseData.code).json(responseData);
     } catch (error) {
       next(error);
     }
@@ -174,10 +128,6 @@ export abstract class BaseController<T> {
     next  : next
   ): Promise<any> => {
     try {
-      let message;
-      let error;
-      let code = HttpStatus.NOT_FOUND;
-
       const {
         orderBy,
         limit,
@@ -187,35 +137,15 @@ export abstract class BaseController<T> {
 
       const queryParams = new APIFilter(query);
 
-      let data = await this.service.getAll(queryParams.getQueryObj(), orderBy, limit, offset);
+      let response = await this.service.getAll(queryParams.getQueryObj(), orderBy, limit, offset);
 
-      if (
-        data != undefined &&
-        data != null &&
-        data != HttpStatus.NOT_FOUND
-      ) {
-        code = HttpStatus.OK;
-        message = req.t('SUCCESS.GET_LIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME_PLURAL`) });
-      } else {
-        data = undefined;
-        error = req.t('ERROR.NOT_FOUND_LIST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME_PLURAL`) });
-      }
+      const responseData : ResponseData = this.processResponse(req, response, 'GET_LIST');
 
-      const responseData : ResponseData = {
-        code    : code,
-        data    : data,
-        total   : (data && data.length) ? data.length : 0,
-        from    : 0,
-        limit   : 0,
-        message : message,
-        error   : error,
-      };
-
-      res.status(code).json(responseData);
+      res.status(responseData.code).json(responseData);
     } catch (error) {
       next(error);
     }
-  };
+  }
 
   /**
    * Recupera un proxecto en concreto. (GET)
@@ -230,39 +160,18 @@ export abstract class BaseController<T> {
     next  : next
   ): Promise<any> => {
     try {
-      let code = HttpStatus.NOT_FOUND;
-      let message;
-      let error;
-
       const { id } = req.params;
       const queryParams = new APIFilter(req.query);
 
-      let data = await this.service.get(id, queryParams.getQueryObj());
+      let response = await this.service.get(id, queryParams.getQueryObj());
 
-      if (
-        data != undefined &&
-        data != null &&
-        data != HttpStatus.NOT_FOUND
-      ) {
-        code = HttpStatus.OK;
-        message = req.t('SUCCESS.GET', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
-      } else {
-        data = undefined;
-        error = req.t('ERROR.NOT_FOUND', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-      }
+      const responseData : ResponseData = this.processResponse(req, response, 'GET');
 
-      const responseData : ResponseData = {
-        code,
-        data,
-        message,
-        error,
-      };
-
-      res.status(code).json(responseData);
+      res.status(responseData.code).json(responseData);
     } catch (error) {
       next(error);
     }
-  };
+  }
 
   // ************************************************************************************************
   // ** MÉTODOS CRUD (UPDATE)
@@ -280,48 +189,23 @@ export abstract class BaseController<T> {
     next  : next
   ): Promise<any> => {
     try {
-      let message;
-      let error;
-      let code = HttpStatus.NOT_FOUND;
-
       const { id } = req.params;
-      const obj: T = this.getNewEntity(req.body);
 
-      let data;
+      let response;
 
-      if (this.hasMinimumAttributes(obj)) {
-        data = await this.service.update(id, obj);
+      if (Object.keys(req.body).length !== 0) {
+        const obj: T = this.getNewEntity(req.body);
+
+        response = await this.service.update(id, obj);
       }
 
-      if (
-        data != undefined &&
-        data != null &&
-        data != HttpStatus.NOT_FOUND &&
-        data != HttpStatus.CONFLICT
-      ) {
-        code = HttpStatus.CREATED;
-        message = req.t('SUCCESS.UPDATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-      } else if (data == HttpStatus.CONFLICT) {
-        code = HttpStatus.CONFLICT;
-        data = undefined;
-        error = req.t('ERROR.CONFLICT', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-      } else {
-        data = undefined;
-        error = req.t('ERROR.NOT_FOUND', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-      }
+      const responseData : ResponseData = this.processResponse(req, response, 'UPDATE');
 
-      const responseData : ResponseData = {
-        code,
-        data,
-        message,
-        error,
-      };
-
-      res.status(code).json(responseData);
+      res.status(responseData.code).json(responseData);
     } catch (error) {
       next(error);
     }
-  };
+  }
 
   /**
    * Actualiza un proxecto. (PATCH)
@@ -336,15 +220,11 @@ export abstract class BaseController<T> {
     next  : next
   ): Promise<any> => {
     try {
-      let message;
-      let error;
-      let code = HttpStatus.NOT_FOUND;
-
       const { id } = req.params;
       const tempPatch: Operation[] = req.body;
       let objPatch: Operation[] = [];
 
-      let data;
+      let response;
 
       if (tempPatch.length > 0) {
         // Quitanse as modficacións de ids.
@@ -352,42 +232,16 @@ export abstract class BaseController<T> {
       }
 
       if (objPatch.length > 0) {
-
-        data = await this.service.modify(id, objPatch);
-
-        if (
-          data != undefined &&
-          data != null &&
-          data != HttpStatus.NOT_FOUND &&
-          data != HttpStatus.CONFLICT
-        ) {
-          code = HttpStatus.CREATED;
-          message = req.t('SUCCESS.UPDATE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-        } else if (data == HttpStatus.CONFLICT) {
-          code = HttpStatus.CONFLICT;
-          data = undefined;
-          error = req.t('ERROR.CONFLICT', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-        } else {
-          data = undefined;
-          error = req.t('ERROR.NOT_FOUND', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-        }
-      } else {
-        code = HttpStatus.BAD_REQUEST;
-        error = req.t('ERROR.BAD_REQUEST', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`) });
+        response = await this.service.modify(id, objPatch);
       }
 
-      const responseData : ResponseData = {
-        code,
-        data,
-        message,
-        error,
-      };
+      const responseData : ResponseData = this.processResponse(req, response, 'UPDATE');
 
-      res.status(code).json(responseData);
+      res.status(responseData.code).json(responseData);
     } catch (error) {
       next(error);
     }
-  };
+  }
 
   // ************************************************************************************************
   // ** MÉTODOS CRUD (DELETE)
@@ -405,47 +259,100 @@ export abstract class BaseController<T> {
     next  : next
   ): Promise<any> => {
     try {
-      let code = HttpStatus.NOT_FOUND;
-      let message;
-      let error;
-
       const { id } = req.params;
 
-      let data = await this.service.delete(id);
+      let response = await this.service.delete(id);
 
-      if (
-        data != undefined &&
-        data != null &&
-        data != HttpStatus.CONFLICT &&
-        data != HttpStatus.NOT_FOUND
-      ) {
-        code = HttpStatus.OK;
-        message = req.t('SUCCESS.DELETE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-      } else if (data == HttpStatus.CONFLICT) {
-        code = HttpStatus.CONFLICT;
-        data = undefined;
-        error = req.t('ERROR.CONFLICT', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-      } else {
-        data = undefined;
-        error = req.t('ERROR.DELETE', { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME`), id: id });
-      }
+      const responseData : ResponseData = this.processResponse(req, response, 'DELETE');
 
-      const responseData : ResponseData = {
-        code,
-        data,
-        message,
-        error,
-      };
-
-      res.status(code).json(responseData);
+      res.status(responseData.code).json(responseData);
     } catch (error) {
       next(error);
     }
-  };
+  }
 
   // ************************************************************************************************
   // ** UTILIDADES
   // ************************************************************************************************
+  /**
+   * Procesa a resposta HTTP da conexión coa BD.
+   *
+   * @param req request do método HTTP
+   * @param response resposta do método HTTP
+   * @param method metótodo para o cal procesar a resposta
+   * @returns ResponseData
+   */
+  protected processResponse(req, response: ResponseData, method: string): ResponseData {
+    method = method.toUpperCase();
+
+    let isPlural = method.includes('LIST');
+    let isError  = false;
+    let plural = (isPlural)
+      ? '_PLURAL'
+      : '';
+    let id = (response && response.data && response.data.id)
+      ? response.data.id
+      : undefined;
+
+    if (
+      !response ||
+      (
+        response.code != HttpStatus.OK &&
+        response.code != HttpStatus.CREATED
+      )
+    ) {
+      isError = true;
+    }
+
+    let code = (response && response.code)
+      ? response.code
+      : HttpStatus.CONFLICT;
+    let data = (response)
+      ? response.data
+      : undefined;
+    let message = (!isError && response)
+      ? response.message
+      : undefined;
+    let error = (isError && response)
+      ? response.error
+      : `ERROR.${method}`;
+
+    if (message) {
+      message = req.t(message, { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME${plural}`), id: id });
+    }
+
+    if (error) {
+      error = req.t(error, { entity: req.t(`${this.TRANSLATION_NAME_MODEL}.NAME${plural}`), id: id });
+    }
+
+    const responseData: ResponseData = {
+      code,
+      data    : (!isError)
+        ? data
+        : undefined,
+      message : (!isError)
+        ? message
+        : undefined,
+      error   : (isError)
+        ? error
+        : undefined,
+    };
+
+    if (isPlural) {
+      responseData.total = (response)
+        ? response.total
+        : 0;
+      responseData.from = (response)
+        ? response.from
+        : 0;
+      responseData.limit = (response)
+        ? response.limit
+        : 0;
+    }
+
+    return responseData;
+  }
+
   /**
    * Comproba se o AssignedResource pasado ten os atributos mínimos que o modelo necesita.
    *
