@@ -204,13 +204,9 @@ export abstract class BaseService<T> {
 
       if (temp != null) {
         try {
-          obj["_id"] = new ObjectId(obj["_id"]);
-
-          let updateData = await getEntityForUpdate(obj, this.entityName.name);
+          let updateData = await getEntityForUpdate(obj, this.entityName.name, this.db);
 
           if (updateData != null) {
-            delete updateData["_id"]; // Eliminase para evitar conflictos
-
             // Gárdanse os cambios na entidade
             temp.assign(updateData, { em: this.db.orm.em }, [this.entityName.name]);
 
@@ -250,7 +246,7 @@ export abstract class BaseService<T> {
 
       // Comprobase que non exista a entidade na BD
       if (id != null) {
-        temp = await this.respository.findOne(id);
+        temp = await this.findOne(id);
       }
 
       if (temp != null) {

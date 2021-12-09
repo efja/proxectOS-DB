@@ -43,7 +43,7 @@ export class Project extends CustomBaseEntity {
     public createdBy            : User;
 
     @ManyToMany(() => AssignedUser)
-    public adminUsers           : Collection<AssignedUser> = new Collection<AssignedUser>(this);
+    public assignedUsers        : Collection<AssignedUser> = new Collection<AssignedUser>(this);
 
     @ManyToOne()
     public productOwner         : User;
