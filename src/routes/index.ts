@@ -3,25 +3,25 @@
 // ##################################################################################################
 import { IRouter, Router } from 'express';
 
-import { AssignedResourceRoutes } from './assigned-resource.route';
-import { AssignedStageRoutes } from './assigned-stage.route';
-import { AssignedUserRoutes } from './assigned-user.route';
-import { CommentAppRoutes } from './commentapp.route';
-import { PriorityRoutes } from './priority.route';
-import { ProjectRoutes } from './project.route';
-import { RepositoryAppRoutes } from './repositoryapp.route';
-import { RequirementRoutes } from './requirement.route';
-import { ResourceRoutes } from './resource.route';
-import { RoleRoutes } from './role.route';
-import { StageRoutes } from './stage.route';
-import { StateHistoryRoutes } from './state-history.route';
-import { StateRoutes } from './state.route';
-import { TypeAppRoutes } from './typeapp.route';
-import { UserContactRoutes } from './user-contact.route';
-import { UserContactTypeRoutes } from './user-contact-type.route';
-import { UserGroupRoutes } from './user-group.route';
-import { UserRoutes } from './user.route';
-import { UserScheduleRoutes } from './user-schedule.route';
+import { AssignedResourceRoutes } from './models/assigned-resource.route';
+import { AssignedStageRoutes } from './models/assigned-stage.route';
+import { AssignedUserRoutes } from './models/assigned-user.route';
+import { CommentAppRoutes } from './models/commentapp.route';
+import { PriorityRoutes } from './models/priority.route';
+import { ProjectRoutes } from './models/project.route';
+import { RepositoryAppRoutes } from './models/repositoryapp.route';
+import { RequirementRoutes } from './models/requirement.route';
+import { ResourceRoutes } from './models/resource.route';
+import { RoleRoutes } from './models/role.route';
+import { StageRoutes } from './models/stage.route';
+import { StateHistoryRoutes } from './models/state-history.route';
+import { StateRoutes } from './models/state.route';
+import { TypeAppRoutes } from './models/typeapp.route';
+import { UserContactRoutes } from './models/user-contact.route';
+import { UserContactTypeRoutes } from './models/user-contact-type.route';
+import { UserGroupRoutes } from './models/user-group.route';
+import { UserRoutes } from './models/user.route';
+import { UserScheduleRoutes } from './models/user-schedule.route';
 
 // ##################################################################################################
 // ## CONSTANTES
