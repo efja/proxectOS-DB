@@ -161,8 +161,7 @@ export abstract class BaseService<T> {
   }
 
   public async get(id: string, filters?: any): Promise<any> {
-    let result =
-    {
+    let result: ResultQuery = {
       code: HttpStatus.NOT_FOUND,
       data: null,
     };
