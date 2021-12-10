@@ -3,7 +3,6 @@
 // ##################################################################################################
 import HttpStatus from 'http-status-codes';
 import { Operation } from 'fast-json-patch';
-import * as jsonpatch from 'fast-json-patch';
 import ooPatch from 'json8-patch';
 
 import { ObjectId } from '@mikro-orm/mongodb';

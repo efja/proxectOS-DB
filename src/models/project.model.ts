@@ -36,8 +36,8 @@ export class Project extends CustomBaseEntity {
     public description          : string;
 
     // Relacións
-    @ManyToMany(() => AssignedStage)
-    public assignedStages       : Collection<AssignedStage> = new Collection<AssignedStage>(this);
+    @ManyToOne()
+    public assignedStage        : AssignedStage;
 
     @ManyToOne()
     public createdBy            : User;
