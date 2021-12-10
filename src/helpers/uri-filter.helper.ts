@@ -64,11 +64,9 @@ export class APIFilter {
                         { [paramKey] : { '$gte' : date.startOf('day').toISOString(), '$lt': date.endOf('day').toISOString() } }
                     );
                 } else if (checksTypes.isObjectID) {
-                    if((String)(new Types.ObjectId(paramValue)) === paramValue) {
-                        this.objectIdFilters.push(
-                            { [paramKey] : new Types.ObjectId(paramValue) }
-                        );
-                    }
+                    this.objectIdFilters.push(
+                        { [paramKey] : new Types.ObjectId(paramValue) }
+                    );
                 } else {
                     this.stringFilters.push(this.getStringFilter(paramKey, paramValue));
                 }
