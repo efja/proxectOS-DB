@@ -32,6 +32,7 @@
     "@mikro-orm/postgresql": "^4.5.9",
     "@mikro-orm/reflection": "^4.5.9",
     "bcryptjs": "^2.4.3",
+    "clean-deep": "^3.4.0",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",

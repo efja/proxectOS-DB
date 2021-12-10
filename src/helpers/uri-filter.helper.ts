@@ -13,6 +13,7 @@ export class APIFilter {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
+    public arrayFilters     : any[] = [];
     public booleanFilters   : any[] = [];
     public dateFilters      : any[] = [];
     public numberFilters    : any[] = [];
@@ -67,6 +68,10 @@ export class APIFilter {
                     this.objectIdFilters.push(
                         { [paramKey] : new Types.ObjectId(paramValue) }
                     );
+                } else if (checksTypes.isCollection || checksTypes.isArray) {
+                    this.arrayFilters.push(
+                        { [paramKey] : paramValue }
+                    );
                 } else {
                     this.stringFilters.push(this.getStringFilter(paramKey, paramValue));
                 }
@@ -98,11 +103,16 @@ export class APIFilter {
             result['orderBy'] = this.orderByFilters;
         }
 
+        if (this.arrayFilters.length > 0) {
+            result['specialFilters'] = this.arrayFilters;
+        }
+
+        // this.getObjectKeyValue(this.arrayFilters, result);
         this.getObjectKeyValue(this.booleanFilters, result);
-        this.getObjectKeyValue(this.numberFilters, result);
         this.getObjectKeyValue(this.dateFilters, result);
-        this.getObjectKeyValue(this.stringFilters, result);
+        this.getObjectKeyValue(this.numberFilters, result);
         this.getObjectKeyValue(this.objectIdFilters, result);
+        this.getObjectKeyValue(this.stringFilters, result);
 
         return result;
     }

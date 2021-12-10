@@ -65,8 +65,8 @@ export class Requirement extends CustomBaseEntity {
     public repositories         : Collection<RepositoryApp> = new Collection<RepositoryApp>(this);
 
     // Relacións
-    @ManyToMany(() => AssignedStage)
-    public assignedStages       : Collection<AssignedStage> = new Collection<AssignedStage>(this);
+    @ManyToOne()
+    public assignedStage        : AssignedStage;
 
     @ManyToMany(() => CommentApp)
     public comments             : Collection<CommentApp> = new Collection<CommentApp>(this);

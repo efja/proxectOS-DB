@@ -1,7 +1,7 @@
 // ##################################################################################################
 // ## IMPORTACIÓNS
 // ##################################################################################################
-import { Collection, Entity, Property, ManyToMany, Unique, wrap } from '@mikro-orm/core';
+import { Collection, Entity, Property, ManyToMany, Unique } from '@mikro-orm/core';
 
 import { CustomBaseEntity } from "./custom-base-entity.model";
 

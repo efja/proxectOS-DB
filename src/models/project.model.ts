@@ -21,41 +21,41 @@ export class Project extends CustomBaseEntity {
     // ** ATRIBUTOS
     // ************************************************************************************************
     @Property()
-    public startDate?           : Date;
+    public startDate?: Date;
     @Property()
-    public finishDate?          : Date;
+    public finishDate?: Date;
     @Property()
-    public targetStartDate?     : Date;
+    public targetStartDate?: Date;
     @Property()
-    public targetFinishDate?    : Date;
+    public targetFinishDate?: Date;
 
     @Property()
     @Unique()
-    public name                 : string;
+    public name: string;
     @Property()
-    public description          : string;
+    public description: string;
 
     // Relacións
     @ManyToOne()
-    public assignedStage        : AssignedStage;
+    public assignedStage: AssignedStage;
 
     @ManyToOne()
-    public createdBy            : User;
+    public createdBy: User;
 
     @ManyToMany(() => AssignedUser)
-    public assignedUsers        : Collection<AssignedUser> = new Collection<AssignedUser>(this);
+    public assignedUsers: Collection<AssignedUser> = new Collection<AssignedUser>(this);
 
     @ManyToOne()
-    public productOwner         : User;
+    public productOwner: User;
 
     @ManyToMany(() => Requirement)
-    public requirements         : Collection<Requirement> = new Collection<Requirement>(this);
+    public requirements: Collection<Requirement> = new Collection<Requirement>(this);
 
     @ManyToMany(() => RepositoryApp)
-    public repositories         : Collection<RepositoryApp> = new Collection<RepositoryApp>(this);
+    public repositories: Collection<RepositoryApp> = new Collection<RepositoryApp>(this);
 
     @ManyToMany(() => CommentApp)
-    public comments             : Collection<CommentApp> = new Collection<CommentApp>(this);
+    public comments: Collection<CommentApp> = new Collection<CommentApp>(this);
 
     // ************************************************************************************************
     // ** CONSTRUTOR
