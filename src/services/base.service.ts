@@ -10,7 +10,8 @@ import { ObjectId } from '@mikro-orm/mongodb';
 import { QueryOrder, Utils } from '@mikro-orm/core';
 
 import { DBConnection } from '../config/config-db';
-import { getEntityForUpdate } from '../helpers/entity-construct.helper';
+
+import { getEntityForUpdate } from '../helpers/entity.helper';
 import { ResponseData, ResultQuery } from '../interfaces/response-data.interface';
 
 // ##################################################################################################

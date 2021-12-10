@@ -2,12 +2,17 @@ import { Utils } from '@mikro-orm/core';
 import moment from 'moment';
 import { Types } from 'mongoose';
 import {
+    isJSONValue,
+    isJSONObject,
     isJSONArray,
     isString,
     isNumber,
     isBoolean,
     isNull,
     isUndefined,
+    JSONObject,
+    JSONValue,
+    JSONArray,
 } from "types-json";
 
 import { ResultCheckType } from '../interfaces/response-data.interface';
@@ -23,7 +28,8 @@ export function checkType(obj) : ResultCheckType {
         isEntity        : (obj) ? Utils.isObject(obj) : false,
         isNull          : isNull(obj),
         isNumber        : (obj) ? isNumber(obj) : false,
-        isObject        : (obj) ? Utils.isObject(obj) : false, isObjectID      : (obj) ? Utils.isObjectID(obj) : false,
+        isObject        : (obj) ? Utils.isObject(obj) : false,
+        isObjectID      : (obj) ? Utils.isObjectID(obj) : false,
         isPlainObject   : (obj) ? Utils.isPlainObject(obj) : false,
         isPrimaryKey    : (obj) ? Utils.isPrimaryKey(obj) : false,
         isString        : (obj) ? isString(obj) : false,
