@@ -3,7 +3,7 @@
 // ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
-import * as jsonpatch from 'fast-json-patch';
+import ooPatch from 'json8-patch';
 import { ObjectId } from "@mikro-orm/mongodb";
 
 import { AssignedUser } from '../../../src/models/assigned-user.model';
@@ -62,18 +62,20 @@ describe('1: Probas DATOS API - AssignedUsers (PATCH)', () => {
     // ************************************************************************************************
     test(`1.1: Actualizar AssignedUser: <${dataList.assignedUsers[0].id}>`, async() => {
         const assignedUser0 = new AssignedUser(dataList.assignedUsers[0]);
-        const assignedUser1 = new AssignedUser(dataList.assignedUsers[0]);
+        const assignedUser1 = dataList.assignedUsers[0] as any;
 
         const assignedUser0assignedUserId = assignedUser0.assignedUser.id;
         // Modificase o modelo AssignedUser
-        assignedUser1.assignedUser = dataList.users[0]._id != assignedUser1.assignedUser._id
-            ? new User(dataList.users[0])
-            : new User(dataList.users[1]);
+        if (assignedUser1.assignedUser != dataList.users[0].id) {
+            assignedUser1.assignedUser = dataList.users[0].id;
+        } else {
+            assignedUser1.assignedUser = dataList.users[1].id;
+        }
 
         // Xerase o objexecto tipo HTTP PATCH
-        const objPatch = jsonpatch.compare(assignedUser0, assignedUser1);
+        const objPatch = ooPatch.diff(assignedUser0, assignedUser1);
 
-        const response = await request.patch(`${API_BASE}/${ENDPOINT}/${assignedUser0.id}`).send(objPatch);
+        const response = await request.patch(`${API_BASE}/${ENDPOINT}/${assignedUser1.id}`).send(objPatch);
         const {
             code,
             data,
@@ -91,7 +93,7 @@ describe('1: Probas DATOS API - AssignedUsers (PATCH)', () => {
         // ** Datos cambiados
         expect(data.assignedUser).toBeDefined();
         expect(data.assignedUser).not.toBe(assignedUser0assignedUserId);
-        expect(data.assignedUser).toBe(assignedUser1.assignedUser.id);
+        expect(data.assignedUser).toBe(assignedUser1.assignedUser);
 
         // ** Datos NON cambiados
         // Comprobanse algúns datos obrigatorios
@@ -150,7 +152,7 @@ describe('2: Probas DATOS API - AssignedUsers ERROS (PATCH)', () => {
             : dataList.users[1] as User;
 
         // Xerase o objexecto tipo HTTP PATCH
-        const objPatch = jsonpatch.compare(assignedUser0, assignedUser1);
+        const objPatch = ooPatch.diff(assignedUser0, assignedUser1);
 
         objPatch[0].path = FAKE_TEXT; // Dato incorrecto
 

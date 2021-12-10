@@ -3,7 +3,7 @@
 // ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
-import * as jsonpatch from 'fast-json-patch';
+import ooPatch from 'json8-patch';
 import { ObjectId } from "@mikro-orm/mongodb";
 
 import { AssignedResource } from '../../../src/models/assigned-resource.model';
@@ -66,7 +66,7 @@ describe('1: Probas DATOS API - AssignedResources (PATCH)', () => {
         assignedResource1.description = assignedResource1.description + FAKE_TEXT;
 
         // Xerase o objexecto tipo HTTP PATCH
-        const objPatch = jsonpatch.compare(assignedResource0, assignedResource1);
+        const objPatch = ooPatch.diff(assignedResource0, assignedResource1);
 
         const response = await request.patch(`${API_BASE}/${ENDPOINT}/${assignedResource0.id}`).send(objPatch);
         const {
@@ -146,7 +146,7 @@ describe('2: Probas DATOS API - AssignedResources ERROS (PATCH)', () => {
         assignedResource1.description = assignedResource1.description + FAKE_TEXT;
 
         // Xerase o objexecto tipo HTTP PATCH
-        const objPatch = jsonpatch.compare(assignedResource0, assignedResource1);
+        const objPatch = ooPatch.diff(assignedResource0, assignedResource1);
 
         objPatch[0].path = FAKE_TEXT; // Dato incorrecto
 

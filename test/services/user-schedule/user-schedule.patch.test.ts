@@ -3,7 +3,7 @@
 // ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
-import * as jsonpatch from 'fast-json-patch';
+import ooPatch from 'json8-patch';
 import { ObjectId } from "@mikro-orm/mongodb";
 
 import { UserSchedule } from '../../../src/models/user-schedule.model';
@@ -66,7 +66,7 @@ describe('1: Probas DATOS API - UserSchedules (PATCH)', () => {
         userSchedule1.description = userSchedule1.description + FAKE_TEXT;
 
         // Xerase o objexecto tipo HTTP PATCH
-        const objPatch = jsonpatch.compare(userSchedule0, userSchedule1);
+        const objPatch = ooPatch.diff(userSchedule0, userSchedule1);
 
         const response = await request.patch(`${API_BASE}/${ENDPOINT}/${userSchedule0.id}`).send(objPatch);
         const {
@@ -146,7 +146,7 @@ describe('2: Probas DATOS API - UserSchedules ERROS (PATCH)', () => {
         userSchedule1.description = userSchedule1.description + FAKE_TEXT;
 
         // Xerase o objexecto tipo HTTP PATCH
-        const objPatch = jsonpatch.compare(userSchedule0, userSchedule1);
+        const objPatch = ooPatch.diff(userSchedule0, userSchedule1);
 
         objPatch[0].path = FAKE_TEXT; // Dato incorrecto
 

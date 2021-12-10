@@ -3,7 +3,7 @@
 // ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
-import * as jsonpatch from 'fast-json-patch';
+import ooPatch from 'json8-patch';
 import { ObjectId } from "@mikro-orm/mongodb";
 
 import { User } from '../../../src/models/user.model';
@@ -66,7 +66,7 @@ describe('1: Probas DATOS API - Users (PATCH)', () => {
         user1.name = user1.name + FAKE_TEXT;
 
         // Xerase o objexecto tipo HTTP PATCH
-        const objPatch = jsonpatch.compare(user0, user1);
+        const objPatch = ooPatch.diff(user0, user1);
 
         const response = await request.patch(`${API_BASE}/${ENDPOINT}/${user0.id}`).send(objPatch);
         const {
@@ -146,7 +146,7 @@ describe('2: Probas DATOS API - Users ERROS (PATCH)', () => {
         user1.name = user1.name + FAKE_TEXT;
 
         // Xerase o objexecto tipo HTTP PATCH
-        const objPatch = jsonpatch.compare(user0, user1);
+        const objPatch = ooPatch.diff(user0, user1);
 
         objPatch[0].path = FAKE_TEXT; // Dato incorrecto
 

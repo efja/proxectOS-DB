@@ -3,7 +3,7 @@
 // ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
-import * as jsonpatch from 'fast-json-patch';
+import ooPatch from 'json8-patch';
 import { ObjectId } from "@mikro-orm/mongodb";
 
 import { StateHistory } from '../../../src/models/state-history.model';
@@ -61,19 +61,21 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
     // ************************************************************************************************
     test(`1.1: Actualizar StateHistory: <${dataList.statesHistory[0].id}>`, async() => {
         const stateHistory0 = new StateHistory(dataList.statesHistory[0]);
-        const stateHistory1 = new StateHistory(dataList.statesHistory[0]);
+        const stateHistory1 = dataList.statesHistory[0] as any;
 
         const stateHistory0newStateId = stateHistory0.newState.id;
-        // Modificase o modelo StateHistory (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
+        // Modificase o modelo StateHistory
         stateHistory0.log = stateHistory0.log + FAKE_TEXT;
 
-        // Modificase o modelo AssignedUser (para empregar o verbo PUT deberíase modifcar todo o obxecto pero para as probas vale)
-        stateHistory1.newState = dataList.users[0]._id != stateHistory1.newState._id
-            ? new State(dataList.states[0])
-            : new State(dataList.states[1]);
+        // Modificase o modelo AssignedUser
+        if (stateHistory1.newState != dataList.states[0].id) {
+            stateHistory1.newState = dataList.states[0].id;
+        } else {
+            stateHistory1.newState = dataList.states[1].id;
+        }
 
         // Xerase o objexecto tipo HTTP PATCH
-        const objPatch = jsonpatch.compare(stateHistory0, stateHistory1);
+        const objPatch = ooPatch.diff(stateHistory0, stateHistory1);
 
         const response = await request.patch(`${API_BASE}/${ENDPOINT}/${stateHistory0.id}`).send(objPatch);
         const {
@@ -103,7 +105,7 @@ describe('1: Probas DATOS API - StateHistorys (PATCH)', () => {
 
         expect(data.newState).toBeDefined();
         expect(data.newState).not.toBe(stateHistory0newStateId);
-        expect(data.newState).toBe(stateHistory1.newState.id);
+        expect(data.newState).toBe(stateHistory1.newState);
 
         expect(message).toBe(i18next.t('SUCCESS.UPDATE', { entity: i18next.t('STATE_HISTORY.NAME'), id: stateHistory1.id }));
     });
@@ -153,7 +155,7 @@ describe('2: Probas DATOS API - StateHistorys ERROS (PATCH)', () => {
         stateHistory1.log = stateHistory1.log + FAKE_TEXT;
 
         // Xerase o objexecto tipo HTTP PATCH
-        const objPatch = jsonpatch.compare(stateHistory0, stateHistory1);
+        const objPatch = ooPatch.diff(stateHistory0, stateHistory1);
 
         objPatch[0].path = FAKE_TEXT; // Dato incorrecto
 

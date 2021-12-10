@@ -3,11 +3,10 @@
 // ##################################################################################################
 import i18next from "i18next";
 import HttpStatus from 'http-status-codes';
-import * as jsonpatch from 'fast-json-patch';
+import ooPatch from 'json8-patch';
 import { ObjectId } from "@mikro-orm/mongodb";
 
 import { UserContact } from '../../../src/models/user-contact.model';
-import { UserContactType } from '../../../src/models/user-contact-type.model';
 
 import {
     app,
@@ -61,18 +60,21 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
     // ************************************************************************************************
     test(`1.1: Actualizar UserContact: <${dataList.userContacts[0].id}>`, async() => {
         const userContact0 = new UserContact(dataList.userContacts[0]);
-        const userContact1 = new UserContact(dataList.userContacts[0]);
+        const userContact1 = dataList.userContacts[0] as any;
 
         const userContact0TypeId = userContact0.type.id;
 
         // Modificase o modelo AssignedUser
         userContact1.contact = userContact1.contact + FAKE_TEXT;
-        userContact1.type = dataList.users[0]._id != userContact1.type._id
-            ? new UserContactType(dataList.users[0])
-            : new UserContactType(dataList.users[1]);
+
+        if (userContact1.type != dataList.userContactTypes[0].id) {
+            userContact1.type = dataList.userContactTypes[0].id;
+        } else {
+            userContact1.type = dataList.userContactTypes[1].id;
+        }
 
         // Xerase o objexecto tipo HTTP PATCH
-        const objPatch = jsonpatch.compare(userContact0, userContact1);
+        const objPatch = ooPatch.diff(userContact0, userContact1);
 
         const response = await request.patch(`${API_BASE}/${ENDPOINT}/${userContact0.id}`).send(objPatch);
         const {
@@ -96,7 +98,7 @@ describe('1: Probas DATOS API - UserContacts (PATCH)', () => {
 
         expect(data.type).toBeDefined();
         expect(data.type).not.toBe(userContact0TypeId);
-        expect(data.type).toBe(userContact1.type.id);
+        expect(data.type).toBe(userContact1.type);
 
         // ** Datos NON cambiados
         // Comprobanse algúns datos obrigatorios
@@ -152,7 +154,7 @@ describe('2: Probas DATOS API - UserContacts ERROS (PATCH)', () => {
         userContact1.contact = userContact1.contact + FAKE_TEXT;
 
         // Xerase o objexecto tipo HTTP PATCH
-        const objPatch = jsonpatch.compare(userContact0, userContact1);
+        const objPatch = ooPatch.diff(userContact0, userContact1);
 
         objPatch[0].path = FAKE_TEXT; // Dato incorrecto
 
