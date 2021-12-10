@@ -24,7 +24,7 @@
         "resourcesConsumed"     : "",
         "repositories"          : "",
 
-        "assignedStages"        : "",
+        "assignedStage"         : "",
         "comments"              : "",
         "priority"              : "",
         "type"                  : ""
