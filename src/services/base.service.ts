@@ -4,14 +4,16 @@
 import HttpStatus from 'http-status-codes';
 import { Operation } from 'fast-json-patch';
 import ooPatch from 'json8-patch';
+import cleanDeep from 'clean-deep';
 
 import { ObjectId } from '@mikro-orm/mongodb';
-import { QueryOrder, Utils } from '@mikro-orm/core';
+import { QueryOrder, Utils, wrap } from '@mikro-orm/core';
 
 import { DBConnection } from '../config/config-db';
 
-import { getEntityForUpdate } from '../helpers/entity.helper';
+import { getEntityForUpdate, getEntitySimplyObject } from '../helpers/entity.helper';
 import { ResponseData, ResultQuery } from '../interfaces/response-data.interface';
+import { Project } from '../models/project.model';
 
 // ##################################################################################################
 // ## CLASE BaseService
@@ -21,9 +23,9 @@ export abstract class BaseService<T> {
   // ** ATRIBUTOS
   // ************************************************************************************************
   protected db: DBConnection;
-  protected respository: any;
+  protected repository: any;
   protected entityName: any;
-  protected includes: string[] = [];
+  protected populate: string[] = [];
 
   // ************************************************************************************************
   // ** CONSTRUTOR
@@ -41,7 +43,7 @@ export abstract class BaseService<T> {
     this.db = new DBConnection();
 
     await this.db.init();
-    this.respository = this.db.getRepository(this.entityName);
+    this.repository = this.db.getRepository(this.entityName);
   }
 
   // ************************************************************************************************
@@ -61,7 +63,7 @@ export abstract class BaseService<T> {
 
       // Comprobase que non exista a entidade na BD
       if (obj["id"] != null) {
-        searchItem = await this.respository.findOne(obj["id"]);
+        searchItem = await this.findOne(obj["id"]);
       }
 
       if (searchItem == null) {
@@ -73,7 +75,7 @@ export abstract class BaseService<T> {
 
         searchItem.assign(obj, { em: this.db.orm.em });
 
-        await this.respository.persist(searchItem).flush();
+        await this.repository.persist(searchItem).flush();
 
         result.code = HttpStatus.CREATED;
       }
@@ -112,12 +114,12 @@ export abstract class BaseService<T> {
 
       // Comprobase que non existan as entidades na BD
       if (itemIds != null) {
-        searchItem = await this.respository.find(itemIds);
+        searchItem = await this.repository.find(itemIds);
         result.data = searchItem;
       }
 
       if (searchItem == null || searchItem.length == 0) {
-        await this.respository.persistAndFlush(obj);
+        await this.repository.persistAndFlush(obj);
 
         result.code = HttpStatus.CREATED;
         result.data = obj;
@@ -148,11 +150,28 @@ export abstract class BaseService<T> {
       limit: limit,
     };
 
-    try {
-      result.data = await this.respository.find(filters, orderBy, limit, offset);
+    const {
+      specialFilters,
+      includes,
+      ...normalFilters
+    } = filters;
 
-      if (result.data && result.data.length > 0) {
+    let populate = {
+      refresh   : true,
+      populate  : (includes)
+        ? this.populate
+        : [],
+    };
+
+    try {
+      let searchItems = await this.repository.find(normalFilters, populate, orderBy, limit, offset);
+
+      this.applySpecialFilters(searchItems, specialFilters);
+      searchItems = cleanDeep(searchItems);
+
+      if (searchItems && searchItems.length > 0) {
         result.code = HttpStatus.OK;
+        result.data = searchItems;
       }
     } catch (error) {
       result.code = HttpStatus.NOT_FOUND;
@@ -167,11 +186,25 @@ export abstract class BaseService<T> {
       data: null,
     };
 
-    try {
-      result.data = await this.respository.findOne({ id, ...filters });
+    const {
+      includes
+    } = filters;
 
-      if (result.data) {
+    let getIncludes = (includes)
+      ? includes
+      : false;
+
+    try {
+      let searchItem = null;
+
+      // Comprobase que non exista a entidade na BD
+      if (id != null) {
+        searchItem = await this.findOne(id, getIncludes);
+      }
+
+      if (searchItem) {
         result.code = HttpStatus.OK;
+        result.data = searchItem;
       } else {
         result.data = { id };
       }
@@ -200,12 +233,12 @@ export abstract class BaseService<T> {
 
       // Comprobase que non exista a entidade na BD
       if (id != null) {
-        searchItem = await this.findOne(id);
+        searchItem = await this.findOne(id, true);
       }
 
       if (searchItem != null) {
         // Persístese a información na base de datos
-        result = await this.updateAndSend(id, searchItem, obj);
+        result = await this.updateAndFlush(id, searchItem, obj);
       }
     } catch (error) {
       result = null;
@@ -232,7 +265,7 @@ export abstract class BaseService<T> {
 
       // Comprobase que non exista a entidade na BD
       if (id != null) {
-        searchItem = await this.findOne(id);
+        searchItem = await this.findOne(id, true);
       }
 
       if (searchItem != null) {
@@ -244,7 +277,7 @@ export abstract class BaseService<T> {
           ooPatch.apply(searchItem, objPatch);
 
           // Persístese a información na base de datos
-          result = await this.updateAndSend(id, originalItem, searchItem);
+          result = await this.updateAndFlush(id, originalItem, searchItem);
         } catch (error) {
           result.code = HttpStatus.CONFLICT;
         }
@@ -263,14 +296,14 @@ export abstract class BaseService<T> {
   // ------------------------------------------------------------------------------------------------
   // -- PERSISTENCIA
   // ------------------------------------------------------------------------------------------------
-  public async updateAndSend(id: string, original: any, newData: any) {
+  public async updateAndFlush(id: string, original: any, newData: any) {
     let result: ResultQuery = {
       code: HttpStatus.NOT_FOUND,
       data: null,
     };
 
     try {
-      let updateData = await getEntityForUpdate(original, newData, this.entityName, this.db);
+      let updateData = await getEntityForUpdate(newData, this.entityName, this.db);
 
       if (updateData != null) {
         // Gárdanse os cambios na entidade
@@ -278,7 +311,7 @@ export abstract class BaseService<T> {
 
         // Actualizase a informanción na BD
         this.db.orm.em.nativeUpdate(this.entityName, { id }, original);
-        await this.respository.flush(original);
+        await this.repository.flush();
 
         result.code = HttpStatus.CREATED;
         result.data = original;
@@ -307,13 +340,13 @@ export abstract class BaseService<T> {
 
       // Comprobase que non exista a entidade na BD
       if (id != null) {
-        searchItem = await this.respository.findOne(id);
+        searchItem = await this.findOne(id);
       }
 
       if (searchItem != null) {
         try {
           // Borrase a informanción na BD
-          await this.respository.remove(searchItem).flush();;
+          await this.repository.remove(searchItem).flush();
 
           result.code = HttpStatus.OK;
           result.data = searchItem;
@@ -335,6 +368,39 @@ export abstract class BaseService<T> {
   // ************************************************************************************************
   // ** UTILIDADES
   // ************************************************************************************************
+  /**
+   * Aplicánselle os filtros especiais da entidade ós resultados obtidos nunha búsqueda.
+   *
+   * @param searchItems resultados que se queren filtrar
+   * @param specialFilters filtros que se lle aplicarán ós resultasos
+   */
+  applySpecialFilters(searchItems, specialFilters = []) {
+    const applyFilter = (entity) => {
+      if (specialFilters.length > 0) {
+        for (let filter of specialFilters) {
+          for (let property of Object.keys(filter)) {
+            for (let valueFiler of filter[property]) {
+              if (entity[property].includes(valueFiler)) {
+                return entity; // exit point
+              }
+            }
+          }
+        }
+      } else {
+        return entity; // exit point
+      }
+    };
+
+    if (searchItems && searchItems.length) {
+      for (let i = 0; i < searchItems.length; i++) {
+        let item = searchItems[i];
+        searchItems[i] = applyFilter(getEntitySimplyObject(item, this.entityName));
+      }
+    } else if (searchItems) {
+      searchItems = applyFilter(getEntitySimplyObject(searchItems, this.entityName));
+    }
+  }
+
   /**
    * Procesa a resposta HTTP da conexión coa BD.
    *
@@ -396,11 +462,11 @@ export abstract class BaseService<T> {
     return responseData;
   }
 
-  findOne(id) {
-    return this.respository.findOne(id, this.includes);
-  }
+  findOne(id, includes: boolean = false) {
+    let populate = (includes)
+      ? this.populate
+      : [];
 
-  findOneFilters(id, filters) {
-    return this.respository.findOne({ id, ...filters });
+    return this.repository.findOne(id, populate);
   }
 }
