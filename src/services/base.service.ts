@@ -4,9 +4,10 @@
 import HttpStatus from 'http-status-codes';
 import { Operation } from 'fast-json-patch';
 import * as jsonpatch from 'fast-json-patch';
+import ooPatch from 'json8-patch';
 
 import { ObjectId } from '@mikro-orm/mongodb';
-import { QueryOrder } from '@mikro-orm/core';
+import { QueryOrder, Utils } from '@mikro-orm/core';
 
 import { DBConnection } from '../config/config-db';
 import { getEntityForUpdate } from '../helpers/entity-construct.helper';
@@ -56,28 +57,28 @@ export abstract class BaseService<T> {
     };
 
     try {
-      let temp = null;
+      let searchItem = null;
 
       // Comprobase que non exista a entidade na BD
       if (obj["id"] != null) {
-        temp = await this.respository.findOne(obj["id"]);
+        searchItem = await this.respository.findOne(obj["id"]);
       }
 
-      if (temp == null) {
-        temp = new this.entityName();
+      if (searchItem == null) {
+        searchItem = new this.entityName();
 
         if (obj["id"]) {
           obj["_id"] = new ObjectId(obj["id"]);
         }
 
-        temp.assign(obj, { em: this.db.orm.em });
+        searchItem.assign(obj, { em: this.db.orm.em });
 
-        await this.respository.persist(temp).flush();
+        await this.respository.persist(searchItem).flush();
 
         result.code = HttpStatus.CREATED;
       }
 
-      result.data = temp;
+      result.data = searchItem;
     } catch (error) {
       result = null;
     }
@@ -94,7 +95,7 @@ export abstract class BaseService<T> {
     };
 
     try {
-      let temp = null;
+      let searchItem = null;
       let itemIds = null;
 
       // Búscase se os obxectos pasados teñen definido o ID
@@ -111,11 +112,11 @@ export abstract class BaseService<T> {
 
       // Comprobase que non existan as entidades na BD
       if (itemIds != null) {
-        temp = await this.respository.find(itemIds);
-        result.data = temp;
+        searchItem = await this.respository.find(itemIds);
+        result.data = searchItem;
       }
 
-      if (temp == null || temp.length == 0) {
+      if (searchItem == null || searchItem.length == 0) {
         await this.respository.persistAndFlush(obj);
 
         result.code = HttpStatus.CREATED;
@@ -195,35 +196,16 @@ export abstract class BaseService<T> {
     };
 
     try {
-      let temp = null;
+      let searchItem = null;
 
       // Comprobase que non exista a entidade na BD
       if (id != null) {
-        temp = await this.findOne(id);
+        searchItem = await this.findOne(id);
       }
 
-      if (temp != null) {
-        try {
-          obj["_id"] = new ObjectId(obj["_id"]);
-
-          let updateData = await getEntityForUpdate(obj, this.entityName.name);
-
-          if (updateData != null) {
-            delete updateData["_id"]; // Eliminase para evitar conflictos
-
-            // Gárdanse os cambios na entidade
-            temp.assign(updateData, { em: this.db.orm.em }, [this.entityName.name]);
-
-            // Actualizase a informanción na BD
-            this.db.orm.em.nativeUpdate(this.entityName, { id }, temp);
-            await this.respository.flush(temp);
-
-            result.code = HttpStatus.CREATED;
-            result.data = temp;
-          }
-        } catch (error) {
-          result.code = HttpStatus.CONFLICT;
-        }
+      if (searchItem != null) {
+        // Persístese a información na base de datos
+        result = await this.updateAndSend(id, searchItem, obj);
       }
     } catch (error) {
       result = null;
@@ -246,28 +228,23 @@ export abstract class BaseService<T> {
     };
 
     try {
-      let temp = null;
+      let searchItem = null;
 
       // Comprobase que non exista a entidade na BD
       if (id != null) {
-        temp = await this.respository.findOne(id);
+        searchItem = await this.findOne(id);
       }
 
-      if (temp != null) {
+      if (searchItem != null) {
         try {
-          // Comprobase que o JSONPatch sexa correcto
-          let testPatch = jsonpatch.validate(objPatch, temp);
+          // Copia do item orixinal
+          let originalItem = Utils.copy(searchItem);
 
-          // Se o validador non produce resultados daquela o JSONPatch é correcto
-          if (testPatch == undefined) {
-            // Aplicase o JSONPatch
-            jsonpatch.applyPatch(temp, objPatch);
+          // Aplicase o JSONPatch
+          ooPatch.apply(searchItem, objPatch);
 
-            // Persístese a información na base de datos
-            result = await this.update(id, temp);
-          } else {
-            result.code = HttpStatus.CONFLICT;
-          }
+          // Persístese a información na base de datos
+          result = await this.updateAndSend(id, originalItem, searchItem);
         } catch (error) {
           result.code = HttpStatus.CONFLICT;
         }
@@ -283,6 +260,36 @@ export abstract class BaseService<T> {
     return this.processResponse(result, 'UPDATE');
   }
 
+  // ------------------------------------------------------------------------------------------------
+  // -- PERSISTENCIA
+  // ------------------------------------------------------------------------------------------------
+  public async updateAndSend(id: string, original: any, newData: any) {
+    let result: ResultQuery = {
+      code: HttpStatus.NOT_FOUND,
+      data: null,
+    };
+
+    try {
+      let updateData = await getEntityForUpdate(original, newData, this.entityName, this.db);
+
+      if (updateData != null) {
+        // Gárdanse os cambios na entidade
+        original.assign(updateData, { em: this.db.orm.em }, [this.entityName.name]);
+
+        // Actualizase a informanción na BD
+        this.db.orm.em.nativeUpdate(this.entityName, { id }, original);
+        await this.respository.flush(original);
+
+        result.code = HttpStatus.CREATED;
+        result.data = original;
+      }
+    } catch (error) {
+      result.code = HttpStatus.CONFLICT;
+    }
+
+    return result;
+  }
+
   // ************************************************************************************************
   // ** MÉTODOS CRUD (DELETE)
   // ************************************************************************************************
@@ -296,20 +303,20 @@ export abstract class BaseService<T> {
     };
 
     try {
-      let temp = null;
+      let searchItem = null;
 
       // Comprobase que non exista a entidade na BD
       if (id != null) {
-        temp = await this.respository.findOne(id);
+        searchItem = await this.respository.findOne(id);
       }
 
-      if (temp != null) {
+      if (searchItem != null) {
         try {
           // Borrase a informanción na BD
-          await this.respository.remove(temp).flush();;
+          await this.respository.remove(searchItem).flush();;
 
           result.code = HttpStatus.OK;
-          result.data = temp;
+          result.data = searchItem;
         } catch (error) {
           result.code = HttpStatus.CONFLICT;
         }

@@ -3,23 +3,8 @@
 // ##################################################################################################
 import qs from 'qs';
 import moment from 'moment';
-// import { ObjectId } from '@mikro-orm/mongodb';
 import { Types } from 'mongoose';
-// const ObjectId = require('mongoose').Types.ObjectId;
-
-import {
-    isJSONValue,
-    isJSONObject,
-    isJSONArray,
-    isString,
-    isNumber,
-    isBoolean,
-    isNull,
-    isUndefined,
-    JSONObject,
-    JSONValue,
-    JSONArray
-  } from "types-json";
+import { checkType } from './check-typeshelper';
 
 // ##################################################################################################
 // ## CLASE AssignedResource
@@ -31,9 +16,9 @@ export class APIFilter {
     public booleanFilters   : any[] = [];
     public dateFilters      : any[] = [];
     public numberFilters    : any[] = [];
+    public objectIdFilters  : any[] = [];
     public orderByFilters   : any[] = [];
     public stringFilters    : any[] = [];
-    public objectIdFilters  : any[] = [];
 
     public stringSensitive  : boolean = false;
 
@@ -61,37 +46,31 @@ export class APIFilter {
             if (paramKey.toLowerCase() === 'sort' || paramKey.toLowerCase() === 'orderby') {
                 this.orderByFilters = paramValue.split(',');
             } else {
-                if (isBoolean(paramValue)) {
+                let checksTypes = checkType(paramValue);
+
+                if (checksTypes.isBoolean) {
                     this.booleanFilters.push(
                         { [paramKey] : Boolean(paramValue) }
                     );
-                } else if (isNumber(paramValue)) {
+                } else if (checksTypes.isNumber) {
                     this.numberFilters.push(
                         { [paramKey] : Number(paramValue) }
                     );
-                } else {
+                } else if (checksTypes.isDate) {
                     let date = moment(paramValue, true); // Modo estricto
 
-                    if (date.isValid()) {
-                        this.dateFilters.push(
-                            // Para buscar dentro do mesmo día poñemos un rango de búsqueda entre a primeira hora e a última do mesmo
-                            { [paramKey] : { '$gte' : date.startOf('day').toISOString(), '$lt': date.endOf('day').toISOString() } }
+                    this.dateFilters.push(
+                        // Para buscar dentro do mesmo día poñemos un rango de búsqueda entre a primeira hora e a última do mesmo
+                        { [paramKey] : { '$gte' : date.startOf('day').toISOString(), '$lt': date.endOf('day').toISOString() } }
+                    );
+                } else if (checksTypes.isObjectID) {
+                    if((String)(new Types.ObjectId(paramValue)) === paramValue) {
+                        this.objectIdFilters.push(
+                            { [paramKey] : new Types.ObjectId(paramValue) }
                         );
-                    } else {
-                        if(Types.ObjectId.isValid(paramValue)) {
-                            try {
-                                if((String)(new Types.ObjectId(paramValue)) === paramValue) {
-                                    this.objectIdFilters.push(
-                                        { [paramKey] : new Types.ObjectId(paramValue) }
-                                    );
-                                }
-                            } catch (error) {
-                                this.stringFilters.push(this.getStringFilter(paramKey, paramValue));
-                            }
-                        } else {
-                            this.stringFilters.push(this.getStringFilter(paramKey, paramValue));
-                        }
                     }
+                } else {
+                    this.stringFilters.push(this.getStringFilter(paramKey, paramValue));
                 }
             }
         }

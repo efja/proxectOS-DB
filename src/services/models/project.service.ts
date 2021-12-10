@@ -11,6 +11,15 @@ export class ProjectService extends BaseService<Project> {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
+  // protected includes: string[] = [
+  //   'assignedStages',
+  //   'createdBy',
+  //   'assignedUsers',
+  //   'productOwner',
+  //   'requirements',
+  //   'repositories',
+  //   'comments',
+  // ];
 
   // ************************************************************************************************
   // ** CONSTRUTOR
