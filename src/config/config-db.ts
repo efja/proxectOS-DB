@@ -2,9 +2,10 @@
 // ##################################################################################################
 // ## IMPORTACIÓNS
 // ##################################################################################################
-import { Configuration, EntityManager, EntityRepository, Options } from '@mikro-orm/core';
+import { Configuration, Options, Entity } from '@mikro-orm/core';
 import { MongoHighlighter } from '@mikro-orm/mongo-highlighter';
 import { MikroORM } from '@mikro-orm/core';
+import { Utils } from '@mikro-orm/core';
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 import { MongoDriver, ObjectId } from '@mikro-orm/mongodb';
 
@@ -223,23 +224,6 @@ export class DBConnection {
 
     if (this.orm) {
       result = this.orm.em.getRepository(entityName);
-    }
-
-    return result;
-  }
-
-  /**
-   * Devolve unha referencia a un obxecto de Mikro-orm para MongoDB.
-   *
-   * @param entityName nome da entidade da que se quere devolver o repositorio
-   * @returns referencia de Mikro-orm
-   */
-   public getReference(entityName, objId: ObjectId) {
-    let result = null;
-
-    if (this.orm) {
-      const repo = this.orm.em.getRepository(entityName);
-      result = repo.getReference(objId, true); // Non sei porque dá fallo o linterm
     }
 
     return result;

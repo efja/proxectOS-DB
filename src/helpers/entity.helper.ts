@@ -33,7 +33,7 @@ export async function getEntityForUpdate<T>(original: T, newData: T, className: 
 
             } else if (checksProperty.isObjectID) {
                 let propClass = getClassProperty(result, prop);
-                result[prop] = db.getReference(propClass.type, new ObjectId(property));
+                result[prop] = getReference(db, propClass.type, new ObjectId(property));
 
             } else if (checksProperty.isString) {
                 result[prop] = property;
@@ -49,7 +49,7 @@ export async function getEntityForUpdate<T>(original: T, newData: T, className: 
                 }
 
                 if (id != "") {
-                    result[prop] = db.getReference(propClass.type, new ObjectId(id));
+                    result[prop] = getReference(db, propClass.type, new ObjectId(id));
                 }
             } else {
                 result[prop] = property;
@@ -99,7 +99,7 @@ export async function assingObjectIdsToCollection(list: any, result, db: DBConne
         }
 
         if (objId) {
-            let item = db.getReference(itemType, objId);
+            let item = getReference(db, itemType, objId);
             result.add(item);
         }
     }
@@ -117,4 +117,20 @@ export function getClassProperty(item, prop) {
 
 export function getClassName(item) {
     return item.__meta.name
+}
+
+
+/**
+ * Devolve unha referencia a un obxecto de Mikro-orm para MongoDB.
+ *
+ * @param entityName nome da entidade da que se quere devolver o repositorio
+ * @returns referencia de Mikro-orm
+ */
+export function getReference(db, entityName, objId: ObjectId) {
+    let result = null;
+
+    const repo = db.getRepository(entityName);
+    result = repo.getReference(objId, true); // Non sei porque dá fallo o lintern
+
+    return result;
 }
