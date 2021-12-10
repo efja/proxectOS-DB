@@ -4,56 +4,59 @@ import { MODELS_PATHS } from './models-paths.helper';
 import { checkType } from './check-typeshelper';
 import { DBConnection } from '../config/config-db';
 
-export async function getEntityForUpdate<T>(entity: T, className: string, db: DBConnection) {
-    let result = await createClassFromName(className);
-    let temp = clearEntity(entity);
+export async function getEntityForUpdate<T>(original: T, newData: T, className: any, db: DBConnection) {
+    let result = new className();
 
-    for (let prop of Object.keys(temp)) {
-        let property = entity[prop]; // Tómase a propiedade da entidade orixinal porque o Utils.copy(entity) de @mikro-orm/core
-                                     // empregado en clearEntity non conserva ben as propiedades das coleccións
+    for (let prop of Object.keys(newData)) {
+        let property = newData[prop];
 
         let checksProperty = checkType(property);
 
-        if (checksProperty.isBoolean) {
-            result[prop] = Boolean(property);
+        try {
+            if (checksProperty.isBoolean) {
+                result[prop] = Boolean(property);
 
-        } else if (
-            (checksProperty.isCollection || checksProperty.isArray) &&
-            !checksProperty.isObjectID
-        ) {
-            await assingObjectIdsToCollection(property, result[prop], db);
+            } else if (
+                (checksProperty.isCollection || checksProperty.isArray) &&
+                !checksProperty.isObjectID
+            ) {
+                await assingObjectIdsToCollection(property, result[prop], db);
 
-        } else if (checksProperty.isDate) {
-            result[prop] = new Date(property.toString());
+            } else if (checksProperty.isDate) {
+                result[prop] = new Date(property.toString());
 
-        } else if (checksProperty.isEntity) {
-            result[prop] = new ObjectId(property["id"]);
+            } else if (checksProperty.isEntity) {
+                result[prop] = new ObjectId(property["id"]);
 
-        } else if (checksProperty.isNumber) {
-            result[prop] = Number(property);
+            } else if (checksProperty.isNumber) {
+                result[prop] = Number(property);
 
-        } else if (checksProperty.isObjectID) {
-            let propClass = getClassProperty(result, prop);
-            result[prop] = db.getReference(propClass.type, new ObjectId(property));
+            } else if (checksProperty.isObjectID) {
+                let propClass = getClassProperty(result, prop);
+                result[prop] = db.getReference(propClass.type, new ObjectId(property));
 
-        } else if (checksProperty.isString) {
-            result[prop] = property;
+            } else if (checksProperty.isString) {
+                result[prop] = property;
 
-        } else if (checksProperty.isObject || checksProperty.isPlainObject) {
-            let propClass = getClassProperty(result, prop);
-            let id = "";
+            } else if (checksProperty.isObject || checksProperty.isPlainObject) {
+                let propClass = getClassProperty(result, prop);
+                let id = "";
 
-            if (property["id"]) {
-                id = property["id"];
-            } else if (property["_id"]) {
-                id = property["_id"];
+                if (property["id"]) {
+                    id = property["id"];
+                } else if (property["_id"]) {
+                    id = property["_id"];
+                }
+
+                if (id != "") {
+                    result[prop] = db.getReference(propClass.type, new ObjectId(id));
+                }
+            } else {
+                result[prop] = property;
             }
 
-            if (id != "") {
-                result[prop] = db.getReference(propClass.type, new ObjectId(id));
-            }
-        } else {
-            result[prop] = property;
+        } catch (error) {
+            let aa = ""
         }
     }
 
@@ -69,7 +72,7 @@ export function clearEntity<T>(entity: T) {
 
         // Eliminase para evitar conflictos
         if (checksProperty.isUndefined || checksProperty.isNull) {
-          delete result[prop];
+            delete result[prop];
         } else if (checksProperty.isCollection) {
             if (property.length == 0) {
                 delete result[prop];
@@ -84,27 +87,18 @@ export async function assingObjectIdsToCollection(list: any, result, db: DBConne
     let itemType = result.property.type;
     let listIsCollection = Utils.isCollection(list);
 
-    let listValues = (listIsCollection)
-        ? list.getItems()
-        : list;
-
-    for (let value of listValues) {
+    for (let index in list) {
+        let value = list[index];
         let objId = null;
+        let checksValue = checkType(value);
 
-        if (listIsCollection) {
+        if (checksValue.isObjectID) {
+            objId = new ObjectId(value);
+        } else if (checksValue.isObject) {
             objId = value._id;
-        } else  {
-            let checksObjId = checkType(value);
-
-            if (checksObjId.isObjectID)
-            {
-                objId = new ObjectId(objId);
-            }
         }
 
-
-        if (objId)
-        {
+        if (objId) {
             let item = db.getReference(itemType, objId);
             result.add(item);
         }
@@ -119,4 +113,8 @@ export async function createClassFromName(name: string, params?) {
 
 export function getClassProperty(item, prop) {
     return item.__meta.props.find(x => x.name == prop)
+}
+
+export function getClassName(item) {
+    return item.__meta.name
 }

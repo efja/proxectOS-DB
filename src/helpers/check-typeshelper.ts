@@ -39,7 +39,7 @@ export function checkType(obj) : ResultCheckType {
         } catch { }
 
         try {
-            if (!result.isObjectID && result.isString) {
+            if (!result.isObjectID && (result.isString)) {
                 result.isObjectID = (String)(new Types.ObjectId(obj)) === obj;
             }
         } catch { }
