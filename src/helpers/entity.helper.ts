@@ -4,7 +4,7 @@ import { MODELS_PATHS } from './models-paths.helper';
 import { checkType } from './check-typeshelper';
 import { DBConnection } from '../config/config-db';
 
-export async function getEntityForUpdate<T>(original: T, newData: T, className: any, db: DBConnection) {
+export async function getEntityForUpdate<T>(newData: T, className: any, db: DBConnection) {
     let result = new className();
 
     for (let prop of Object.keys(newData)) {
@@ -16,29 +16,28 @@ export async function getEntityForUpdate<T>(original: T, newData: T, className: 
             if (checksProperty.isBoolean) {
                 result[prop] = Boolean(property);
 
+            } else if (checksProperty.isNumber) {
+                result[prop] = Number(property);
+
+            } else if (checksProperty.isString) {
+                result[prop] = property;
+
+            } else if (checksProperty.isDate) {
+                result[prop] = new Date(property.toString());
+
+            } else if (checksProperty.isObjectID) {
+                result[prop] = new ObjectId(property);
+
             } else if (
                 (checksProperty.isCollection || checksProperty.isArray) &&
                 !checksProperty.isObjectID
             ) {
                 await assingObjectIdsToCollection(property, result[prop], db);
 
-            } else if (checksProperty.isDate) {
-                result[prop] = new Date(property.toString());
-
-            } else if (checksProperty.isEntity) {
-                result[prop] = new ObjectId(property["id"]);
-
-            } else if (checksProperty.isNumber) {
-                result[prop] = Number(property);
-
-            } else if (checksProperty.isObjectID) {
-                let propClass = getClassProperty(result, prop);
-                result[prop] = getReference(db, propClass.type, new ObjectId(property));
-
-            } else if (checksProperty.isString) {
-                result[prop] = property;
-
-            } else if (checksProperty.isObject || checksProperty.isPlainObject) {
+            } else if (
+                checksProperty.isEntity ||
+                checksProperty.isObject
+            ) {
                 let propClass = getClassProperty(result, prop);
                 let id = "";
 
@@ -56,7 +55,62 @@ export async function getEntityForUpdate<T>(original: T, newData: T, className: 
             }
 
         } catch (error) {
-            let aa = ""
+            console.log(`error to update entity "${className.name}" property "${prop}" :>> `, error);
+        }
+    }
+
+    return result;
+}
+export function getEntitySimplyObject<T>(obj: T, className: any, simplifyAll: boolean = false) {
+    let result = {};
+
+    for (let prop of Object.keys(obj)) {
+        let property = obj[prop];
+
+        let checksProperty = checkType(property);
+
+        try {
+            if (checksProperty.isBoolean) {
+                result[prop] = Boolean(property);
+
+            } else if (
+                (checksProperty.isCollection || checksProperty.isArray) &&
+                !checksProperty.isObjectID
+            ) {
+                result[prop] = assingObjectIdsToJSON(property);
+
+            } else if (checksProperty.isDate) {
+                result[prop] = new Date(property.toString());
+
+            } else if (
+                checksProperty.isEntity ||
+                checksProperty.isObject
+            ) {
+                let id = "";
+
+                try {
+                    id = property.toHexString();
+                } catch (error) {
+                    if (simplifyAll) {
+                        if (property["id"]) {
+                            id = property["id"];
+                        } else if (property["_id"]) {
+                            id = property["_id"].toHexString();
+                        }
+                    }
+                }
+
+                result[prop] = id;
+
+            } else if (checksProperty.isNumber) {
+                result[prop] = Number(property);
+
+            } else {
+                result[prop] = property;
+            }
+
+        } catch (error) {
+            console.log(`error to simplify entity "${className.name}" :>> `, error);
         }
     }
 
@@ -85,7 +139,6 @@ export function clearEntity<T>(entity: T) {
 
 export async function assingObjectIdsToCollection(list: any, result, db: DBConnection) {
     let itemType = result.property.type;
-    let listIsCollection = Utils.isCollection(list);
 
     for (let index in list) {
         let value = list[index];
@@ -105,6 +158,28 @@ export async function assingObjectIdsToCollection(list: any, result, db: DBConne
     }
 }
 
+export function assingObjectIdsToJSON(list: any) {
+    let result: string[] = [];
+
+    for (let index in list) {
+        let value = list[index];
+        let objId = null;
+        let checksValue = checkType(value);
+
+        if (checksValue.isObjectID) {
+            objId = value;
+        } else if (checksValue.isObject) {
+            objId = value._id.toJSON();
+        }
+
+        if (objId) {
+            result.push(objId);
+        }
+    }
+
+    return result;
+}
+
 export async function createClassFromName(name: string, params?) {
     var ns = await import(`../models/${MODELS_PATHS[name]}`);
 
@@ -118,7 +193,6 @@ export function getClassProperty(item, prop) {
 export function getClassName(item) {
     return item.__meta.name
 }
-
 
 /**
  * Devolve unha referencia a un obxecto de Mikro-orm para MongoDB.

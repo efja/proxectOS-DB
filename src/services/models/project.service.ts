@@ -11,15 +11,15 @@ export class ProjectService extends BaseService<Project> {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  // protected includes: string[] = [
-  //   'assignedStages',
-  //   'createdBy',
-  //   'assignedUsers',
-  //   'productOwner',
-  //   'requirements',
-  //   'repositories',
-  //   'comments',
-  // ];
+  protected populate: string[] = [
+    'assignedStage',
+    'createdBy',
+    'assignedUsers',
+    'productOwner',
+    'requirements',
+    'repositories',
+    'comments',
+  ];
 
   // ************************************************************************************************
   // ** CONSTRUTOR

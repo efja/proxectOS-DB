@@ -328,7 +328,7 @@ export abstract class BaseController<T> {
     const responseData: ResponseData = {
       code,
       data    : (!isError)
-        ? data
+        ? (data)
         : undefined,
       message : (!isError)
         ? message
