@@ -21,6 +21,9 @@ export class APIFilter {
     public orderByFilters   : any[] = [];
     public stringFilters    : any[] = [];
 
+    public special          : any[] = [];
+    public includes         : boolean = false;
+    public logicalOperator  : string = ""; // TODO: implementar operacións OR, por defecto son AND
     public stringSensitive  : boolean = false;
 
     // Relacións
@@ -46,6 +49,18 @@ export class APIFilter {
 
             if (paramKey.toLowerCase() === 'sort' || paramKey.toLowerCase() === 'orderby') {
                 this.orderByFilters = paramValue.split(',');
+            } else if (paramKey.toLowerCase() === 'includes') {
+                this.includes = Boolean(paramValue);
+            } else if (paramKey.toLowerCase() === 'special') {
+                this.special.push(paramValue);
+            } else if (
+                paramKey.toLowerCase() === 'logical' ||
+                paramKey.toLowerCase() === 'operator' ||
+                paramKey.toLowerCase() === 'op'
+            ) {
+                // só pode mandarse un operador lóxico.
+                // Se se manda máis de un sobreescribese co valor do último
+                this.logicalOperator = paramValue;
             } else {
                 let checksTypes = checkType(paramValue);
 
@@ -59,10 +74,12 @@ export class APIFilter {
                     );
                 } else if (checksTypes.isDate) {
                     let date = moment(paramValue, true); // Modo estricto
+                    let startDate = new Date(date.year(), date.month(), date.date(), 0, 0, 0);
+                    let endDate = new Date(date.year(), date.month(), date.date(), 23, 59, 59);
 
                     this.dateFilters.push(
                         // Para buscar dentro do mesmo día poñemos un rango de búsqueda entre a primeira hora e a última do mesmo
-                        { [paramKey] : { '$gte' : date.startOf('day').toISOString(), '$lt': date.endOf('day').toISOString() } }
+                        { [paramKey] : { '$gte' : startDate, '$lt': endDate } }
                     );
                 } else if (checksTypes.isObjectID) {
                     this.objectIdFilters.push(
@@ -99,15 +116,27 @@ export class APIFilter {
     public getQueryObj() {
         let result : Object = {};
 
+        result['includes'] = this.includes;
+        result['specialFilters'] = [];
+
         if (this.orderByFilters.length > 0) {
             result['orderBy'] = this.orderByFilters;
         }
 
         if (this.arrayFilters.length > 0) {
-            result['specialFilters'] = this.arrayFilters;
+            result['specialFilters'].push(this.arrayFilters);
         }
 
-        // this.getObjectKeyValue(this.arrayFilters, result);
+        if (this.special.length > 0) {
+            // Hai que meter por separado os valores de "this.special" para que non se intente acceder á unha propiedade
+            // "special" nos modelos que non existe.
+            result['specialFilters'].push(...this.special);
+        }
+
+        // if (this.logicalOperator != "") {
+            //     result['logicalOperator'] = this.logicalOperator;
+        // }
+
         this.getObjectKeyValue(this.booleanFilters, result);
         this.getObjectKeyValue(this.dateFilters, result);
         this.getObjectKeyValue(this.numberFilters, result);

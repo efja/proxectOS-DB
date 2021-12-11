@@ -96,24 +96,26 @@ export function getEntitySimplyObject<T>(obj: T, className: any, simplifyAll: bo
                 checksProperty.isEntity ||
                 checksProperty.isObject
             ) {
-                let id = "";
-                let propName = (prop == "_id")
-                    ? "id"
-                    : prop;
+                if (simplifyAll || prop == "_id") {
+                    let id = "";
+                    let propName = (prop == "_id")
+                        ? "id"
+                        : prop;
 
-                try {
-                    id = property.toHexString();
-                } catch (error) {
-                    if (simplifyAll) {
+                    try {
+                        id = property.toHexString();
+                    } catch (error) {
                         if (property["id"]) {
                             id = property["id"];
                         } else if (property["_id"]) {
                             id = property["id"].toHexString();
                         }
                     }
-                }
 
-                result[propName] = id;
+                    result[propName] = id;
+                } else {
+                    result[prop] = property;
+                }
 
             } else {
                 result[prop] = property;
