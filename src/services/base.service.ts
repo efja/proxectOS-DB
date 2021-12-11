@@ -14,7 +14,7 @@ import { DBConnection } from '../config/config-db';
 import { getEntityForUpdate, getEntitySimplyObject } from '../helpers/entity.helper';
 import { ResponseData, ResultQuery } from '../interfaces/response-data.interface';
 import { Project } from '../models/project.model';
-import { isArray } from '../helpers/check-typeshelper';
+import { isArray } from '../helpers/check-types.helper';
 
 // ##################################################################################################
 // ## CLASE BaseService

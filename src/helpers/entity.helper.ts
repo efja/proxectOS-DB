@@ -1,7 +1,7 @@
 import { Utils } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
 import { MODELS_PATHS } from './models-paths.helper';
-import { checkType } from './check-typeshelper';
+import { checkType } from './check-types.helper';
 import { DBConnection } from '../config/config-db';
 
 export async function getEntityForUpdate<T>(newData: T, className: any, db: DBConnection) {

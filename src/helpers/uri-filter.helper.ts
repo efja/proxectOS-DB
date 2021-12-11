@@ -4,7 +4,7 @@
 import qs from 'qs';
 import moment from 'moment';
 import { Types } from 'mongoose';
-import { checkType } from './check-typeshelper';
+import { checkType } from './check-types.helper';
 
 // ##################################################################################################
 // ## CLASE AssignedResource
