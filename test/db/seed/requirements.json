@@ -17,14 +17,14 @@
 
         "assignedUsers"         : [],
         "createdBy"             : "616b4df3a2facc1a9c4145a1",
-        "visibleToUserGroups"   : "",
+        "visibleToUserGroups"   : [],
 
-        "estimatedResources"    : "",
-        "resourcesConsumed"     : "",
-        "repositories"          : "",
+        "estimatedResources"    : [],
+        "resourcesConsumed"     : [],
+        "repositories"          : [],
 
-        "assignedStage"         : "",
-        "comments"              : "",
+        "assignedStage"         : "616b5190265cafd5a3176e1f",
+        "comments"              : [],
         "priority"              : "616b53b04be617848ac51d42",
         "type"                  : "616b4cb3661a771102c3fc94"
     },
@@ -46,14 +46,14 @@
 
         "assignedUsers"         : [],
         "createdBy"             : "616b4df3a2facc1a9c4145a1",
-        "visibleToUserGroups"   : "",
+        "visibleToUserGroups"   : [],
 
-        "estimatedResources"    : "",
-        "resourcesConsumed"     : "",
-        "repositories"          : "",
+        "estimatedResources"    : [],
+        "resourcesConsumed"     : [],
+        "repositories"          : [],
 
-        "assignedStage"         : "",
-        "comments"              : "",
+        "assignedStage"         : "616b5190265cafd5a3176e1f",
+        "comments"              : [],
         "priority"              : "616b54dd3f87b251f1f7cfce",
         "type"                  : "616b4cb3661a771102c3fc94"
     },
@@ -75,14 +75,14 @@
 
         "assignedUsers"         : [],
         "createdBy"             : "616b4df3a2facc1a9c4145a1",
-        "visibleToUserGroups"   : "",
+        "visibleToUserGroups"   : [],
 
-        "estimatedResources"    : "",
-        "resourcesConsumed"     : "",
-        "repositories"          : "",
+        "estimatedResources"    : [],
+        "resourcesConsumed"     : [],
+        "repositories"          : [],
 
-        "assignedStage"         : "",
-        "comments"              : "",
+        "assignedStage"         : "616b5190265cafd5a3176e1f",
+        "comments"              : [],
         "priority"              : "616b54dd3f87b251f1f7cfce",
         "type"                  : "616b53b04be617848ac51d42"
     },
@@ -104,14 +104,14 @@
 
         "assignedUsers"         : [],
         "createdBy"             : "616b4df3a2facc1a9c4145a1",
-        "visibleToUserGroups"   : "",
+        "visibleToUserGroups"   : [],
 
-        "estimatedResources"    : "",
-        "resourcesConsumed"     : "",
-        "repositories"          : "",
+        "estimatedResources"    : [],
+        "resourcesConsumed"     : [],
+        "repositories"          : [],
 
-        "assignedStage"         : "",
-        "comments"              : "",
+        "assignedStage"         : "616b5190265cafd5a3176e1f",
+        "comments"              : [],
         "priority"              : "616b55248eaad55a06c73607",
         "type"                  : "616b4cb3661a771102c3fc94"
     },
@@ -133,14 +133,14 @@
 
         "assignedUsers"         : [],
         "createdBy"             : "616b4df3a2facc1a9c4145a1",
-        "visibleToUserGroups"   : "",
+        "visibleToUserGroups"   : [],
 
-        "estimatedResources"    : "",
-        "resourcesConsumed"     : "",
-        "repositories"          : "",
+        "estimatedResources"    : [],
+        "resourcesConsumed"     : [],
+        "repositories"          : [],
 
-        "assignedStage"         : "",
-        "comments"              : "",
+        "assignedStage"         : "616b5190265cafd5a3176e1f",
+        "comments"              : [],
         "priority"              : "616b54dd3f87b251f1f7cfce",
         "type"                  : "616b4c4284bceba467c30f97"
     }

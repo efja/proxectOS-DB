@@ -150,13 +150,13 @@ export class DBTestConnection {
    */
   public async inicializeData(listObj: any[], dropAllData: boolean = false) {
     if (this.orm) {
-      if (dropAllData) {
-        await this.dropAllData(listObj);
-      }
-
-      await this.createCollections();
-
       try {
+        if (dropAllData) {
+          await this.dropAllData(listObj);
+        }
+
+        await this.createCollections();
+
         for (let obj of listObj) {
           if (obj.id != null) {
             if (obj.id){

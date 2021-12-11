@@ -16,16 +16,15 @@
         "dependencies"          : [],
 
         "assignedUsers"         : [],
-        "assignedUsers"         : "",
-        "createdBy"             : "",
-        "visibleToUserGroups"   : "",
+        "createdBy"             : {},
+        "visibleToUserGroups"   : [],
 
-        "estimatedResources"    : "",
-        "resourcesConsumed"     : "",
-        "repositories"          : "",
+        "estimatedResources"    : [],
+        "resourcesConsumed"     : [],
+        "repositories"          : [],
 
-        "assignedStage"         : "",
-        "comments"              : "",
+        "assignedStage"         : {},
+        "comments"              : [],
         "priority"              : "",
         "type"                  : ""
     }
