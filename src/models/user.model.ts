@@ -39,7 +39,7 @@ export class User extends CustomBaseEntity {
     @Property()
     public flexibleSchedule     : boolean;
     @Property()
-    public vacantions           : Date[];
+    public vacantions           : Date[] = [];
 
     // Relacións
     @ManyToOne()
