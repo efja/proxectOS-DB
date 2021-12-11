@@ -43,9 +43,6 @@ export class Requirement extends CustomBaseEntity {
 
     // Relacións usuarios
     @ManyToMany(() => AssignedUser)
-    public adminUsers           : Collection<AssignedUser> = new Collection<AssignedUser>(this);
-
-    @ManyToMany(() => AssignedUser)
     public assignedUsers        : Collection<AssignedUser> = new Collection<AssignedUser>(this);
 
     @ManyToOne()
