@@ -34,7 +34,7 @@ export class StateHistory extends CustomBaseEntity {
     public visibleToUserGroups  : Collection<Role> = new Collection<Role>(this);
 
     @ManyToOne()
-    public assignedStage        : AssignedStage;
+    public assignedState        : AssignedStage;
 
     // ************************************************************************************************
     // ** CONSTRUTOR

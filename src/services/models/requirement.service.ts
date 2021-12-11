@@ -11,6 +11,19 @@ export class RequirementService extends BaseService<Requirement> {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
+  protected populate: string[] = [
+    'dependencies',
+    'assignedUsers',
+    'createdBy',
+    'visibleToUserGroups',
+    'estimatedResources',
+    'resourcesConsumed',
+    'repositories',
+    'assignedStage',
+    'comments',
+    'priority',
+    'type',
+  ];
 
   // ************************************************************************************************
   // ** CONSTRUTOR

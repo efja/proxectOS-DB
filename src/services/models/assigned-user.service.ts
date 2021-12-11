@@ -11,12 +11,12 @@ export class AssignedUserService extends BaseService<AssignedUser> {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
-  // protected includes: string[] = [
-  //   'assignedUser',
-  //   'createdBy',
-  //   'assignedRoles',
-  //   'assignedUserGroups'
-  // ];
+  protected populate: string[] = [
+    'createdBy',
+    'assignedUser',
+    'assignedRoles',
+    'assignedUserGroups',
+  ];
 
   // ************************************************************************************************
   // ** CONSTRUTOR

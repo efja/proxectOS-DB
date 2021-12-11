@@ -11,6 +11,13 @@ export class AssignedStageService extends BaseService<AssignedStage> {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
+  protected populate: string[] = [
+    'createdBy',
+    'stage',
+    'currentState',
+    'validationUsers',
+    'comments',
+  ];
 
   // ************************************************************************************************
   // ** CONSTRUTOR

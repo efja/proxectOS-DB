@@ -14,6 +14,7 @@ import { DBConnection } from '../config/config-db';
 import { getEntityForUpdate, getEntitySimplyObject } from '../helpers/entity.helper';
 import { ResponseData, ResultQuery } from '../interfaces/response-data.interface';
 import { Project } from '../models/project.model';
+import { isArray } from '../helpers/check-typeshelper';
 
 // ##################################################################################################
 // ## CLASE BaseService
@@ -166,7 +167,7 @@ export abstract class BaseService<T> {
     try {
       let searchItems = await this.repository.find(normalFilters, populate, orderBy, limit, offset);
 
-      this.applySpecialFilters(searchItems, specialFilters);
+      this.applySpecialFilters(searchItems, specialFilters, includes);
       searchItems = cleanDeep(searchItems);
 
       if (searchItems && searchItems.length > 0) {
@@ -187,6 +188,7 @@ export abstract class BaseService<T> {
     };
 
     const {
+      specialFilters,
       includes,
       ...normalFilters
     } = filters;
@@ -202,6 +204,8 @@ export abstract class BaseService<T> {
       if (id != null) {
         searchItem = await this.findOne({ id, ...normalFilters }, getIncludes);
       }
+
+      searchItem = this.applySpecialFilters(searchItem, specialFilters, includes);
 
       if (searchItem) {
         result.code = HttpStatus.OK;
@@ -375,31 +379,57 @@ export abstract class BaseService<T> {
    * @param searchItems resultados que se queren filtrar
    * @param specialFilters filtros que se lle aplicarán ós resultasos
    */
-  applySpecialFilters(searchItems, specialFilters = []) {
-    const applyFilter = (entity) => {
-      if (specialFilters.length > 0) {
-        for (let filter of specialFilters) {
-          for (let property of Object.keys(filter)) {
-            for (let valueFiler of filter[property]) {
-              if (entity[property].includes(valueFiler)) {
-                return entity; // exit point
-              }
-            }
-          }
-        }
-      } else {
-        return entity; // exit point
-      }
-    };
+  applySpecialFilters(searchItems, specialFilters = [], includes: boolean = false) {
+    let simplifyAll = !includes;
 
     if (searchItems && searchItems.length) {
       for (let i = 0; i < searchItems.length; i++) {
         let item = searchItems[i];
-        searchItems[i] = applyFilter(getEntitySimplyObject(item, this.entityName));
+        searchItems[i] = this.applyFilter(getEntitySimplyObject(item, this.entityName, simplifyAll), specialFilters);
       }
     } else if (searchItems) {
-      searchItems = applyFilter(getEntitySimplyObject(searchItems, this.entityName));
+      return this.applyFilter(getEntitySimplyObject(searchItems, this.entityName, simplifyAll), specialFilters);
     }
+  }
+
+  applyFilter(entity, specialFilters) {
+    let result = null;
+
+    const checkFilter = (property, compare) => {
+      let result = false;
+
+      if (isArray(property)) {
+        result = property.includes(compare);
+      } else {
+        result = property == compare;
+      }
+
+      return result;
+    };
+
+    if (specialFilters.length > 0) {
+      specialFilters.forEach(filter => {
+        filter.forEach(filterValue => {
+          for (const property in filterValue) {
+            let itemFilterValue = filterValue[property];
+
+            if (isArray(itemFilterValue)) {
+              itemFilterValue.forEach(element => {
+                if (checkFilter(entity[property], element)) {
+                  result = entity;
+                }
+              });
+            } else if (checkFilter(entity[property], itemFilterValue)) {
+              result = entity;
+            }
+          }
+        });
+      });
+    } else {
+      result = entity;
+    }
+
+    return result;
   }
 
   /**
