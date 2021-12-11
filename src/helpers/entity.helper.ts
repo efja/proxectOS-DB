@@ -26,7 +26,14 @@ export async function getEntityForUpdate<T>(newData: T, className: any, db: DBCo
                 result[prop] = new ObjectId(property);
 
             } else if (
-                (checksProperty.isCollection || checksProperty.isArray) &&
+                checksProperty.isArray &&
+                !checksProperty.isCollection &&
+                !checksProperty.isObjectID
+            ) {
+                result[prop] = property;
+
+            } else if (
+                checksProperty.isCollection &&
                 !checksProperty.isObjectID
             ) {
                 await assingObjectIdsToCollection(property, result[prop], db);
