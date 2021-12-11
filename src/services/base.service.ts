@@ -187,7 +187,8 @@ export abstract class BaseService<T> {
     };
 
     const {
-      includes
+      includes,
+      ...normalFilters
     } = filters;
 
     let getIncludes = (includes)
@@ -199,7 +200,7 @@ export abstract class BaseService<T> {
 
       // Comprobase que non exista a entidade na BD
       if (id != null) {
-        searchItem = await this.findOne(id, getIncludes);
+        searchItem = await this.findOne({ id, ...normalFilters }, getIncludes);
       }
 
       if (searchItem) {

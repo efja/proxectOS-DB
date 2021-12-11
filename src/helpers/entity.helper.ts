@@ -19,9 +19,6 @@ export async function getEntityForUpdate<T>(newData: T, className: any, db: DBCo
             } else if (checksProperty.isNumber) {
                 result[prop] = Number(property);
 
-            } else if (checksProperty.isString) {
-                result[prop] = property;
-
             } else if (checksProperty.isDate) {
                 result[prop] = new Date(property.toString());
 
@@ -29,7 +26,14 @@ export async function getEntityForUpdate<T>(newData: T, className: any, db: DBCo
                 result[prop] = new ObjectId(property);
 
             } else if (
-                (checksProperty.isCollection || checksProperty.isArray) &&
+                checksProperty.isArray &&
+                !checksProperty.isCollection &&
+                !checksProperty.isObjectID
+            ) {
+                result[prop] = property;
+
+            } else if (
+                checksProperty.isCollection &&
                 !checksProperty.isObjectID
             ) {
                 await assingObjectIdsToCollection(property, result[prop], db);
@@ -50,6 +54,9 @@ export async function getEntityForUpdate<T>(newData: T, className: any, db: DBCo
                 if (id != "") {
                     result[prop] = getReference(db, propClass.type, new ObjectId(id));
                 }
+            } else if (checksProperty.isString) {
+                result[prop] = property;
+
             } else {
                 result[prop] = property;
             }
@@ -73,20 +80,26 @@ export function getEntitySimplyObject<T>(obj: T, className: any, simplifyAll: bo
             if (checksProperty.isBoolean) {
                 result[prop] = Boolean(property);
 
+            } else if (checksProperty.isNumber) {
+                result[prop] = Number(property);
+
+            } else if (checksProperty.isDate) {
+                result[prop] = new Date(property.toString());
+
             } else if (
                 (checksProperty.isCollection || checksProperty.isArray) &&
                 !checksProperty.isObjectID
             ) {
                 result[prop] = assingObjectIdsToJSON(property);
 
-            } else if (checksProperty.isDate) {
-                result[prop] = new Date(property.toString());
-
             } else if (
                 checksProperty.isEntity ||
                 checksProperty.isObject
             ) {
                 let id = "";
+                let propName = (prop == "_id")
+                    ? "id"
+                    : prop;
 
                 try {
                     id = property.toHexString();
@@ -95,15 +108,12 @@ export function getEntitySimplyObject<T>(obj: T, className: any, simplifyAll: bo
                         if (property["id"]) {
                             id = property["id"];
                         } else if (property["_id"]) {
-                            id = property["_id"].toHexString();
+                            id = property["id"].toHexString();
                         }
                     }
                 }
 
-                result[prop] = id;
-
-            } else if (checksProperty.isNumber) {
-                result[prop] = Number(property);
+                result[propName] = id;
 
             } else {
                 result[prop] = property;
