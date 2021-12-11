@@ -20,45 +20,73 @@ import { ResultCheckType } from '../interfaces/response-data.interface';
 export function checkType(obj) : ResultCheckType {
     let result : ResultCheckType = {
         getObjectType   : (obj) ? Utils.getObjectType(obj) : false,
-        isArray         : (obj) ? isJSONArray(obj) : false,
+        isArray         : (obj) ? isArray(obj) : false,
         isBoolean       : (obj) ? isBoolean(obj) : false,
         isCollection    : (obj) ? Utils.isCollection(obj) : false,
-        isDate          : false,
+        isDate          : (obj) ? isDate(obj) : false,
         isDefined       : (obj) ? Utils.isDefined(obj) : false,
         isEntity        : (obj) ? Utils.isObject(obj) : false,
         isNull          : isNull(obj),
         isNumber        : (obj) ? isNumber(obj) : false,
         isObject        : (obj) ? Utils.isObject(obj) : false,
-        isObjectID      : (obj) ? Utils.isObjectID(obj) : false,
+        isObjectID      : (obj) ? isObjectID(obj) : false,
         isString        : (obj) ? isString(obj) : false,
         isUndefined     : (obj != null) ? isUndefined(obj) : false,
     };
 
+    return result;
+}
+
+export function isArray(obj) {
+    let result = false;
+
     if (obj) {
         try {
-            if (!result.isArray && result.isString) {
-                let aaa = JSON.parse(obj);
-                result.isArray = isJSONArray(JSON.parse(obj));
+            if (isString(obj)) {
+                result = isJSONArray(JSON.parse(obj));
+            } else {
+                result = isJSONArray(obj);
             }
-        } catch { }
+        } catch {
+            result = false;
+        }
+    }
 
-        try {
-            if (!result.isDate && !Utils.isObjectID(obj)) {
-                result.isDate = moment(obj.toString(), true).isValid();
-            }
-        } catch { }
+    return result;
+}
 
-        try {
-            if (!result.isObjectID && (result.isString)) {
-                result.isObjectID = (String)(new Types.ObjectId(obj)) === obj;
-            }
-        } catch { }
+export function isDate(obj) {
+    let result = false;
 
+    if (obj) {
         try {
-            if (!result.isCollection && result.isString) {
-                result.isCollection = (String)(new Types.ObjectId(obj)) === obj;
+            if (
+                !isString(obj) &&
+                !isObjectID(obj)
+            ) {
+                result = moment(new Date(obj.toString()), true).isValid();
             }
-        } catch { }
+        } catch {
+            result = false;
+        }
+    }
+
+    return result;
+}
+
+export function isObjectID(obj) {
+    let result = false;
+
+    if (obj) {
+        try {
+            if (isString(obj)) {
+                result = (String)(new Types.ObjectId(obj)) === obj;
+            } else {
+                result = Utils.isObjectID(obj);
+            }
+        } catch {
+            result = false;
+        }
     }
 
     return result;

@@ -11,6 +11,12 @@ export class RepositoryAppService extends BaseService<RepositoryApp> {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
+  protected populate: string[] = [
+    'createdBy',
+    'assignedUsers',
+    'visibleToUserGroups',
+    'comments',
+  ];
 
   // ************************************************************************************************
   // ** CONSTRUTOR

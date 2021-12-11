@@ -11,6 +11,13 @@ export class StateHistoryService extends BaseService<StateHistory> {
   // ************************************************************************************************
   // ** ATRIBUTOS
   // ************************************************************************************************
+  protected populate: string[] = [
+    'oldState',
+    'newState',
+    'createdBy',
+    'visibleToUserGroups',
+    'AssignedStage',
+  ];
 
   // ************************************************************************************************
   // ** CONSTRUTOR
