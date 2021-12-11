@@ -15,7 +15,7 @@
 
         "dependencies"          : [],
 
-        "adminUsers"            : [],
+        "assignedUsers"         : [],
         "assignedUsers"         : "",
         "createdBy"             : "",
         "visibleToUserGroups"   : "",

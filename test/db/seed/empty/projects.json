@@ -17,7 +17,7 @@
 
         "createdBy"         : {},
 
-        "adminUsers"        : [],
+        "assignedUsers"     : [],
 
         "productOwner"      : {},
 

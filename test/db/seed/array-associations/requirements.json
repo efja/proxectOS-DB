@@ -2,7 +2,7 @@
     {
         "id"                : "616b5398fe14967a5820e0fc",
 
-        "adminUsers"        : [
+        "assignedUsers"     : [
             "616b524d366c2aa993b56590"
         ],
 
@@ -13,7 +13,7 @@
     {
         "id"                : "616b53c2f6b1ac380d5e7f66",
 
-        "adminUsers"        : [
+        "assignedUsers"     : [
             "616b524d366c2aa993b56590"
         ],
 
