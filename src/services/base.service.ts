@@ -14,7 +14,7 @@ import { DBConnection } from '../config/config-db';
 import { getEntityForUpdate, getEntitySimplyObject } from '../helpers/entity.helper';
 import { ResponseData, ResultQuery } from '../interfaces/response-data.interface';
 import { Project } from '../models/project.model';
-import { isArray } from '../helpers/check-types.helper';
+import { checkType, isArray } from '../helpers/check-types.helper';
 
 // ##################################################################################################
 // ## CLASE BaseService
@@ -398,10 +398,14 @@ export abstract class BaseService<T> {
     const checkFilter = (property, compare) => {
       let result = false;
 
-      if (isArray(property)) {
+      let checkProperty = checkType(property);
+
+      if (checkProperty.isArray) {
         result = property.includes(compare);
-      } else {
+      } else if (checkProperty.isObjectID && checkProperty.isString) {
         result = property == compare;
+      } else if (checkProperty.isEntity) {
+        result = property._id.toJSON() == compare;
       }
 
       return result;
