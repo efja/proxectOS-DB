@@ -13,18 +13,18 @@ export class APIFilter {
     // ************************************************************************************************
     // ** ATRIBUTOS
     // ************************************************************************************************
-    public arrayFilters     : any[] = [];
-    public booleanFilters   : any[] = [];
-    public dateFilters      : any[] = [];
-    public numberFilters    : any[] = [];
-    public objectIdFilters  : any[] = [];
-    public orderByFilters   : any[] = [];
-    public stringFilters    : any[] = [];
+    public arrayFilters: any[] = [];
+    public booleanFilters: any[] = [];
+    public dateFilters: any[] = [];
+    public numberFilters: any[] = [];
+    public objectIdFilters: any[] = [];
+    public orderByFilters: any[] = [];
+    public stringFilters: any[] = [];
 
-    public special          : any[] = [];
-    public includes         : boolean = false;
-    public logicalOperator  : string = ""; // TODO: implementar operacións OR, por defecto son AND
-    public stringSensitive  : boolean = false;
+    public special: any[] = [];
+    public includes: boolean = false;
+    public logicalOperator: string = ""; // TODO: implementar operacións OR, por defecto son AND
+    public stringSensitive: boolean = false;
 
     // Relacións
 
@@ -66,11 +66,11 @@ export class APIFilter {
 
                 if (checksTypes.isBoolean) {
                     this.booleanFilters.push(
-                        { [paramKey] : Boolean(paramValue) }
+                        { [paramKey]: Boolean(paramValue) }
                     );
                 } else if (checksTypes.isNumber) {
                     this.numberFilters.push(
-                        { [paramKey] : Number(paramValue) }
+                        { [paramKey]: Number(paramValue) }
                     );
                 } else if (checksTypes.isDate) {
                     let date = moment(paramValue, true); // Modo estricto
@@ -79,42 +79,30 @@ export class APIFilter {
 
                     this.dateFilters.push(
                         // Para buscar dentro do mesmo día poñemos un rango de búsqueda entre a primeira hora e a última do mesmo
-                        { [paramKey] : { '$gte' : startDate, '$lt': endDate } }
+                        { [paramKey]: { '$gte': startDate, '$lt': endDate } }
                     );
                 } else if (checksTypes.isObjectID) {
                     this.objectIdFilters.push(
-                        { [paramKey] : new Types.ObjectId(paramValue) }
+                        { [paramKey]: new Types.ObjectId(paramValue) }
                     );
                 } else if (checksTypes.isCollection || checksTypes.isArray) {
                     this.arrayFilters.push(
-                        { [paramKey] : paramValue }
+                        { [paramKey]: paramValue }
                     );
                 } else {
-                    this.stringFilters.push(this.getStringFilter(paramKey, paramValue));
+                    this.stringFilters.push(this.addStringFilter(paramKey, paramValue));
                 }
             }
         }
     }
 
-    private getStringFilter(key: string, filter: string, stringSensitive: boolean = this.stringSensitive): Object {
-        let options : string = "g";
-
-        if (!stringSensitive) {
-            options += "i";
-        }
-
-        return { [key] : { '$re': new RegExp(filter, options) } }
-    }
-
-    private getObjectKeyValue(list: any[], result : Object) {
-        for (let i = 0; i < list.length; i++) {
-            let item = list[0];
-            result[Object.keys(item)[0]] = Object.values(item)[0];
-        }
-    }
-
-    public getQueryObj() {
-        let result : Object = {};
+    /**
+     * Devolve un obxecto coas distintas coleccións de parámetros de búsqueda.
+     *
+     * @returns Object
+     */
+    public getQueryObj(): Object {
+        let result: Object = {};
 
         result['includes'] = this.includes;
         result['specialFilters'] = [];
@@ -134,7 +122,7 @@ export class APIFilter {
         }
 
         // if (this.logicalOperator != "") {
-            //     result['logicalOperator'] = this.logicalOperator;
+        //     result['logicalOperator'] = this.logicalOperator;
         // }
 
         this.getObjectKeyValue(this.booleanFilters, result);
@@ -144,5 +132,42 @@ export class APIFilter {
         this.getObjectKeyValue(this.stringFilters, result);
 
         return result;
+    }
+
+    // **********************************************************************************************
+    // ** UTILIDADES
+    // **********************************************************************************************
+    /**
+     * Prepara un obxecto para un filtro de tipo string para engadir á colección.
+     *
+     * @param key clave do filtro
+     * @param filter valores de filtrado
+     * @param stringSensitive indica se se deben diferenciar as maiúsculas e minúsculas
+     * @returns obxecto de filtrado por string
+     */
+    private addStringFilter(key: string, filter: string, stringSensitive: boolean = this.stringSensitive): Object {
+        let options: string = "g";
+
+        if (!stringSensitive) {
+            options += "i";
+        }
+
+        return { [key]: { '$re': new RegExp(filter, options) } }
+    }
+
+    /**
+     * Incorpora os atributos dun obxecto como elementos individuais dun array nominativo.
+     *
+     * @param obj obxecto a tratar
+     * @param result array nominativo no que introducir os cambios
+     */
+    private getObjectKeyValue(obj: any[], result: Object) {
+        for (let i = 0; i < obj.length; i++) {
+            let property = obj[i];
+
+            // Como indice do array empregase a key da propiedade e como valor todo o seu contido
+            // o indice 0 é necesario porque Object.keys e Object.values devolve un array e neste caso de só un elemento
+            result[Object.keys(property)[0]] = Object.values(property)[0];
+        }
     }
 }
