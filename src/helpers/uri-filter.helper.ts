@@ -2,6 +2,7 @@
 // ## IMPORTACIÓNS
 // ##################################################################################################
 import qs from 'qs';
+import clone from 'rfdc/default';
 import moment from 'moment';
 import { Types } from 'mongoose';
 import { checkType } from './check-types.helper';
@@ -168,6 +169,18 @@ export class APIFilter {
             // Como indice do array empregase a key da propiedade e como valor todo o seu contido
             // o indice 0 é necesario porque Object.keys e Object.values devolve un array e neste caso de só un elemento
             result[Object.keys(property)[0]] = Object.values(property)[0];
+        }
+    }
+
+    /**
+     * Copia as propiedades do obxecto pasado como parámetro no obxecto actual.
+     *
+     * @param original un obxecto APIFilter
+     * @param properties lista de propiedades a copiar
+     */
+     public copy(original: APIFilter, properties: string[] = Object.keys(this)) {
+        for (let property of properties) {
+            this[property] = clone(original[property]);
         }
     }
 }
